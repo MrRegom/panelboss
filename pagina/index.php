@@ -15,7 +15,7 @@
     
     <header class="navbar">
         <div class="logo-container">
-            <img src="https://cajaya.cl/assets/logo.png" alt="CajaYa Logo" class="main-logo" style="height: 50px; width: auto;">
+            <img src="assets/logo.png?v=<?php echo time(); ?>" alt="CajaYa Logo" class="main-logo" style="height: 60px; width: auto; display: block;">
         </div>
         <nav>
             <a href="#beneficios" class="nav-link-desktop">Beneficios</a>
@@ -33,7 +33,7 @@
                     <h1>El corazón digital de tu negocio,<br><span class="text-gradient">sin límites.</span></h1>
                     <p>Vende sin depender de internet, emite boletas del SII al instante y controla el stock de todas tus cajas en tiempo real. Combinamos tecnología corporativa con extrema facilidad de uso.</p>
                     <div class="hero-actions">
-                        <a href="#registro" class="btn-primary">Únete Gratis Hoy</a>
+                        <a href="#registro" class="btn-primary">Descargar Demo Ahora</a>
                         <a href="#beneficios" class="btn-outline">Explorar Tecnología</a>
                     </div>
                 </div>
@@ -168,7 +168,7 @@
 
                         <form class="modern-form">
                             <input type="email" placeholder="Correo electrónico corporativo" required>
-                            <button type="submit" class="btn-primary w-100" style="margin-top: 0.5rem; background: var(--bg-dark); border: 1px solid var(--primary);">Crear cuenta manual</button>
+                            <button type="submit" class="btn-primary w-100" style="margin-top: 0.5rem; background: var(--bg-dark); border: 1px solid var(--primary);">Solicitar Demo Manual</button>
                         </form>
                     </div>
                 </div>
