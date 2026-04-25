@@ -79,9 +79,37 @@ try {
                                 <h5 class="card-title fw-bold">Software POS</h5>
                             </div>
                             <div class="card-body p-4">
-                                <form id="formSettings">
+                                <form id="formUpload" enctype="multipart/form-data">
                                     <div class="mb-4">
-                                        <label class="form-label text-muted small fw-bold">URL DE DESCARGA (.EXE)</label>
+                                        <label class="form-label text-muted small fw-bold">SUBIR NUEVA VERSIÓN (.EXE)</label>
+                                        <div class="input-group">
+                                            <input type="file" class="form-control bg-dark border-secondary" name="installer" id="installerFile" accept=".exe" required>
+                                        </div>
+                                        <div class="form-text text-muted mt-2">Al subir un archivo, se actualizará automáticamente la URL de descarga.</div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="form-label text-muted small fw-bold">VERSION DEL ARCHIVO</label>
+                                        <input type="text" class="form-control bg-dark border-secondary" name="version" placeholder="Ej: 1.0.1" required>
+                                    </div>
+
+                                    <div class="progress mb-4 d-none" style="height: 10px;">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                                    </div>
+
+                                    <div class="text-end border-top pt-3 mt-4">
+                                        <button type="submit" class="btn btn-success px-5 fw-bold">
+                                            <i class="fa-solid fa-cloud-arrow-up me-2"></i> SUBIR Y ACTUALIZAR
+                                        </button>
+                                    </div>
+                                </form>
+
+                                <hr class="my-4 opacity-10">
+
+                                <form id="formSettings">
+                                    <h6 class="fw-bold mb-3 small text-muted">LINK ACTUAL CONFIGURADO</h6>
+                                    <div class="mb-4">
+                                        <label class="form-label text-muted small fw-bold">URL DE DESCARGA DIRECTA</label>
                                         <div class="input-group">
                                             <span class="input-group-text bg-dark border-secondary text-primary">
                                                 <i class="fa-solid fa-download"></i>
@@ -136,6 +164,52 @@ try {
 
     <script>
     $(document).ready(function() {
+        // MANEJO DE SUBIDA DE ARCHIVO
+        $('#formUpload').on('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const btn = $(this).find('button[type="submit"]');
+            const progress = $('.progress');
+            const progressBar = $('.progress-bar');
+
+            btn.prop('disabled', true).html('<i class="fa-solid fa-spinner fa-spin me-2"></i> Subiendo...');
+            progress.removeClass('d-none');
+            progressBar.css('width', '0%').text('0%');
+
+            $.ajax({
+                url: 'api/upload_installer.php',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                xhr: function() {
+                    const xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", function(evt) {
+                        if (evt.lengthComputable) {
+                            const percentComplete = Math.round((evt.loaded / evt.total) * 100);
+                            progressBar.css('width', percentComplete + '%').text(percentComplete + '%');
+                        }
+                    }, false);
+                    return xhr;
+                },
+                success: function(res) {
+                    btn.prop('disabled', false).html('<i class="fa-solid fa-cloud-arrow-up me-2"></i> SUBIR Y ACTUALIZAR');
+                    if(res.success) {
+                        Swal.fire('¡Éxito!', res.message, 'success').then(() => location.reload());
+                    } else {
+                        Swal.fire('Error', res.message, 'error');
+                        progress.addClass('d-none');
+                    }
+                },
+                error: function() {
+                    btn.prop('disabled', false).html('<i class="fa-solid fa-cloud-arrow-up me-2"></i> SUBIR Y ACTUALIZAR');
+                    Swal.fire('Error', 'Error de red o tamaño de archivo excedido', 'error');
+                    progress.addClass('d-none');
+                }
+            });
+        });
+
+        // GUARDAR CAMBIOS MANUALES
         $('#formSettings').on('submit', function(e) {
             e.preventDefault();
             const btn = $(this).find('button[type="submit"]');
