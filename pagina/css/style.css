@@ -89,14 +89,38 @@ h1, h2, h3, .logo { font-family: 'Outfit', sans-serif; }
     flex-shrink: 0;
 }
 .navbar-brand img {
-    height: 45px;
+    height: 55px; /* Más grande aún */
     width: auto;
-    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+    filter: drop-shadow(0 0 1px #fff) drop-shadow(0 0 1px #fff) drop-shadow(0 0 1px #fff); /* Efecto de borde blanco */
     transition: transform 0.3s ease;
 }
 
-.navbar-brand img:hover {
-    transform: scale(1.05);
+/* Botón de Google Profesional */
+.btn-social.google {
+    background: white !important;
+    color: #444 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-social.google:hover {
+    background: #f8f8f8 !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transform: translateY(-1px);
+}
+
+.btn-social.google img {
+    height: 24px;
+    width: 24px;
 }
 .main-logo {
     height: 100%;

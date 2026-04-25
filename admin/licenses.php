@@ -117,6 +117,45 @@ $db = Database::getConnection();
         </div>
     </div>
 
+    <!-- Modal: Detalles de Empresa -->
+    <div class="modal fade" id="modalCompanyDetails" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content border-0 shadow-lg" style="background-color: var(--bg-card);">
+                <div class="modal-header border-bottom border-white border-opacity-10">
+                    <h5 class="modal-title fw-bold text-info"><i class="fa-solid fa-building me-2"></i>Ficha del Cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4" id="detailsContent">
+                    <!-- Se llena con JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Editar Expiración -->
+    <div class="modal fade" id="modalEditExpiration" tabindex="-1">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg" style="background-color: var(--bg-card);">
+                <div class="modal-header border-bottom border-white border-opacity-10">
+                    <h5 class="modal-title fw-bold text-warning"><i class="fa-solid fa-calendar-day me-2"></i>Vencimiento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="formEditExpiration">
+                    <div class="modal-body p-4">
+                        <input type="hidden" name="id" id="edit_license_id">
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">NUEVA FECHA</label>
+                            <input type="date" class="form-control bg-dark border-secondary" name="expires_at" id="edit_expires_at" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top border-white border-opacity-10">
+                        <button type="submit" class="btn btn-primary w-100">Actualizar Fecha</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
@@ -130,19 +169,86 @@ $db = Database::getConnection();
             ajax: 'api/get_licenses.php',
             columns: [
                 { data: 'license_key', render: function(data){ return '<code class="text-primary fw-bold">'+data+'</code>'; } },
-                { data: 'company_name', render: function(data){ return data ? '<span class="fw-medium">'+data+'</span>' : '<span class="opacity-50">N/A</span>'; } },
+                { 
+                    data: 'company_name', 
+                    render: function(data, type, row){ 
+                        return `<a href="javascript:void(0)" class="text-info text-decoration-none fw-medium company-link" data-id="${row.id}">${data || 'N/A'}</a>`; 
+                    } 
+                },
                 { data: 'plan', render: function(data){ return '<span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25">'+(data || 'BASIC')+'</span>'; } },
                 { data: 'status', render: function(data){
                     const color = data === 'active' ? 'success' : 'warning';
                     return '<span class="badge bg-'+color+' bg-opacity-10 text-'+color+' border border-'+color+' border-opacity-25 px-3">'+data.toUpperCase()+'</span>';
                 }},
                 { data: 'expires_at', render: function(data){ return data ? new Date(data).toLocaleDateString() : 'Perpetua'; } },
-                { data: null, className: 'text-end', render: function(data){
-                    return '<button class="btn btn-sm btn-outline-primary border-0"><i class="fa-solid fa-edit"></i></button>';
+                { data: null, className: 'text-end', render: function(data, type, row){
+                    return `<button class="btn btn-sm btn-outline-warning border-0 btn-edit" data-id="${row.id}" data-date="${row.expires_at}"><i class="fa-solid fa-calendar-pen"></i></button>`;
                 }}
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
             dom: '<"row mb-3"<"col-sm-6"l><"col-sm-6"f>>rt<"row mt-3"<"col-sm-6"i><"col-sm-6"p>>'
+        });
+
+        // Ver Detalles de Empresa
+        $('#licensesTable').on('click', '.company-link', function() {
+            const data = table.row($(this).closest('tr')).data();
+            const content = `
+                <div class="mb-4 text-center">
+                    <div class="h4 text-white mb-1">${data.company_name}</div>
+                    <div class="text-muted small">RUT: ${data.rut || 'No registrado'}</div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <div class="p-3 rounded bg-white bg-opacity-5 border border-white border-opacity-10">
+                            <label class="text-muted small d-block mb-1">Email Corporativo</label>
+                            <div class="text-info fw-medium">${data.email || 'N/A'}</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-3 rounded bg-white bg-opacity-5 border border-white border-opacity-10">
+                            <label class="text-muted small d-block mb-1">Teléfono</label>
+                            <div>${data.phone || 'N/A'}</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-3 rounded bg-white bg-opacity-5 border border-white border-opacity-10">
+                            <label class="text-muted small d-block mb-1">Ciudad/Región</label>
+                            <div>${data.address ? data.address.split(',')[0] : 'N/A'}</div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="p-3 rounded bg-white bg-opacity-5 border border-white border-opacity-10">
+                            <label class="text-muted small d-block mb-1">Dirección Completa</label>
+                            <div class="small">${data.address || 'Sin dirección registrada'}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            $('#detailsContent').html(content);
+            $('#modalCompanyDetails').modal('show');
+        });
+
+        // Abrir Modal Editar Expiración
+        $('#licensesTable').on('click', '.btn-edit', function() {
+            const id = $(this).data('id');
+            const date = $(this).data('date');
+            $('#edit_license_id').val(id);
+            if(date) $('#edit_expires_at').val(date.split(' ')[0]);
+            $('#modalEditExpiration').modal('show');
+        });
+
+        // Guardar Nueva Fecha
+        $('#formEditExpiration').on('submit', function(e) {
+            e.preventDefault();
+            $.post('api/update_license.php', $(this).serialize(), function(response) {
+                if(response.success) {
+                    Swal.fire('¡Actualizado!', 'La fecha ha sido cambiada.', 'success');
+                    $('#modalEditExpiration').modal('hide');
+                    table.ajax.reload();
+                } else {
+                    Swal.fire('Error', response.message, 'error');
+                }
+            }, 'json');
         });
 
         $('#formGenerateLicense').on('submit', function(e) {
