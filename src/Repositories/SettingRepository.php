@@ -8,7 +8,7 @@ class SettingRepository {
     private $db;
 
     public function __construct() {
-        $this->db = Database::getInstance()->getConnection();
+        $this->db = Database::getConnection();
         $this->ensureTableExists();
     }
 
