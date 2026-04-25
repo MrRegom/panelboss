@@ -38,28 +38,62 @@ $downloadUrl = $settings->get('download_url') ?? 'https://cajaya.cl/downloads/Ca
             <div class="container">
                 <span class="badge">🚀 LANZAMIENTO OFICIAL - ABRIL 2026</span>
                 <h1>El POS que trabaja<br><span style="color: var(--primary)">donde tú estés.</span></h1>
-                <p>Vende sin internet, sincroniza múltiples cajas en tiempo real y controla tu negocio desde cualquier lugar. La tecnología de las grandes empresas, ahora a tu alcance.</p>
-                <div class="hero-actions">
-                    <a href="<?= $downloadUrl ?>" class="btn-primary">EMPEZAR AHORA GRATIS</a>
+                <p>Vende sin internet, sincroniza múltiples cajas en tiempo real y controla tu negocio desde cualquier lugar.</p>
+                
+                <div class="hero-actions" style="margin-bottom: 4rem;">
+                    <a href="<?= $downloadUrl ?>" class="btn-primary" style="margin-bottom: 1rem;">DESCARGAR DEMO GRATIS</a>
+                    <div style="margin-top: 15px;">
+                        <span style="color: var(--text-muted); font-size: 0.8rem; display: block; margin-bottom: 10px;">O REGÍSTRATE AL INSTANTE:</span>
+                        <a href="../admin/auth/google" class="btn-google">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" style="width: 18px;">
+                            Conectar con Google
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SHOWCASE DE LA APP CON ANIMACIÓN -->
+                <div class="product-showcase">
+                    <img src="assets/img/app-preview.png" alt="CajaYa App" class="img-fluid reveal-app">
                 </div>
             </div>
         </section>
 
-        <section class="container features">
-            <div class="feature-card">
-                <i class="fa-solid fa-cloud-slash"></i>
-                <h3>Modo Offline Resiliente</h3>
-                <p>¿Se cayó el internet? No importa. Sigue vendiendo sin interrupciones. CajaYa sincroniza todo automáticamente cuando vuelve la conexión.</p>
+        <!-- SECCIÓN DE BENEFICIOS (TODOS LOS CARDS) -->
+        <section class="container" id="beneficios" style="padding: 100px 0;">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <h2 style="font-size: 2.5rem; font-weight: 800;">Todo lo que necesitas para ganar</h2>
             </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-sync"></i>
-                <h3>Multi-Caja Inteligente</h3>
-                <p>Gestiona 2, 5 o 20 cajas al mismo tiempo. El stock y las ventas se consolidan en tiempo real para un control absoluto.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fa-solid fa-bolt"></i>
-                <h3>Boleta Electrónica Express</h3>
-                <p>Integración nativa con el SII para emitir boletas en segundos. Cumple con la normativa sin complicaciones extras.</p>
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fa-solid fa-cloud-slash"></i>
+                    <h3>Modo Offline</h3>
+                    <p>Venta continua sin depender de la señal.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-sync"></i>
+                    <h3>Sincronización</h3>
+                    <p>Tus cajas siempre alineadas en tiempo real.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <h3>Boleta SII</h3>
+                    <p>Emisión directa y automática al SII.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <h3>Reportes Pro</h3>
+                    <p>Dashboard de ventas en vivo desde el celular.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                    <h3>Stock Global</h3>
+                    <p>Control de inventario multi-sucursal.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h3>Seguridad RSA</h3>
+                    <p>Encriptación de grado bancario en tus datos.</p>
+                </div>
             </div>
         </section>
 

@@ -165,3 +165,46 @@ footer {
     text-align: center;
     color: var(--text-muted);
 }
+
+/* Botón Google Premium */
+.btn-google {
+    background: white;
+    color: #1f1f1f;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #e1e1e1;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.btn-google:hover {
+    background: #f8f8f8;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Product Showcase */
+.product-showcase {
+    margin-top: 4rem;
+    perspective: 1000px;
+}
+
+.reveal-app {
+    width: 100%;
+    max-width: 1000px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    transform: rotateX(10deg);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.reveal-app:hover {
+    transform: rotateX(0deg) scale(1.02) translateY(-20px);
+    box-shadow: 0 50px 100px rgba(59, 130, 246, 0.2);
+}
