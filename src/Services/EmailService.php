@@ -8,9 +8,13 @@ require_once __DIR__ . '/../../vendor/phpmailer/phpmailer/src/SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use App\Repositories\SettingRepository;
 
 class EmailService {
     public static function sendLicenseKey(string $toEmail, string $userName, string $licenseKey) {
+        $repo = new SettingRepository();
+        $downloadUrl = $repo->get('download_url') ?? 'https://cajaya.cl/LumarePOS-Setup-1.0.0.exe';
+        
         $mail = new PHPMailer(true);
 
         try {
@@ -57,7 +61,7 @@ class EmailService {
                                 
                                 <!-- Botón de Acción -->
                                 <div style='text-align: center; margin-bottom: 30px;'>
-                                    <a href='https://cajaya.cl/downloads/CajaYa-Setup-1.0.0.exe' style='background: #0f172a; color: #ffffff; padding: 14px 30px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 14px; display: inline-block;'>
+                                    <a href='$downloadUrl' style='background: #0f172a; color: #ffffff; padding: 14px 30px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 14px; display: inline-block;'>
                                         Descargar Instalador
                                     </a>
                                 </div>

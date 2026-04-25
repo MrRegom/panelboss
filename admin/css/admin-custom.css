@@ -1,104 +1,66 @@
-/* ENTERPRISE GRADE UI - CAJAYA / PANELBOSS */
+/* PREMIUM GLASSMORPHISM UI - CAJAYA */
 :root {
     --bg-main: #09090b;
-    --bg-sidebar: #111114;
-    --bg-card: #18181b;
-    --border-color: rgba(255, 255, 255, 0.08);
-    --primary-blue: #3b82f6; /* Azul Profesional SaaS */
-    --text-muted: #a1a1aa;
+    --bg-sidebar: #0e0e11;
+    --bg-card: #141417;
+    --border-color: rgba(255, 255, 255, 0.05);
+    --primary-blue: #2563eb;
+    --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    --text-muted: #8e8e93;
 }
 
 body {
     background-color: var(--bg-main) !important;
-    color: #fafafa;
-    font-family: 'Inter', -apple-system, sans-serif;
-    letter-spacing: -0.01em;
+    color: #f4f4f5;
+    font-family: 'Inter', sans-serif;
 }
 
-/* Sidebar Estilo Linear/Vercel */
 .app-sidebar {
-    background-color: var(--bg-sidebar) !important;
+    background: var(--bg-sidebar) !important;
     border-right: 1px solid var(--border-color) !important;
 }
 
-.sidebar-brand {
-    padding: 1.5rem !important;
-    border-bottom: 1px solid var(--border-color) !important;
-}
-
-.brand-text {
-    font-weight: 700;
-    font-size: 1.1rem !important;
-    letter-spacing: -0.02em;
-}
-
 .nav-link {
-    font-size: 0.9rem !important;
-    color: var(--text-muted) !important;
-    padding: 0.6rem 1rem !important;
-    border-radius: 6px !important;
-    margin: 0.2rem 0.8rem;
-    transition: all 0.2s ease;
-}
-
-.nav-link:hover {
-    background: rgba(255, 255, 255, 0.03) !important;
-    color: #fff !important;
+    font-weight: 500;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-link.active {
-    background: rgba(59, 130, 246, 0.1) !important;
-    color: var(--primary-blue) !important;
+    background: rgba(37, 99, 235, 0.15) !important;
+    color: #60a5fa !important;
+    box-shadow: inset 4px 0 0 #2563eb;
+    border-radius: 0 8px 8px 0 !important;
 }
 
-/* Header Minimalista */
-.app-header {
-    background: rgba(9, 9, 11, 0.8) !important;
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border-color) !important;
-}
-
-/* Cards Profesionales */
-.small-box {
-    background: var(--bg-card) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: 12px !important;
-    padding: 1.5rem !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
-}
-
-.small-box .inner p {
-    color: var(--text-muted);
-    font-size: 0.85rem !important;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-}
-
-.small-box .inner h2 {
-    font-size: 1.85rem !important;
-    font-weight: 700;
-    margin: 0;
-}
-
-.small-box .icon {
-    font-size: 1.5rem !important;
-    top: 1.5rem;
-    right: 1.5rem;
-    color: var(--primary-blue) !important;
-    opacity: 0.5 !important;
-}
-
-/* Tablas y Contenedores */
 .card {
     background: var(--bg-card) !important;
     border: 1px solid var(--border-color) !important;
-    border-radius: 12px !important;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary {
-    background-color: var(--primary-blue) !important;
+    background: var(--primary-gradient) !important;
     border: none !important;
-    font-weight: 600;
-    padding: 0.5rem 1.25rem !important;
-    border-radius: 6px !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    transition: transform 0.2s;
 }
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
+}
+
+.form-control, .form-select {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid var(--border-color) !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+}
+
+.form-control:focus {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-color: var(--primary-blue) !important;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1) !important;
+}
+
