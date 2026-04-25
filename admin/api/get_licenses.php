@@ -8,7 +8,7 @@ AuthService::check();
 $db = Database::getConnection();
 $sql = "SELECT l.id, l.license_key, 
                COALESCE(c.name, l.business_name, 'N/A') as company_name, 
-               l.plan, l.status, l.expires_at,
+               l.plan, l.status, l.expires_at, l.activated_at,
                l.rut, l.email, l.address, l.phone, l.business_name
         FROM licenses l 
         LEFT JOIN companies c ON l.company_id = c.id

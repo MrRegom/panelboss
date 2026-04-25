@@ -192,10 +192,13 @@ $db = Database::getConnection();
         // Ver Detalles de Empresa
         $('#licensesTable').on('click', '.company-link', function() {
             const data = table.row($(this).closest('tr')).data();
+            const activationDate = data.activated_at ? new Date(data.activated_at).toLocaleDateString('es-CL', { day: '2-digit', month: 'long', year: 'numeric' }) : 'Pendiente de activación';
+            
             const content = `
                 <div class="mb-4 text-center">
                     <div class="h4 text-info fw-bold mb-1">${data.company_name}</div>
                     <div class="text-white-50 small">RUT: ${data.rut || 'No registrado'}</div>
+                    <div class="mt-2"><span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3">Activado el: ${activationDate}</span></div>
                 </div>
                 <div class="row g-3">
                     <div class="col-12">
