@@ -10,6 +10,7 @@ try {
     $total_licenses = $db->query("SELECT COUNT(*) FROM licenses")->fetchColumn();
     $active_licenses = $db->query("SELECT COUNT(*) FROM licenses WHERE status = 'active'")->fetchColumn();
     $total_companies = $db->query("SELECT COUNT(*) FROM companies")->fetchColumn();
+    $total_leads = $db->query("SELECT COUNT(*) FROM leads")->fetchColumn();
 } catch (\Exception $e) {
     die("Error de base de datos: " . $e->getMessage());
 }
@@ -64,6 +65,7 @@ try {
                         <li class="nav-header small text-muted px-4 mt-3">OPERACIONES</li>
                         <li class="nav-item mb-2"> <a href="./licenses.php" class="nav-link"> <i class="nav-icon fa-solid fa-key"></i> <p>Licencias</p> </a> </li>
                         <li class="nav-item mb-2"> <a href="./companies.php" class="nav-link"> <i class="nav-icon fa-solid fa-building"></i> <p>Empresas</p> </a> </li>
+                        <li class="nav-item mb-2"> <a href="./leads.php" class="nav-link"> <i class="nav-icon fa-solid fa-user-tag"></i> <p>Prospectos</p> </a> </li>
                         <li class="nav-header small text-muted px-4 mt-3">SISTEMA</li>
                         <li class="nav-item mb-2"> <a href="./users.php" class="nav-link"> <i class="nav-icon fa-solid fa-users-gear"></i> <p>Usuarios</p> </a> </li>
                     </ul>
@@ -86,9 +88,9 @@ try {
 
             <div class="app-content">
                 <div class="container-fluid px-4">
-                    <!-- Cards Estilo SaaS -->
+                    <!-- Cards Estilo SaaS (Fila de 4) -->
                     <div class="row g-4">
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="small-box">
                                 <div class="inner">
                                     <p>Total Licencias</p>
@@ -97,7 +99,7 @@ try {
                                 <div class="icon"> <i class="fa-solid fa-id-card"></i> </div>
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="small-box">
                                 <div class="inner">
                                     <p>Terminales Online</p>
@@ -106,13 +108,22 @@ try {
                                 <div class="icon"> <i class="fa-solid fa-signal"></i> </div>
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="small-box">
                                 <div class="inner">
                                     <p>Empresas Activas</p>
                                     <h2><?= number_format($total_companies) ?></h2>
                                 </div>
                                 <div class="icon"> <i class="fa-solid fa-briefcase"></i> </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="small-box" style="background: var(--primary); color: white;">
+                                <div class="inner">
+                                    <p>Prospectos (Leads)</p>
+                                    <h2><?= number_format($total_leads) ?></h2>
+                                </div>
+                                <div class="icon" style="color: rgba(255,255,255,0.3)"> <i class="fa-solid fa-user-plus"></i> </div>
                             </div>
                         </div>
                     </div>
