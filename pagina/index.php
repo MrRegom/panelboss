@@ -14,7 +14,9 @@
     <div class="bg-grid"></div>
     
     <header class="navbar">
-        <div class="logo">Caja<span>Ya</span></div>
+        <div class="logo-container">
+            <img src="assets/logo.png" alt="CajaYa Logo" class="main-logo">
+        </div>
         <nav>
             <a href="#beneficios">Beneficios</a>
             <a href="#faq">Preguntas</a>
@@ -168,7 +170,7 @@
 
                         <form class="modern-form">
                             <input type="email" placeholder="Correo electrónico corporativo" required>
-                            <button type="submit" class="btn-outline w-100" style="color: var(--text-main); border-color: rgba(0,0,0,0.1);">Crear cuenta manual</button>
+                            <button type="submit" class="btn-primary w-100" style="margin-top: 0.5rem; background: var(--bg-dark); border: 1px solid var(--primary);">Crear cuenta manual</button>
                         </form>
                     </div>
                 </div>
