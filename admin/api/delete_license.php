@@ -7,7 +7,6 @@ AuthService::check();
 
 $db = Database::getConnection();
 
-$action = $_POST['action'] ?? 'update_expiry';
 $id = $_POST['id'] ?? null;
 
 if (!$id) {
@@ -17,15 +16,8 @@ if (!$id) {
 }
 
 try {
-    if ($action === 'toggle_status') {
-        $status = $_POST['status'] ?? 'active';
-        $stmt = $db->prepare("UPDATE licenses SET status = :status WHERE id = :id");
-        $stmt->execute(['status' => $status, 'id' => $id]);
-    } else {
-        $expiry = $_POST['expires_at'] ?? null;
-        $stmt = $db->prepare("UPDATE licenses SET expires_at = :expiry WHERE id = :id");
-        $stmt->execute(['expiry' => $expiry, 'id' => $id]);
-    }
+    $stmt = $db->prepare("DELETE FROM licenses WHERE id = :id");
+    $stmt->execute(['id' => $id]);
     
     header('Content-Type: application/json');
     echo json_encode(['success' => true]);

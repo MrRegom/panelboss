@@ -182,11 +182,62 @@ $db = Database::getConnection();
                 }},
                 { data: 'expires_at', render: function(data){ return data ? new Date(data).toLocaleDateString() : 'Perpetua'; } },
                 { data: null, className: 'text-end', render: function(data, type, row){
-                    return `<button class="btn btn-sm btn-warning shadow-sm rounded-circle btn-edit" data-id="${row.id}" data-date="${row.expires_at}" title="Editar Expiración" style="width: 32px; height: 32px; padding: 0;"><i class="fa-solid fa-calendar-day"></i></button>`;
+                    const statusIcon = row.status === 'active' ? 'fa-ban text-warning' : 'fa-check text-success';
+                    const statusTitle = row.status === 'active' ? 'Suspender' : 'Activar';
+                    return `
+                        <div class="btn-group shadow-sm">
+                            <button class="btn btn-sm btn-dark btn-edit" data-id="${row.id}" data-date="${row.expires_at}" title="Editar Fecha">
+                                <i class="fa-solid fa-calendar-day text-info"></i>
+                            </button>
+                            <button class="btn btn-sm btn-dark btn-toggle-status" data-id="${row.id}" data-status="${row.status}" title="${statusTitle}">
+                                <i class="fa-solid ${statusIcon}"></i>
+                            </button>
+                            <button class="btn btn-sm btn-dark btn-delete" data-id="${row.id}" title="Eliminar">
+                                <i class="fa-solid fa-trash-can text-danger"></i>
+                            </button>
+                        </div>
+                    `;
                 }}
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
             dom: '<"row mb-3"<"col-sm-6"l><"col-sm-6"f>>rt<"row mt-3"<"col-sm-6"i><"col-sm-6"p>>'
+        });
+
+        // Eliminar Licencia
+        $('#licensesTable').on('click', '.btn-delete', function() {
+            const id = $(this).data('id');
+            Swal.fire({
+                title: '¿Eliminar licencia?',
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post('api/delete_license.php', { id: id }, function(res) {
+                        if(res.success) {
+                            Swal.fire('Eliminado', 'La licencia ha sido borrada.', 'success');
+                            table.ajax.reload();
+                        }
+                    }, 'json');
+                }
+            });
+        });
+
+        // Alternar Estado (Activar/Suspender)
+        $('#licensesTable').on('click', '.btn-toggle-status', function() {
+            const id = $(this).data('id');
+            const currentStatus = $(this).data('status');
+            const newStatus = currentStatus === 'active' ? 'suspended' : 'active';
+            
+            $.post('api/update_license.php', { action: 'toggle_status', id: id, status: newStatus }, function(res) {
+                if(res.success) {
+                    Swal.fire('Estado Actualizado', 'La licencia ahora está ' + newStatus, 'success');
+                    table.ajax.reload();
+                }
+            }, 'json');
         });
 
         // Ver Detalles de Empresa
