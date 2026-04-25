@@ -16,8 +16,8 @@ try {
     $db = Database::getConnection();
     $repo = new \App\Repositories\LicenseRepository($db);
     
-    // Generador de Key Profesional (LPOS-2026-XXXX-XXXX-XXXX)
-    $key = 'LPOS-2026-' . strtoupper(bin2hex(random_bytes(2))) . '-' . strtoupper(bin2hex(random_bytes(2))) . '-' . strtoupper(bin2hex(random_bytes(2)));
+    // Generador de Key Profesional (CJYA-2026-XXXX-XXXX-XXXX)
+    $key = 'CJYA-2026-' . strtoupper(bin2hex(random_bytes(2))) . '-' . strtoupper(bin2hex(random_bytes(2))) . '-' . strtoupper(bin2hex(random_bytes(2)));
 
     $repo->create($key, $plan, $expires_at, $company_id);
 

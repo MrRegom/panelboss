@@ -38,7 +38,7 @@
                 
                 <div class="hero-image fade-in">
                     <div class="dashboard-glow"></div>
-                    <img src="assets/lumare_pos_mockup.png" alt="CajaYa POS Dashboard" class="dashboard-img">
+                    <img src="assets/cajaya_pos_mockup.png" alt="CajaYa POS Dashboard" class="dashboard-img">
                     
                     <!-- Elementos flotantes decorativos -->
                     <div class="float-badge float-top-right">

@@ -32,8 +32,8 @@ try {
 
     // 2. Crear un par de licencias
     $licenses = [
-        ['key' => 'LPOS-2026-TEST-0001', 'plan' => 'pro', 'status' => 'active', 'expires' => '2026-12-31'],
-        ['key' => 'LPOS-2026-TEST-0002', 'plan' => 'basic', 'status' => 'pending', 'expires' => '2026-06-30'],
+        ['key' => 'CJYA-2026-TEST-0001', 'plan' => 'pro', 'status' => 'active', 'expires' => '2026-12-31'],
+        ['key' => 'CJYA-2026-TEST-0002', 'plan' => 'basic', 'status' => 'pending', 'expires' => '2026-06-30'],
     ];
 
     foreach ($licenses as $l) {
