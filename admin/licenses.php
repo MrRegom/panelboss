@@ -246,21 +246,31 @@ $db = Database::getConnection();
             const $btn = $(this).find('button[type="submit"]');
             const originalText = $btn.html();
             
-            // Bloqueo y carga
-            $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-2"></i> Actualizando...');
-            Swal.fire({ title: 'Actualizando...', allowOutsideClick: false, didOpen: () => { Swal.showLoading() } });
+            $btn.prop('disabled', true).html('<i class="fas fa-sync fa-spin me-2"></i> Procesando cambios...');
+            Swal.fire({ 
+                title: 'Sincronizando con el servidor...', 
+                html: 'Aplicando nueva fecha de expiración',
+                allowOutsideClick: false, 
+                didOpen: () => { Swal.showLoading() } 
+            });
 
             $.post('api/update_license.php', $(this).serialize(), function(response) {
-                if(response.success) {
-                    Swal.fire('¡Actualizado!', 'La fecha ha sido cambiada.', 'success').then(() => location.reload());
-                } else {
-                    Swal.fire('Error', response.message, 'error');
-                    $btn.prop('disabled', false).html(originalText);
-                }
-            }, 'json').fail(function() {
-                $btn.prop('disabled', false).html(originalText);
-                Swal.fire('Error', 'Fallo en la conexión', 'error');
-            });
+                // Forzamos 2.5 segundos de "épica"
+                setTimeout(() => {
+                    if(response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Actualización Exitosa!',
+                            text: 'La licencia ha sido actualizada correctamente.',
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(() => location.reload());
+                    } else {
+                        Swal.fire('Error', response.message, 'error');
+                        $btn.prop('disabled', false).html(originalText);
+                    }
+                }, 2500);
+            }, 'json');
         });
 
         $('#formGenerateLicense').on('submit', function(e) {
@@ -268,23 +278,32 @@ $db = Database::getConnection();
             const $btn = $(this).find('button[type="submit"]');
             const originalText = $btn.html();
 
-            // Bloqueo y carga
-            $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-2"></i> Generando...');
-            Swal.fire({ title: 'Generando Licencia...', allowOutsideClick: false, didOpen: () => { Swal.showLoading() } });
+            $btn.prop('disabled', true).html('<i class="fas fa-magic fa-spin me-2"></i> Forjando llave...');
+            Swal.fire({ 
+                title: 'Generando Nueva Licencia...', 
+                html: 'Creando accesos criptográficos seguros',
+                allowOutsideClick: false, 
+                didOpen: () => { Swal.showLoading() } 
+            });
 
             $.post('api/save_license.php', $(this).serialize(), function(response) {
-                if(response.success) {
-                    Swal.fire('¡Éxito!', 'Licencia creada: ' + response.key, 'success');
-                    $('#modalGenerateLicense').modal('hide');
-                    table.ajax.reload();
-                } else {
-                    Swal.fire('Error', response.message, 'error');
-                }
-                $btn.prop('disabled', false).html(originalText);
-            }, 'json').fail(function() {
-                $btn.prop('disabled', false).html(originalText);
-                Swal.fire('Error', 'Fallo en la conexión', 'error');
-            });
+                // Forzamos 2.5 segundos de "épica"
+                setTimeout(() => {
+                    if(response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Licencia Forjada!',
+                            text: 'La nueva llave ha sido creada con éxito.',
+                            confirmButtonText: 'Genial'
+                        });
+                        $('#modalGenerateLicense').modal('hide');
+                        table.ajax.reload();
+                    } else {
+                        Swal.fire('Error', response.message, 'error');
+                    }
+                    $btn.prop('disabled', false).html(originalText);
+                }, 2500);
+            }, 'json');
         });
     });
     </script>
