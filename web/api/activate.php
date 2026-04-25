@@ -26,11 +26,19 @@ if (!isset($_SERVER['HTTP_X_API_KEY']) || $_SERVER['HTTP_X_API_KEY'] !== $apiKey
     exit(json_encode(['error' => 'Invalid X-API-Key']));
 }
 
+$businessData = [
+    'business_name' => $data['business_name'] ?? '',
+    'rut' => $data['rut'] ?? '',
+    'email' => $data['email'] ?? '',
+    'address' => $data['address'] ?? '',
+    'phone' => $data['phone'] ?? ''
+];
+
 $result = $service->activate(
     $data['license_key'] ?? '',
     $data['machine_id'] ?? '',
     $data['version'] ?? '1.0.0',
-    $data ?? []
+    $businessData
 );
 
 http_response_code($result['code']);
