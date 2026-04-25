@@ -34,61 +34,51 @@ class EmailService {
             
             $year = date('Y');
             $mail->Body = "
-                <div style='background: #f8fafc; padding: 40px 10px; font-family: -apple-system, system-ui, sans-serif;'>
+                <div style='background: #f1f5f9; padding: 60px 10px; font-family: -apple-system, system-ui, sans-serif;'>
                     <center>
-                        <!-- Tarjeta Corporativa Limpia -->
-                        <div style='max-width: 480px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);'>
+                        <!-- Logo Destacado (GRANDE) -->
+                        <div style='margin-bottom: 40px;'>
+                            <img src='https://cajaya.cl/assets/logo.png' alt='CajaYa' style='width: 240px; height: auto;'>
+                        </div>
+
+                        <!-- Tarjeta Corporativa Premium -->
+                        <div style='max-width: 520px; background: #ffffff; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);'>
                             
-                            <!-- Header Sutil -->
-                            <div style='padding: 30px; text-align: left; border-bottom: 1px solid #f1f5f9;'>
-                                <img src='https://cajaya.cl/assets/logo.png' alt='CajaYa' style='height: 35px;'>
+                            <!-- Banner de Bienvenida -->
+                            <div style='background: #0f172a; padding: 50px 40px; text-align: center;'>
+                                <h1 style='color: #ffffff; font-size: 26px; font-weight: 800; margin: 0; letter-spacing: -1px;'>¡Bienvenido a bordo!</h1>
+                                <p style='color: #94a3b8; font-size: 16px; margin: 15px 0 0 0;'>Tu terminal de ventas está lista para despegar.</p>
                             </div>
                             
                             <!-- Contenido Principal -->
-                            <div style='padding: 40px 30px; text-align: left;'>
-                                <h1 style='color: #0f172a; font-size: 20px; font-weight: 700; margin: 0 0 10px 0;'>Configuración de tu cuenta</h1>
-                                <p style='color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 30px;'>Hola <strong>$userName</strong>, bienvenido a CajaYa POS. Tu infraestructura de ventas ya está lista para operar.</p>
+                            <div style='padding: 45px 40px; text-align: left;'>
+                                <p style='color: #334155; font-size: 16px; line-height: 1.6; margin-bottom: 30px;'>Hola <strong>$userName</strong>,<br><br>Hemos configurado con éxito tu acceso a <strong>CajaYa Pro</strong>. A continuación encontrarás las credenciales maestras para activar tu sistema.</p>
                                 
-                                <!-- Caja de Licencia Elegante -->
-                                <div style='background: #f1f5f9; border-radius: 12px; padding: 25px; text-align: center; margin-bottom: 35px;'>
-                                    <span style='text-transform: uppercase; letter-spacing: 1px; font-size: 11px; font-weight: 600; color: #64748b; display: block; margin-bottom: 12px;'>Llave de Acceso Maestra</span>
-                                    <div style='font-family: \"SF Mono\", monospace; font-size: 22px; color: #2563eb; font-weight: 700; letter-spacing: 1px;'>$licenseKey</div>
+                                <!-- Caja de Licencia Visual -->
+                                <div style='background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 20px; padding: 35px 20px; text-align: center; margin-bottom: 40px;'>
+                                    <span style='text-transform: uppercase; letter-spacing: 2px; font-size: 11px; font-weight: 700; color: #64748b; display: block; margin-bottom: 15px;'>LLAVE MAESTRA DE ACTIVACIÓN</span>
+                                    <div style='font-family: \"Courier New\", Courier, monospace; font-size: 28px; color: #0284c7; font-weight: 900; letter-spacing: 2px;'>$licenseKey</div>
                                 </div>
                                 
-                                <!-- Instrucciones -->
-                                <div style='margin-bottom: 35px;'>
-                                    <table border='0' cellpadding='0' cellspacing='0' width='100%'>
-                                        <tr>
-                                            <td style='vertical-align: top; width: 24px; padding-bottom: 15px;'>
-                                                <div style='color: #2563eb; font-weight: bold;'>&bull;</div>
-                                            </td>
-                                            <td style='color: #1e293b; font-size: 14px; padding-bottom: 15px;'>
-                                                <strong>Instalación:</strong> Descarga el ejecutable en tu terminal principal.
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style='vertical-align: top; width: 24px;'>
-                                                <div style='color: #2563eb; font-weight: bold;'>&bull;</div>
-                                            </td>
-                                            <td style='color: #1e293b; font-size: 14px;'>
-                                                <strong>Activación:</strong> Vincula tu equipo usando la llave superior.
-                                            </td>
-                                        </tr>
-                                    </table>
+                                <!-- Guía de Pasos Rápidos -->
+                                <div style='margin-bottom: 40px; border-left: 3px solid #e2e8f0; padding-left: 20px;'>
+                                    <h3 style='font-size: 14px; color: #0f172a; margin-bottom: 15px;'>PRÓXIMOS PASOS:</h3>
+                                    <p style='color: #475569; font-size: 14px; margin-bottom: 10px;'><strong>1. Descarga:</strong> Usa el botón inferior para bajar el instalador oficial.</p>
+                                    <p style='color: #475569; font-size: 14px; margin: 0;'><strong>2. Activa:</strong> Pega tu llave maestra al iniciar el software por primera vez.</p>
                                 </div>
                                 
-                                <!-- Botón Corporativo -->
+                                <!-- Botón de Descarga Estilo App Store -->
                                 <div style='text-align: center;'>
-                                    <a href='https://cajaya.cl/downloads/CajaYa-Setup-1.0.0.exe' style='background: #0f172a; color: #ffffff; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; display: inline-block;'>
-                                        Descargar CajaYa Pro
+                                    <a href='https://cajaya.cl/downloads/CajaYa-Setup-1.0.0.exe' style='background: #2563eb; color: #ffffff; padding: 18px 40px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 16px; display: inline-block; box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);'>
+                                        Descargar CajaYa Pro 1.0
                                     </a>
                                 </div>
                             </div>
                             
-                            <!-- Footer Formal -->
-                            <div style='background: #f8fafc; padding: 20px; text-align: center; border-top: 1px solid #e2e8f0;'>
-                                <p style='font-size: 12px; color: #94a3b8; margin: 0;'>© $year CajaYa POS System. Todos los derechos reservados.</p>
-                                <p style='font-size: 11px; color: #cbd5e1; margin-top: 5px;'>Soporte técnico: reltzerspa@gmail.com</p>
+                            <!-- Footer Corporativo -->
+                            <div style='background: #f8fafc; padding: 30px; text-align: center; border-top: 1px solid #f1f5f9;'>
+                                <p style='font-size: 12px; color: #64748b; margin: 0;'>© $year CajaYa POS System • Chile</p>
+                                <p style='font-size: 11px; color: #94a3b8; margin-top: 8px;'>Este es un correo automático, por favor no respondas a esta dirección.</p>
                             </div>
                         </div>
                     </center>

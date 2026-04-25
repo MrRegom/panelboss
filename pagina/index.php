@@ -15,12 +15,12 @@
     
     <header class="navbar">
         <div class="logo-container">
-            <img src="assets/logo.png" alt="CajaYa Logo" class="main-logo">
+            <img src="https://cajaya.cl/assets/logo.png" alt="CajaYa Logo" class="main-logo" style="height: 50px; width: auto;">
         </div>
         <nav>
             <a href="#beneficios" class="nav-link-desktop">Beneficios</a>
             <a href="#faq" class="nav-link-desktop">Preguntas</a>
-            <a href="#registro" class="btn-primary-small">Crear Cuenta</a>
+            <a href="#registro" class="btn-primary-small">Descargar Demo</a>
         </nav>
     </header>
 
