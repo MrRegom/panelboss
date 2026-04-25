@@ -11,12 +11,52 @@ $downloadUrl = $settings->get('download_url') ?? 'https://cajaya.cl/downloads/Ca
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CajaYa - El Punto de Venta que nunca se detiene</title>
-    <meta name="description" content="Software POS empresarial con sincronización multi-caja, modo offline y boleta electrónica integrada.">
     <link rel="stylesheet" href="assets/css/modern.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6; /* Púrpura Aeris */
+            --primary-glow: rgba(139, 92, 246, 0.5);
+        }
+        h1 { font-family: 'Outfit', sans-serif; letter-spacing: -2px; }
+        .hero-split {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            padding: 8rem 0;
+            text-align: left;
+        }
+        .hero-content { flex: 1; }
+        .hero-image { flex: 1; position: relative; }
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            transform: perspective(1000px) rotateY(-10deg);
+            transition: transform 0.5s ease;
+        }
+        .hero-image img:hover { transform: perspective(1000px) rotateY(0deg); }
+        
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            padding: 3rem;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            margin-top: -2rem;
+            backdrop-filter: blur(20px);
+        }
+        .stat-item h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .stat-item p { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+        @media (max-width: 992px) {
+            .hero-split { flex-direction: column; text-align: center; padding: 4rem 0; }
+            .hero-image img { transform: none; }
+        }
+    </style>
 </head>
 <body>
     <div class="bg-glow"></div>
@@ -24,104 +64,89 @@ $downloadUrl = $settings->get('download_url') ?? 'https://cajaya.cl/downloads/Ca
     <header>
         <div class="container nav">
             <div class="logo">
-                <img src="https://cajaya.cl/assets/logo.png" alt="CajaYa" style="height: 40px;">
+                <img src="https://cajaya.cl/assets/logo.png" alt="CajaYa" style="height: 45px;">
             </div>
             <div class="nav-links">
-                <a href="<?= $downloadUrl ?>" class="btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">DESCARGAR DEMO</a>
+                <a href="../admin/auth/google" class="btn-primary" style="background: var(--primary); box-shadow: 0 0 20px var(--primary-glow);">COTIZAR AHORA</a>
             </div>
         </div>
     </header>
 
     <main>
-        <section class="hero">
-            <div class="container">
-                <span class="badge">🚀 LANZAMIENTO OFICIAL - ABRIL 2026</span>
-                <h1>El POS que trabaja<br><span style="color: var(--primary)">donde tú estés.</span></h1>
-                <p>Vende sin internet, sincroniza múltiples cajas en tiempo real y controla tu negocio desde cualquier lugar.</p>
-                
-                <div class="hero-actions" style="margin-bottom: 4rem;">
-                    <a href="<?= $downloadUrl ?>" class="btn-primary" style="margin-bottom: 1rem;">DESCARGAR DEMO GRATIS</a>
-                    <div style="margin-top: 15px;">
-                        <a href="../admin/auth/google" class="btn-google">
-                            <img src="https://www.gstatic.com/images/branding/product/2x/googleg_48dp.png" alt="Google" style="width: 24px;">
-                            Conectar con Google para bajar Demo
-                        </a>
-                    </div>
+        <section class="container hero-split">
+            <div class="hero-content">
+                <span class="badge" style="color: var(--primary); border-color: var(--primary);">✨ SOFTWARE POS DE VANGUARDIA</span>
+                <h1 style="font-size: 4.5rem; margin-bottom: 2rem;">Vende sin límites,<br><span style="color: var(--primary)">estés donde estés.</span></h1>
+                <p style="font-size: 1.2rem; margin-bottom: 3rem; color: var(--text-muted);">
+                    Diseñamos el punto de venta más resiliente del mercado. Modo offline real, sincronización multi-caja y boleta electrónica en un solo lugar.
+                </p>
+                <div class="hero-actions">
+                    <!-- ESTRATEGIA: TODO LLEVA A GOOGLE PARA CAPTURAR CORREO -->
+                    <a href="../admin/auth/google" class="btn-primary" style="background: var(--primary); font-size: 1.1rem; padding: 1.2rem 2.5rem;">
+                        <i class="fa-brands fa-google me-2"></i> DESCARGAR DEMO GRATIS
+                    </a>
+                    <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--text-muted);">* Requiere registro rápido para activar tu licencia demo.</p>
                 </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/cajaya_pos_mockup.png" alt="CajaYa App" class="reveal-app">
+            </div>
+        </section>
 
-                <!-- SHOWCASE DE LA APP CON ANIMACIÓN -->
-                <div class="product-showcase">
-                    <img src="assets/cajaya_pos_mockup.png" alt="CajaYa POS" class="img-fluid reveal-app">
+        <section class="container">
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <h2>+500</h2>
+                    <p>Empresas Activas</p>
+                </div>
+                <div class="stat-item">
+                    <h2>8+</h2>
+                    <p>Años de Experiencia</p>
+                </div>
+                <div class="stat-item">
+                    <h2>98%</h2>
+                    <p>Clientes Satisfechos</p>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN DE BENEFICIOS (TODOS LOS CARDS) -->
-        <section class="container" id="beneficios" style="padding: 100px 0;">
-            <div style="text-align: center; margin-bottom: 4rem;">
-                <h2 style="font-size: 2.5rem; font-weight: 800;">Todo lo que necesitas para ganar</h2>
+        <section class="container" id="beneficios" style="padding: 120px 0;">
+            <div style="text-align: center; margin-bottom: 5rem;">
+                <h2 style="font-size: 3rem; font-weight: 800;">Potencia tu negocio con tecnología AI</h2>
             </div>
             <div class="features">
                 <div class="feature-card">
-                    <i class="fa-solid fa-cloud-slash"></i>
-                    <h3>Modo Offline</h3>
-                    <p>Venta continua sin depender de la señal.</p>
+                    <i class="fa-solid fa-bolt" style="color: var(--primary);"></i>
+                    <h3>Rapidez Extrema</h3>
+                    <p>Atiende a tus clientes en segundos con nuestra interfaz optimizada.</p>
                 </div>
                 <div class="feature-card">
-                    <i class="fa-solid fa-sync"></i>
-                    <h3>Sincronización</h3>
-                    <p>Tus cajas siempre alineadas en tiempo real.</p>
+                    <i class="fa-solid fa-cloud-slash" style="color: var(--primary);"></i>
+                    <h3>Independencia Total</h3>
+                    <p>Sigue vendiendo aunque se corte el internet o la luz.</p>
                 </div>
                 <div class="feature-card">
-                    <i class="fa-solid fa-file-invoice-dollar"></i>
-                    <h3>Boleta SII</h3>
-                    <p>Emisión directa y automática al SII.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fa-solid fa-chart-line"></i>
-                    <h3>Reportes Pro</h3>
-                    <p>Dashboard de ventas en vivo desde el celular.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fa-solid fa-boxes-stacked"></i>
-                    <h3>Stock Global</h3>
-                    <p>Control de inventario multi-sucursal.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <h3>Seguridad RSA</h3>
-                    <p>Encriptación de grado bancario en tus datos.</p>
+                    <i class="fa-solid fa-mobile-screen-button" style="color: var(--primary);"></i>
+                    <h3>Control Móvil</h3>
+                    <p>Revisa tus ventas desde cualquier parte del mundo.</p>
                 </div>
             </div>
         </section>
-
-        <section class="container" style="padding: 100px 0; text-align: center; border-top: 1px solid var(--border);">
-            <h2 style="font-size: 3rem; font-weight: 800; margin-bottom: 2rem;">¿Listo para escalar tu negocio?</h2>
-            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 3rem;">Únete a los negocios que ya están vendiendo más rápido y con menos errores.</p>
-            <a href="<?= $downloadUrl ?>" class="btn-primary">DESCARGAR INSTALADOR .EXE</a>
-        </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>© 2026 CajaYa - Desarrollado por PanelBoss Pro. Todos los derechos reservados.</p>
+    <footer style="background: #050505; padding: 6rem 0;">
+        <div class="container" style="text-align: center;">
+            <img src="https://cajaya.cl/assets/logo.png" alt="CajaYa" style="height: 50px; margin-bottom: 2rem;">
+            <p style="color: var(--text-muted);">&copy; 2026 CajaYa. La nueva era de los puntos de venta en Chile.</p>
         </div>
     </footer>
 
     <script src="https://unpkg.com/scrollreveal"></script>
     <script>
-        ScrollReveal().reveal('.feature-card', { 
-            delay: 200,
-            distance: '50px',
-            origin: 'bottom',
-            interval: 100 
-        });
-        ScrollReveal().reveal('h1, .badge, .hero p', { 
-            delay: 100,
-            distance: '30px',
-            origin: 'top',
-            interval: 150
-        });
+        ScrollReveal().reveal('.hero-content', { origin: 'left', distance: '100px', duration: 1000 });
+        ScrollReveal().reveal('.hero-image', { origin: 'right', distance: '100px', duration: 1200, delay: 200 });
+        ScrollReveal().reveal('.stat-item', { interval: 200, scale: 0.85, duration: 800 });
+        ScrollReveal().reveal('.feature-card', { interval: 100, origin: 'bottom', distance: '50px' });
     </script>
 </body>
 </html>
