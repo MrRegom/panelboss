@@ -155,10 +155,10 @@
                 </div>
                 <div class="cta-form">
                     <div class="social-login-container">
-                        <button class="btn-social btn-google">
+                        <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn-social btn-google" style="text-decoration: none;">
                             <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Google" class="social-icon">
                             Continuar con Google
-                        </button>
+                        </a>
                         <button class="btn-social btn-microsoft">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" class="social-icon">
                             Continuar con Microsoft
