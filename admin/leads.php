@@ -11,95 +11,114 @@ $repo = new LeadRepository($db);
 $leads = $repo->getAll();
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <title>Prospectos - CajaYa Admin</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css">
-    <style>
-        .avatar-img { width: 32px; height: 32px; border-radius: 50%; }
-        .badge-google { background: #ea4335; color: white; }
-        .badge-microsoft { background: #00a4ef; color: white; }
-    </style>
+    <title>Prospectos | PanelBoss PRO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin-custom.css">
 </head>
-<body>
-    <div class="page">
-        <header class="navbar navbar-expand-md navbar-light d-print-none">
-            <div class="container-xl">
-                <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-                    <a href="index.php">CajaYa Admin</a>
-                </h1>
-                <div class="navbar-nav flex-row order-md-last">
-                    <div class="nav-item">
-                        <a href="logout.php" class="nav-link">Cerrar Sesión</a>
-                    </div>
-                </div>
+<body class="layout-fixed sidebar-expand-lg">
+    <div class="app-wrapper">
+        <!-- Header -->
+        <nav class="app-header navbar navbar-expand">
+            <div class="container-fluid px-4">
+                <ul class="navbar-nav">
+                    <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i class="fa-solid fa-bars-staggered"></i> </a> </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown user-menu"> 
+                        <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown"> 
+                            <span class="d-none d-md-inline fw-semibold me-2"><?= $_SESSION['user_name'] ?? 'Admin' ?></span>
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                                <i class="fa-solid fa-user-tie text-white small"></i>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2">
+                            <li><a href="logout.php" class="dropdown-item py-2 text-danger fw-medium"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-        </header>
-        
-        <div class="page-wrapper">
-            <div class="page-header d-print-none">
-                <div class="container-xl">
-                    <div class="row g-2 align-items-center">
-                        <div class="col">
-                            <h2 class="page-title">Gestión de Prospectos (Leads)</h2>
-                            <div class="text-muted mt-1">Usuarios que han mostrado interés y descargado la demo.</div>
+        </nav>
+
+        <!-- Sidebar -->
+        <?php include __DIR__ . '/includes/sidebar.php'; ?>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <div class="app-content-header py-4">
+                <div class="container-fluid px-4">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3 class="fw-semibold mb-0">Gestión de Prospectos</h3>
+                            <p class="text-muted small">Usuarios que han descargado la demo de CajaYa</p>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="page-body">
-                <div class="container-xl">
-                    <div class="card">
-                        <div class="table-responsive">
-                            <table class="table table-vcenter card-table">
-                                <thead>
-                                    <tr>
-                                        <th>Usuario</th>
-                                        <th>Email</th>
-                                        <th>Proveedor</th>
-                                        <th>Licencia Demo</th>
-                                        <th>Fecha Registro</th>
-                                        <th class="w-1"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($leads as $lead): ?>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex py-1 align-items-center">
-                                                <img src="<?php echo $lead['avatar_url'] ?: 'https://ui-avatars.com/api/?name=' . urlencode($lead['full_name']); ?>" class="avatar-img me-2">
-                                                <div class="flex-fill">
-                                                    <div class="font-weight-medium"><?php echo htmlspecialchars($lead['full_name']); ?></div>
+
+            <div class="app-content">
+                <div class="container-fluid px-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle mb-0">
+                                    <thead class="bg-light bg-opacity-10">
+                                        <tr>
+                                            <th class="ps-4">Usuario</th>
+                                            <th>Email</th>
+                                            <th>Proveedor</th>
+                                            <th>Licencia Demo</th>
+                                            <th>Fecha Registro</th>
+                                            <th class="text-end pe-4">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($leads as $lead): ?>
+                                        <tr>
+                                            <td class="ps-4">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="<?= $lead['avatar_url'] ?: 'https://ui-avatars.com/api/?name=' . urlencode($lead['full_name']) ?>" class="rounded-circle me-3" width="35">
+                                                    <span class="fw-medium"><?= htmlspecialchars($lead['full_name']) ?></span>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-muted"><?php echo htmlspecialchars($lead['email']); ?></td>
-                                        <td>
-                                            <span class="badge badge-outline <?php echo $lead['provider'] === 'google' ? 'badge-google' : 'badge-microsoft'; ?>">
-                                                <?php echo ucfirst($lead['provider']); ?>
-                                            </span>
-                                        </td>
-                                        <td class="text-muted font-monospace"><?php echo $lead['demo_license_key']; ?></td>
-                                        <td><?php echo date('d M Y, H:i', strtotime($lead['created_at'])); ?></td>
-                                        <td>
-                                            <a href="mailto:<?php echo $lead['email']; ?>" class="btn btn-sm btn-ghost-primary">Contactar</a>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach; ?>
-                                    <?php if (empty($leads)): ?>
-                                    <tr>
-                                        <td colspan="6" class="text-center py-4">No hay prospectos registrados aún.</td>
-                                    </tr>
-                                    <?php endif; ?>
-                                </tbody>
-                            </table>
+                                            </td>
+                                            <td class="text-muted"><?= htmlspecialchars($lead['email']) ?></td>
+                                            <td>
+                                                <?php if($lead['provider'] == 'google'): ?>
+                                                    <span class="badge bg-danger bg-opacity-10 text-danger border-0"><i class="fab fa-google me-1"></i> Google</span>
+                                                <?php else: ?>
+                                                    <span class="badge bg-info bg-opacity-10 text-info border-0"><i class="fab fa-microsoft me-1"></i> Microsoft</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td><code class="text-primary"><?= $lead['demo_license_key'] ?></code></td>
+                                            <td class="text-muted small"><?= date('d/m/Y H:i', strtotime($lead['created_at'])) ?></td>
+                                            <td class="text-end pe-4">
+                                                <a href="mailto:<?= $lead['email'] ?>" class="btn btn-sm btn-primary bg-opacity-10 text-primary border-0">
+                                                    <i class="fa-solid fa-envelope"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                        <?php if (empty($leads)): ?>
+                                        <tr>
+                                            <td colspan="6" class="text-center py-5 text-muted">No hay prospectos registrados aún.</td>
+                                        </tr>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/js/adminlte.min.js"></script>
 </body>
 </html>
