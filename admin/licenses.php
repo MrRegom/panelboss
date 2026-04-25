@@ -182,7 +182,7 @@ $db = Database::getConnection();
                 }},
                 { data: 'expires_at', render: function(data){ return data ? new Date(data).toLocaleDateString() : 'Perpetua'; } },
                 { data: null, className: 'text-end', render: function(data, type, row){
-                    return `<button class="btn btn-sm btn-warning shadow-sm fw-bold btn-edit" data-id="${row.id}" data-date="${row.expires_at}"><i class="fa-solid fa-calendar-pen me-1"></i> EDITAR</button>`;
+                    return `<button class="btn btn-sm btn-warning shadow-sm rounded-circle btn-edit" data-id="${row.id}" data-date="${row.expires_at}" title="Editar Expiración" style="width: 32px; height: 32px; padding: 0;"><i class="fa-solid fa-calendar-day"></i></button>`;
                 }}
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
