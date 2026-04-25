@@ -15,7 +15,7 @@
     
     <header class="navbar">
         <div class="logo-container">
-            <img src="assets/logo.png?v=<?php echo time(); ?>" alt="CajaYa Logo" class="main-logo" style="height: 60px; width: auto; display: block;">
+            <img src="assets/logo.png" alt="CajaYa Logo" class="main-logo" style="height: 60px; width: auto; display: block;">
         </div>
         <nav>
             <a href="#beneficios" class="nav-link-desktop">Beneficios</a>
