@@ -80,20 +80,20 @@ $result = $authService->handleSocialLogin($userData);
 </head>
 <body>
     <div class="success-card">
-        <div style="font-size: 4rem; margin-bottom: 1rem;">
-            <?php echo $result['is_new'] ? '🎉' : '👋'; ?>
+        <div style="margin-bottom: 1.5rem;">
+            <img src="https://cajaya.cl/assets/logo.png" alt="CajaYa" style="height: 60px;">
         </div>
 
         <?php if (!$result['is_new']): ?>
             <span class="welcome-back">¡Qué bueno verte de nuevo!</span>
         <?php endif; ?>
 
-        <h1>¡Hola, <?php echo htmlspecialchars($userData['name']); ?>!</h1>
+        <h1>¡Felicidades, <?php echo explode(' ', $userData['name'])[0]; ?>!</h1>
         
         <p>
             <?php echo $result['is_new'] 
-                ? 'Tu cuenta ha sido creada con éxito. Aquí tienes tu acceso gratuito:' 
-                : 'Ya tienes una cuenta activa con nosotros. Aquí tienes tu llave de acceso:'; 
+                ? 'Tu acceso a la nueva era de ventas está listo. Aquí tienes tu llave maestra:' 
+                : 'Tu cuenta está activa y lista para seguir creciendo. Esta es tu llave:'; 
             ?>
         </p>
         
@@ -102,21 +102,49 @@ $result = $authService->handleSocialLogin($userData);
                 <span id="licenseText"><?php echo $result['license_key']; ?></span>
                 <i class="fa-regular fa-copy" style="font-size: 0.9rem; opacity: 0.6;"></i>
             </div>
-            <div id="copyBadge" class="copy-badge">¡COPIADO!</div>
+            <div id="copyBadge" class="copy-badge">¡LLAVE COPIADA! 🚀</div>
         </div>
         
-        <p style="margin-bottom: 2rem; font-size: 0.9rem;">Copia la llave y pégala cuando abras la App de CajaYa.</p>
+        <p style="margin-bottom: 2rem; font-size: 0.9rem;">Copia la llave y pégala cuando abras la App de CajaYa en tu PC.</p>
         
         <a href="<?php echo $result['download_url']; ?>" class="btn-download">
-            <i class="fa-solid fa-download me-2"></i> Descargar CajaYa para Windows
+            <i class="fa-solid fa-cloud-arrow-down me-2"></i> Descargar CajaYa v1.0.0
         </a>
         
-        <p style="margin-top: 2rem; font-size: 0.8rem;">
-            Hemos enviado un recordatorio a <strong><?php echo $userData['email']; ?></strong>
+        <p style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.7;">
+            Te hemos enviado un respaldo a <strong><?php echo $userData['email']; ?></strong>
         </p>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
+        // Lanzar fuegos artificiales al cargar
+        window.onload = function() {
+            var end = Date.now() + (3 * 1000);
+            var colors = ['#9333ea', '#0ea5e9'];
+
+            (function frame() {
+                confetti({
+                    particleCount: 2,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: colors
+                });
+                confetti({
+                    particleCount: 2,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: colors
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        };
+
         function copyLicense() {
             const text = document.getElementById('licenseText').innerText;
             navigator.clipboard.writeText(text).then(() => {
@@ -125,6 +153,14 @@ $result = $authService->handleSocialLogin($userData);
                 setTimeout(() => {
                     badge.style.display = 'none';
                 }, 2000);
+                
+                // Un pequeño estallido extra al copiar
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#22c55e']
+                });
             });
         }
     </script>
