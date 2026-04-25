@@ -1,14 +1,27 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once __DIR__ . '/../vendor/autoload.php';
 use App\Services\AuthService;
 use App\Repositories\SettingRepository;
 
-AuthService::check();
+try {
+    AuthService::check();
+} catch (\Exception $e) {
+    die("Error de Autenticación: " . $e->getMessage());
+}
 
 $userName = $_SESSION['user_name'] ?? 'Administrador';
-$repo = new SettingRepository();
-$downloadUrl = $repo->get('download_url');
-$currentVersion = $repo->get('current_version');
+
+try {
+    $repo = new SettingRepository();
+    $downloadUrl = $repo->get('download_url');
+    $currentVersion = $repo->get('current_version');
+} catch (\Exception $e) {
+    die("Error de Base de Datos: " . $e->getMessage());
+}
 ?>
 <!DOCTYPE html>
 <html lang="es" data-bs-theme="dark">
