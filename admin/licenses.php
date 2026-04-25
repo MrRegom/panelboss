@@ -182,7 +182,7 @@ $db = Database::getConnection();
                 }},
                 { data: 'expires_at', render: function(data){ return data ? new Date(data).toLocaleDateString() : 'Perpetua'; } },
                 { data: null, className: 'text-end', render: function(data, type, row){
-                    return `<button class="btn btn-sm btn-outline-warning border-0 btn-edit" data-id="${row.id}" data-date="${row.expires_at}"><i class="fa-solid fa-calendar-pen"></i></button>`;
+                    return `<button class="btn btn-sm btn-warning shadow-sm fw-bold btn-edit" data-id="${row.id}" data-date="${row.expires_at}"><i class="fa-solid fa-calendar-pen me-1"></i> EDITAR</button>`;
                 }}
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
@@ -194,32 +194,32 @@ $db = Database::getConnection();
             const data = table.row($(this).closest('tr')).data();
             const content = `
                 <div class="mb-4 text-center">
-                    <div class="h4 text-white mb-1">${data.company_name}</div>
-                    <div class="text-muted small">RUT: ${data.rut || 'No registrado'}</div>
+                    <div class="h4 text-info fw-bold mb-1">${data.company_name}</div>
+                    <div class="text-white-50 small">RUT: ${data.rut || 'No registrado'}</div>
                 </div>
                 <div class="row g-3">
                     <div class="col-12">
-                        <div class="p-3 rounded bg-white bg-opacity-5 border border-white border-opacity-10">
-                            <label class="text-muted small d-block mb-1">Email Corporativo</label>
-                            <div class="text-info fw-medium">${data.email || 'N/A'}</div>
+                        <div class="p-3 rounded bg-dark border border-secondary shadow-sm">
+                            <label class="text-info small d-block mb-1 fw-bold">EMAIL CORPORATIVO</label>
+                            <div class="text-white fs-5">${data.email || 'N/A'}</div>
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="p-3 rounded bg-white bg-opacity-5 border border-white border-opacity-10">
-                            <label class="text-muted small d-block mb-1">Teléfono</label>
-                            <div>${data.phone || 'N/A'}</div>
+                        <div class="p-3 rounded bg-dark border border-secondary shadow-sm h-100">
+                            <label class="text-info small d-block mb-1 fw-bold">TELÉFONO</label>
+                            <div class="text-white">${data.phone || 'N/A'}</div>
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="p-3 rounded bg-white bg-opacity-5 border border-white border-opacity-10">
-                            <label class="text-muted small d-block mb-1">Ciudad/Región</label>
-                            <div>${data.address ? data.address.split(',')[0] : 'N/A'}</div>
+                        <div class="p-3 rounded bg-dark border border-secondary shadow-sm h-100">
+                            <label class="text-info small d-block mb-1 fw-bold">CIUDAD/REGIÓN</label>
+                            <div class="text-white">${data.address ? data.address.split(',')[0] : 'N/A'}</div>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="p-3 rounded bg-white bg-opacity-5 border border-white border-opacity-10">
-                            <label class="text-muted small d-block mb-1">Dirección Completa</label>
-                            <div class="small">${data.address || 'Sin dirección registrada'}</div>
+                        <div class="p-3 rounded bg-dark border border-secondary shadow-sm">
+                            <label class="text-info small d-block mb-1 fw-bold">DIRECCIÓN COMPLETA</label>
+                            <div class="text-white small">${data.address || 'Sin dirección registrada'}</div>
                         </div>
                     </div>
                 </div>
