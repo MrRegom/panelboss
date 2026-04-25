@@ -192,7 +192,7 @@ $db = Database::getConnection();
                             <button class="btn btn-sm btn-dark btn-toggle-status" data-id="${row.id}" data-status="${row.status}" title="${statusTitle}">
                                 <i class="fa-solid ${statusIcon}"></i>
                             </button>
-                            <button class="btn btn-sm btn-dark btn-delete" data-id="${row.id}" title="Eliminar">
+                            <button class="btn btn-sm btn-dark btn-delete ${row.status === 'active' ? 'opacity-25' : ''}" data-id="${row.id}" title="${row.status === 'active' ? 'Bloqueado (Licencia Activa)' : 'Eliminar'}">
                                 <i class="fa-solid fa-trash-can text-danger"></i>
                             </button>
                         </div>
@@ -220,6 +220,8 @@ $db = Database::getConnection();
                         if(res.success) {
                             Swal.fire('Eliminado', 'La licencia ha sido borrada.', 'success');
                             table.ajax.reload();
+                        } else {
+                            Swal.fire('Protegido', res.message, 'error');
                         }
                     }, 'json');
                 }
