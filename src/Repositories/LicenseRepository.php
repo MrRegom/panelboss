@@ -13,8 +13,9 @@ class LicenseRepository {
     }
 
     public function findAll() {
-        $sql = "SELECT l.license_key, c.name as company_name, l.plan, 
-                       l.status, l.expires_at 
+        $sql = "SELECT l.license_key, 
+                       COALESCE(c.name, l.business_name, 'N/A') as company_name, 
+                       l.plan, l.status, l.expires_at 
                 FROM licenses l 
                 LEFT JOIN companies c ON l.company_id = c.id
                 ORDER BY l.created_at DESC";
