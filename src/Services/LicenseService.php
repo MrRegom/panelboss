@@ -11,7 +11,7 @@ class LicenseService {
     private $repository;
     private $privateKeyPath;
 
-    public function __construct(PDO $db) {
+    public function __construct(\PDO $db) {
         $this->repository = new LicenseRepository($db);
         $this->privateKeyPath = __DIR__ . '/../../certs/cajaya-priv.pem';
     }
