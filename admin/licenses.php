@@ -243,19 +243,35 @@ $db = Database::getConnection();
         // Guardar Nueva Fecha
         $('#formEditExpiration').on('submit', function(e) {
             e.preventDefault();
+            const $btn = $(this).find('button[type="submit"]');
+            const originalText = $btn.html();
+            
+            // Bloqueo y carga
+            $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-2"></i> Actualizando...');
+            Swal.fire({ title: 'Actualizando...', allowOutsideClick: false, didOpen: () => { Swal.showLoading() } });
+
             $.post('api/update_license.php', $(this).serialize(), function(response) {
                 if(response.success) {
-                    Swal.fire('¡Actualizado!', 'La fecha ha sido cambiada.', 'success');
-                    $('#modalEditExpiration').modal('hide');
-                    table.ajax.reload();
+                    Swal.fire('¡Actualizado!', 'La fecha ha sido cambiada.', 'success').then(() => location.reload());
                 } else {
                     Swal.fire('Error', response.message, 'error');
+                    $btn.prop('disabled', false).html(originalText);
                 }
-            }, 'json');
+            }, 'json').fail(function() {
+                $btn.prop('disabled', false).html(originalText);
+                Swal.fire('Error', 'Fallo en la conexión', 'error');
+            });
         });
 
         $('#formGenerateLicense').on('submit', function(e) {
             e.preventDefault();
+            const $btn = $(this).find('button[type="submit"]');
+            const originalText = $btn.html();
+
+            // Bloqueo y carga
+            $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-2"></i> Generando...');
+            Swal.fire({ title: 'Generando Licencia...', allowOutsideClick: false, didOpen: () => { Swal.showLoading() } });
+
             $.post('api/save_license.php', $(this).serialize(), function(response) {
                 if(response.success) {
                     Swal.fire('¡Éxito!', 'Licencia creada: ' + response.key, 'success');
@@ -264,7 +280,11 @@ $db = Database::getConnection();
                 } else {
                     Swal.fire('Error', response.message, 'error');
                 }
-            }, 'json');
+                $btn.prop('disabled', false).html(originalText);
+            }, 'json').fail(function() {
+                $btn.prop('disabled', false).html(originalText);
+                Swal.fire('Error', 'Fallo en la conexión', 'error');
+            });
         });
     });
     </script>
