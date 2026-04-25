@@ -25,7 +25,6 @@ $downloadUrl = $settings->get('download_url') ?? 'https://cajaya.cl/downloads/Ca
         <div class="container nav">
             <div class="logo">
                 <img src="https://cajaya.cl/assets/logo.png" alt="CajaYa" style="height: 40px;">
-                <span>CajaYa</span>
             </div>
             <div class="nav-links">
                 <a href="<?= $downloadUrl ?>" class="btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">DESCARGAR DEMO</a>
@@ -43,17 +42,16 @@ $downloadUrl = $settings->get('download_url') ?? 'https://cajaya.cl/downloads/Ca
                 <div class="hero-actions" style="margin-bottom: 4rem;">
                     <a href="<?= $downloadUrl ?>" class="btn-primary" style="margin-bottom: 1rem;">DESCARGAR DEMO GRATIS</a>
                     <div style="margin-top: 15px;">
-                        <span style="color: var(--text-muted); font-size: 0.8rem; display: block; margin-bottom: 10px;">O REGÍSTRATE AL INSTANTE:</span>
                         <a href="../admin/auth/google" class="btn-google">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" style="width: 18px;">
-                            Conectar con Google
+                            <img src="https://www.gstatic.com/images/branding/product/2x/googleg_48dp.png" alt="Google" style="width: 24px;">
+                            Conectar con Google para bajar Demo
                         </a>
                     </div>
                 </div>
 
                 <!-- SHOWCASE DE LA APP CON ANIMACIÓN -->
                 <div class="product-showcase">
-                    <img src="assets/img/app-preview.png" alt="CajaYa App" class="img-fluid reveal-app">
+                    <img src="assets/cajaya_pos_mockup.png" alt="CajaYa POS" class="img-fluid reveal-app">
                 </div>
             </div>
         </section>
