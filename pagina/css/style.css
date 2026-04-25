@@ -88,6 +88,16 @@ h1, h2, h3, .logo { font-family: 'Outfit', sans-serif; }
     align-items: center;
     flex-shrink: 0;
 }
+.navbar-brand img {
+    height: 45px;
+    width: auto;
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand img:hover {
+    transform: scale(1.05);
+}
 .main-logo {
     height: 100%;
     width: auto;

@@ -155,17 +155,15 @@
                 </div>
                 <div class="cta-form">
                     <div class="social-login-container">
-                        <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn-social btn-google" style="text-decoration: none;">
-                            <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Google" class="social-icon">
-                            Continuar con Google
-                        </a>
-                        <button class="btn-social btn-microsoft">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" class="social-icon">
-                            Continuar con Microsoft
-                        </button>
+                        <div class="social-login">
+                            <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn-social google">
+                                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                                Continuar con Google
+                            </a>
+                        </div>
                         
                         <div class="divider">
-                            <span>O usa tu correo electrónico</span>
+                            <span>O solicita tu demo gratuita</span>
                         </div>
 
                         <form class="modern-form">
