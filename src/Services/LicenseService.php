@@ -107,7 +107,7 @@ class LicenseService {
         return [
             'status' => $status,
             'license_key' => $license['license_key'],
-            'expires_at' => $license['expires_at'],
+            'expires_at' => $license['expires_at'] ? date('c', strtotime($license['expires_at'])) : null,
             'days_remaining' => (int)$daysRemaining,
             'message' => $message,
             'force_update' => false,
