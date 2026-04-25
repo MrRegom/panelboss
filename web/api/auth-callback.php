@@ -46,11 +46,13 @@ $userUrl = "https://www.googleapis.com/oauth2/v2/userinfo?access_token=" . $toke
 $userData = json_decode(file_get_contents($userUrl), true);
 $userData['provider'] = 'google';
 
-// 3. Procesar con nuestro servicio (Guardar en DB y crear Licencia)
+// 3. Procesar con nuestro servicio
 $authService = new SocialAuthService(Database::getConnection());
 $result = $authService->handleSocialLogin($userData);
 
-// 4. Mostrar página de éxito profesional
+// TODO: Aquí llamaríamos a un servicio de Email para enviar la llave
+// mail($userData['email'], "Tu Licencia de CajaYa", "Hola... tu clave es " . $result['license_key']);
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -58,34 +60,70 @@ $result = $authService->handleSocialLogin($userData);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Bienvenido a CajaYa!</title>
-    <link rel="stylesheet" href="https://api.cajaya.cl/css/style.css"> <!-- Reutilizamos estilos si existen -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background: #04010a; color: white; font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .success-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(147, 51, 234, 0.3); padding: 3rem; border-radius: 24px; text-align: center; max-width: 500px; box-shadow: 0 0 50px rgba(147, 51, 234, 0.2); }
-        .license-box { background: rgba(0,0,0,0.5); border: 1px dashed #9333ea; padding: 1.5rem; border-radius: 12px; margin: 2rem 0; font-family: monospace; font-size: 1.2rem; color: #0ea5e9; letter-spacing: 2px; }
-        .btn-download { background: linear-gradient(135deg, #9333ea, #0ea5e9); color: white; padding: 1.2rem 2.5rem; border-radius: 12px; text-decoration: none; font-weight: bold; display: inline-block; transition: transform 0.3s; }
+        body { background: #04010a; color: white; font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+        .success-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(147, 51, 234, 0.3); padding: 3rem; border-radius: 24px; text-align: center; max-width: 500px; box-shadow: 0 0 50px rgba(147, 51, 234, 0.2); position: relative; overflow: hidden; }
+        .license-container { position: relative; margin: 2rem 0; }
+        .license-box { background: rgba(0,0,0,0.5); border: 1px dashed #9333ea; padding: 1.5rem; border-radius: 12px; font-family: monospace; font-size: 1.2rem; color: #0ea5e9; letter-spacing: 2px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; transition: all 0.3s; }
+        .license-box:hover { border-style: solid; background: rgba(147, 51, 234, 0.1); }
+        .copy-badge { position: absolute; top: -10px; right: -10px; background: #22c55e; color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; display: none; }
+        .btn-download { background: linear-gradient(135deg, #9333ea, #0ea5e9); color: white; padding: 1.2rem 2.5rem; border-radius: 12px; text-decoration: none; font-weight: bold; display: inline-block; transition: transform 0.3s; width: 100%; box-sizing: border-box; }
         .btn-download:hover { transform: translateY(-3px); }
-        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        p { color: #94a3b8; }
+        h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        p { color: #94a3b8; line-height: 1.6; }
+        .welcome-back { color: #f59e0b; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; display: block; }
     </style>
 </head>
 <body>
     <div class="success-card">
-        <div style="font-size: 4rem; margin-bottom: 1rem;">🎉</div>
+        <div style="font-size: 4rem; margin-bottom: 1rem;">
+            <?php echo $result['is_new'] ? '🎉' : '👋'; ?>
+        </div>
+
+        <?php if (!$result['is_new']): ?>
+            <span class="welcome-back">¡Qué bueno verte de nuevo!</span>
+        <?php endif; ?>
+
         <h1>¡Hola, <?php echo htmlspecialchars($userData['name']); ?>!</h1>
-        <p>Tu cuenta ha sido creada con éxito. Aquí tienes tu acceso para empezar hoy mismo:</p>
         
-        <div class="license-box">
-            <?php echo $result['license_key']; ?>
+        <p>
+            <?php echo $result['is_new'] 
+                ? 'Tu cuenta ha sido creada con éxito. Aquí tienes tu acceso gratuito:' 
+                : 'Ya tienes una cuenta activa con nosotros. Aquí tienes tu llave de acceso:'; 
+            ?>
+        </p>
+        
+        <div class="license-container">
+            <div class="license-box" id="licenseBox" onclick="copyLicense()">
+                <span id="licenseText"><?php echo $result['license_key']; ?></span>
+                <i class="fa-regular fa-copy" style="font-size: 0.9rem; opacity: 0.6;"></i>
+            </div>
+            <div id="copyBadge" class="copy-badge">¡COPIADO!</div>
         </div>
         
-        <p style="margin-bottom: 2rem;">Copia esta llave y úsala al abrir la aplicación.</p>
+        <p style="margin-bottom: 2rem; font-size: 0.9rem;">Copia la llave y pégala cuando abras la App de CajaYa.</p>
         
         <a href="<?php echo $result['download_url']; ?>" class="btn-download">
-            ⬇️ Descargar CajaYa para Windows
+            <i class="fa-solid fa-download me-2"></i> Descargar CajaYa para Windows
         </a>
         
-        <p style="margin-top: 2rem; font-size: 0.8rem;">También te enviamos una copia a <strong><?php echo $userData['email']; ?></strong></p>
+        <p style="margin-top: 2rem; font-size: 0.8rem;">
+            Hemos enviado un recordatorio a <strong><?php echo $userData['email']; ?></strong>
+        </p>
     </div>
+
+    <script>
+        function copyLicense() {
+            const text = document.getElementById('licenseText').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const badge = document.getElementById('copyBadge');
+                badge.style.display = 'block';
+                setTimeout(() => {
+                    badge.style.display = 'none';
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>
