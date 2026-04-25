@@ -18,8 +18,8 @@
             <img src="assets/logo.png" alt="CajaYa Logo" class="main-logo">
         </div>
         <nav>
-            <a href="#beneficios">Beneficios</a>
-            <a href="#faq">Preguntas</a>
+            <a href="#beneficios" class="nav-link-desktop">Beneficios</a>
+            <a href="#faq" class="nav-link-desktop">Preguntas</a>
             <a href="#registro" class="btn-primary-small">Crear Cuenta</a>
         </nav>
     </header>
