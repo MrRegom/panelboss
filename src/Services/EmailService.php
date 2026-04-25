@@ -1,6 +1,11 @@
 <?php
 namespace App\Services;
 
+// Forzar carga manual (Guerilla Fix)
+require_once __DIR__ . '/../../vendor/phpmailer/phpmailer/src/Exception.php';
+require_once __DIR__ . '/../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require_once __DIR__ . '/../../vendor/phpmailer/phpmailer/src/SMTP.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -23,7 +28,7 @@ class EmailService {
             $mail->setFrom($_ENV['SMTP_FROM'], $_ENV['SMTP_FROM_NAME']);
             $mail->addAddress($toEmail, $userName);
 
-            // Contenido del Correo (HTML elegante)
+            // Contenido del Correo
             $mail->isHTML(true);
             $mail->Subject = "🔑 Tu Llave de Acceso - CajaYa POS";
             
