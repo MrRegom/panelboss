@@ -1,3 +1,10 @@
+<?php
+require_once __DIR__ . '/../vendor/autoload.php';
+use App\Repositories\SettingRepository;
+
+$settings = new SettingRepository();
+$downloadUrl = $settings->get('download_url') ?? 'https://cajaya.cl/downloads/CajaYa-Setup-1.0.0.exe';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -33,7 +40,7 @@
                     <h1>El corazón digital de tu negocio,<br><span class="text-gradient">sin límites.</span></h1>
                     <p>Vende sin depender de internet, emite boletas del SII al instante y controla el stock de todas tus cajas en tiempo real. Combinamos tecnología corporativa con extrema facilidad de uso.</p>
                     <div class="hero-actions">
-                        <a href="#registro" class="btn-primary">Descargar Demo Ahora</a>
+                        <a href="<?= $downloadUrl ?>" class="btn-primary">Descargar Demo Ahora</a>
                         <a href="#beneficios" class="btn-outline">Explorar Tecnología</a>
                     </div>
                 </div>
