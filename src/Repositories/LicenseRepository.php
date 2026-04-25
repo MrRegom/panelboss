@@ -8,8 +8,17 @@ use PDO;
 class LicenseRepository {
     private $db;
 
-    public function __construct() {
-        $this->db = Database::getConnection();
+    public function __construct(PDO $db) {
+        $this->db = $db;
+    }
+
+    public function findAll() {
+        $sql = "SELECT l.license_key, c.name as company_name, l.plan, 
+                       l.status, l.expires_at 
+                FROM licenses l 
+                LEFT JOIN companies c ON l.company_id = c.id
+                ORDER BY l.created_at DESC";
+        return $this->db->query($sql)->fetchAll();
     }
 
     public function findByLicenseKey($key) {
@@ -68,15 +77,16 @@ class LicenseRepository {
         return $stmt->fetchAll();
     }
 
-    public function create($licenseKey, $plan, $expiresAt = null) {
+    public function create($licenseKey, $plan, $expiresAt = null, $companyId = null) {
         $stmt = $this->db->prepare("
-            INSERT INTO licenses (license_key, plan, expires_at, status, created_at) 
-            VALUES (:key, :plan, :expires_at, 'pending', NOW())
+            INSERT INTO licenses (license_key, plan, expires_at, company_id, status, created_at) 
+            VALUES (:key, :plan, :expires_at, :company_id, 'pending', NOW())
         ");
         return $stmt->execute([
             'key' => $licenseKey,
             'plan' => $plan,
-            'expires_at' => $expiresAt
+            'expires_at' => $expiresAt,
+            'company_id' => $companyId
         ]);
     }
 

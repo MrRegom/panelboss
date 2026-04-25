@@ -1,12 +1,8 @@
 <?php
-
-require_once __DIR__ . '/../vendor/autoload.php';
-
+require_once __DIR__ . '/../../vendor/autoload.php';
 use App\Services\LicenseService;
-
 header('Content-Type: application/json');
 
-// Validar API Key
 $apiKey = $_SERVER['HTTP_X_API_KEY'] ?? '';
 if ($apiKey !== 'abc123shared') {
     http_response_code(401);
@@ -15,14 +11,13 @@ if ($apiKey !== 'abc123shared') {
 }
 
 $data = json_decode(file_get_contents('php://input'), true);
-
 if (!$data) {
     http_response_code(400);
     echo json_encode(['error' => 'Invalid request body']);
     exit;
 }
 
-$service = new LicenseService();
+$service = new LicenseService(\App\Config\Database::getConnection());
 $result = $service->activate(
     $data['license_key'] ?? '',
     $data['machine_id'] ?? '',
