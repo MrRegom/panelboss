@@ -38,25 +38,7 @@ AuthService::check();
             </div>
         </nav>
 
-        <aside class="app-sidebar shadow-sm" data-bs-theme="dark">
-            <div class="sidebar-brand"> 
-                <a href="./index.php" class="brand-link border-0"> 
-                    <span class="brand-text">PANELBOSS <span class="text-primary">PRO</span></span> 
-                </a> 
-            </div>
-            <div class="sidebar-wrapper">
-                <nav class="mt-3">
-                    <ul class="nav sidebar-menu flex-column">
-                        <li class="nav-item"> <a href="./index.php" class="nav-link"> <i class="nav-icon fa-solid fa-house"></i> <p>Dashboard</p> </a> </li>
-                        <li class="nav-header small text-muted px-4 mt-3">OPERACIONES</li>
-                        <li class="nav-item"> <a href="./licenses.php" class="nav-link"> <i class="nav-icon fa-solid fa-key"></i> <p>Licencias</p> </a> </li>
-                        <li class="nav-item"> <a href="./companies.php" class="nav-link active"> <i class="nav-icon fa-solid fa-building"></i> <p>Empresas</p> </a> </li>
-                        <li class="nav-header small text-muted px-4 mt-3">SISTEMA</li>
-                        <li class="nav-item"> <a href="./users.php" class="nav-link"> <i class="nav-icon fa-solid fa-users-gear"></i> <p>Usuarios</p> </a> </li>
-                    </ul>
-                </nav>
-            </div>
-        </aside>
+        <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
         <main class="app-main">
             <!-- Alineación igual al Dashboard y Licencias -->
