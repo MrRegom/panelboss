@@ -50,9 +50,22 @@ $userData['provider'] = 'google';
 $authService = new SocialAuthService(Database::getConnection());
 $result = $authService->handleSocialLogin($userData);
 
-// TODO: Aquí llamaríamos a un servicio de Email para enviar la llave
-// mail($userData['email'], "Tu Licencia de CajaYa", "Hola... tu clave es " . $result['license_key']);
+// 4. Enviar Correo Electrónico (Simple por ahora)
+$to = $userData['email'];
+$subject = "🔑 Tu Llave de Acceso - CajaYa POS";
+$message = "Hola " . $userData['name'] . ",\n\n" .
+           "¡Bienvenido a CajaYa! Estamos felices de tenerte con nosotros.\n\n" .
+           "Aquí tienes tu llave de acceso para la demo:\n" .
+           "LLAVE: " . $result['license_key'] . "\n\n" .
+           "Puedes descargar la aplicación instalador desde aquí:\n" .
+           "https://cajaya.cl/downloads/CajaYa-Setup-1.0.0.exe\n\n" .
+           "Si tienes alguna duda, responde a este correo.\n\n" .
+           "¡Éxito!\nEquipo CajaYa";
+$headers = "From: CajaYa <no-reply@cajaya.cl>\r\n" .
+           "Reply-To: soporte@cajaya.cl\r\n" .
+           "X-Mailer: PHP/" . phpversion();
 
+@mail($to, $subject, $message, $headers);
 ?>
 <!DOCTYPE html>
 <html lang="es">
