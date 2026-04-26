@@ -40,20 +40,25 @@
         h1, h2, h3 { font-family: 'Outfit', sans-serif; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* --- PROMO BANNER CON ANIMACIÓN --- */
+        /* --- PROMO BANNER ULTRA-LLAMATIVO --- */
         .promo-banner {
-            background: linear-gradient(90deg, #7c3aed, #a855f7, #7c3aed);
+            background: linear-gradient(90deg, #7c3aed, #db2777, #7c3aed);
             background-size: 200% auto;
             color: #fff;
             text-align: center;
-            padding: 10px 0;
-            font-size: 0.9rem;
-            font-weight: 700;
+            padding: 12px 0;
+            font-size: 0.95rem;
+            font-weight: 800;
             letter-spacing: 0.5px;
             position: sticky;
             top: 0;
             z-index: 1100;
-            animation: shimmer 3s linear infinite;
+            animation: shimmer 2s linear infinite, pulse-banner 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-banner {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
         @keyframes shimmer {
@@ -65,19 +70,22 @@
         header {
             padding: 25px 0;
             position: sticky;
-            top: 40px;
+            top: 45px;
             z-index: 1000;
-            background: rgba(10, 9, 16, 0.9);
+            background: rgba(10, 9, 16, 0.95);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
         }
         .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
         .logo img { 
-            height: 50px; /* Logo más grande */
-            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3)); /* Resplandor blanco sutil */
+            height: 45px; 
+            filter: brightness(0) invert(1); /* Logo blanco puro para contraste total */
             transition: transform 0.3s ease;
         }
         .logo:hover img { transform: scale(1.05); }
+        
+        .nav-menu { display: flex; gap: 20px; align-items: center; }
+        .nav-separator { color: rgba(255,255,255,0.2); font-weight: 300; }
         .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: all 0.3s; }
         .nav-link:hover { color: var(--accent); }
 
@@ -222,7 +230,11 @@
             </a>
             <nav class="nav-menu">
                 <a href="#beneficios" class="nav-link">Beneficios</a>
+                <span class="nav-separator">|</span>
+                <a href="#que-ofrecemos" class="nav-link">¿Qué ofrecemos?</a>
+                <span class="nav-separator">|</span>
                 <a href="#precios" class="nav-link">Precios</a>
+                <span class="nav-separator">|</span>
                 <a href="#faq" class="nav-link">Preguntas</a>
             </nav>
             <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn-neon">Prueba Gratis</a>
