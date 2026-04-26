@@ -171,7 +171,7 @@
 <body>
 
     <div class="promo-banner">
-        🔥 OFERTA DE LANZAMIENTO: 1 Mes Gratis + Instalación Prioritaria (Solo 5 cupos)
+        🔥 OFERTA: 1 Mes Gratis + Instalación Prioritaria (Solo 5 cupos)
     </div>
 
     <header>
