@@ -21,7 +21,7 @@ $downloadUrl = $settings->get('download_url') ?? 'https://cajaya.cl/downloads/Ca
         :root {
             --primary: #7c3aed; /* Violet 600 */
             --primary-light: #a78bfa;
-            --accent: #f97316; /* Orange 500 (BSale Style) */
+            --accent: #a855f7; /* Morado claro (CajaYa Logo Style) */
             --bg-deep: #050506;
             --bg-card: #0f0f12;
             --text-main: #f8fafc;
@@ -99,8 +99,8 @@ $downloadUrl = $settings->get('download_url') ?? 'https://cajaya.cl/downloads/Ca
             gap: 10px;
             cursor: pointer;
         }
-        .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4); background: #fb923c; }
+        .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4); background: var(--primary-light); }
         
         .btn-outline { border: 1.5px solid var(--border); color: #fff; }
         .btn-outline:hover { background: rgba(255,255,255,0.05); border-color: #fff; }
@@ -314,7 +314,7 @@ $downloadUrl = $settings->get('download_url') ?? 'https://cajaya.cl/downloads/Ca
 
     <div class="top-bar">
         <div class="container top-bar-content">
-            <a href="tel:+56229381115"><i class="fa-solid fa-phone"></i> +56 2 2938 1115</a>
+            <a href="tel:+56959764771"><i class="fa-solid fa-phone"></i> +56 9 5976 4771</a>
             <a href="#"><i class="fa-solid fa-circle-question"></i> Centro de ayuda</a>
             <a href="#"><i class="fa-solid fa-bullhorn"></i> ¡Recomiéndanos!</a>
         </div>
@@ -326,7 +326,6 @@ $downloadUrl = $settings->get('download_url') ?? 'https://cajaya.cl/downloads/Ca
             
             <nav class="nav-menu">
                 <a href="#precios" class="nav-link">Precios</a>
-                <a href="#clientes" class="nav-link">Clientes</a>
                 <a href="#recursos" class="nav-link">¿Qué ofrecemos?</a>
                 <div class="dropdown">
                     <a href="#" class="nav-link">Recursos <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
@@ -335,7 +334,6 @@ $downloadUrl = $settings->get('download_url') ?? 'https://cajaya.cl/downloads/Ca
 
             <div class="nav-actions">
                 <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn btn-primary">Prueba Gratis</a>
-                <a href="/admin/login.php" class="btn-ghost">Login <i class="fa-solid fa-circle-user"></i></a>
             </div>
         </div>
     </header>
@@ -353,7 +351,7 @@ $downloadUrl = $settings->get('download_url') ?? 'https://cajaya.cl/downloads/Ca
                     </p>
                     <div class="hero-btns">
                         <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn btn-primary">Contrata aquí <i class="fa-solid fa-arrow-right"></i></a>
-                        <a href="https://wa.me/56936316154" class="btn btn-outline"><i class="fa-solid fa-play"></i> Ver video</a>
+                        <a href="https://wa.me/56959764771" class="btn btn-outline"><i class="fa-solid fa-play"></i> Ver video</a>
                     </div>
                     <div style="margin-top: 30px; display: flex; gap: 20px; font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">
                         <span><i class="fa-solid fa-check text-success"></i> Demo 30 días gratis</span>
@@ -379,7 +377,7 @@ $downloadUrl = $settings->get('download_url') ?? 'https://cajaya.cl/downloads/Ca
                     </div>
 
                     <div class="organic-shape">
-                        <img src="assets/cajaya_dashboard_mockup.png" alt="Dashboard CajaYa" class="mockup-img">
+                        <img src="assets/cajaya_pos_mockup.png" alt="POS CajaYa" class="mockup-img">
                     </div>
                 </div>
             </div>
@@ -441,7 +439,7 @@ $downloadUrl = $settings->get('download_url') ?? 'https://cajaya.cl/downloads/Ca
                 <p>Únete a las miles de pymes que ya transformaron su gestión con CajaYa.</p>
                 <div style="display: flex; gap: 20px; justify-content: center; margin-top: 40px;">
                     <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn btn-primary" style="padding: 18px 40px; font-size: 1.1rem;">Comenzar Demo Gratis</a>
-                    <a href="https://wa.me/56936316154" class="btn btn-outline" style="padding: 18px 40px; font-size: 1.1rem;">Hablar con un Experto</a>
+                    <a href="https://wa.me/56959764771" class="btn btn-outline" style="padding: 18px 40px; font-size: 1.1rem;">Hablar con un Experto</a>
                 </div>
             </div>
         </section>
@@ -473,18 +471,16 @@ $downloadUrl = $settings->get('download_url') ?? 'https://cajaya.cl/downloads/Ca
                 <h5>Empresa</h5>
                 <ul>
                     <li><a href="#">Sobre nosotros</a></li>
-                    <li><a href="#">Clientes</a></li>
                     <li><a href="#">Contacto</a></li>
-                    <li><a href="#">Blog</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
                 <h5>Contacto</h5>
                 <ul>
-                    <li><a href="tel:+56229381115"><i class="fa-solid fa-phone me-2"></i> +56 2 2938 1115</a></li>
+                    <li><a href="tel:+56959764771"><i class="fa-solid fa-phone me-2"></i> +56 9 5976 4771</a></li>
                     <li><a href="mailto:soporte@cajaya.cl"><i class="fa-solid fa-envelope me-2"></i> soporte@cajaya.cl</a></li>
-                    <li><a href="#"><i class="fa-solid fa-location-dot me-2"></i> Santiago, Chile</a></li>
+                    <li><a href="#"><i class="fa-solid fa-location-dot me-2"></i> Viña del Mar, Chile</a></li>
                 </ul>
             </div>
         </div>
