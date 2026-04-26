@@ -1,160 +1,160 @@
-/* HIGH-CONTRAST PROFESSIONAL POLISH */
+/* ULTRA-MODERN MINIMALIST (LINEAR/VERCEL STYLE) */
 :root {
-    --bg-body: #050506;
-    --bg-card: #0c0c0e;
-    --accent: #a855f7; /* Morado Eléctrico CajaYa */
-    --text-pure: #ffffff;
-    --text-muted: #a1a1aa;
-    --border: rgba(255, 255, 255, 0.08);
+    --black-pure: #000000;
+    --black-soft: #0a0a0a;
+    --gray-deep: #111111;
+    --gray-border: #1a1a1a;
+    --accent: #fff;
+    --accent-purple: #8b5cf6;
+    --text-main: #ffffff;
+    --text-muted: #666666;
 }
 
 body {
-    background-color: var(--bg-body) !important;
-    color: var(--text-pure);
-    font-family: 'Inter', sans-serif;
+    background-color: var(--black-pure) !important;
+    color: var(--text-main);
+    font-family: 'Inter', -apple-system, sans-serif;
+    letter-spacing: -0.02em;
     -webkit-font-smoothing: antialiased;
 }
 
-/* Header & Sidebar */
-.app-header {
-    background: var(--bg-body) !important;
-    border-bottom: 1px solid var(--border) !important;
-}
-
+/* Sidebar Ultra-Clean */
 .app-sidebar {
-    background: #000 !important;
-    border-right: 1px solid var(--border) !important;
+    background: var(--black-pure) !important;
+    border-right: 1px solid var(--gray-border) !important;
 }
 
 .nav-link {
     color: var(--text-muted) !important;
-    font-weight: 500;
-    font-size: 0.92rem;
-    padding: 12px 18px !important;
-    border-radius: 10px !important;
-    margin: 2px 0;
+    font-size: 0.85rem;
+    padding: 8px 16px !important;
+    transition: all 0.2s ease;
+    border-radius: 6px !important;
+}
+
+.nav-link:hover {
+    color: #fff !important;
+    background: rgba(255, 255, 255, 0.03) !important;
 }
 
 .nav-link.active {
-    background: rgba(168, 85, 247, 0.1) !important;
     color: #fff !important;
-    border: 1px solid rgba(168, 85, 247, 0.2);
+    background: rgba(139, 92, 246, 0.05) !important;
 }
 
-.nav-link.active i { color: var(--accent); }
+.nav-link.active i {
+    color: var(--accent-purple) !important;
+}
 
-/* Main Card (The Work Area) */
+/* Header */
+.app-header {
+    background: var(--black-pure) !important;
+    border-bottom: 1px solid var(--gray-border) !important;
+}
+
+/* Cards as Containers */
 .card {
-    background: var(--bg-card) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 16px !important;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important;
+    background: var(--black-pure) !important;
+    border: 1px solid var(--gray-border) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
     margin-bottom: 2rem;
 }
 
-/* Perfect High-Contrast Tables */
+/* Tables (The Precision Work) */
 .table thead th {
-    background: rgba(255,255,255,0.02) !important;
+    background: transparent !important;
     color: var(--text-muted) !important;
-    font-size: 0.75rem !important;
-    font-weight: 700 !important;
+    font-size: 0.7rem !important;
+    font-weight: 500 !important;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding: 16px 24px !important;
-    border-bottom: 2px solid var(--border) !important;
+    letter-spacing: 0.05em;
+    padding: 12px 20px !important;
+    border-bottom: 1px solid var(--gray-border) !important;
 }
 
 .table tbody td {
-    padding: 20px 24px !important;
-    border-bottom: 1px solid var(--border) !important;
-    color: var(--text-pure) !important; /* Texto Blanco por defecto */
-    font-size: 0.95rem;
+    padding: 16px 20px !important;
+    border-bottom: 1px solid var(--gray-border) !important;
+    color: #fff !important;
+    font-size: 0.9rem;
     vertical-align: middle;
 }
 
 .table tr:hover {
-    background: rgba(255,255,255,0.02) !important;
+    background: rgba(255, 255, 255, 0.01) !important;
 }
 
-/* Specialized Data Styles */
-.key-text, code {
+/* NO MÁS BORDES MORADOS - LLAVES LIMPIAS */
+.key-text, code, td code {
+    background: transparent !important;
+    border: none !important;
     color: #fff !important;
-    background: rgba(168, 85, 247, 0.2) !important;
-    border: 1px solid rgba(168, 85, 247, 0.3);
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.88rem !important;
+    font-family: 'SFMono-Regular', Consolas, monospace !important;
+    font-size: 0.85rem !important;
+    padding: 0 !important;
+    letter-spacing: 0;
 }
 
-.empresa-name {
-    color: #fff !important;
-    font-weight: 600;
-}
-
-.email-muted {
-    color: var(--text-muted);
+/* Icons Modernization */
+.nav-icon, i {
     font-size: 0.85rem;
+    opacity: 0.8;
 }
 
-/* Action Buttons Pro */
-.btn-action {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border);
-    color: #fff;
-    width: 38px;
-    height: 38px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    transition: all 0.2s;
-    margin-left: 5px;
+/* Action Buttons (Minimalist) */
+.btn-action, .btn-sm {
+    background: transparent !important;
+    border: none !important;
+    color: var(--text-muted) !important;
+    padding: 5px !important;
+    transition: color 0.2s, transform 0.2s;
 }
 
-.btn-action:hover {
-    background: var(--accent);
-    border-color: var(--accent);
+.btn-action:hover, .btn-sm:hover {
+    color: #fff !important;
     transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
 }
 
-/* DataTables Global Integration */
-.dataTables_wrapper .dataTables_filter input {
-    background: #000 !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 10px;
-    color: #fff !important;
-    padding: 10px 16px !important;
-}
-
-.dataTables_wrapper .dataTables_paginate .paginate_button {
-    background: #000 !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 10px !important;
-    color: #fff !important;
-    margin: 0 4px;
-}
-
-.paginate_button.current {
-    background: var(--accent) !important;
-    border-color: var(--accent) !important;
-}
-
-/* Badges Premium */
+/* Badges Minimal */
 .badge {
-    padding: 6px 14px !important;
-    border-radius: 20px !important;
-    font-weight: 600 !important;
+    background: transparent !important;
+    border: 1px solid var(--gray-border) !important;
+    color: var(--text-muted) !important;
+    font-size: 0.7rem !important;
+    font-weight: 400 !important;
+    padding: 2px 8px !important;
+    border-radius: 4px !important;
 }
 
-.badge-google { background: #ea433522; color: #fb7185; border: 1px solid #ea433544; }
-.badge-active { background: #22c55e22; color: #4ade80; border: 1px solid #22c55e44; }
+.badge-active {
+    border-color: rgba(34, 197, 94, 0.3) !important;
+    color: #4ade80 !important;
+}
 
-/* Scrollbar Custom */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-main); }
+/* DataTables Integration */
+.dataTables_wrapper .dataTables_filter input {
+    background: var(--black-pure) !important;
+    border: 1px solid var(--gray-border) !important;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: #fff;
+    padding: 6px 12px !important;
+}
+
+.dataTables_paginate .paginate_button {
+    background: transparent !important;
+    border: 1px solid var(--gray-border) !important;
+    color: var(--text-muted) !important;
+    border-radius: 4px !important;
+    font-size: 0.8rem !important;
+}
+
+.dataTables_paginate .paginate_button.current {
+    border-color: #fff !important;
+    color: #fff !important;
+}
+
+/* Scrollbar Style */
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: #333; }
-
-.letter-spacing-1 { letter-spacing: 1px; }
