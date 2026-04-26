@@ -40,25 +40,25 @@
         h1, h2, h3 { font-family: 'Outfit', sans-serif; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* --- PROMO BANNER ULTRA-LLAMATIVO --- */
+        /* --- PROMO BANNER ELEGANTE --- */
         .promo-banner {
             background: linear-gradient(90deg, #7c3aed, #db2777, #7c3aed);
             background-size: 200% auto;
             color: #fff;
             text-align: center;
-            padding: 12px 0;
-            font-size: 0.95rem;
+            padding: 10px 0;
+            font-size: 0.9rem;
             font-weight: 800;
             letter-spacing: 0.5px;
             position: sticky;
             top: 0;
             z-index: 1100;
-            animation: shimmer 2s linear infinite, pulse-banner 2s ease-in-out infinite;
+            animation: shimmer 4s linear infinite, pulse-soft 3s ease-in-out infinite;
         }
 
-        @keyframes pulse-banner {
+        @keyframes pulse-soft {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+            50% { transform: scale(1.01); } /* Pulso más suave */
         }
 
         @keyframes shimmer {
@@ -70,19 +70,33 @@
         header {
             padding: 25px 0;
             position: sticky;
-            top: 45px;
+            top: 40px;
             z-index: 1000;
             background: rgba(10, 9, 16, 0.95);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
         }
         .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
-        .logo img { 
-            height: 45px; 
-            filter: brightness(0) invert(1); /* Logo blanco puro para contraste total */
-            transition: transform 0.3s ease;
+        
+        /* LOGO TEXTO ELEGANTE */
+        .logo-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            letter-spacing: -1.5px;
+            animation: fadeInDown 0.8s ease-out;
         }
-        .logo:hover img { transform: scale(1.05); }
+        .logo-text span.caja { color: #ffffff; }
+        .logo-text span.ya { color: var(--accent); }
+        .logo-text:hover { transform: scale(1.03); transition: 0.3s; }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         
         .nav-menu { display: flex; gap: 20px; align-items: center; }
         .nav-separator { color: rgba(255,255,255,0.2); font-weight: 300; }
@@ -225,8 +239,8 @@
 
     <header>
         <div class="container nav-wrapper">
-            <a href="#hero" class="logo">
-                <img src="assets/img/logo.png" alt="CajaYa" style="height: 35px;">
+            <a href="#hero" class="logo-text">
+                <span class="caja">Caja</span><span class="ya">YA</span>
             </a>
             <nav class="nav-menu">
                 <a href="#beneficios" class="nav-link">Beneficios</a>
