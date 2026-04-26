@@ -46,8 +46,8 @@
             background-size: 200% auto;
             color: #fff;
             text-align: center;
-            padding: 8px 10px;
-            font-size: 0.85rem;
+            padding: 10px 0;
+            font-size: 0.9rem;
             font-weight: 800;
             position: sticky;
             top: 0;
@@ -67,9 +67,9 @@
 
         /* --- HEADER --- */
         header {
-            padding: 15px 0;
+            padding: 20px 0;
             position: sticky;
-            top: 35px;
+            top: 40px;
             z-index: 1000;
             background: rgba(10, 9, 16, 0.95);
             backdrop-filter: blur(15px);
@@ -79,9 +79,10 @@
         
         .logo-container {
             position: relative;
-            height: 38px;
-            width: 120px;
+            height: 45px;
+            width: 140px;
             overflow: hidden;
+            animation: fadeInDown 0.8s ease-out;
         }
         .logo-base, .logo-overlay {
             position: absolute;
@@ -91,6 +92,7 @@
             background-image: url('assets/img/logo.png');
             background-size: contain;
             background-repeat: no-repeat;
+            transition: transform 0.3s ease;
         }
         .logo-overlay {
             filter: brightness(0) invert(1);
@@ -98,81 +100,95 @@
             z-index: 2;
         }
         
-        .nav-menu { display: flex; gap: 15px; align-items: center; }
+        .nav-menu { display: flex; gap: 20px; align-items: center; }
         .nav-separator { color: rgba(255,255,255,0.1); }
-        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
+        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
         .nav-link:hover { color: var(--accent); }
 
         .btn-neon {
             background: var(--accent);
             color: #fff;
-            padding: 10px 22px;
-            border-radius: 10px;
+            padding: 12px 28px;
+            border-radius: 12px;
             font-weight: 700;
             text-decoration: none;
-            font-size: 0.9rem;
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
             transition: 0.3s;
             border: none;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .btn-green {
             background: #25d366;
             color: #fff;
-            padding: 10px 22px;
-            border-radius: 10px;
+            padding: 12px 28px;
+            border-radius: 12px;
             font-weight: 700;
             text-decoration: none;
-            font-size: 0.9rem;
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.2);
+            box-shadow: 0 0 25px rgba(37, 211, 102, 0.3);
             transition: 0.3s;
             border: none;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
-        /* --- FAQ --- */
-        .faq-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; }
-        .faq-question { padding: 15px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
-        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: 0.4s; color: var(--text-muted); font-size: 0.9rem; }
-        .faq-item.active .faq-answer { padding: 0 20px 20px; max-height: 200px; }
-
         /* --- HERO --- */
-        .hero { padding: 60px 0; }
-        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-        .hero-title { font-size: 4rem; font-weight: 900; line-height: 1.1; margin-bottom: 25px; letter-spacing: -2px; }
+        .hero { padding: 80px 0; }
+        .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
+        .hero-title { font-size: 4.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 30px; letter-spacing: -2px; }
         .text-gradient { background: linear-gradient(135deg, #fff 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-desc { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 35px; max-width: 500px; }
-        .mockup-img { max-width: 100%; border-radius: 12px; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6)); }
+        .hero-desc { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 45px; max-width: 550px; }
+        .mockup-img { max-width: 120%; border-radius: 12px; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8)); }
+
+        /* --- BENEFICIOS --- */
+        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .benefit-card { background: var(--bg-card); padding: 40px; border-radius: 24px; border: 1px solid var(--border); transition: 0.3s; }
+        .benefit-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+
+        /* --- PRICING --- */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .price-card { background: var(--bg-card); border: 1px solid var(--border); padding: 50px 40px; border-radius: 24px; display: flex; flex-direction: column; transition: 0.3s; }
+        .price-card.featured { border-color: var(--accent); box-shadow: 0 0 40px rgba(168, 85, 247, 0.15); }
+        .price-features { list-style: none; margin: 30px 0; flex-grow: 1; }
+        .price-features li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+        .price-features i { color: #22c55e; }
+
+        /* --- FAQ --- */
+        .faq-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 15px; margin-bottom: 15px; overflow: hidden; }
+        .faq-question { padding: 20px 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
+        .faq-answer { padding: 0 25px; max-height: 0; overflow: hidden; transition: 0.4s; color: var(--text-muted); font-size: 0.95rem; }
+        .faq-item.active .faq-answer { padding: 0 25px 25px; max-height: 200px; }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 992px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
             .hero-title { font-size: 3.2rem; }
-            .hero-desc { margin: 0 auto 30px; }
+            .hero-desc { margin: 0 auto 40px; }
             .nav-menu { display: none; }
         }
 
         @media (max-width: 480px) {
-            .promo-banner { font-size: 0.75rem; padding: 10px 5px; }
             header { top: 38px; padding: 10px 0; }
             .logo-container { width: 100px; height: 32px; }
-            .hero-title { font-size: 2.4rem; letter-spacing: -1px; }
-            .hero-desc { font-size: 1rem; }
-            .hero-btns .btn-neon, .hero-btns .btn-green { width: 100%; justify-content: center; padding: 14px; }
-            .hero-btns { display: flex; flex-direction: column; gap: 15px; width: 100%; }
-            header .btn-neon { padding: 8px 15px; font-size: 0.75rem; border-radius: 8px; }
+            header .btn-neon { padding: 8px 12px; font-size: 0.7rem; border-radius: 8px; }
+            .hero-title { font-size: 2.4rem; }
+            .hero-btns { display: flex; flex-direction: column; gap: 15px; }
+            .hero-btns .btn-neon, .hero-btns .btn-green { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
 
     <div class="promo-banner">
-        🔥 OFERTA: 1 Mes Gratis + Instalación Prioritaria (Solo 5 cupos)
+        🔥 OFERTA: 1 Mes Gratis + Instalación Prioritaria (Solo 5 cupos disponibles esta semana)
     </div>
 
     <header>
@@ -182,7 +198,7 @@
                 <div class="logo-overlay"></div>
             </a>
             <nav class="nav-menu">
-                <a href="#beneficios" class="nav-link">Beneficios</a>
+                <a href="#que-ofrecemos" class="nav-link">Beneficios</a>
                 <span class="nav-separator">|</span>
                 <a href="#precios" class="nav-link">Precios</a>
                 <span class="nav-separator">|</span>
@@ -200,7 +216,7 @@
                         Vende más, <br> <span class="text-gradient">controla todo.</span>
                     </h1>
                     <p class="hero-desc">
-                        El sistema POS que automatiza tus ventas, gestiona tu stock y genera reportes X/Z en segundos.
+                        El sistema POS que automatiza tus ventas, gestiona tu stock y genera reportes X/Z en segundos. Diseñado para la velocidad de tu negocio.
                     </p>
                     <div class="hero-btns">
                         <a href="#precios" class="btn-neon">Ver Planes <i class="fa-solid fa-chevron-down"></i></a>
@@ -214,94 +230,112 @@
         </div>
     </section>
 
-    <!-- BENEFICIOS -->
-    <section id="beneficios" style="padding: 60px 0; background: rgba(255,255,255,0.01);">
+    <!-- SECTION QUE OFRECEMOS -->
+    <section id="que-ofrecemos" style="padding: 100px 0; background: rgba(255,255,255,0.01);">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 40px;">
-                <h2 style="font-size: 2.5rem;">Lo que ofrecemos</h2>
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 3.5rem;">¿Qué ofrecemos?</h2>
+                <p style="color: var(--text-muted);">Tecnología de vanguardia para el crecimiento de tu empresa.</p>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
-                <div style="background: var(--bg-card); padding: 25px; border-radius: 15px; border: 1px solid var(--border);">
-                    <i class="fa-solid fa-file-invoice-dollar" style="font-size: 1.5rem; color: var(--accent); margin-bottom: 15px; display: block;"></i>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="fa-solid fa-file-invoice-dollar" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
                     <h4>Reportes X y Z</h4>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">Genera cierres de caja profesionales cumpliendo la normativa SII.</p>
+                    <p style="color: var(--text-muted);">Cumple con la normativa tributaria chilena. Genera tus cierres de caja profesionales en un clic.</p>
                 </div>
-                <div style="background: var(--bg-card); padding: 25px; border-radius: 15px; border: 1px solid var(--border);">
-                    <i class="fa-solid fa-wifi-slash" style="font-size: 1.5rem; color: var(--accent); margin-bottom: 15px; display: block;"></i>
-                    <h4>Modo Offline</h4>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;">Vende sin internet. El sistema sincroniza todo automáticamente.</p>
+                <div class="benefit-card">
+                    <i class="fa-solid fa-wifi-slash" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
+                    <h4>100% Offline-Ready</h4>
+                    <p style="color: var(--text-muted);">¿Se fue el internet? No detengas tus ventas. El sistema sincroniza todo cuando vuelve la conexión.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fa-solid fa-shield-halved" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
+                    <h4>Seguridad Bancaria</h4>
+                    <p style="color: var(--text-muted);">Tus datos están encriptados y respaldados en la nube. Tu información es solo tuya y de nadie más.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fa-solid fa-users-gear" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
+                    <h4>Multi-Caja</h4>
+                    <p style="color: var(--text-muted);">Gestiona múltiples puntos de venta en tiempo real desde un solo panel de administración centralizado.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PRECIOS -->
-    <section id="precios" style="padding: 80px 0; background: #08080c;">
+    <!-- SECTION PRECIOS -->
+    <section id="precios" style="padding: 100px 0; background: #08080c;">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 40px;">
-                <h2 style="font-size: 2.8rem;">Planes de Lanzamiento</h2>
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 3.5rem;">Planes a tu Medida</h2>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <div class="pricing-grid">
                 <!-- Básico -->
-                <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 40px 30px; border-radius: 20px; text-align: center; display: flex; flex-direction: column;">
+                <div class="price-card">
                     <h3>Plan Básico</h3>
-                    <div style="font-size: 2.5rem; font-weight: 800; margin: 20px 0;">$20.000 <span style="font-size: 1rem; color: var(--text-muted);">/mes</span></div>
-                    <ul style="list-style: none; margin-bottom: 30px; text-align: left; font-size: 0.9rem; flex-grow: 1;">
-                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> Integración SII (Boletas)</li>
-                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> Reportes X y Z Diarios</li>
-                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> Soporte por Email</li>
+                    <div style="font-size: 3rem; font-weight: 900; margin: 25px 0;">$20.000 <span>/mes</span></div>
+                    <ul class="price-features">
+                        <li><i class="fa-solid fa-check"></i> Integración SII (Boletas)</li>
+                        <li><i class="fa-solid fa-check"></i> Soporte Técnico</li>
                     </ul>
-                    <a href="#" class="btn-neon" style="width: 100%; justify-content: center;">Suscribirse</a>
+                    <a href="#" class="btn-neon" style="justify-content: center;">Suscribirse Ahora</a>
                 </div>
                 <!-- Premium -->
-                <div style="background: var(--bg-card); border: 1px solid var(--accent); padding: 40px 30px; border-radius: 20px; text-align: center; position: relative; display: flex; flex-direction: column;">
-                    <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); padding: 4px 15px; border-radius: 50px; font-size: 0.7rem; font-weight: 800;">RECOMENDADO</div>
+                <div class="price-card featured">
                     <h3>Plan Premium</h3>
-                    <div style="font-size: 2.5rem; font-weight: 800; margin: 20px 0;">$35.000 <span style="font-size: 1rem; color: var(--text-muted);">/mes</span></div>
-                    <ul style="list-style: none; margin-bottom: 30px; text-align: left; font-size: 0.9rem; flex-grow: 1;">
-                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> Todo lo del Plan Básico</li>
-                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> <strong>Respaldos Automáticos</strong></li>
-                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> <strong>Soporte 24/7 VIP</strong></li>
+                    <div style="font-size: 3rem; font-weight: 900; margin: 25px 0;">$35.000 <span>/mes</span></div>
+                    <ul class="price-features">
+                        <li><i class="fa-solid fa-check"></i> Integración SII</li>
+                        <li><i class="fa-solid fa-check"></i> <strong>Soporte 24/7</strong></li>
+                        <li><i class="fa-solid fa-check"></i> <strong>Respaldos Automáticos</strong></li>
                     </ul>
-                    <a href="#" class="btn-neon" style="width: 100%; justify-content: center;">Suscribirse</a>
+                    <a href="#" class="btn-neon" style="justify-content: center; background: var(--accent);">Suscribirse Ahora</a>
                 </div>
                 <!-- Lifetime -->
-                <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 40px 30px; border-radius: 20px; text-align: center; display: flex; flex-direction: column;">
-                    <h3>Lifetime</h3>
-                    <div style="font-size: 2.5rem; font-weight: 800; margin: 20px 0;">$180.000 <span style="font-size: 0.8rem; color: var(--text-muted);">pago único</span></div>
-                    <ul style="list-style: none; margin-bottom: 30px; text-align: left; font-size: 0.9rem; flex-grow: 1;">
-                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> <strong>Licencia Perpetua</strong></li>
-                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> Multi-caja Ilimitado</li>
-                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> 3 Meses Soporte VIP</li>
+                <div class="price-card">
+                    <h3>Plan Lifetime</h3>
+                    <div style="font-size: 3rem; font-weight: 900; margin: 25px 0;">$180.000 <span>pago único</span></div>
+                    <ul class="price-features">
+                        <li><i class="fa-solid fa-check"></i> <strong>Licencia de por vida</strong></li>
+                        <li><i class="fa-solid fa-check"></i> <strong>Multi Caja Ilimitado</strong></li>
+                        <li><i class="fa-solid fa-check"></i> 3 Meses de Soporte Full</li>
+                        <li><i class="fa-solid fa-check"></i> Posibilidad de Integración SII</li>
                     </ul>
-                    <a href="#" class="btn-neon" style="width: 100%; justify-content: center;">Comprar Licencia</a>
+                    <a href="#" class="btn-neon" style="justify-content: center;">Comprar Licencia</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ -->
-    <section id="faq" style="padding: 60px 0;">
+    <!-- SECTION FAQ -->
+    <section id="faq" style="padding: 100px 0;">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 40px;">
-                <h2 style="font-size: 2.5rem;">Preguntas</h2>
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 3rem;">Preguntas Frecuentes</h2>
             </div>
-            <div style="max-width: 700px; margin: 0 auto;">
+            <div style="max-width: 800px; margin: 0 auto;">
                 <div class="faq-item">
                     <div class="faq-question">¿Tienen integración con el SII? <i class="fa-solid fa-chevron-down"></i></div>
-                    <div class="faq-answer">Sí, CajaYa está certificado para emitir boletas y facturas electrónicas cumpliendo con la normativa 2026.</div>
+                    <div class="faq-answer">Sí, CajaYa está certificado para emitir boletas y facturas electrónicas cumpliendo con la normativa vigente 2026.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">¿Funciona sin internet? <i class="fa-solid fa-chevron-down"></i></div>
-                    <div class="faq-answer">¡Absolutamente! El sistema está diseñado para trabajar 100% offline y sincronizar cuando haya conexión.</div>
+                    <div class="faq-answer">¡Absolutamente! El sistema está diseñado para trabajar 100% offline y sincronizar todos los datos automáticamente cuando recuperes la conexión.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">¿Qué métodos de pago aceptan? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Aceptamos todas las tarjetas de crédito, débito y transferencias a través de nuestra integración segura con MercadoPago.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">¿Cómo funciona el soporte técnico? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Contamos con soporte técnico en línea prioritario. Dependiendo de tu plan (Básico o Premium), puedes acceder a atención personalizada 24/7.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer style="padding: 50px 0; border-top: 1px solid var(--border); text-align: center;">
+    <footer style="padding: 80px 0; border-top: 1px solid var(--border); text-align: center;">
         <div class="container">
-            <p style="color: var(--text-muted); font-size: 0.85rem;">© 2026 CajaYa Chile. El sistema POS que tu Pyme merece.</p>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">© 2026 CajaYa Chile. El sistema POS que tu Pyme merece.</p>
         </div>
     </footer>
 
