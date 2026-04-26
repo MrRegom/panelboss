@@ -98,7 +98,7 @@
         }
         .logo-overlay {
             filter: brightness(0) invert(1); /* Capa blanca */
-            clip-path: inset(0 52% 0 0); /* Recorta más para que el "YA" quede morado */
+            clip-path: inset(0 60% 0 0); /* Recorta más para liberar la Y por completo */
             z-index: 2;
         }
         .logo-container:hover .logo-base, 
