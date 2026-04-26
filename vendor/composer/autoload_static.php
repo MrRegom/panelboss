@@ -23,6 +23,10 @@ class ComposerStaticInit20fad51902f91e7fd3039e016a6556b5
             'Psr\\Http\\Client\\' => 16,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
+        'M' => 
+        array (
+            'MercadoPago\\' => 12,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -56,6 +60,10 @@ class ComposerStaticInit20fad51902f91e7fd3039e016a6556b5
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
+        'MercadoPago\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mercadopago/dx-php/src/MercadoPago',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
