@@ -277,7 +277,9 @@
 
     <header>
         <div class="container nav-wrapper">
-            <a href="#" class="logo">Caja<span>YA</span></a>
+            <a href="#" class="logo">
+                <img src="assets/img/logo.png" alt="CajaYa Logo" style="height: 40px; width: auto;">
+            </a>
             
             <nav class="nav-menu">
                 <a href="#precios" class="nav-link">Precios</a>
@@ -331,8 +333,8 @@
                     </div>
 
                     <div class="organic-shape">
-                        <img src="assets/cajaya_pos_v2.png" alt="POS CajaYa" class="mockup-img active">
-                        <img src="assets/cajaya_dashboard_v2.png" alt="Dashboard CajaYa" class="mockup-img">
+                        <img src="assets/cajaya_pos_mockup.png" alt="POS CajaYa" class="mockup-img active">
+                        <img src="assets/cajaya_dashboard_mockup.png" alt="Dashboard CajaYa" class="mockup-img">
                     </div>
                 </div>
             </div>
@@ -413,7 +415,9 @@
     <footer>
         <div class="container footer-grid">
             <div>
-                <a href="#" class="footer-logo logo">Caja<span>YA</span></a>
+                <a href="#" class="footer-logo logo">
+                    <img src="assets/img/logo.png" alt="CajaYa Logo" style="height: 40px; width: auto; margin-bottom: 20px; display: block;">
+                </a>
                 <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 300px;">
                     La solución POS más completa de Chile. Potencia tu negocio con tecnología de vanguardia.
                 </p>
