@@ -334,7 +334,9 @@
 
                     <div class="organic-shape">
                         <img src="assets/cajaya_pos_mockup.png" alt="POS CajaYa" class="mockup-img active">
-                        <img src="assets/cajaya_dashboard_mockup.png" alt="Dashboard CajaYa" class="mockup-img">
+                        <div class="mockup-img logo-slide" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, transparent 70%);">
+                            <img src="assets/img/logo.png" alt="CajaYa Logo" style="width: 60%; height: auto; filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.5));">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -479,13 +481,13 @@
 
     <script>
         // Simple Carousel Logic for Mockups
-        const images = document.querySelectorAll('.mockup-img');
+        const slides = document.querySelectorAll('.mockup-img');
         let current = 0;
 
         setInterval(() => {
-            images[current].classList.remove('active');
-            current = (current + 1) % images.length;
-            images[current].classList.add('active');
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
         }, 5000);
 
         // FAQ Accordion Logic
@@ -493,23 +495,23 @@
             item.addEventListener('click', () => {
                 const answer = item.querySelector('.faq-answer');
                 const icon = item.querySelector('.faq-icon');
-                const isOpen = answer.style.maxHeight !== '0px' && answer.style.maxHeight !== '';
-
+                
+                // Toggle current
+                const isOpen = item.classList.contains('active-faq');
+                
                 // Close all others
-                document.querySelectorAll('.faq-answer').forEach(el => {
-                    el.style.maxHeight = '0px';
-                    el.style.opacity = '0';
-                    el.style.paddingTop = '0';
+                document.querySelectorAll('.faq-item').forEach(el => {
+                    el.classList.remove('active-faq');
+                    el.querySelector('.faq-answer').style.maxHeight = null;
+                    el.querySelector('.faq-answer').style.opacity = '0';
+                    el.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
                 });
-                document.querySelectorAll('.faq-icon').forEach(el => el.style.transform = 'rotate(0deg)');
 
                 if (!isOpen) {
-                    answer.style.maxHeight = '200px'; // Arbitrary large value
+                    item.classList.add('active-faq');
+                    answer.style.maxHeight = answer.scrollHeight + "px";
                     answer.style.opacity = '1';
                     icon.style.transform = 'rotate(180deg)';
-                    item.style.borderColor = 'var(--accent)';
-                } else {
-                    item.style.borderColor = 'var(--border)';
                 }
             });
         });
