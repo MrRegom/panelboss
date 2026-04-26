@@ -46,18 +46,13 @@
             background-size: 200% auto;
             color: #fff;
             text-align: center;
-            padding: 10px 0;
-            font-size: 0.9rem;
+            padding: 8px 0;
+            font-size: 0.85rem;
             font-weight: 800;
             position: sticky;
             top: 0;
             z-index: 1100;
-            animation: shimmer 4s linear infinite, pulse-soft 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse-soft {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.01); }
+            animation: shimmer 4s linear infinite;
         }
 
         @keyframes shimmer {
@@ -67,9 +62,9 @@
 
         /* --- HEADER --- */
         header {
-            padding: 20px 0;
+            padding: 15px 0;
             position: sticky;
-            top: 40px;
+            top: 36px;
             z-index: 1000;
             background: rgba(10, 9, 16, 0.95);
             backdrop-filter: blur(15px);
@@ -79,10 +74,9 @@
         
         .logo-container {
             position: relative;
-            height: 45px;
-            width: 140px;
+            height: 40px;
+            width: 130px;
             overflow: hidden;
-            animation: fadeInDown 0.8s ease-out;
         }
         .logo-base, .logo-overlay {
             position: absolute;
@@ -92,7 +86,6 @@
             background-image: url('assets/img/logo.png');
             background-size: contain;
             background-repeat: no-repeat;
-            transition: transform 0.3s ease;
         }
         .logo-overlay {
             filter: brightness(0) invert(1);
@@ -100,100 +93,118 @@
             z-index: 2;
         }
         
-        .nav-menu { display: flex; gap: 20px; align-items: center; }
-        .nav-separator { color: rgba(255,255,255,0.1); }
-        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
+        .nav-menu { display: flex; gap: 15px; align-items: center; }
+        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
         .nav-link:hover { color: var(--accent); }
 
         .btn-neon {
             background: var(--accent);
             color: #fff;
-            padding: 12px 28px;
-            border-radius: 12px;
+            padding: 10px 22px;
+            border-radius: 10px;
             font-weight: 700;
             text-decoration: none;
-            box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
             transition: 0.3s;
             border: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            font-size: 0.9rem;
         }
 
         .btn-green {
             background: #25d366;
             color: #fff;
-            padding: 12px 28px;
-            border-radius: 12px;
+            padding: 10px 22px;
+            border-radius: 10px;
             font-weight: 700;
             text-decoration: none;
-            box-shadow: 0 0 25px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.2);
             transition: 0.3s;
             border: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            font-size: 0.9rem;
         }
 
         /* --- HERO --- */
-        .hero { padding: 80px 0; }
-        .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
-        .hero-title { font-size: 4.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 30px; letter-spacing: -2px; }
+        .hero { padding: 60px 0; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .hero-title { font-size: 3.8rem; font-weight: 900; line-height: 1.1; margin-bottom: 25px; letter-spacing: -1.5px; }
         .text-gradient { background: linear-gradient(135deg, #fff 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-desc { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 45px; max-width: 550px; }
-        .mockup-img { max-width: 120%; border-radius: 12px; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8)); }
+        .hero-desc { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 35px; max-width: 500px; }
+        .mockup-img { max-width: 100%; border-radius: 12px; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6)); }
 
-        /* --- BENEFICIOS --- */
-        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .benefit-card { background: var(--bg-card); padding: 40px; border-radius: 24px; border: 1px solid var(--border); transition: 0.3s; }
-        .benefit-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        /* --- BENEFICIOS GRID 4 COLUMNAS --- */
+        .benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .benefit-card { background: var(--bg-card); padding: 25px; border-radius: 18px; border: 1px solid var(--border); transition: 0.3s; }
+        .benefit-card:hover { border-color: var(--accent); }
+        .benefit-card h4 { margin: 15px 0 10px; font-size: 1.1rem; }
+        .benefit-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
 
         /* --- PRICING --- */
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .price-card { background: var(--bg-card); border: 1px solid var(--border); padding: 50px 40px; border-radius: 24px; display: flex; flex-direction: column; transition: 0.3s; }
-        .price-card.featured { border-color: var(--accent); box-shadow: 0 0 40px rgba(168, 85, 247, 0.15); }
-        .price-features { list-style: none; margin: 30px 0; flex-grow: 1; }
-        .price-features li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
-        .price-features i { color: #22c55e; }
-
-        /* --- FAQ --- */
-        .faq-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 15px; margin-bottom: 15px; overflow: hidden; }
-        .faq-question { padding: 20px 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
-        .faq-answer { padding: 0 25px; max-height: 0; overflow: hidden; transition: 0.4s; color: var(--text-muted); font-size: 0.95rem; }
-        .faq-item.active .faq-answer { padding: 0 25px 25px; max-height: 200px; }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .price-card { background: var(--bg-card); border: 1px solid var(--border); padding: 40px 30px; border-radius: 20px; display: flex; flex-direction: column; transition: 0.3s; text-align: center; position: relative; }
+        .price-card.featured { border-color: var(--accent); box-shadow: 0 0 30px rgba(168, 85, 247, 0.1); }
+        .price-tag { font-size: 2.2rem; font-weight: 900; margin: 15px 0; }
+        .price-tag span { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
+        .price-features { list-style: none; margin: 20px 0; text-align: left; flex-grow: 1; }
+        .price-features li { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; font-size: 0.85rem; }
+        .price-features i { color: #22c55e; font-size: 0.8rem; }
+        
+        .badge-recommended {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #fff;
+            padding: 4px 15px;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 15px rgba(168, 85, 247, 0.3);
         }
 
+        /* --- FAQ --- */
+        .faq-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; }
+        .faq-question { padding: 15px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 0.95rem; }
+        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: 0.4s; color: var(--text-muted); font-size: 0.85rem; }
+        .faq-item.active .faq-answer { padding: 0 20px 15px; max-height: 200px; }
+
         /* --- RESPONSIVE --- */
+        @media (max-width: 1100px) {
+            .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media (max-width: 992px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
-            .hero-title { font-size: 3.2rem; }
-            .hero-desc { margin: 0 auto 40px; }
+            .hero-title { font-size: 3rem; }
+            .hero-desc { margin: 0 auto 30px; }
             .nav-menu { display: none; }
         }
 
         @media (max-width: 480px) {
             .desktop-text { display: none; }
             .mobile-text { display: inline; }
-            header { top: 32px; padding: 10px 0; }
-            .logo-container { width: 100px; height: 32px; }
-            header .btn-neon { padding: 8px 12px; font-size: 0.7rem; border-radius: 8px; }
-            .hero-title { font-size: 2.4rem; }
-            .hero-btns { display: flex; flex-direction: column; gap: 15px; }
-            .hero-btns .btn-neon, .hero-btns .btn-green { width: 100%; justify-content: center; }
+            header { top: 34px; padding: 10px 0; }
+            .logo-container { width: 95px; height: 30px; }
+            header .btn-neon { padding: 6px 12px; font-size: 0.7rem; border-radius: 6px; }
+            .hero-title { font-size: 2.2rem; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .hero-btns { display: flex; flex-direction: column; gap: 12px; }
+            .hero-btns .btn-neon, .hero-btns .btn-green { width: 100%; justify-content: center; padding: 14px; }
         }
-        
-        .mobile-text { display: none; }
     </style>
 </head>
 <body>
 
     <div class="promo-banner">
-        <span class="desktop-text">🔥 OFERTA: 1 Mes Gratis + Instalación Prioritaria (Solo 5 cupos disponibles esta semana)</span>
-        <span class="mobile-text">🔥 1 Mes Gratis + Instalación (Solo 5 cupos)</span>
+        <span class="desktop-text">Oferta: Mes Gratis + Instalacion(Solo 5 cupos)</span>
+        <span class="mobile-text">Oferta: Mes Gratis + Instalacion(Solo 5 cupos)</span>
     </div>
 
     <header>
@@ -204,9 +215,7 @@
             </a>
             <nav class="nav-menu">
                 <a href="#que-ofrecemos" class="nav-link">Beneficios</a>
-                <span class="nav-separator">|</span>
                 <a href="#precios" class="nav-link">Precios</a>
-                <span class="nav-separator">|</span>
                 <a href="#faq" class="nav-link">Preguntas</a>
             </nav>
             <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn-neon">Prueba Gratis</a>
@@ -221,7 +230,7 @@
                         Vende más, <br> <span class="text-gradient">controla todo.</span>
                     </h1>
                     <p class="hero-desc">
-                        El sistema POS que automatiza tus ventas, gestiona tu stock y genera reportes X/Z en segundos. Diseñado para la velocidad de tu negocio.
+                        El sistema POS que automatiza tus ventas, gestiona tu stock y genera reportes X/Z en segundos.
                     </p>
                     <div class="hero-btns">
                         <a href="#precios" class="btn-neon">Ver Planes <i class="fa-solid fa-chevron-down"></i></a>
@@ -235,49 +244,48 @@
         </div>
     </section>
 
-    <!-- SECTION QUE OFRECEMOS -->
-    <section id="que-ofrecemos" style="padding: 100px 0; background: rgba(255,255,255,0.01);">
+    <!-- SECTION QUE OFRECEMOS (4 COLUMNAS) -->
+    <section id="que-ofrecemos" style="padding: 80px 0; background: rgba(255,255,255,0.01);">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 60px;">
-                <h2 style="font-size: 3.5rem;">¿Qué ofrecemos?</h2>
-                <p style="color: var(--text-muted);">Tecnología de vanguardia para el crecimiento de tu empresa.</p>
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 style="font-size: 2.8rem;">¿Qué ofrecemos?</h2>
             </div>
             <div class="benefits-grid">
                 <div class="benefit-card">
-                    <i class="fa-solid fa-file-invoice-dollar" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
+                    <i class="fa-solid fa-file-invoice-dollar" style="color: var(--accent);"></i>
                     <h4>Reportes X y Z</h4>
-                    <p style="color: var(--text-muted);">Cumple con la normativa tributaria chilena. Genera tus cierres de caja profesionales en un clic.</p>
+                    <p>Cierres de caja profesionales bajo normativa SII.</p>
                 </div>
                 <div class="benefit-card">
-                    <i class="fa-solid fa-wifi-slash" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
-                    <h4>100% Offline-Ready</h4>
-                    <p style="color: var(--text-muted);">¿Se fue el internet? No detengas tus ventas. El sistema sincroniza todo cuando vuelve la conexión.</p>
+                    <i class="fa-solid fa-wifi-slash" style="color: var(--accent);"></i>
+                    <h4>Offline-Ready</h4>
+                    <p>Sigue vendiendo sin internet, sincroniza después.</p>
                 </div>
                 <div class="benefit-card">
-                    <i class="fa-solid fa-shield-halved" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
-                    <h4>Seguridad Bancaria</h4>
-                    <p style="color: var(--text-muted);">Tus datos están encriptados y respaldados en la nube. Tu información es solo tuya y de nadie más.</p>
+                    <i class="fa-solid fa-shield-halved" style="color: var(--accent);"></i>
+                    <h4>Seguridad</h4>
+                    <p>Datos encriptados y respaldos en la nube.</p>
                 </div>
                 <div class="benefit-card">
-                    <i class="fa-solid fa-users-gear" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
+                    <i class="fa-solid fa-users-gear" style="color: var(--accent);"></i>
                     <h4>Multi-Caja</h4>
-                    <p style="color: var(--text-muted);">Gestiona múltiples puntos de venta en tiempo real desde un solo panel de administración centralizado.</p>
+                    <p>Gestiona múltiples puntos desde un solo panel.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- SECTION PRECIOS -->
-    <section id="precios" style="padding: 100px 0; background: #08080c;">
+    <section id="precios" style="padding: 80px 0; background: #08080c;">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 60px;">
-                <h2 style="font-size: 3.5rem;">Planes a tu Medida</h2>
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 style="font-size: 2.8rem;">Planes a tu Medida</h2>
             </div>
             <div class="pricing-grid">
                 <!-- Básico -->
                 <div class="price-card">
                     <h3>Plan Básico</h3>
-                    <div style="font-size: 3rem; font-weight: 900; margin: 25px 0;">$20.000 <span>/mes</span></div>
+                    <div class="price-tag">$20.000 <span>/mes</span></div>
                     <ul class="price-features">
                         <li><i class="fa-solid fa-check"></i> Integración SII (Boletas)</li>
                         <li><i class="fa-solid fa-check"></i> Soporte Técnico</li>
@@ -286,24 +294,25 @@
                 </div>
                 <!-- Premium -->
                 <div class="price-card featured">
+                    <div class="badge-recommended">RECOMENDADO</div>
                     <h3>Plan Premium</h3>
-                    <div style="font-size: 3rem; font-weight: 900; margin: 25px 0;">$35.000 <span>/mes</span></div>
+                    <div class="price-tag">$35.000 <span>/mes</span></div>
                     <ul class="price-features">
                         <li><i class="fa-solid fa-check"></i> Integración SII</li>
                         <li><i class="fa-solid fa-check"></i> <strong>Soporte 24/7</strong></li>
                         <li><i class="fa-solid fa-check"></i> <strong>Respaldos Automáticos</strong></li>
                     </ul>
-                    <a href="#" class="btn-neon" style="justify-content: center; background: var(--accent);">Suscribirse Ahora</a>
+                    <a href="#" class="btn-neon" style="justify-content: center;">Suscribirse Ahora</a>
                 </div>
                 <!-- Lifetime -->
                 <div class="price-card">
                     <h3>Plan Lifetime</h3>
-                    <div style="font-size: 3rem; font-weight: 900; margin: 25px 0;">$180.000 <span>pago único</span></div>
+                    <div class="price-tag">$180.000 <span>pago único</span></div>
                     <ul class="price-features">
                         <li><i class="fa-solid fa-check"></i> <strong>Licencia de por vida</strong></li>
-                        <li><i class="fa-solid fa-check"></i> <strong>Multi Caja Ilimitado</strong></li>
-                        <li><i class="fa-solid fa-check"></i> 3 Meses de Soporte Full</li>
-                        <li><i class="fa-solid fa-check"></i> Posibilidad de Integración SII</li>
+                        <li><i class="fa-solid fa-check"></i> Multi Caja Ilimitado</li>
+                        <li><i class="fa-solid fa-check"></i> 3 Meses Soporte Full</li>
+                        <li><i class="fa-solid fa-check"></i> Integración SII</li>
                     </ul>
                     <a href="#" class="btn-neon" style="justify-content: center;">Comprar Licencia</a>
                 </div>
@@ -311,36 +320,32 @@
         </div>
     </section>
 
-    <!-- SECTION FAQ -->
-    <section id="faq" style="padding: 100px 0;">
+    <!-- FAQ -->
+    <section id="faq" style="padding: 80px 0;">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 60px;">
-                <h2 style="font-size: 3rem;">Preguntas Frecuentes</h2>
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="font-size: 2.5rem;">Preguntas</h2>
             </div>
-            <div style="max-width: 800px; margin: 0 auto;">
+            <div style="max-width: 700px; margin: 0 auto;">
                 <div class="faq-item">
-                    <div class="faq-question">¿Tienen integración con el SII? <i class="fa-solid fa-chevron-down"></i></div>
-                    <div class="faq-answer">Sí, CajaYa está certificado para emitir boletas y facturas electrónicas cumpliendo con la normativa vigente 2026.</div>
+                    <div class="faq-question">¿Integración con el SII? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Sí, CajaYa está certificado para emitir boletas y facturas electrónicas 2026.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">¿Funciona sin internet? <i class="fa-solid fa-chevron-down"></i></div>
-                    <div class="faq-answer">¡Absolutamente! El sistema está diseñado para trabajar 100% offline y sincronizar todos los datos automáticamente cuando recuperes la conexión.</div>
+                    <div class="faq-answer">¡Sí! Trabaja 100% offline y sincroniza cuando recuperes la conexión.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">¿Qué métodos de pago aceptan? <i class="fa-solid fa-chevron-down"></i></div>
-                    <div class="faq-answer">Aceptamos todas las tarjetas de crédito, débito y transferencias a través de nuestra integración segura con MercadoPago.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">¿Cómo funciona el soporte técnico? <i class="fa-solid fa-chevron-down"></i></div>
-                    <div class="faq-answer">Contamos con soporte técnico en línea prioritario. Dependiendo de tu plan (Básico o Premium), puedes acceder a atención personalizada 24/7.</div>
+                    <div class="faq-question">¿Métodos de pago? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Tarjetas de crédito, débito y transferencias vía MercadoPago.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer style="padding: 80px 0; border-top: 1px solid var(--border); text-align: center;">
+    <footer style="padding: 40px 0; border-top: 1px solid var(--border); text-align: center;">
         <div class="container">
-            <p style="color: var(--text-muted); font-size: 0.9rem;">© 2026 CajaYa Chile. El sistema POS que tu Pyme merece.</p>
+            <p style="color: var(--text-muted); font-size: 0.8rem;">© 2026 CajaYa Chile. POS Profesional.</p>
         </div>
     </footer>
 
