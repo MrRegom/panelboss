@@ -1,7 +1,8 @@
 {
     "require": {
         "firebase/php-jwt": "^6.0",
-        "phpmailer/phpmailer": "^7.0"
+        "phpmailer/phpmailer": "^7.0",
+        "transbank/transbank-sdk": "^5.1"
     },
     "autoload": {
         "psr-4": {
