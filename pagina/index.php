@@ -163,8 +163,9 @@
             .logo-container { width: 100px; height: 32px; }
             .hero-title { font-size: 2.4rem; letter-spacing: -1px; }
             .hero-desc { font-size: 1rem; }
-            .btn-neon, .btn-green { width: 100%; justify-content: center; padding: 14px; }
+            .hero-btns .btn-neon, .hero-btns .btn-green { width: 100%; justify-content: center; padding: 14px; }
             .hero-btns { display: flex; flex-direction: column; gap: 15px; width: 100%; }
+            header .btn-neon { padding: 8px 15px; font-size: 0.75rem; border-radius: 8px; }
         }
     </style>
 </head>
