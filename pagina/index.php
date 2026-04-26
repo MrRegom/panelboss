@@ -30,6 +30,7 @@
 
         body {
             background-color: var(--bg-deep);
+            background-image: radial-gradient(circle at top right, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
@@ -37,7 +38,7 @@
             position: relative;
         }
 
-        /* --- EFECTO SALES UNIVERSE (SÍMBOLOS FLOTANTES) --- */
+        /* --- EFECTO SALES UNIVERSE (SÍMBOLOS MÁS CLAROS) --- */
         .sales-universe {
             position: fixed;
             top: 0; left: 0;
@@ -45,21 +46,20 @@
             pointer-events: none;
             z-index: -1;
             overflow: hidden;
-            opacity: 0.4;
         }
         .symbol {
             position: absolute;
             color: var(--accent);
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            opacity: 0.1;
-            animation: float-random 20s linear infinite;
+            opacity: 0.15; /* Un poco más claro como pediste */
+            animation: float-random linear infinite;
         }
 
         @keyframes float-random {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.2; }
-            90% { opacity: 0.2; }
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.25; }
+            90% { opacity: 0.25; }
             100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
@@ -69,8 +69,8 @@
             background-size: 200% auto;
             color: #fff;
             text-align: center;
-            padding: 8px 10px;
-            font-size: 0.85rem;
+            padding: 10px 0;
+            font-size: 0.9rem;
             font-weight: 800;
             position: sticky;
             top: 0;
@@ -85,20 +85,20 @@
 
         /* --- HEADER --- */
         header {
-            padding: 15px 0;
+            padding: 20px 0;
             position: sticky;
-            top: 36px;
+            top: 40px;
             z-index: 1000;
-            background: rgba(10, 9, 16, 0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 9, 16, 0.95);
+            backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
         }
         .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
         
         .logo-container {
             position: relative;
-            height: 40px;
-            width: 130px;
+            height: 45px;
+            width: 140px;
             overflow: hidden;
         }
         .logo-base, .logo-overlay {
@@ -116,81 +116,92 @@
             z-index: 2;
         }
         
-        .nav-menu { display: flex; gap: 15px; align-items: center; }
-        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
+        .nav-menu { display: flex; gap: 20px; align-items: center; }
+        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
         .nav-link:hover { color: var(--accent); }
 
         .btn-neon {
             background: var(--accent);
             color: #fff;
-            padding: 10px 22px;
-            border-radius: 10px;
+            padding: 12px 28px;
+            border-radius: 12px;
             font-weight: 700;
             text-decoration: none;
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
             transition: 0.3s;
             border: none;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
+            gap: 10px;
         }
 
         .btn-green {
             background: #25d366;
             color: #fff;
-            padding: 10px 22px;
-            border-radius: 10px;
+            padding: 12px 28px;
+            border-radius: 12px;
             font-weight: 700;
             text-decoration: none;
-            box-shadow: 0 0 15px rgba(37, 211, 102, 0.2);
+            box-shadow: 0 0 25px rgba(37, 211, 102, 0.3);
             transition: 0.3s;
             border: none;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
+            gap: 10px;
         }
 
         /* --- HERO --- */
         .hero { padding: 80px 0; }
-        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-        .hero-title { font-size: 3.8rem; font-weight: 900; line-height: 1.1; margin-bottom: 25px; letter-spacing: -1.5px; }
+        .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
+        .hero-title { font-size: 4.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 30px; letter-spacing: -2px; }
         .text-gradient { background: linear-gradient(135deg, #fff 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-desc { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 35px; max-width: 500px; }
-        .mockup-img { max-width: 100%; border-radius: 12px; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6)); }
+        .hero-desc { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 45px; max-width: 550px; }
+        .mockup-img { max-width: 120%; border-radius: 12px; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8)); }
+
+        /* --- BENEFICIOS --- */
+        .benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .benefit-card { background: var(--bg-card); padding: 40px; border-radius: 24px; border: 1px solid var(--border); transition: 0.3s; }
+        .benefit-card:hover { border-color: var(--accent); transform: translateY(-5px); }
 
         /* --- PRICING --- */
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .price-card { background: var(--bg-card); border: 1px solid var(--border); padding: 40px 30px; border-radius: 20px; display: flex; flex-direction: column; text-align: center; position: relative; }
-        .price-card.featured { border-color: var(--accent); box-shadow: 0 0 30px rgba(168, 85, 247, 0.1); }
-        .price-tag { font-size: 2.2rem; font-weight: 900; margin: 15px 0; }
-        .price-tag span { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
-        .price-features { list-style: none; margin: 20px 0; text-align: left; flex-grow: 1; }
-        .price-features li { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; font-size: 0.85rem; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .price-card { background: var(--bg-card); border: 1px solid var(--border); padding: 50px 40px; border-radius: 24px; display: flex; flex-direction: column; text-align: center; position: relative; transition: 0.3s; }
+        .price-card.featured { border-color: var(--accent); box-shadow: 0 0 40px rgba(168, 85, 247, 0.15); }
+        .price-tag { font-size: 2.5rem; font-weight: 900; margin: 25px 0; }
+        .price-tag span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+        .price-features { list-style: none; margin: 30px 0; text-align: left; flex-grow: 1; }
+        .price-features li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
         .price-features i { color: #22c55e; }
         
         .badge-recommended {
             position: absolute;
             top: -12px; left: 50%; transform: translateX(-50%);
-            background: var(--accent); color: #fff; padding: 4px 15px; border-radius: 50px; font-size: 0.65rem; font-weight: 800;
+            background: var(--accent); color: #fff; padding: 4px 15px; border-radius: 50px; font-size: 0.7rem; font-weight: 800;
         }
+
+        /* --- FAQ --- */
+        .faq-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 15px; margin-bottom: 15px; overflow: hidden; }
+        .faq-question { padding: 20px 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
+        .faq-answer { padding: 0 25px; max-height: 0; overflow: hidden; transition: 0.4s; color: var(--text-muted); font-size: 0.95rem; }
+        .faq-item.active .faq-answer { padding: 0 25px 25px; max-height: 200px; }
 
         /* --- RESPONSIVE --- */
+        @media (max-width: 1100px) {
+            .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+        }
         @media (max-width: 992px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
-            .hero-title { font-size: 3rem; }
-            .hero-desc { margin: 0 auto 30px; }
+            .hero-title { font-size: 3.2rem; }
+            .hero-desc { margin: 0 auto 40px; }
             .nav-menu { display: none; }
         }
-
         @media (max-width: 480px) {
-            header { top: 32px; padding: 10px 0; }
-            .logo-container { width: 95px; height: 30px; }
-            header .btn-neon { padding: 6px 12px; font-size: 0.7rem; border-radius: 6px; }
-            .hero-title { font-size: 2.2rem; }
-            .hero-btns { display: flex; flex-direction: column; gap: 12px; }
-            .hero-btns .btn-neon, .hero-btns .btn-green { width: 100%; justify-content: center; padding: 14px; }
+            header { top: 38px; padding: 10px 0; }
+            .logo-container { width: 100px; height: 32px; }
+            header .btn-neon { padding: 8px 12px; font-size: 0.75rem; border-radius: 8px; }
+            .hero-title { font-size: 2.4rem; }
+            .hero-btns { display: flex; flex-direction: column; gap: 15px; }
+            .hero-btns .btn-neon, .hero-btns .btn-green { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -211,7 +222,9 @@
             </a>
             <nav class="nav-menu">
                 <a href="#que-ofrecemos" class="nav-link">Beneficios</a>
+                <span class="nav-separator" style="color: rgba(255,255,255,0.1);">|</span>
                 <a href="#precios" class="nav-link">Precios</a>
+                <span class="nav-separator" style="color: rgba(255,255,255,0.1);">|</span>
                 <a href="#faq" class="nav-link">Preguntas</a>
             </nav>
             <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn-neon">Prueba Gratis</a>
@@ -226,7 +239,7 @@
                         Vende más, <br> <span class="text-gradient">controla todo.</span>
                     </h1>
                     <p class="hero-desc">
-                        El sistema POS que automatiza tus ventas, gestiona tu stock y genera reportes X/Z en segundos.
+                        El sistema POS que automatiza tus ventas, gestiona tu stock y genera reportes X/Z en segundos. Diseñado para la velocidad de tu negocio.
                     </p>
                     <div class="hero-btns">
                         <a href="#precios" class="btn-neon">Ver Planes <i class="fa-solid fa-chevron-down"></i></a>
@@ -241,41 +254,41 @@
     </section>
 
     <!-- SECTION QUE OFRECEMOS -->
-    <section id="que-ofrecemos" style="padding: 80px 0; background: rgba(255,255,255,0.01);">
+    <section id="que-ofrecemos" style="padding: 100px 0; background: rgba(255,255,255,0.01);">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 50px;">
-                <h2 style="font-size: 2.8rem;">¿Qué ofrecemos?</h2>
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 3.5rem;">¿Qué ofrecemos?</h2>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                <div style="background: var(--bg-card); padding: 25px; border-radius: 18px; border: 1px solid var(--border);">
-                    <i class="fa-solid fa-file-invoice-dollar" style="color: var(--accent); margin-bottom: 15px; display: block;"></i>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="fa-solid fa-file-invoice-dollar" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
                     <h4>Reportes X y Z</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-muted);">Cierres de caja bajo normativa SII.</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Cierres de caja profesionales bajo normativa SII.</p>
                 </div>
-                <div style="background: var(--bg-card); padding: 25px; border-radius: 18px; border: 1px solid var(--border);">
-                    <i class="fa-solid fa-wifi-slash" style="color: var(--accent); margin-bottom: 15px; display: block;"></i>
-                    <h4>Offline-Ready</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-muted);">Sigue vendiendo sin internet.</p>
+                <div class="benefit-card">
+                    <i class="fa-solid fa-wifi-slash" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
+                    <h4>100% Offline</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Sigue vendiendo sin internet sin interrupciones.</p>
                 </div>
-                <div style="background: var(--bg-card); padding: 25px; border-radius: 18px; border: 1px solid var(--border);">
-                    <i class="fa-solid fa-shield-halved" style="color: var(--accent); margin-bottom: 15px; display: block;"></i>
+                <div class="benefit-card">
+                    <i class="fa-solid fa-shield-halved" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
                     <h4>Seguridad</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-muted);">Datos encriptados en la nube.</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Datos encriptados y respaldos en la nube.</p>
                 </div>
-                <div style="background: var(--bg-card); padding: 25px; border-radius: 18px; border: 1px solid var(--border);">
-                    <i class="fa-solid fa-users-gear" style="color: var(--accent); margin-bottom: 15px; display: block;"></i>
+                <div class="benefit-card">
+                    <i class="fa-solid fa-users-gear" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
                     <h4>Multi-Caja</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-muted);">Gestiona múltiples puntos.</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Gestiona múltiples puntos desde un solo panel.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- SECTION PRECIOS -->
-    <section id="precios" style="padding: 80px 0; background: #08080c;">
+    <section id="precios" style="padding: 100px 0; background: #08080c;">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 50px;">
-                <h2 style="font-size: 2.8rem;">Planes a tu Medida</h2>
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 3.5rem;">Planes a tu Medida</h2>
             </div>
             <div class="pricing-grid">
                 <div class="price-card">
@@ -285,7 +298,7 @@
                         <li><i class="fa-solid fa-check"></i> Integración SII (Boletas)</li>
                         <li><i class="fa-solid fa-check"></i> Soporte Técnico</li>
                     </ul>
-                    <a href="#" class="btn-neon" style="justify-content: center;">Suscribirse</a>
+                    <a href="#" class="btn-neon" style="justify-content: center;">Suscribirse Ahora</a>
                 </div>
                 <div class="price-card featured">
                     <div class="badge-recommended">RECOMENDADO</div>
@@ -296,7 +309,7 @@
                         <li><i class="fa-solid fa-check"></i> <strong>Soporte 24/7</strong></li>
                         <li><i class="fa-solid fa-check"></i> <strong>Respaldos Automáticos</strong></li>
                     </ul>
-                    <a href="#" class="btn-neon" style="justify-content: center;">Suscribirse</a>
+                    <a href="#" class="btn-neon" style="justify-content: center;">Suscribirse Ahora</a>
                 </div>
                 <div class="price-card">
                     <h3>Plan Lifetime</h3>
@@ -313,29 +326,44 @@
         </div>
     </section>
 
-    <footer style="padding: 40px 0; border-top: 1px solid var(--border); text-align: center;">
+    <!-- FAQ -->
+    <section id="faq" style="padding: 100px 0;">
         <div class="container">
-            <p style="color: var(--text-muted); font-size: 0.8rem;">© 2026 CajaYa Chile. POS Profesional.</p>
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="font-size: 3rem;">Preguntas</h2>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="faq-item">
+                    <div class="faq-question">¿Tienen integración con el SII? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Sí, CajaYa está certificado para emitir boletas y facturas electrónicas cumpliendo con la normativa 2026.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">¿Funciona sin internet? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">¡Absolutamente! El sistema está diseñado para trabajar 100% offline y sincronizar cuando haya conexión.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 60px 0; border-top: 1px solid var(--border); text-align: center;">
+        <div class="container">
+            <p style="color: var(--text-muted); font-size: 0.9rem;">© 2026 CajaYa Chile. POS Profesional.</p>
         </div>
     </footer>
 
     <script>
-        // GENERADOR DE SALES UNIVERSE (Símbolos matemáticos)
         const universe = document.getElementById('universe');
         const symbols = ['$', '%', '+', '-', '×', '÷', '='];
-        const symbolCount = 30;
+        const symbolCount = 40;
 
         for (let i = 0; i < symbolCount; i++) {
             const span = document.createElement('span');
             span.className = 'symbol';
             span.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-            
-            // Posición y animación aleatoria
             span.style.left = Math.random() * 100 + 'vw';
-            span.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            span.style.fontSize = (Math.random() * 25 + 12) + 'px';
             span.style.animationDelay = (Math.random() * 20) + 's';
-            span.style.animationDuration = (Math.random() * 10 + 15) + 's';
-            
+            span.style.animationDuration = (Math.random() * 12 + 18) + 's';
             universe.appendChild(span);
         }
     </script>
