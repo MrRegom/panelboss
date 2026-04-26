@@ -314,8 +314,8 @@
 
                 <div class="hero-visual">
                     <div class="floating-card card-stats">
-                        <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Ventas Hoy</div>
-                        <div style="font-size: 1.4rem; font-weight: 900; color: #fff;">$ 234.670</div>
+                        <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Demos Hoy</div>
+                        <div style="font-size: 1.4rem; font-weight: 900; color: #fff;">+ 24</div>
                     </div>
 
                     <div class="floating-card card-users">
