@@ -18,11 +18,11 @@
         :root {
             --primary: #7c3aed;
             --accent: #a855f7;
-            --bg-deep: #050506;
-            --bg-card: #0f0f12;
+            --bg-deep: #0a0910; /* Deep Midnight Purple */
+            --bg-card: #0f0e1a;
             --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: rgba(255, 255, 255, 0.08);
+            --text-muted: #8b8a9e;
+            --border: rgba(168, 85, 247, 0.15);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,6 +30,7 @@
 
         body {
             background-color: var(--bg-deep);
+            background-image: radial-gradient(circle at top right, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             line-height: 1.6;

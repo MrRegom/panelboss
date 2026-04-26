@@ -1,17 +1,19 @@
-/* ULTRA-MODERN MINIMALIST (LINEAR/VERCEL STYLE) */
+/* DEEP MIDNIGHT PURPLE ENTERPRISE THEME */
 :root {
-    --black-pure: #000000;
-    --black-soft: #0a0a0a;
-    --gray-deep: #111111;
-    --gray-border: #1a1a1a;
-    --accent: #fff;
-    --accent-purple: #8b5cf6;
+    --black-pure: #050508; /* Casi negro con tinte púrpura */
+    --black-soft: #0a0910; /* Morado Medianoche Profundo */
+    --gray-deep: #11101a;
+    --gray-border: rgba(139, 92, 246, 0.15); /* Bordes con tinte morado sutil */
+    --accent: #ffffff;
+    --accent-purple: #a855f7;
     --text-main: #ffffff;
-    --text-muted: #666666;
+    --text-muted: #8b8a9e;
 }
 
 body {
-    background-color: var(--black-pure) !important;
+    background-color: var(--black-soft) !important;
+    background-image: radial-gradient(circle at top right, rgba(168, 85, 247, 0.05) 0%, transparent 40%),
+                      radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.03) 0%, transparent 40%);
     color: var(--text-main);
     font-family: 'Inter', -apple-system, sans-serif;
     letter-spacing: -0.02em;
