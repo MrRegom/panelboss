@@ -78,20 +78,33 @@
         }
         .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
         
-        /* LOGO TEXTO ELEGANTE */
-        .logo-text {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 900;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            letter-spacing: -1.5px;
+        /* --- LOGO DUAL CON IMAGEN ORIGINAL (MANTENIENDO LÍNEAS) --- */
+        .logo-container {
+            position: relative;
+            height: 45px;
+            width: 140px; /* Ajustar según el ancho real del logo */
+            overflow: hidden;
             animation: fadeInDown 0.8s ease-out;
         }
-        .logo-text span.caja { color: #ffffff; }
-        .logo-text span.ya { color: var(--accent); }
-        .logo-text:hover { transform: scale(1.03); transition: 0.3s; }
+        .logo-base, .logo-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%;
+            width: 100%;
+            background-image: url('assets/img/logo.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: transform 0.3s ease;
+        }
+        .logo-overlay {
+            filter: brightness(0) invert(1); /* Capa blanca */
+            clip-path: inset(0 42% 0 0); /* Recorta para mostrar solo "Caja" */
+            z-index: 2;
+        }
+        .logo-container:hover .logo-base, 
+        .logo-container:hover .logo-overlay { 
+            transform: scale(1.05); 
+        }
 
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-10px); }
@@ -239,8 +252,9 @@
 
     <header>
         <div class="container nav-wrapper">
-            <a href="#hero" class="logo-text">
-                <span class="caja">Caja</span><span class="ya">YA</span>
+            <a href="#hero" class="logo-container">
+                <div class="logo-base"></div>
+                <div class="logo-overlay"></div>
             </a>
             <nav class="nav-menu">
                 <a href="#beneficios" class="nav-link">Beneficios</a>
