@@ -40,9 +40,10 @@
         h1, h2, h3 { font-family: 'Outfit', sans-serif; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* --- PROMO BANNER --- */
+        /* --- PROMO BANNER CON ANIMACIÓN --- */
         .promo-banner {
-            background: linear-gradient(90deg, var(--primary), var(--accent));
+            background: linear-gradient(90deg, #7c3aed, #a855f7, #7c3aed);
+            background-size: 200% auto;
             color: #fff;
             text-align: center;
             padding: 10px 0;
@@ -52,20 +53,31 @@
             position: sticky;
             top: 0;
             z-index: 1100;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
         }
 
         /* --- HEADER --- */
         header {
-            padding: 20px 0;
+            padding: 25px 0;
             position: sticky;
-            top: 40px; /* Debajo del promo banner */
+            top: 40px;
             z-index: 1000;
-            background: rgba(10, 9, 16, 0.8);
+            background: rgba(10, 9, 16, 0.9);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
         }
         .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
-        .nav-menu { display: flex; gap: 35px; }
+        .logo img { 
+            height: 50px; /* Logo más grande */
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3)); /* Resplandor blanco sutil */
+            transition: transform 0.3s ease;
+        }
+        .logo:hover img { transform: scale(1.05); }
         .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: all 0.3s; }
         .nav-link:hover { color: var(--accent); }
 
@@ -230,7 +242,7 @@
                     </p>
                     <div style="display: flex; gap: 20px; flex-wrap: wrap;">
                         <a href="#precios" class="btn-neon" style="padding: 16px 45px; font-size: 1.1rem;">Ver Planes <i class="fa-solid fa-chevron-down"></i></a>
-                        <a href="https://wa.me/56959764771" class="btn-green" style="padding: 16px 40px; font-size: 1.1rem;">Soporte en línea <i class="fa-solid fa-whatsapp"></i></a>
+                        <a href="https://wa.me/56959764771" class="btn-green" style="padding: 16px 40px; font-size: 1.1rem;">Soporte en línea <i class="fa-brands fa-whatsapp"></i></a>
                     </div>
                 </div>
 
