@@ -191,8 +191,8 @@
                 </div>
 
                 <div class="hero-visual">
-                    <div class="organic-shape">
-                        <img src="assets/cajaya_pos_mockup.png" alt="CajaYa POS" class="mockup-img">
+                    <div class="organic-shape" style="background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%); border: none;">
+                        <img src="assets/cajaya_hardware_mockup.png" alt="Hardware CajaYa" class="mockup-img" style="filter: drop-shadow(0 20px 50px rgba(0,0,0,0.8));">
                     </div>
                 </div>
             </div>
