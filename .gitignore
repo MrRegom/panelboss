@@ -4,3 +4,4 @@ vendor/
 *.log
 certs/*.pem
 !certs/.gitkeep
+documentacion_tecnica.md
