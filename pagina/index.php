@@ -161,9 +161,11 @@
 
         @media (max-width: 480px) {
             .hero-title { font-size: 2.6rem; }
-            .btn-neon { width: 100%; text-align: center; }
+            .hero-btns .btn-neon { width: 100%; text-align: center; } /* Solo botones del hero al 100% */
+            .btn-neon { padding: 10px 20px; font-size: 0.85rem; }
             .hero-badge { font-size: 0.65rem; padding: 6px 12px; }
-            .header-glass { padding: 10px 0; }
+            .nav-wrapper { flex-direction: row; justify-content: space-between; }
+            .logo img { height: 28px !important; }
         }
     </style>
 </head>
