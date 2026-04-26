@@ -13,7 +13,7 @@ class LicenseService {
 
     public function __construct(\PDO $db) {
         $this->repository = new LicenseRepository($db);
-        $this->privateKeyPath = __DIR__ . '/../../certs/cajaya-priv.pem';
+        $this->privateKeyPath = __DIR__ . '/../../certs/lumare-priv.pem';
     }
 
     private function getPrivateKey() {
