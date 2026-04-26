@@ -60,38 +60,93 @@ body {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-/* Table Perfection */
-.table thead th {
+/* MICROSOFT ENTERPRISE TABLES - PERFECT MINIMALISM */
+.card {
     background: transparent !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: none !important;
+}
+
+.table {
+    background: transparent !important;
+}
+
+.table thead th {
+    background: rgba(255, 255, 255, 0.01) !important;
     color: var(--text-muted) !important;
-    font-size: 0.75rem !important;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    text-transform: none !important; /* Estilo Microsoft: No todo en mayúsculas */
+    letter-spacing: 0 !important;
+    padding: 12px 20px !important;
+    border-bottom: 2px solid var(--border) !important;
+}
+
+.table tbody tr {
+    background: transparent !important;
     border-bottom: 1px solid var(--border) !important;
-    padding: 15px 20px !important;
+    transition: background 0.15s ease;
+}
+
+.table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03) !important;
 }
 
 .table tbody td {
-    padding: 15px 20px !important;
-    border-bottom: 1px solid var(--border) !important;
+    padding: 14px 20px !important;
+    border: none !important;
+    color: #e4e4e7 !important;
+    font-size: 0.9rem !important;
     vertical-align: middle;
 }
 
-.table tr:last-child td { border-bottom: none !important; }
-
-/* Buttons */
-.btn-primary {
-    background: var(--accent) !important;
-    border: none !important;
-    border-radius: 8px !important;
-    font-weight: 600 !important;
-    padding: 10px 20px !important;
+/* Data Contrast */
+.table td strong, .table td .fw-bold {
+    color: #ffffff !important;
 }
 
-.app-header {
-    background: var(--bg-app) !important;
-    border-bottom: 1px solid var(--border) !important;
+.table td code, .key-text {
+    color: #c084fc !important; /* Un morado más suave y legible */
+    background: rgba(192, 132, 252, 0.05);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
 }
+
+/* Microsoft Style Action Buttons (Ghost Buttons) */
+.btn-action {
+    background: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-muted) !important;
+    width: 34px;
+    height: 34px;
+    border-radius: 6px !important;
+    transition: all 0.2s;
+}
+
+.btn-action:hover {
+    border-color: var(--accent) !important;
+    color: #fff !important;
+    background: rgba(139, 92, 246, 0.1) !important;
+}
+
+/* Badges Fluent */
+.badge {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-main) !important;
+    padding: 5px 10px !important;
+    font-weight: 500 !important;
+    font-size: 0.75rem !important;
+}
+
+.badge-google { border-color: rgba(239, 68, 68, 0.2) !important; color: #f87171 !important; }
+.badge-active { border-color: rgba(34, 197, 94, 0.2) !important; color: #4ade80 !important; }
+
+/* Scrollbar Style Microsoft */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #444; }
 
 .app-main {
     background: var(--bg-main);
