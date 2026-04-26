@@ -98,7 +98,7 @@
         }
         .logo-overlay {
             filter: brightness(0) invert(1); /* Capa blanca */
-            clip-path: inset(0 42% 0 0); /* Recorta para mostrar solo "Caja" */
+            clip-path: inset(0 52% 0 0); /* Recorta más para que el "YA" quede morado */
             z-index: 2;
         }
         .logo-container:hover .logo-base, 
