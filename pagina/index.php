@@ -18,7 +18,7 @@
         :root {
             --primary: #7c3aed;
             --accent: #a855f7;
-            --bg-deep: #0a0910; /* Deep Midnight Purple */
+            --bg-deep: #0a0910;
             --bg-card: #0f0e1a;
             --text-main: #f8fafc;
             --text-muted: #8b8a9e;
@@ -40,16 +40,15 @@
         h1, h2, h3 { font-family: 'Outfit', sans-serif; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* --- PROMO BANNER ELEGANTE --- */
+        /* --- PROMO BANNER --- */
         .promo-banner {
             background: linear-gradient(90deg, #7c3aed, #db2777, #7c3aed);
             background-size: 200% auto;
             color: #fff;
             text-align: center;
-            padding: 10px 0;
-            font-size: 0.9rem;
+            padding: 8px 10px;
+            font-size: 0.85rem;
             font-weight: 800;
-            letter-spacing: 0.5px;
             position: sticky;
             top: 0;
             z-index: 1100;
@@ -68,9 +67,9 @@
 
         /* --- HEADER --- */
         header {
-            padding: 25px 0;
+            padding: 15px 0;
             position: sticky;
-            top: 40px;
+            top: 35px;
             z-index: 1000;
             background: rgba(10, 9, 16, 0.95);
             backdrop-filter: blur(15px);
@@ -78,13 +77,11 @@
         }
         .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
         
-        /* --- LOGO DUAL CON IMAGEN ORIGINAL (MANTENIENDO LÍNEAS) --- */
         .logo-container {
             position: relative;
-            height: 45px;
-            width: 140px;
+            height: 38px;
+            width: 120px;
             overflow: hidden;
-            animation: fadeInDown 0.8s ease-out;
         }
         .logo-base, .logo-overlay {
             position: absolute;
@@ -94,189 +91,87 @@
             background-image: url('assets/img/logo.png');
             background-size: contain;
             background-repeat: no-repeat;
-            transition: transform 0.3s ease;
         }
         .logo-overlay {
-            filter: brightness(0) invert(1); /* Capa blanca */
-            clip-path: inset(0 57% 0 0); /* Ajuste preciso para no manchar la 'a' */
+            filter: brightness(0) invert(1);
+            clip-path: inset(0 57% 0 0);
             z-index: 2;
         }
-        .logo-container:hover .logo-base, 
-        .logo-container:hover .logo-overlay { 
-            transform: scale(1.05); 
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
         
-        .nav-menu { display: flex; gap: 20px; align-items: center; }
-        .nav-separator { color: rgba(255,255,255,0.2); font-weight: 300; }
-        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: all 0.3s; }
+        .nav-menu { display: flex; gap: 15px; align-items: center; }
+        .nav-separator { color: rgba(255,255,255,0.1); }
+        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
         .nav-link:hover { color: var(--accent); }
 
         .btn-neon {
             background: var(--accent);
             color: #fff;
-            padding: 12px 28px;
-            border-radius: 12px;
+            padding: 10px 22px;
+            border-radius: 10px;
             font-weight: 700;
             text-decoration: none;
-            box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
-            transition: all 0.3s;
+            font-size: 0.9rem;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+            transition: 0.3s;
             border: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
-        .btn-neon:hover { transform: translateY(-2px); box-shadow: 0 0 35px rgba(168, 85, 247, 0.6); }
 
         .btn-green {
             background: #25d366;
             color: #fff;
-            padding: 12px 28px;
-            border-radius: 12px;
+            padding: 10px 22px;
+            border-radius: 10px;
             font-weight: 700;
             text-decoration: none;
-            box-shadow: 0 0 25px rgba(37, 211, 102, 0.3);
-            transition: all 0.3s;
+            font-size: 0.9rem;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.2);
+            transition: 0.3s;
             border: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-        }
-        .btn-green:hover { transform: translateY(-2px); box-shadow: 0 0 35px rgba(37, 211, 102, 0.5); color: #fff; }
-
-        /* --- FAQ STYLES --- */
-        .faq-item {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
-        .faq-question {
-            padding: 20px 25px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-        .faq-question:hover { background: rgba(168, 85, 247, 0.05); }
-        .faq-answer {
-            padding: 0 25px;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-        .faq-item.active .faq-answer { padding: 0 25px 25px; max-height: 200px; }
-        .faq-item.active .fa-chevron-down { transform: rotate(180deg); }
-
-        /* --- HERO SPLIT --- */
-        .hero { padding: 80px 0; }
-        .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
-        
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
             gap: 8px;
-            background: rgba(168, 85, 247, 0.1);
-            border: 1px solid rgba(168, 85, 247, 0.2);
-            padding: 8px 18px;
-            border-radius: 100px;
-            color: var(--accent);
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            text-transform: uppercase;
         }
 
-        .hero-title { font-size: 4.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 30px; letter-spacing: -2px; }
+        /* --- FAQ --- */
+        .faq-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; }
+        .faq-question { padding: 15px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
+        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: 0.4s; color: var(--text-muted); font-size: 0.9rem; }
+        .faq-item.active .faq-answer { padding: 0 20px 20px; max-height: 200px; }
+
+        /* --- HERO --- */
+        .hero { padding: 60px 0; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .hero-title { font-size: 4rem; font-weight: 900; line-height: 1.1; margin-bottom: 25px; letter-spacing: -2px; }
         .text-gradient { background: linear-gradient(135deg, #fff 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-desc { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 45px; max-width: 550px; }
-
-        .hero-visual { position: relative; }
-        .organic-shape {
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
-            display: flex; justify-content: center; align-items: center;
-        }
-        .mockup-img { max-width: 120%; border-radius: 12px; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8)); }
-
-        /* --- PRICING SECTION --- */
-        .pricing { padding: 100px 0; background: #08080c; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 60px; }
-        
-        .price-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 50px 40px;
-            border-radius: 24px;
-            position: relative;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-        .price-card.featured { border-color: var(--accent); box-shadow: 0 0 40px rgba(168, 85, 247, 0.15); }
-        .price-card.featured::after {
-            content: 'RECOMENDADO';
-            position: absolute;
-            top: 20px; right: 20px;
-            background: var(--accent);
-            color: #fff;
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: 800;
-        }
-
-        .price-card h3 { font-size: 1.8rem; margin-bottom: 10px; }
-        .price-tag { font-size: 3rem; font-weight: 900; margin: 25px 0; }
-        .price-tag span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
-        
-        .price-features { list-style: none; margin-bottom: 40px; flex-grow: 1; }
-        .price-features li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
-        .price-features i { color: #22c55e; }
-
-        .btn-mp {
-            background: #009ee3; /* MercadoPago Blue */
-            color: #fff;
-            text-align: center;
-            padding: 15px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: 0.3s;
-        }
-        .btn-mp:hover { filter: brightness(1.1); transform: scale(1.02); }
+        .hero-desc { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 35px; max-width: 500px; }
+        .mockup-img { max-width: 100%; border-radius: 12px; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6)); }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 992px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
             .hero-title { font-size: 3.2rem; }
-            .hero-desc { margin: 0 auto 40px; }
-            header { top: 35px; }
+            .hero-desc { margin: 0 auto 30px; }
+            .nav-menu { display: none; }
         }
 
         @media (max-width: 480px) {
-            .hero-title { font-size: 2.6rem; }
-            .nav-menu { display: none; }
-            .btn-neon { padding: 10px 20px; font-size: 0.85rem; }
+            .promo-banner { font-size: 0.75rem; padding: 10px 5px; }
+            header { top: 38px; padding: 10px 0; }
+            .logo-container { width: 100px; height: 32px; }
+            .hero-title { font-size: 2.4rem; letter-spacing: -1px; }
+            .hero-desc { font-size: 1rem; }
+            .btn-neon, .btn-green { width: 100%; justify-content: center; padding: 14px; }
+            .hero-btns { display: flex; flex-direction: column; gap: 15px; width: 100%; }
         }
     </style>
 </head>
 <body>
 
     <div class="promo-banner">
-        🔥 OFERTA DE LANZAMIENTO: 1 Mes Gratis + Instalación Prioritaria (Solo 5 cupos disponibles esta semana)
+        🔥 OFERTA DE LANZAMIENTO: 1 Mes Gratis + Instalación Prioritaria (Solo 5 cupos)
     </div>
 
     <header>
@@ -287,8 +182,6 @@
             </a>
             <nav class="nav-menu">
                 <a href="#beneficios" class="nav-link">Beneficios</a>
-                <span class="nav-separator">|</span>
-                <a href="#que-ofrecemos" class="nav-link">¿Qué ofrecemos?</a>
                 <span class="nav-separator">|</span>
                 <a href="#precios" class="nav-link">Precios</a>
                 <span class="nav-separator">|</span>
@@ -302,137 +195,101 @@
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-content">
-                    <div class="hero-badge"><i class="fa-solid fa-bolt"></i> SII CERTIFICADO 2026</div>
                     <h1 class="hero-title">
                         Vende más, <br> <span class="text-gradient">controla todo.</span>
                     </h1>
                     <p class="hero-desc">
-                        El sistema POS que automatiza tus ventas, gestiona tu stock y genera reportes X/Z en segundos. Diseñado para la velocidad de tu negocio.
+                        El sistema POS que automatiza tus ventas, gestiona tu stock y genera reportes X/Z en segundos.
                     </p>
-                    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                        <a href="#precios" class="btn-neon" style="padding: 16px 45px; font-size: 1.1rem;">Ver Planes <i class="fa-solid fa-chevron-down"></i></a>
-                        <a href="https://wa.me/56959764771" class="btn-green" style="padding: 16px 40px; font-size: 1.1rem;">Soporte en línea <i class="fa-brands fa-whatsapp"></i></a>
+                    <div class="hero-btns">
+                        <a href="#precios" class="btn-neon">Ver Planes <i class="fa-solid fa-chevron-down"></i></a>
+                        <a href="https://wa.me/56959764771" class="btn-green">Soporte en línea <i class="fa-brands fa-whatsapp"></i></a>
                     </div>
                 </div>
-
                 <div class="hero-visual">
-                    <div class="organic-shape">
-                        <img src="assets/cajaya_hardware_mockup.png" alt="Hardware CajaYa" class="mockup-img">
-                    </div>
+                    <img src="assets/cajaya_hardware_mockup.png" alt="Hardware CajaYa" class="mockup-img">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION QUE OFRECEMOS -->
-    <section id="que-ofrecemos" style="padding: 100px 0; background: rgba(255,255,255,0.01);">
-        <div class="container" id="beneficios">
-            <div style="text-align: center; margin-bottom: 60px;">
-                <h2 style="font-size: 3.5rem; letter-spacing: -1px;">Lo que tu negocio merece</h2>
-                <p style="color: var(--text-muted); margin-top: 15px;">Tecnología robusta diseñada para el mercado chileno.</p>
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
-                <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 20px; border: 1px solid var(--border);">
-                    <i class="fa-solid fa-file-invoice-dollar" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
-                    <h4 style="font-size: 1.5rem; margin-bottom: 10px;">Reportes X y Z</h4>
-                    <p style="color: var(--text-muted);">Genera cierres de caja profesionales. Cumple con la normativa tributaria sin esfuerzo manual.</p>
-                </div>
-                <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 20px; border: 1px solid var(--border);">
-                    <i class="fa-solid fa-wifi-slash" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
-                    <h4 style="font-size: 1.5rem; margin-bottom: 10px;">Modo Offline</h4>
-                    <p style="color: var(--text-muted);">Vende sin internet. El sistema guarda todo localmente y sincroniza cuando vuelve la conexión.</p>
-                </div>
-                <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 20px; border: 1px solid var(--border);">
-                    <i class="fa-solid fa-users-gear" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
-                    <h4 style="font-size: 1.5rem; margin-bottom: 10px;">Multi-Caja</h4>
-                    <p style="color: var(--text-muted);">Gestiona múltiples puntos de venta en tiempo real desde un solo panel de administración.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="precios" class="pricing">
+    <!-- BENEFICIOS -->
+    <section id="beneficios" style="padding: 60px 0; background: rgba(255,255,255,0.01);">
         <div class="container">
-            <div style="text-align: center;">
-                <h2 style="font-size: 3.5rem; letter-spacing: -1px;">Planes que crecen contigo</h2>
-                <p style="color: var(--text-muted); margin-top: 15px;">Transparente, simple y sin letras chicas.</p>
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="font-size: 2.5rem;">Lo que ofrecemos</h2>
             </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+                <div style="background: var(--bg-card); padding: 25px; border-radius: 15px; border: 1px solid var(--border);">
+                    <i class="fa-solid fa-file-invoice-dollar" style="font-size: 1.5rem; color: var(--accent); margin-bottom: 15px; display: block;"></i>
+                    <h4>Reportes X y Z</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Genera cierres de caja profesionales cumpliendo la normativa SII.</p>
+                </div>
+                <div style="background: var(--bg-card); padding: 25px; border-radius: 15px; border: 1px solid var(--border);">
+                    <i class="fa-solid fa-wifi-slash" style="font-size: 1.5rem; color: var(--accent); margin-bottom: 15px; display: block;"></i>
+                    <h4>Modo Offline</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Vende sin internet. El sistema sincroniza todo automáticamente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <div class="pricing-grid">
-                <div class="price-card">
+    <!-- PRECIOS -->
+    <section id="precios" style="padding: 80px 0; background: #08080c;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="font-size: 2.8rem;">Planes de Lanzamiento</h2>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <!-- Básico -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 40px 30px; border-radius: 20px; text-align: center;">
                     <h3>Plan Básico</h3>
-                    <div class="price-tag">$20.000 <span>/mes</span></div>
-                    <ul class="price-features">
-                        <li><i class="fa-solid fa-check"></i> Integración SII (Boletas)</li>
-                        <li><i class="fa-solid fa-check"></i> Reportes X y Z Diarios</li>
-                        <li><i class="fa-solid fa-check"></i> Soporte por Email</li>
-                    </ul>
-                    <a href="#" class="btn-mp"><i class="fa-solid fa-credit-card"></i> Pagar con MercadoPago</a>
+                    <div style="font-size: 2.5rem; font-weight: 800; margin: 20px 0;">$20.000 <span style="font-size: 1rem; color: var(--text-muted);">/mes</span></div>
+                    <a href="#" class="btn-neon" style="width: 100%; justify-content: center;">Suscribirse</a>
                 </div>
-
-                <div class="price-card featured">
+                <!-- Premium -->
+                <div style="background: var(--bg-card); border: 1px solid var(--accent); padding: 40px 30px; border-radius: 20px; text-align: center; position: relative;">
+                    <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); padding: 4px 15px; border-radius: 50px; font-size: 0.7rem; font-weight: 800;">RECOMENDADO</div>
                     <h3>Plan Premium</h3>
-                    <div class="price-tag">$35.000 <span>/mes</span></div>
-                    <ul class="price-features">
-                        <li><i class="fa-solid fa-check"></i> Todo lo del Básico</li>
-                        <li><i class="fa-solid fa-check"></i> Respaldos Automáticos</li>
-                        <li><i class="fa-solid fa-check"></i> Soporte 24/7 VIP</li>
-                    </ul>
-                    <a href="#" class="btn-mp" style="background: var(--accent);"><i class="fa-solid fa-credit-card"></i> Suscribirse Ahora</a>
+                    <div style="font-size: 2.5rem; font-weight: 800; margin: 20px 0;">$35.000 <span style="font-size: 1rem; color: var(--text-muted);">/mes</span></div>
+                    <a href="#" class="btn-neon" style="width: 100%; justify-content: center;">Suscribirse</a>
                 </div>
-
-                <div class="price-card">
-                    <h3>Plan Lifetime</h3>
-                    <div class="price-tag">$180.000 <span>pago único</span></div>
-                    <ul class="price-features">
-                        <li><i class="fa-solid fa-check"></i> Licencia Perpetua</li>
-                        <li><i class="fa-solid fa-check"></i> Multi-caja Ilimitado</li>
-                        <li><i class="fa-solid fa-check"></i> 3 Meses Soporte VIP</li>
-                    </ul>
-                    <a href="#" class="btn-mp"><i class="fa-solid fa-bag-shopping"></i> Comprar Licencia</a>
+                <!-- Lifetime -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 40px 30px; border-radius: 20px; text-align: center;">
+                    <h3>Lifetime</h3>
+                    <div style="font-size: 2.5rem; font-weight: 800; margin: 20px 0;">$180.000 <span style="font-size: 0.8rem; color: var(--text-muted);">pago único</span></div>
+                    <a href="#" class="btn-neon" style="width: 100%; justify-content: center;">Comprar Licencia</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION FAQ -->
-    <section id="faq" style="padding: 100px 0;">
+    <!-- FAQ -->
+    <section id="faq" style="padding: 60px 0;">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 60px;">
-                <h2 style="font-size: 3rem;">Preguntas Frecuentes</h2>
-                <p style="color: var(--text-muted);">Todo lo que necesitas saber sobre el ecosistema CajaYa.</p>
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="font-size: 2.5rem;">Preguntas</h2>
             </div>
-            <div style="max-width: 800px; margin: 0 auto;">
+            <div style="max-width: 700px; margin: 0 auto;">
                 <div class="faq-item">
                     <div class="faq-question">¿Tienen integración con el SII? <i class="fa-solid fa-chevron-down"></i></div>
                     <div class="faq-answer">Sí, CajaYa está certificado para emitir boletas y facturas electrónicas cumpliendo con la normativa 2026.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">¿Funciona sin internet? <i class="fa-solid fa-chevron-down"></i></div>
-                    <div class="faq-answer">¡Absolutamente! Puedes seguir vendiendo offline. El sistema sincronizará todas las transacciones automáticamente cuando recuperes la conexión.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">¿Cómo es el proceso de soporte? <i class="fa-solid fa-chevron-down"></i></div>
-                    <div class="faq-answer">Contamos con soporte técnico en línea prioritario. Dependiendo de tu plan, puedes acceder a atención 24/7.</div>
+                    <div class="faq-answer">¡Absolutamente! El sistema está diseñado para trabajar 100% offline y sincronizar cuando haya conexión.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer style="padding: 80px 0; border-top: 1px solid var(--border); text-align: center;">
+    <footer style="padding: 50px 0; border-top: 1px solid var(--border); text-align: center;">
         <div class="container">
-            <div style="display: flex; justify-content: center; margin-bottom: 30px;">
-                <div class="logo-container" style="opacity: 0.6; height: 35px; width: 110px;">
-                    <div class="logo-base"></div>
-                    <div class="logo-overlay"></div>
-                </div>
-            </div>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">© 2026 CajaYa Chile. El sistema POS que tu Pyme merece.</p>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">© 2026 CajaYa Chile. El sistema POS que tu Pyme merece.</p>
         </div>
     </footer>
 
     <script>
-        // Lógica de Acordeón para FAQ
         document.querySelectorAll('.faq-question').forEach(item => {
             item.addEventListener('click', () => {
                 const parent = item.parentElement;
