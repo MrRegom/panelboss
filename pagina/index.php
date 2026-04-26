@@ -10,167 +10,207 @@ $downloadUrl = $settings->get('download_url') ?? 'https://cajaya.cl/downloads/Ca
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CajaYa - La nueva era del POS</title>
+    <title>CajaYa - Tu Negocio, Sin Límites</title>
     <link rel="stylesheet" href="assets/css/modern.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #c084fc;
-            --primary-glow: rgba(192, 132, 252, 0.4);
-            --bg: #050505;
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --accent: #00f2ff;
+            --bg: #030303;
         }
-        body { background: var(--bg); color: #fff; font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+        body { background: var(--bg); color: #fff; font-family: 'Outfit', sans-serif; }
         
-        .hero-split {
+        .hero-section {
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
+            grid-template-columns: 1fr 1fr;
             align-items: center;
             gap: 4rem;
-            padding: 12rem 0 8rem;
-        }
-        
-        h1 { 
-            font-size: 5rem; 
-            line-height: 0.85; 
-            font-weight: 900; 
-            letter-spacing: -4px;
-            margin-bottom: 2rem;
+            padding: 10rem 0 6rem;
         }
 
-        .btn-modern {
-            background: #fff;
-            color: #000;
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
             padding: 1.2rem 2.5rem;
-            border-radius: 100px;
+            border-radius: 12px;
             font-weight: 800;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            transition: all 0.3s ease;
-            border: 2px solid #fff;
-        }
-        .btn-modern:hover {
-            background: transparent;
-            color: #fff;
-            transform: translateY(-3px);
-        }
-
-        .btn-google-modern {
-            background: rgba(255,255,255,0.05);
-            color: #fff;
-            padding: 1.2rem 2.5rem;
-            border-radius: 100px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
             transition: all 0.3s ease;
         }
-        .btn-google-modern:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: var(--primary);
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.4);
         }
 
-        /* Contenedor de Imagen "Pantalla Flotante" */
-        .screen-container {
-            position: relative;
-            border-radius: 20px;
-            background: #111;
-            padding: 10px;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 50px 100px rgba(0,0,0,0.8), 0 0 40px var(--primary-glow);
-            transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
-            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-        .screen-container:hover {
-            transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.05);
-        }
-        .screen-container img {
-            width: 100%;
-            border-radius: 12px;
-            display: block;
-        }
-
-        .feature-box {
-            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
-            border: 1px solid rgba(255,255,255,0.05);
-            padding: 2.5rem;
+        /* Cómo funciona */
+        .step-card {
+            background: rgba(255,255,255,0.02);
+            padding: 3rem;
             border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.05);
             text-align: center;
         }
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-weight: 900;
+        }
+
+        /* Precios */
+        .price-card {
+            background: rgba(255,255,255,0.02);
+            padding: 3rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .price-card.featured {
+            border: 2px solid var(--primary);
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .floating-image {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+            transform: perspective(1000px) rotateY(-10deg) rotateX(5deg);
+            transition: 0.5s;
+        }
+        .floating-image:hover { transform: scale(1.05); }
 
         @media (max-width: 992px) {
-            .hero-split { grid-template-columns: 1fr; text-align: center; padding-top: 8rem; }
-            .screen-container { transform: none; margin-top: 3rem; }
+            .hero-section { grid-template-columns: 1fr; text-align: center; }
         }
     </style>
 </head>
 <body>
     <div class="bg-glow"></div>
 
-    <header style="padding: 2rem 0; position: absolute; width: 100%; z-index: 10;">
+    <header>
         <div class="container nav">
-            <img src="https://cajaya.cl/assets/logo.png" alt="CajaYa" style="height: 45px;">
-            <a href="https://panel.cajaya.cl/login.php" style="color: #fff; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px;">ACCESO CLIENTES →</a>
+            <img src="https://cajaya.cl/assets/logo.png" alt="CajaYa" style="height: 40px;">
+            <a href="https://panel.cajaya.cl/login.php" class="cta-button" style="padding: 0.7rem 1.5rem; font-size: 0.8rem;">ACCESO CLIENTES</a>
         </div>
     </header>
 
     <main>
-        <section class="container hero-split">
+        <section class="container hero-section">
             <div>
-                <span style="color: var(--primary); font-weight: 800; letter-spacing: 2px; font-size: 0.8rem;">[ SOFTWARE POS EMPRESARIAL ]</span>
-                <h1 style="margin-top: 1.5rem;">Vende más.<br>Sin pausas.<br><span style="color: var(--primary)">Sin límites.</span></h1>
-                <p style="color: rgba(255,255,255,0.6); font-size: 1.2rem; margin-bottom: 3rem; line-height: 1.5;">
-                    El único punto de venta diseñado para resistir. Sincronización inteligente y boleta SII en una interfaz que te encantará usar.
+                <h1 style="font-size: 5rem; line-height: 0.9; margin-bottom: 2rem;">Vende más rápido con <span style="color: var(--primary)">CajaYa.</span></h1>
+                <p style="font-size: 1.3rem; color: rgba(255,255,255,0.6); margin-bottom: 3rem;">
+                    El punto de venta que funciona incluso sin internet. Sincroniza, vende y escala tu negocio hoy mismo.
                 </p>
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <a href="https://panel.cajaya.cl/login.php" class="btn-modern">PROBAR DEMO GRATIS</a>
-                    <a href="https://panel.cajaya.cl/login.php" class="btn-google-modern">
-                        <img src="https://www.gstatic.com/images/branding/product/2x/googleg_48dp.png" alt="G" style="width: 20px;">
-                        Registro con Google
-                    </a>
-                </div>
+                <!-- BOTÓN ESTRATÉGICO: CAPTURA DE GOOGLE -->
+                <a href="https://api.cajaya.cl/auth.php?provider=google" class="cta-button">
+                    <img src="https://www.gstatic.com/images/branding/product/2x/googleg_48dp.png" alt="G" style="width: 24px;">
+                    CONECTAR GOOGLE Y BAJAR DEMO
+                </a>
             </div>
             <div>
-                <div class="screen-container">
-                    <img src="assets/cajaya_dashboard_mockup.png" alt="CajaYa Dashboard">
+                <img src="assets/cajaya_dashboard_mockup.png" alt="Dashboard" class="floating-image">
+            </div>
+        </section>
+
+        <!-- CÓMO FUNCIONA -->
+        <section class="container" style="padding: 100px 0;">
+            <h2 style="text-align: center; font-size: 3rem; margin-bottom: 5rem;">Empieza en 3 pasos</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Regístrate</h3>
+                    <p>Conecta tu cuenta de Google en un clic. Sin formularios largos.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Descarga</h3>
+                    <p>Obtén el instalador de CajaYa y configúralo en segundos.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Vende</h3>
+                    <p>¡Listo! Empieza a emitir boletas y controlar tu stock.</p>
                 </div>
             </div>
         </section>
 
-        <section class="container" style="padding-bottom: 120px;">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-                <div class="feature-box">
-                    <i class="fa-solid fa-cloud-slash" style="font-size: 2rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
-                    <h3 style="margin-bottom: 1rem;">Modo Offline</h3>
-                    <p style="color: rgba(255,255,255,0.5);">Tu negocio nunca se detiene, incluso sin conexión.</p>
+        <!-- BENEFICIOS (CARDS) -->
+        <section class="container" style="padding: 100px 0; border-top: 1px solid rgba(255,255,255,0.05);">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div class="step-card" style="padding: 2rem;">
+                    <i class="fa-solid fa-cloud-slash" style="color: var(--primary); font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <h4>Modo Offline</h4>
+                    <p>Venta continua sin internet.</p>
                 </div>
-                <div class="feature-box">
-                    <i class="fa-solid fa-sync" style="font-size: 2rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
-                    <h3 style="margin-bottom: 1rem;">Sincronización</h3>
-                    <p style="color: rgba(255,255,255,0.5);">Inventario y ventas al día en todas tus cajas.</p>
+                <div class="step-card" style="padding: 2rem;">
+                    <i class="fa-solid fa-sync" style="color: var(--primary); font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <h4>Multi-Caja</h4>
+                    <p>Sincronización en tiempo real.</p>
                 </div>
-                <div class="feature-box">
-                    <i class="fa-solid fa-bolt" style="font-size: 2rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
-                    <h3 style="margin-bottom: 1rem;">Boleta SII</h3>
-                    <p style="color: rgba(255,255,255,0.5);">Facturación electrónica rápida y certificada.</p>
+                <div class="step-card" style="padding: 2rem;">
+                    <i class="fa-solid fa-receipt" style="color: var(--primary); font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <h4>Boleta SII</h4>
+                    <p>Integración nativa rápida.</p>
+                </div>
+                <div class="step-card" style="padding: 2rem;">
+                    <i class="fa-solid fa-shield-halved" style="color: var(--primary); font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <h4>Seguridad</h4>
+                    <p>Datos encriptados siempre.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRECIOS -->
+        <section class="container" style="padding: 120px 0;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="price-card">
+                    <h3>Plan Demo</h3>
+                    <p style="font-size: 3rem; font-weight: 900; margin: 1.5rem 0;">$0 <span style="font-size: 1rem; color: #666;">/ por siempre</span></p>
+                    <ul style="list-style: none; color: rgba(255,255,255,0.6); margin-bottom: 2rem;">
+                        <li>✓ 1 Caja</li>
+                        <li>✓ Reportes básicos</li>
+                        <li>✓ Soporte por email</li>
+                    </ul>
+                    <a href="https://api.cajaya.cl/auth.php?provider=google" class="cta-button" style="width: 100%; justify-content: center;">BAJAR AHORA</a>
+                </div>
+                <div class="price-card featured">
+                    <span style="background: var(--primary); padding: 0.3rem 1rem; border-radius: 100px; font-size: 0.7rem; position: absolute; top: 2rem; right: 2rem;">RECOMENDADO</span>
+                    <h3>Plan Profesional</h3>
+                    <p style="font-size: 3rem; font-weight: 900; margin: 1.5rem 0;">Cotizar <span style="font-size: 1rem; color: #666;">/ personalizado</span></p>
+                    <ul style="list-style: none; color: rgba(255,255,255,0.6); margin-bottom: 2rem;">
+                        <li>✓ Cajas ilimitadas</li>
+                        <li>✓ Sincronización multi-sucursal</li>
+                        <li>✓ Boleta SII ilimitada</li>
+                        <li>✓ Soporte prioritario 24/7</li>
+                    </ul>
+                    <a href="https://api.cajaya.cl/auth.php?provider=google" class="cta-button" style="width: 100%; justify-content: center;">SOLICITAR DEMO PRO</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer style="padding: 4rem 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
-        <p style="color: rgba(255,255,255,0.3); font-size: 0.9rem;">&copy; 2026 CAJAYA CL. TODOS LOS DERECHOS RESERVADOS.</p>
+    <footer style="padding: 6rem 0; background: #050505; text-align: center;">
+        <img src="https://cajaya.cl/assets/logo.png" alt="CajaYa" style="height: 50px; margin-bottom: 2rem;">
+        <p style="color: rgba(255,255,255,0.3);">&copy; 2026 CajaYa CL. Tecnología para tu crecimiento.</p>
     </footer>
 
     <script src="https://unpkg.com/scrollreveal"></script>
     <script>
-        ScrollReveal().reveal('.hero-split > div', { interval: 200, origin: 'bottom', distance: '60px', duration: 1000 });
-        ScrollReveal().reveal('.feature-box', { interval: 150, origin: 'bottom', distance: '30px' });
+        ScrollReveal().reveal('.step-card', { interval: 200, origin: 'bottom', distance: '50px' });
+        ScrollReveal().reveal('.price-card', { interval: 200, scale: 0.9 });
     </script>
 </body>
 </html>
