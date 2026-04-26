@@ -243,22 +243,37 @@
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
                 <!-- Básico -->
-                <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 40px 30px; border-radius: 20px; text-align: center;">
+                <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 40px 30px; border-radius: 20px; text-align: center; display: flex; flex-direction: column;">
                     <h3>Plan Básico</h3>
                     <div style="font-size: 2.5rem; font-weight: 800; margin: 20px 0;">$20.000 <span style="font-size: 1rem; color: var(--text-muted);">/mes</span></div>
+                    <ul style="list-style: none; margin-bottom: 30px; text-align: left; font-size: 0.9rem; flex-grow: 1;">
+                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> Integración SII (Boletas)</li>
+                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> Reportes X y Z Diarios</li>
+                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> Soporte por Email</li>
+                    </ul>
                     <a href="#" class="btn-neon" style="width: 100%; justify-content: center;">Suscribirse</a>
                 </div>
                 <!-- Premium -->
-                <div style="background: var(--bg-card); border: 1px solid var(--accent); padding: 40px 30px; border-radius: 20px; text-align: center; position: relative;">
+                <div style="background: var(--bg-card); border: 1px solid var(--accent); padding: 40px 30px; border-radius: 20px; text-align: center; position: relative; display: flex; flex-direction: column;">
                     <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); padding: 4px 15px; border-radius: 50px; font-size: 0.7rem; font-weight: 800;">RECOMENDADO</div>
                     <h3>Plan Premium</h3>
                     <div style="font-size: 2.5rem; font-weight: 800; margin: 20px 0;">$35.000 <span style="font-size: 1rem; color: var(--text-muted);">/mes</span></div>
+                    <ul style="list-style: none; margin-bottom: 30px; text-align: left; font-size: 0.9rem; flex-grow: 1;">
+                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> Todo lo del Plan Básico</li>
+                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> <strong>Respaldos Automáticos</strong></li>
+                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> <strong>Soporte 24/7 VIP</strong></li>
+                    </ul>
                     <a href="#" class="btn-neon" style="width: 100%; justify-content: center;">Suscribirse</a>
                 </div>
                 <!-- Lifetime -->
-                <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 40px 30px; border-radius: 20px; text-align: center;">
+                <div style="background: var(--bg-card); border: 1px solid var(--border); padding: 40px 30px; border-radius: 20px; text-align: center; display: flex; flex-direction: column;">
                     <h3>Lifetime</h3>
                     <div style="font-size: 2.5rem; font-weight: 800; margin: 20px 0;">$180.000 <span style="font-size: 0.8rem; color: var(--text-muted);">pago único</span></div>
+                    <ul style="list-style: none; margin-bottom: 30px; text-align: left; font-size: 0.9rem; flex-grow: 1;">
+                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> <strong>Licencia Perpetua</strong></li>
+                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> Multi-caja Ilimitado</li>
+                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-check" style="color: #22c55e; margin-right: 8px;"></i> 3 Meses Soporte VIP</li>
+                    </ul>
                     <a href="#" class="btn-neon" style="width: 100%; justify-content: center;">Comprar Licencia</a>
                 </div>
             </div>
