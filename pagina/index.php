@@ -58,7 +58,7 @@
 
         @keyframes pulse-soft {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.01); } /* Pulso más suave */
+            50% { transform: scale(1.01); }
         }
 
         @keyframes shimmer {
@@ -82,7 +82,7 @@
         .logo-container {
             position: relative;
             height: 45px;
-            width: 140px; /* Ajustar según el ancho real del logo */
+            width: 140px;
             overflow: hidden;
             animation: fadeInDown 0.8s ease-out;
         }
@@ -98,7 +98,7 @@
         }
         .logo-overlay {
             filter: brightness(0) invert(1); /* Capa blanca */
-            clip-path: inset(0 60% 0 0); /* Recorta más para liberar la Y por completo */
+            clip-path: inset(0 57% 0 0); /* Ajuste preciso para no manchar la 'a' */
             z-index: 2;
         }
         .logo-container:hover .logo-base, 
@@ -147,6 +147,35 @@
             gap: 10px;
         }
         .btn-green:hover { transform: translateY(-2px); box-shadow: 0 0 35px rgba(37, 211, 102, 0.5); color: #fff; }
+
+        /* --- FAQ STYLES --- */
+        .faq-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .faq-question:hover { background: rgba(168, 85, 247, 0.05); }
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .faq-item.active .faq-answer { padding: 0 25px 25px; max-height: 200px; }
+        .faq-item.active .fa-chevron-down { transform: rotate(180deg); }
 
         /* --- HERO SPLIT --- */
         .hero { padding: 80px 0; }
@@ -295,7 +324,33 @@
         </div>
     </section>
 
-    <!-- SECTION PRECIOS -->
+    <!-- SECTION QUE OFRECEMOS -->
+    <section id="que-ofrecemos" style="padding: 100px 0; background: rgba(255,255,255,0.01);">
+        <div class="container" id="beneficios">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 3.5rem; letter-spacing: -1px;">Lo que tu negocio merece</h2>
+                <p style="color: var(--text-muted); margin-top: 15px;">Tecnología robusta diseñada para el mercado chileno.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+                <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 20px; border: 1px solid var(--border);">
+                    <i class="fa-solid fa-file-invoice-dollar" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
+                    <h4 style="font-size: 1.5rem; margin-bottom: 10px;">Reportes X y Z</h4>
+                    <p style="color: var(--text-muted);">Genera cierres de caja profesionales. Cumple con la normativa tributaria sin esfuerzo manual.</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 20px; border: 1px solid var(--border);">
+                    <i class="fa-solid fa-wifi-slash" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
+                    <h4 style="font-size: 1.5rem; margin-bottom: 10px;">Modo Offline</h4>
+                    <p style="color: var(--text-muted);">Vende sin internet. El sistema guarda todo localmente y sincroniza cuando vuelve la conexión.</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 20px; border: 1px solid var(--border);">
+                    <i class="fa-solid fa-users-gear" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
+                    <h4 style="font-size: 1.5rem; margin-bottom: 10px;">Multi-Caja</h4>
+                    <p style="color: var(--text-muted);">Gestiona múltiples puntos de venta en tiempo real desde un solo panel de administración.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="precios" class="pricing">
         <div class="container">
             <div style="text-align: center;">
@@ -304,44 +359,35 @@
             </div>
 
             <div class="pricing-grid">
-                <!-- Básico -->
                 <div class="price-card">
                     <h3>Plan Básico</h3>
-                    <p style="color: var(--text-muted);">Ideal para emprendedores</p>
                     <div class="price-tag">$20.000 <span>/mes</span></div>
                     <ul class="price-features">
                         <li><i class="fa-solid fa-check"></i> Integración SII (Boletas)</li>
                         <li><i class="fa-solid fa-check"></i> Reportes X y Z Diarios</li>
-                        <li><i class="fa-solid fa-check"></i> Gestión de Stock Base</li>
                         <li><i class="fa-solid fa-check"></i> Soporte por Email</li>
                     </ul>
                     <a href="#" class="btn-mp"><i class="fa-solid fa-credit-card"></i> Pagar con MercadoPago</a>
                 </div>
 
-                <!-- Premium -->
                 <div class="price-card featured">
                     <h3>Plan Premium</h3>
-                    <p style="color: var(--text-muted);">El estándar para negocios pro</p>
                     <div class="price-tag">$35.000 <span>/mes</span></div>
                     <ul class="price-features">
-                        <li><i class="fa-solid fa-check"></i> Todo lo del Plan Básico</li>
-                        <li><i class="fa-solid fa-check"></i> <strong>Respaldos Automáticos</strong></li>
-                        <li><i class="fa-solid fa-check"></i> <strong>Soporte 24/7 VIP</strong></li>
-                        <li><i class="fa-solid fa-check"></i> Multi-usuario</li>
+                        <li><i class="fa-solid fa-check"></i> Todo lo del Básico</li>
+                        <li><i class="fa-solid fa-check"></i> Respaldos Automáticos</li>
+                        <li><i class="fa-solid fa-check"></i> Soporte 24/7 VIP</li>
                     </ul>
                     <a href="#" class="btn-mp" style="background: var(--accent);"><i class="fa-solid fa-credit-card"></i> Suscribirse Ahora</a>
                 </div>
 
-                <!-- Lifetime -->
                 <div class="price-card">
                     <h3>Plan Lifetime</h3>
-                    <p style="color: var(--text-muted);">Ahorro total de por vida</p>
                     <div class="price-tag">$180.000 <span>pago único</span></div>
                     <ul class="price-features">
-                        <li><i class="fa-solid fa-check"></i> <strong>Licencia Perpetua</strong></li>
+                        <li><i class="fa-solid fa-check"></i> Licencia Perpetua</li>
                         <li><i class="fa-solid fa-check"></i> Multi-caja Ilimitado</li>
-                        <li><i class="fa-solid fa-check"></i> 3 Meses Soporte Full</li>
-                        <li><i class="fa-solid fa-check"></i> Integración SII Incluida</li>
+                        <li><i class="fa-solid fa-check"></i> 3 Meses Soporte VIP</li>
                     </ul>
                     <a href="#" class="btn-mp"><i class="fa-solid fa-bag-shopping"></i> Comprar Licencia</a>
                 </div>
@@ -349,24 +395,25 @@
         </div>
     </section>
 
-    <!-- BENEFICIOS SECTION -->
-    <section id="beneficios" style="padding: 100px 0;">
+    <!-- SECTION FAQ -->
+    <section id="faq" style="padding: 100px 0;">
         <div class="container">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
-                <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 20px; border: 1px solid var(--border);">
-                    <i class="fa-solid fa-file-invoice-dollar" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
-                    <h4 style="font-size: 1.5rem; margin-bottom: 10px;">Reportes X y Z</h4>
-                    <p style="color: var(--text-muted);">Cumple con la normativa tributaria chilena. Genera tus cierres de caja profesionales en un clic.</p>
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 3rem;">Preguntas Frecuentes</h2>
+                <p style="color: var(--text-muted);">Todo lo que necesitas saber sobre el ecosistema CajaYa.</p>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="faq-item">
+                    <div class="faq-question">¿Tienen integración con el SII? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Sí, CajaYa está certificado para emitir boletas y facturas electrónicas cumpliendo con la normativa 2026.</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 20px; border: 1px solid var(--border);">
-                    <i class="fa-solid fa-wifi-slash" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
-                    <h4 style="font-size: 1.5rem; margin-bottom: 10px;">100% Offline-Ready</h4>
-                    <p style="color: var(--text-muted);">¿Se fue el internet? No detengas tus ventas. El sistema sincroniza todo cuando vuelve la conexión.</p>
+                <div class="faq-item">
+                    <div class="faq-question">¿Funciona sin internet? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">¡Absolutamente! Puedes seguir vendiendo offline. El sistema sincronizará todas las transacciones automáticamente cuando recuperes la conexión.</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 20px; border: 1px solid var(--border);">
-                    <i class="fa-solid fa-shield-halved" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
-                    <h4 style="font-size: 1.5rem; margin-bottom: 10px;">Seguridad Bancaria</h4>
-                    <p style="color: var(--text-muted);">Tus datos están encriptados y respaldados en la nube. Tu información es solo tuya.</p>
+                <div class="faq-item">
+                    <div class="faq-question">¿Cómo es el proceso de soporte? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Contamos con soporte técnico en línea prioritario. Dependiendo de tu plan, puedes acceder a atención 24/7.</div>
                 </div>
             </div>
         </div>
@@ -374,10 +421,25 @@
 
     <footer style="padding: 80px 0; border-top: 1px solid var(--border); text-align: center;">
         <div class="container">
-            <img src="assets/img/logo.png" alt="CajaYa" style="height: 35px; opacity: 0.6; margin-bottom: 30px;">
+            <div style="display: flex; justify-content: center; margin-bottom: 30px;">
+                <div class="logo-container" style="opacity: 0.6; height: 35px; width: 110px;">
+                    <div class="logo-base"></div>
+                    <div class="logo-overlay"></div>
+                </div>
+            </div>
             <p style="color: var(--text-muted); font-size: 0.9rem;">© 2026 CajaYa Chile. El sistema POS que tu Pyme merece.</p>
         </div>
     </footer>
+
+    <script>
+        // Lógica de Acordeón para FAQ
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+    </script>
 
 </body>
 </html>
