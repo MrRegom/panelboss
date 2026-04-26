@@ -85,6 +85,22 @@
         }
         .btn-neon:hover { transform: translateY(-2px); box-shadow: 0 0 35px rgba(168, 85, 247, 0.6); }
 
+        .btn-green {
+            background: #25d366;
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 0 25px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-green:hover { transform: translateY(-2px); box-shadow: 0 0 35px rgba(37, 211, 102, 0.5); color: #fff; }
+
         /* --- HERO SPLIT --- */
         .hero { padding: 80px 0; }
         .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
@@ -214,7 +230,7 @@
                     </p>
                     <div style="display: flex; gap: 20px; flex-wrap: wrap;">
                         <a href="#precios" class="btn-neon" style="padding: 16px 45px; font-size: 1.1rem;">Ver Planes <i class="fa-solid fa-chevron-down"></i></a>
-                        <a href="https://wa.me/56959764771" class="nav-link d-flex align-items-center" style="font-weight: 700; color: #fff;">Soporte por WhatsApp <i class="fa-solid fa-whatsapp ms-2" style="color: #25d366;"></i></a>
+                        <a href="https://wa.me/56959764771" class="btn-green" style="padding: 16px 40px; font-size: 1.1rem;">Soporte en línea <i class="fa-solid fa-whatsapp"></i></a>
                     </div>
                 </div>
 
