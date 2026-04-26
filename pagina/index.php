@@ -176,19 +176,24 @@
         }
 
         @media (max-width: 480px) {
-            header { top: 38px; padding: 10px 0; }
+            .desktop-text { display: none; }
+            .mobile-text { display: inline; }
+            header { top: 32px; padding: 10px 0; }
             .logo-container { width: 100px; height: 32px; }
             header .btn-neon { padding: 8px 12px; font-size: 0.7rem; border-radius: 8px; }
             .hero-title { font-size: 2.4rem; }
             .hero-btns { display: flex; flex-direction: column; gap: 15px; }
             .hero-btns .btn-neon, .hero-btns .btn-green { width: 100%; justify-content: center; }
         }
+        
+        .mobile-text { display: none; }
     </style>
 </head>
 <body>
 
     <div class="promo-banner">
-        🔥 OFERTA: 1 Mes Gratis + Instalación Prioritaria (Solo 5 cupos disponibles esta semana)
+        <span class="desktop-text">🔥 OFERTA: 1 Mes Gratis + Instalación Prioritaria (Solo 5 cupos disponibles esta semana)</span>
+        <span class="mobile-text">🔥 1 Mes Gratis + Instalación (Solo 5 cupos)</span>
     </div>
 
     <header>
