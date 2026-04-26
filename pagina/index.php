@@ -208,20 +208,76 @@
         </div>
     </section>
 
-    <!-- COMPARISON -->
-    <section class="container" style="padding: 60px 0;">
-        <h2 style="text-align: center; font-size: 2.8rem; font-family: 'Outfit';">CajaYa vs La Competencia</h2>
-        <table class="pro-table">
-            <thead>
-                <tr><th class="feat-col">Característica</th><th class="cajaya-highlight">CajaYa</th><th>Otros POS</th></tr>
-            </thead>
-            <tbody>
-                <tr><td class="feat-col">Modo Offline Real</td><td class="cajaya-highlight">SÍ (Sigue vendiendo)</td><td>No (Se bloquea)</td></tr>
-                <tr><td class="feat-col">Ahorro Anual</td><td class="cajaya-highlight">$360.000+ (Plan Lifetime)</td><td>$0 (Cuotas eternas)</td></tr>
-                <tr><td class="feat-col">Soporte Premium 24/7</td><td class="cajaya-highlight">SÍ (Vía WhatsApp)</td><td>Tickets lentos</td></tr>
-                <tr><td class="feat-col">Garantía Real</td><td class="cajaya-highlight">30 Días (Devolución)</td><td>Sin reembolso</td></tr>
-            </tbody>
-        </table>
+    <!-- COMPARISON SECTION (UX REDESIGN) -->
+    <section class="container" style="padding: 100px 0;">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h2 style="font-size: 3.2rem; font-family: 'Outfit'; margin-bottom: 15px;">CajaYa <span style="color: var(--primary-light);">vs</span> La Competencia</h2>
+            <p style="color: var(--text-dim); font-size: 1.1rem;">Por qué somos la opción favorita de las Pymes en Chile.</p>
+        </div>
+
+        <div class="table-container">
+            <style>
+                .ux-table {
+                    width: 100%; border-collapse: separate; border-spacing: 0;
+                    background: rgba(255, 255, 255, 0.01); border-radius: 35px;
+                    overflow: hidden; border: 1px solid var(--border);
+                }
+                .ux-table th {
+                    padding: 30px 20px; font-family: 'Outfit'; font-size: 1.3rem;
+                    background: rgba(124, 58, 237, 0.05); border-bottom: 1px solid var(--border);
+                }
+                .ux-table td {
+                    padding: 22px 20px; text-align: center;
+                    border-bottom: 1px solid rgba(124, 58, 237, 0.05); transition: 0.2s;
+                }
+                .ux-table tr:hover td { background: rgba(255,255,255,0.02); }
+                .feat-label { text-align: left !important; padding-left: 45px !important; font-weight: 600; color: var(--text-dim); width: 35%; }
+                .cajaya-col {
+                    background: rgba(124, 58, 237, 0.08); width: 32%; position: relative;
+                    border-left: 1px solid var(--border); border-right: 1px solid var(--border);
+                    font-weight: 800; color: #fff;
+                }
+                .other-col { width: 33%; color: var(--text-dim); opacity: 0.7; }
+                .status-yes { color: var(--success); display: flex; align-items: center; justify-content: center; gap: 8px; }
+                .status-no { color: #ef4444; display: flex; align-items: center; justify-content: center; gap: 8px; }
+                .best-badge {
+                    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+                    background: var(--primary); color: #fff; font-size: 0.65rem; padding: 4px 12px;
+                    border-radius: 50px; font-weight: 900; letter-spacing: 1px; box-shadow: 0 5px 15px rgba(124, 58, 237, 0.4);
+                }
+            </style>
+            <table class="ux-table">
+                <thead>
+                    <tr>
+                        <th class="feat-label">Beneficio Clave</th>
+                        <th class="cajaya-col"><span class="best-badge">MEJOR OPCIÓN</span>CajaYa</th>
+                        <th class="other-col">Otros POS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feat-label">Modo Offline Real</td>
+                        <td class="cajaya-col"><div class="status-yes"><i class="fa-solid fa-circle-check"></i> SÍ (100% Funcional)</div></td>
+                        <td class="other-col"><div class="status-no"><i class="fa-solid fa-circle-xmark"></i> No (Se bloquea)</div></td>
+                    </tr>
+                    <tr>
+                        <td class="feat-label">Propiedad del Software</td>
+                        <td class="cajaya-col"><div class="status-yes"><i class="fa-solid fa-circle-check"></i> Tuyo para siempre</div></td>
+                        <td class="other-col"><div class="status-no"><i class="fa-solid fa-circle-xmark"></i> Mensualidad eterna</div></td>
+                    </tr>
+                    <tr>
+                        <td class="feat-label">Ahorro Anual Estimado</td>
+                        <td class="cajaya-col"><div style="color: var(--success);">$360.000+</div></td>
+                        <td class="other-col">$0 (Sin ahorro)</td>
+                    </tr>
+                    <tr>
+                        <td class="feat-label">Soporte WhatsApp 24/7</td>
+                        <td class="cajaya-col"><div class="status-yes"><i class="fa-solid fa-circle-check"></i> SÍ (Inmediato)</div></td>
+                        <td class="other-col"><div class="status-no"><i class="fa-solid fa-circle-xmark"></i> Sistema de tickets</div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
 
     <!-- PRICING -->
