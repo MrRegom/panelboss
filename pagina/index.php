@@ -504,23 +504,23 @@
 
         // FAQ Accordion Logic
         document.querySelectorAll('.faq-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const answer = item.querySelector('.faq-answer');
-                const icon = item.querySelector('.faq-icon');
-                
-                // Toggle current
-                const isOpen = item.classList.contains('active-faq');
-                
-                // Close all others
+            item.addEventListener('click', function() {
+                const answer = this.querySelector('.faq-answer');
+                const icon = this.querySelector('.faq-icon');
+                const isOpen = this.classList.contains('active-faq');
+
+                // Primero, cerramos TODOS (incluyendo el actual si estaba abierto)
                 document.querySelectorAll('.faq-item').forEach(el => {
                     el.classList.remove('active-faq');
-                    el.querySelector('.faq-answer').style.maxHeight = null;
-                    el.querySelector('.faq-answer').style.opacity = '0';
+                    const ans = el.querySelector('.faq-answer');
+                    ans.style.maxHeight = '0px';
+                    ans.style.opacity = '0';
                     el.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
                 });
 
+                // Si NO estaba abierto, lo abrimos ahora
                 if (!isOpen) {
-                    item.classList.add('active-faq');
+                    this.classList.add('active-faq');
                     answer.style.maxHeight = answer.scrollHeight + "px";
                     answer.style.opacity = '1';
                     icon.style.transform = 'rotate(180deg)';
