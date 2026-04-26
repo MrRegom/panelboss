@@ -208,75 +208,110 @@
         </div>
     </section>
 
-    <!-- COMPARISON SECTION (UX REDESIGN) -->
-    <section class="container" style="padding: 100px 0;">
-        <div style="text-align: center; margin-bottom: 60px;">
-            <h2 style="font-size: 3.2rem; font-family: 'Outfit'; margin-bottom: 15px;">CajaYa <span style="color: var(--primary-light);">vs</span> La Competencia</h2>
-            <p style="color: var(--text-dim); font-size: 1.1rem;">Por qué somos la opción favorita de las Pymes en Chile.</p>
+    <!-- ULTRA-MODERN COMPARISON (POWER GRID) -->
+    <section class="container" style="padding: 120px 0;">
+        <div style="text-align: center; margin-bottom: 80px;">
+            <h2 style="font-size: 3.5rem; font-family: 'Outfit'; font-weight: 900; letter-spacing: -2px;">
+                ¿Por qué <span style="color: var(--primary-light);">CajaYa</span> es superior?
+            </h2>
+            <p style="color: var(--text-dim); font-size: 1.2rem; margin-top: 15px;">Compara la tecnología que impulsará tu crecimiento.</p>
         </div>
 
-        <div class="table-container">
+        <div class="modern-grid">
             <style>
-                .ux-table {
-                    width: 100%; border-collapse: separate; border-spacing: 0;
-                    background: rgba(255, 255, 255, 0.01); border-radius: 35px;
-                    overflow: hidden; border: 1px solid var(--border);
+                .modern-grid {
+                    display: flex; flex-direction: column; gap: 40px; max-width: 900px; margin: 0 auto;
                 }
-                .ux-table th {
-                    padding: 30px 20px; font-family: 'Outfit'; font-size: 1.3rem;
-                    background: rgba(124, 58, 237, 0.05); border-bottom: 1px solid var(--border);
+                .comp-row {
+                    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+                    padding: 30px; border-radius: 24px; transition: 0.4s; position: relative;
                 }
-                .ux-table td {
-                    padding: 22px 20px; text-align: center;
-                    border-bottom: 1px solid rgba(124, 58, 237, 0.05); transition: 0.2s;
+                .comp-row::before {
+                    content: attr(data-label); position: absolute; top: -15px; left: 50%;
+                    transform: translateX(-50%); background: var(--bg-dark); padding: 0 15px;
+                    color: var(--primary-light); font-weight: 800; font-size: 0.75rem; letter-spacing: 2px;
+                    font-family: 'Outfit'; z-index: 2;
                 }
-                .ux-table tr:hover td { background: rgba(255,255,255,0.02); }
-                .feat-label { text-align: left !important; padding-left: 45px !important; font-weight: 600; color: var(--text-dim); width: 35%; }
-                .cajaya-col {
-                    background: rgba(124, 58, 237, 0.08); width: 32%; position: relative;
-                    border-left: 1px solid var(--border); border-right: 1px solid var(--border);
-                    font-weight: 800; color: #fff;
+                .comp-row:hover { background: rgba(124, 58, 237, 0.03); }
+
+                .side-bad {
+                    text-align: right; opacity: 0.4; filter: grayscale(1); transition: 0.3s;
                 }
-                .other-col { width: 33%; color: var(--text-dim); opacity: 0.7; }
-                .status-yes { color: var(--success); display: flex; align-items: center; justify-content: center; gap: 8px; }
-                .status-no { color: #ef4444; display: flex; align-items: center; justify-content: center; gap: 8px; }
-                .best-badge {
-                    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-                    background: var(--primary); color: #fff; font-size: 0.65rem; padding: 4px 12px;
-                    border-radius: 50px; font-weight: 900; letter-spacing: 1px; box-shadow: 0 5px 15px rgba(124, 58, 237, 0.4);
+                .side-good {
+                    text-align: left; padding: 25px 35px; border-radius: 20px;
+                    background: rgba(124, 58, 237, 0.05); border: 1px solid var(--border);
+                    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.1); position: relative;
+                }
+                .side-good::after {
+                    content: ''; position: absolute; inset: -1px; border-radius: 20px;
+                    padding: 1px; background: linear-gradient(135deg, var(--primary), transparent);
+                    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+                    -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+                }
+
+                .comp-icon { font-size: 1.5rem; margin-bottom: 10px; display: block; }
+                .val-title { font-size: 1.1rem; font-weight: 800; display: block; margin-bottom: 5px; font-family: 'Outfit'; }
+                .val-desc { font-size: 0.9rem; color: var(--text-dim); }
+
+                .vs-divider {
+                    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+                    width: 40px; height: 40px; background: var(--bg-dark); border: 1px solid var(--border);
+                    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+                    font-size: 0.7rem; font-weight: 900; color: var(--text-dim); z-index: 5;
+                }
+
+                @media (max-width: 768px) {
+                    .comp-row { grid-template-columns: 1fr; gap: 20px; text-align: center; }
+                    .side-bad { text-align: center; order: 2; }
+                    .side-good { text-align: center; order: 1; }
+                    .vs-divider { display: none; }
                 }
             </style>
-            <table class="ux-table">
-                <thead>
-                    <tr>
-                        <th class="feat-label">Beneficio Clave</th>
-                        <th class="cajaya-col"><span class="best-badge">MEJOR OPCIÓN</span>CajaYa</th>
-                        <th class="other-col">Otros POS</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="feat-label">Modo Offline Real</td>
-                        <td class="cajaya-col"><div class="status-yes"><i class="fa-solid fa-circle-check"></i> SÍ (100% Funcional)</div></td>
-                        <td class="other-col"><div class="status-no"><i class="fa-solid fa-circle-xmark"></i> No (Se bloquea)</div></td>
-                    </tr>
-                    <tr>
-                        <td class="feat-label">Propiedad del Software</td>
-                        <td class="cajaya-col"><div class="status-yes"><i class="fa-solid fa-circle-check"></i> Tuyo para siempre</div></td>
-                        <td class="other-col"><div class="status-no"><i class="fa-solid fa-circle-xmark"></i> Mensualidad eterna</div></td>
-                    </tr>
-                    <tr>
-                        <td class="feat-label">Ahorro Anual Estimado</td>
-                        <td class="cajaya-col"><div style="color: var(--success);">$360.000+</div></td>
-                        <td class="other-col">$0 (Sin ahorro)</td>
-                    </tr>
-                    <tr>
-                        <td class="feat-label">Soporte WhatsApp 24/7</td>
-                        <td class="cajaya-col"><div class="status-yes"><i class="fa-solid fa-circle-check"></i> SÍ (Inmediato)</div></td>
-                        <td class="other-col"><div class="status-no"><i class="fa-solid fa-circle-xmark"></i> Sistema de tickets</div></td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <!-- ROW 1 -->
+            <div class="comp-row" data-label="CONECTIVIDAD">
+                <div class="side-bad">
+                    <i class="fa-solid fa-cloud-slash comp-icon" style="color: #ef4444;"></i>
+                    <span class="val-title">Otros Sistemas</span>
+                    <span class="val-desc">Se bloquean sin internet. Pierdes ventas y clientes.</span>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="side-good">
+                    <i class="fa-solid fa-bolt comp-icon" style="color: var(--success);"></i>
+                    <span class="val-title" style="color: #fff;">CajaYa Offline</span>
+                    <span class="val-desc">Sigue vendiendo al 100%. Sincronización inteligente al volver.</span>
+                </div>
+            </div>
+
+            <!-- ROW 2 -->
+            <div class="comp-row" data-label="INVERSIÓN">
+                <div class="side-bad">
+                    <i class="fa-solid fa-calendar-minus comp-icon" style="color: #ef4444;"></i>
+                    <span class="val-title">Mensualidades</span>
+                    <span class="val-desc">Pagos eternos que nunca terminan. Gasto fijo infinito.</span>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="side-good" style="box-shadow: 0 0 40px rgba(124, 58, 237, 0.2);">
+                    <i class="fa-solid fa-crown comp-icon" style="color: #fbbf24;"></i>
+                    <span class="val-title" style="color: #fff;">Plan Lifetime</span>
+                    <span class="val-desc">Un solo pago. El software es tuyo para siempre. Sin cuotas.</span>
+                </div>
+            </div>
+
+            <!-- ROW 3 -->
+            <div class="comp-row" data-label="ATENCIÓN">
+                <div class="side-bad">
+                    <i class="fa-solid fa-ticket comp-icon" style="color: #ef4444;"></i>
+                    <span class="val-title">Soporte Lento</span>
+                    <span class="val-desc">Tickets y correos que tardan días en responder.</span>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="side-good">
+                    <i class="fa-solid fa-comment-dots comp-icon" style="color: #22c55e;"></i>
+                    <span class="val-title" style="color: #fff;">Soporte WhatsApp</span>
+                    <span class="val-desc">Atención humana e inmediata. Estamos contigo 24/7.</span>
+                </div>
+            </div>
         </div>
     </section>
 
