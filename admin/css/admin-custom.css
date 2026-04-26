@@ -1,176 +1,96 @@
-/* PREMIUM HOSTINGER DARK UI */
+/* MICROSOFT FLUENT MINIMALIST THEME */
 :root {
-    --bg-main: #0a0a0b;
-    --bg-sidebar-primary: #070708;
-    --bg-sidebar-secondary: #0e0e11;
-    --bg-card: #141416;
-    --accent: #7c3aed; /* Morado CajaYa */
-    --border-color: rgba(255, 255, 255, 0.04);
-    --text-muted: #86868b;
-    --inter: 'Inter', sans-serif;
+    --bg-app: #09090b;
+    --bg-sidebar: #09090b;
+    --bg-card: #111114;
+    --accent: #8b5cf6;
+    --border: rgba(255, 255, 255, 0.06);
+    --text-main: #f4f4f5;
+    --text-muted: #71717a;
 }
 
 body {
-    background-color: var(--bg-main) !important;
-    color: #f5f5f7;
-    font-family: var(--inter);
+    background-color: var(--bg-app) !important;
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
     letter-spacing: -0.01em;
 }
 
-/* PREMIUM MINIMALIST TABLES - CAJAYA */
+.app-sidebar {
+    background: var(--bg-sidebar) !important;
+}
+
+.nav-link {
+    color: var(--text-muted) !important;
+    padding: 10px 16px !important;
+    border-radius: 8px !important;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-link i {
+    font-size: 1.1rem;
+    opacity: 0.7;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.03) !important;
+    color: #fff !important;
+}
+
+.nav-link.active {
+    background: rgba(139, 92, 246, 0.08) !important;
+    color: var(--accent) !important;
+    font-weight: 600;
+}
+
+.nav-link.active i {
+    opacity: 1;
+}
+
+/* Card Styling */
 .card {
     background: var(--bg-card) !important;
     border: 1px solid var(--border) !important;
     border-radius: 12px !important;
-    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.table-responsive {
-    padding: 0;
-}
-
-.table {
-    margin-bottom: 0 !important;
-    border-collapse: collapse !important;
-}
-
+/* Table Perfection */
 .table thead th {
-    background: rgba(255, 255, 255, 0.02) !important;
+    background: transparent !important;
     color: var(--text-muted) !important;
-    font-size: 0.7rem !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.08em !important;
-    padding: 15px 20px !important;
+    font-size: 0.75rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     border-bottom: 1px solid var(--border) !important;
+    padding: 15px 20px !important;
 }
 
 .table tbody td {
-    padding: 16px 20px !important;
+    padding: 15px 20px !important;
     border-bottom: 1px solid var(--border) !important;
-    color: var(--text-main) !important;
-    font-size: 0.9rem !important;
-    background: transparent !important;
+    vertical-align: middle;
 }
 
-.table tbody tr:last-child td {
-    border-bottom: none !important;
-}
+.table tr:last-child td { border-bottom: none !important; }
 
-.table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.02) !important;
-}
-
-/* Contrast Fixes */
-.table td code, .table td .key-text {
-    color: #ffffff !important;
-    font-weight: 500 !important;
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: 0.85rem;
-}
-
-.table td .empresa-text {
-    color: #e4e4e7 !important;
-    font-weight: 500;
-}
-
-/* Action Buttons */
-.btn-action {
-    width: 32px;
-    height: 32px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-muted);
-    transition: all 0.2s;
-    border: 1px solid transparent;
-}
-
-.btn-action:hover {
-    background: var(--accent);
-    color: #fff;
-    transform: translateY(-1px);
-}
-
-/* DataTables Global Overhaul */
-.dataTables_wrapper {
-    padding: 20px !important;
-}
-
-.dataTables_filter input {
-    background: rgba(0, 0, 0, 0.2) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 8px !important;
-    color: #fff !important;
-    padding: 8px 15px !important;
-    font-size: 0.9rem;
-}
-
-.dataTables_length select {
-    background: rgba(0, 0, 0, 0.2) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 6px !important;
-    color: #fff !important;
-    padding: 4px 8px !important;
-}
-
-.paginate_button {
-    border-radius: 8px !important;
-    border: 1px solid var(--border) !important;
-    background: transparent !important;
-    color: var(--text-muted) !important;
-    margin: 0 3px !important;
-    padding: 5px 12px !important;
-}
-
-.paginate_button.current {
+/* Buttons */
+.btn-primary {
     background: var(--accent) !important;
-    border-color: var(--accent) !important;
-    color: #fff !important;
-}
-
-.dataTables_info {
-    font-size: 0.85rem !important;
-    color: var(--text-muted) !important;
-    margin-top: 15px !important;
-}
-
-/* Badges Hostinger Style */
-.badge-demo { background: rgba(161, 161, 170, 0.1); color: #a1a1aa; border: 1px solid rgba(161, 161, 170, 0.2); }
-.badge-active { background: rgba(34, 197, 94, 0.1); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.2); }
-.badge-pro { background: rgba(139, 92, 246, 0.1); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.2); }
-
-/* Sidebar Styles */
-.app-sidebar {
-    border-right: 1px solid var(--border-color) !important;
-}
-
-.sub-link {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    padding: 10px 15px !important;
+    border: none !important;
     border-radius: 8px !important;
-    transition: all 0.2s;
-    text-decoration: none;
-}
-
-.sub-link:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.sub-link.active-sub {
-    color: #fff !important;
-    background: rgba(124, 58, 237, 0.1) !important;
-    font-weight: 600;
+    font-weight: 600 !important;
+    padding: 10px 20px !important;
 }
 
 .app-header {
-    background: var(--bg-main) !important;
-    border-bottom: 1px solid var(--border-color) !important;
-    height: 70px;
+    background: var(--bg-app) !important;
+    border-bottom: 1px solid var(--border) !important;
 }
 
 .app-main {
