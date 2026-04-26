@@ -17,6 +17,131 @@ body {
     letter-spacing: -0.01em;
 }
 
+/* PREMIUM MINIMALIST TABLES - CAJAYA */
+.card {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+}
+
+.table-responsive {
+    padding: 0;
+}
+
+.table {
+    margin-bottom: 0 !important;
+    border-collapse: collapse !important;
+}
+
+.table thead th {
+    background: rgba(255, 255, 255, 0.02) !important;
+    color: var(--text-muted) !important;
+    font-size: 0.7rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    padding: 15px 20px !important;
+    border-bottom: 1px solid var(--border) !important;
+}
+
+.table tbody td {
+    padding: 16px 20px !important;
+    border-bottom: 1px solid var(--border) !important;
+    color: var(--text-main) !important;
+    font-size: 0.9rem !important;
+    background: transparent !important;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none !important;
+}
+
+.table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Contrast Fixes */
+.table td code, .table td .key-text {
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.85rem;
+}
+
+.table td .empresa-text {
+    color: #e4e4e7 !important;
+    font-weight: 500;
+}
+
+/* Action Buttons */
+.btn-action {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.btn-action:hover {
+    background: var(--accent);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* DataTables Global Overhaul */
+.dataTables_wrapper {
+    padding: 20px !important;
+}
+
+.dataTables_filter input {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 8px !important;
+    color: #fff !important;
+    padding: 8px 15px !important;
+    font-size: 0.9rem;
+}
+
+.dataTables_length select {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 6px !important;
+    color: #fff !important;
+    padding: 4px 8px !important;
+}
+
+.paginate_button {
+    border-radius: 8px !important;
+    border: 1px solid var(--border) !important;
+    background: transparent !important;
+    color: var(--text-muted) !important;
+    margin: 0 3px !important;
+    padding: 5px 12px !important;
+}
+
+.paginate_button.current {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: #fff !important;
+}
+
+.dataTables_info {
+    font-size: 0.85rem !important;
+    color: var(--text-muted) !important;
+    margin-top: 15px !important;
+}
+
+/* Badges Hostinger Style */
+.badge-demo { background: rgba(161, 161, 170, 0.1); color: #a1a1aa; border: 1px solid rgba(161, 161, 170, 0.2); }
+.badge-active { background: rgba(34, 197, 94, 0.1); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.2); }
+.badge-pro { background: rgba(139, 92, 246, 0.1); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.2); }
+
 /* Sidebar Styles */
 .app-sidebar {
     border-right: 1px solid var(--border-color) !important;
@@ -40,30 +165,6 @@ body {
     color: #fff !important;
     background: rgba(124, 58, 237, 0.1) !important;
     font-weight: 600;
-}
-
-/* Card & Content */
-.card {
-    background: var(--bg-card) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: 14px !important;
-}
-
-.table thead th {
-    background: rgba(255,255,255,0.02) !important;
-    border-bottom: 1px solid var(--border-color) !important;
-    color: var(--text-muted);
-    font-weight: 500;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 15px 20px !important;
-}
-
-.table tbody td {
-    padding: 18px 20px !important;
-    border-bottom: 1px solid var(--border-color) !important;
-    font-size: 0.95rem;
 }
 
 .app-header {
