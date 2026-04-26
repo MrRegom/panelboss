@@ -1,156 +1,155 @@
-/* MICROSOFT FLUENT MINIMALIST THEME */
+/* HIGH-CONTRAST PROFESSIONAL POLISH */
 :root {
-    --bg-app: #09090b;
-    --bg-sidebar: #09090b;
-    --bg-card: #111114;
-    --accent: #8b5cf6;
-    --border: rgba(255, 255, 255, 0.06);
-    --text-main: #f4f4f5;
-    --text-muted: #71717a;
+    --bg-body: #050506;
+    --bg-card: #0c0c0e;
+    --accent: #a855f7; /* Morado Eléctrico CajaYa */
+    --text-pure: #ffffff;
+    --text-muted: #a1a1aa;
+    --border: rgba(255, 255, 255, 0.08);
 }
 
 body {
-    background-color: var(--bg-app) !important;
-    color: var(--text-main);
+    background-color: var(--bg-body) !important;
+    color: var(--text-pure);
     font-family: 'Inter', sans-serif;
-    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Header & Sidebar */
+.app-header {
+    background: var(--bg-body) !important;
+    border-bottom: 1px solid var(--border) !important;
 }
 
 .app-sidebar {
-    background: var(--bg-sidebar) !important;
+    background: #000 !important;
+    border-right: 1px solid var(--border) !important;
 }
 
 .nav-link {
     color: var(--text-muted) !important;
-    padding: 10px 16px !important;
-    border-radius: 8px !important;
-    font-size: 0.9rem;
     font-weight: 500;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.nav-link i {
-    font-size: 1.1rem;
-    opacity: 0.7;
-}
-
-.nav-link:hover {
-    background: rgba(255, 255, 255, 0.03) !important;
-    color: #fff !important;
+    font-size: 0.92rem;
+    padding: 12px 18px !important;
+    border-radius: 10px !important;
+    margin: 2px 0;
 }
 
 .nav-link.active {
-    background: rgba(139, 92, 246, 0.08) !important;
-    color: var(--accent) !important;
-    font-weight: 600;
+    background: rgba(168, 85, 247, 0.1) !important;
+    color: #fff !important;
+    border: 1px solid rgba(168, 85, 247, 0.2);
 }
 
-.nav-link.active i {
-    opacity: 1;
-}
+.nav-link.active i { color: var(--accent); }
 
-/* Card Styling */
+/* Main Card (The Work Area) */
 .card {
     background: var(--bg-card) !important;
     border: 1px solid var(--border) !important;
-    border-radius: 12px !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-radius: 16px !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important;
+    margin-bottom: 2rem;
 }
 
-/* MICROSOFT ENTERPRISE TABLES - PERFECT MINIMALISM */
-.card {
-    background: transparent !important;
-    border: 1px solid var(--border) !important;
-    box-shadow: none !important;
-}
-
-.table {
-    background: transparent !important;
-}
-
+/* Perfect High-Contrast Tables */
 .table thead th {
-    background: rgba(255, 255, 255, 0.01) !important;
+    background: rgba(255,255,255,0.02) !important;
     color: var(--text-muted) !important;
-    font-size: 0.8rem !important;
-    font-weight: 600 !important;
-    text-transform: none !important; /* Estilo Microsoft: No todo en mayúsculas */
-    letter-spacing: 0 !important;
-    padding: 12px 20px !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 16px 24px !important;
     border-bottom: 2px solid var(--border) !important;
 }
 
-.table tbody tr {
-    background: transparent !important;
-    border-bottom: 1px solid var(--border) !important;
-    transition: background 0.15s ease;
-}
-
-.table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.03) !important;
-}
-
 .table tbody td {
-    padding: 14px 20px !important;
-    border: none !important;
-    color: #e4e4e7 !important;
-    font-size: 0.9rem !important;
+    padding: 20px 24px !important;
+    border-bottom: 1px solid var(--border) !important;
+    color: var(--text-pure) !important; /* Texto Blanco por defecto */
+    font-size: 0.95rem;
     vertical-align: middle;
 }
 
-/* Data Contrast */
-.table td strong, .table td .fw-bold {
-    color: #ffffff !important;
+.table tr:hover {
+    background: rgba(255,255,255,0.02) !important;
 }
 
-.table td code, .key-text {
-    color: #c084fc !important; /* Un morado más suave y legible */
-    background: rgba(192, 132, 252, 0.05);
-    padding: 4px 8px;
-    border-radius: 4px;
+/* Specialized Data Styles */
+.key-text, code {
+    color: #fff !important;
+    background: rgba(168, 85, 247, 0.2) !important;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88rem !important;
+}
+
+.empresa-name {
+    color: #fff !important;
+    font-weight: 600;
+}
+
+.email-muted {
+    color: var(--text-muted);
     font-size: 0.85rem;
 }
 
-/* Microsoft Style Action Buttons (Ghost Buttons) */
+/* Action Buttons Pro */
 .btn-action {
-    background: transparent !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    color: var(--text-muted) !important;
-    width: 34px;
-    height: 34px;
-    border-radius: 6px !important;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    color: #fff;
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
     transition: all 0.2s;
+    margin-left: 5px;
 }
 
 .btn-action:hover {
-    border-color: var(--accent) !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+}
+
+/* DataTables Global Integration */
+.dataTables_wrapper .dataTables_filter input {
+    background: #000 !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 10px;
     color: #fff !important;
-    background: rgba(139, 92, 246, 0.1) !important;
+    padding: 10px 16px !important;
 }
 
-/* Badges Fluent */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: #000 !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    margin: 0 4px;
+}
+
+.paginate_button.current {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+}
+
+/* Badges Premium */
 .badge {
-    background: rgba(255, 255, 255, 0.05) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    color: var(--text-main) !important;
-    padding: 5px 10px !important;
-    font-weight: 500 !important;
-    font-size: 0.75rem !important;
+    padding: 6px 14px !important;
+    border-radius: 20px !important;
+    font-weight: 600 !important;
 }
 
-.badge-google { border-color: rgba(239, 68, 68, 0.2) !important; color: #f87171 !important; }
-.badge-active { border-color: rgba(34, 197, 94, 0.2) !important; color: #4ade80 !important; }
-
-/* Scrollbar Style Microsoft */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: #444; }
-
-.app-main {
-    background: var(--bg-main);
-}
+.badge-google { background: #ea433522; color: #fb7185; border: 1px solid #ea433544; }
+.badge-active { background: #22c55e22; color: #4ade80; border: 1px solid #22c55e44; }
 
 /* Scrollbar Custom */
 ::-webkit-scrollbar { width: 6px; }
