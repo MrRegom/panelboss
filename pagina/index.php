@@ -331,8 +331,8 @@
                     </div>
 
                     <div class="organic-shape">
-                        <img src="assets/cajaya_pos_mockup.png" alt="POS CajaYa" class="mockup-img active">
-                        <img src="assets/cajaya_dashboard_mockup.png" alt="Dashboard CajaYa" class="mockup-img">
+                        <img src="assets/cajaya_pos_v2.png" alt="POS CajaYa" class="mockup-img active">
+                        <img src="assets/cajaya_dashboard_v2.png" alt="Dashboard CajaYa" class="mockup-img">
                     </div>
                 </div>
             </div>
@@ -371,6 +371,41 @@
             <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
                 <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn btn-primary" style="padding: 18px 40px; font-size: 1.1rem;">Comenzar Demo Gratis</a>
                 <a href="https://wa.me/56959764771" class="btn btn-outline" style="padding: 18px 40px; font-size: 1.1rem;">Hablar con un Experto</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" style="padding: 100px 0; background: linear-gradient(to bottom, var(--bg-deep), #0a0a0d);">
+        <div class="container" style="max-width: 800px;">
+            <h2 class="font-outfit" style="font-size: 3rem; text-align: center; margin-bottom: 10px;">Preguntas que probablemente</h2>
+            <h2 class="font-outfit" style="font-size: 3rem; text-align: center; margin-bottom: 60px; color: var(--text-muted);">te estás haciendo.</h2>
+
+            <div class="faq-list">
+                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600; font-size: 1.1rem;">¿Qué significa Licencia Lifetime?</span>
+                    <i class="fa-solid fa-chevron-down" style="color: var(--text-muted);"></i>
+                </div>
+                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600; font-size: 1.1rem;">¿Y si cambio de computador?</span>
+                    <i class="fa-solid fa-chevron-down" style="color: var(--text-muted);"></i>
+                </div>
+                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600; font-size: 1.1rem;">¿Cómo funciona el modo offline?</span>
+                    <i class="fa-solid fa-chevron-down" style="color: var(--text-muted);"></i>
+                </div>
+                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600; font-size: 1.1rem;">¿Incluye soporte técnico?</span>
+                    <i class="fa-solid fa-chevron-down" style="color: var(--text-muted);"></i>
+                </div>
+                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600; font-size: 1.1rem;">¿Puedo agregar más cajas después?</span>
+                    <i class="fa-solid fa-chevron-down" style="color: var(--text-muted);"></i>
+                </div>
+                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600; font-size: 1.1rem;">¿Es realmente compatible con cualquier impresora?</span>
+                    <i class="fa-solid fa-chevron-down" style="color: var(--text-muted);"></i>
+                </div>
             </div>
         </div>
     </section>
