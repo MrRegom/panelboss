@@ -149,11 +149,21 @@
         .faq-answer { max-height: 0; opacity: 0; overflow: hidden; transition: all 0.4s ease; padding: 0 25px; color: var(--text-muted); }
         .faq-item.active .faq-answer { max-height: 200px; opacity: 1; padding-bottom: 25px; }
 
+        /* --- RESPONSIVE OPTIMIZACIÓN --- */
         @media (max-width: 992px) {
-            .hero-grid { grid-template-columns: 1fr; text-align: center; }
-            .hero-title { font-size: 3rem; }
-            .hero-desc { margin: 0 auto 40px; }
-            .hero-visual { margin-top: 50px; }
+            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .hero-title { font-size: 3.2rem; letter-spacing: -1.5px; }
+            .hero-desc { margin: 0 auto 40px; font-size: 1.1rem; }
+            .hero-btns { justify-content: center; flex-direction: column; gap: 15px; }
+            .nav-menu { display: none; } /* Ocultar links en móvil para limpieza */
+            .organic-shape { padding: 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { font-size: 2.6rem; }
+            .btn-neon { width: 100%; text-align: center; }
+            .hero-badge { font-size: 0.65rem; padding: 6px 12px; }
+            .header-glass { padding: 10px 0; }
         }
     </style>
 </head>
@@ -162,14 +172,14 @@
     <header>
         <div class="container nav-wrapper">
             <a href="#hero" class="logo">
-                <img src="assets/img/logo.png" alt="CajaYa" style="height: 40px;">
+                <img src="assets/img/logo.png" alt="CajaYa" style="height: 32px;">
             </a>
             <nav class="nav-menu">
                 <a href="#beneficios" class="nav-link">Beneficios</a>
                 <a href="#que-ofrecemos" class="nav-link">¿Qué ofrecemos?</a>
                 <a href="#faq" class="nav-link">Preguntas</a>
             </nav>
-            <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn-neon">Prueba Gratis</a>
+            <a href="#contacto" class="btn-neon" style="font-size: 0.85rem; padding: 8px 20px;">Prueba Gratis</a>
         </div>
     </header>
 
@@ -179,14 +189,14 @@
                 <div class="hero-content">
                     <div class="hero-badge"><i class="fa-solid fa-shield-check"></i> SII CERTIFICADO 2026</div>
                     <h1 class="hero-title">
-                        Controla tu negocio con el <span>Sistema POS Líder</span> en Chile.
+                        Controla tu negocio con el <br> <span class="text-gradient">Sistema POS Líder</span>.
                     </h1>
                     <p class="hero-desc">
-                        Emite boletas, facturas electrónicas y gestiona tu stock en tiempo real. La solución robusta diseñada para la seriedad de tu empresa.
+                        Emite boletas y gestiona tu stock en tiempo real. La solución robusta diseñada para la seriedad de tu empresa.
                     </p>
-                    <div style="display: flex; gap: 20px;">
-                        <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn-neon" style="padding: 16px 45px; font-size: 1.1rem;">Contratar Ahora</a>
-                        <a href="https://wa.me/56959764771" class="nav-link d-flex align-items-center" style="font-weight: 700;">Ver Demo en Vivo <i class="fa-solid fa-play ms-2"></i></a>
+                    <div class="hero-btns" style="display: flex; gap: 20px;">
+                        <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn-neon" style="padding: 16px 40px; font-size: 1.1rem;">Contratar Ahora</a>
+                        <a href="https://wa.me/56959764771" class="nav-link d-flex align-items-center justify-content-center" style="font-weight: 700;">Ver Demo <i class="fa-solid fa-play ms-2"></i></a>
                     </div>
                 </div>
 
