@@ -384,29 +384,64 @@
             <h2 class="font-outfit" style="font-size: 3rem; text-align: center; margin-bottom: 60px; color: var(--text-muted);">te estás haciendo.</h2>
 
             <div class="faq-list">
-                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-weight: 600; font-size: 1.1rem;">¿Qué significa Licencia Lifetime?</span>
-                    <i class="fa-solid fa-chevron-down" style="color: var(--text-muted);"></i>
+                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; cursor: pointer; overflow: hidden; transition: all 0.3s;">
+                    <div class="faq-question" style="padding: 25px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; font-size: 1.1rem;">¿Qué significa Licencia Lifetime?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon" style="color: var(--text-muted); transition: transform 0.3s;"></i>
+                    </div>
+                    <div class="faq-answer" style="max-height: 0; padding: 0 25px; color: var(--text-muted); transition: all 0.3s ease-out; opacity: 0;">
+                        <p style="padding-bottom: 25px;">Es un pago único de por vida. No tendrás que pagar mensualidades ni suscripciones para usar las funciones principales de tu sistema de ventas.</p>
+                    </div>
                 </div>
-                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-weight: 600; font-size: 1.1rem;">¿Y si cambio de computador?</span>
-                    <i class="fa-solid fa-chevron-down" style="color: var(--text-muted);"></i>
+
+                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; cursor: pointer; overflow: hidden; transition: all 0.3s;">
+                    <div class="faq-question" style="padding: 25px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; font-size: 1.1rem;">¿Y si cambio de computador?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon" style="color: var(--text-muted); transition: transform 0.3s;"></i>
+                    </div>
+                    <div class="faq-answer" style="max-height: 0; padding: 0 25px; color: var(--text-muted); transition: all 0.3s ease-out; opacity: 0;">
+                        <p style="padding-bottom: 25px;">No hay problema. Tu licencia es transferible. Solo debes contactar a nuestro soporte para liberar el ID anterior y activar el nuevo equipo.</p>
+                    </div>
                 </div>
-                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-weight: 600; font-size: 1.1rem;">¿Cómo funciona el modo offline?</span>
-                    <i class="fa-solid fa-chevron-down" style="color: var(--text-muted);"></i>
+
+                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; cursor: pointer; overflow: hidden; transition: all 0.3s;">
+                    <div class="faq-question" style="padding: 25px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; font-size: 1.1rem;">¿Cómo funciona el modo offline?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon" style="color: var(--text-muted); transition: transform 0.3s;"></i>
+                    </div>
+                    <div class="faq-answer" style="max-height: 0; padding: 0 25px; color: var(--text-muted); transition: all 0.3s ease-out; opacity: 0;">
+                        <p style="padding-bottom: 25px;">CajaYa está diseñado para trabajar sin internet. Puedes vender y gestionar stock normalmente, y el sistema sincronizará los datos automáticamente al detectar conexión.</p>
+                    </div>
                 </div>
-                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-weight: 600; font-size: 1.1rem;">¿Incluye soporte técnico?</span>
-                    <i class="fa-solid fa-chevron-down" style="color: var(--text-muted);"></i>
+
+                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; cursor: pointer; overflow: hidden; transition: all 0.3s;">
+                    <div class="faq-question" style="padding: 25px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; font-size: 1.1rem;">¿Incluye soporte técnico?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon" style="color: var(--text-muted); transition: transform 0.3s;"></i>
+                    </div>
+                    <div class="faq-answer" style="max-height: 0; padding: 0 25px; color: var(--text-muted); transition: all 0.3s ease-out; opacity: 0;">
+                        <p style="padding-bottom: 25px;">¡Sí! Contamos con un equipo especializado en Chile para ayudarte vía WhatsApp o correo ante cualquier duda o inconveniente técnico en horario comercial.</p>
+                    </div>
                 </div>
-                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-weight: 600; font-size: 1.1rem;">¿Puedo agregar más cajas después?</span>
-                    <i class="fa-solid fa-chevron-down" style="color: var(--text-muted);"></i>
+
+                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; cursor: pointer; overflow: hidden; transition: all 0.3s;">
+                    <div class="faq-question" style="padding: 25px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; font-size: 1.1rem;">¿Puedo agregar más cajas después?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon" style="color: var(--text-muted); transition: transform 0.3s;"></i>
+                    </div>
+                    <div class="faq-answer" style="max-height: 0; padding: 0 25px; color: var(--text-muted); transition: all 0.3s ease-out; opacity: 0;">
+                        <p style="padding-bottom: 25px;">Por supuesto. Puedes escalar tu negocio agregando licencias adicionales para nuevas terminales o sucursales en cualquier momento desde tu panel.</p>
+                    </div>
                 </div>
-                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-weight: 600; font-size: 1.1rem;">¿Es realmente compatible con cualquier impresora?</span>
-                    <i class="fa-solid fa-chevron-down" style="color: var(--text-muted);"></i>
+
+                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 15px; cursor: pointer; overflow: hidden; transition: all 0.3s;">
+                    <div class="faq-question" style="padding: 25px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; font-size: 1.1rem;">¿Es realmente compatible con cualquier impresora?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon" style="color: var(--text-muted); transition: transform 0.3s;"></i>
+                    </div>
+                    <div class="faq-answer" style="max-height: 0; padding: 0 25px; color: var(--text-muted); transition: all 0.3s ease-out; opacity: 0;">
+                        <p style="padding-bottom: 25px;">Es compatible con la gran mayoría de impresoras térmicas (58mm y 80mm) y de etiquetas que funcionen con controladores de Windows estándar.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -452,6 +487,32 @@
             current = (current + 1) % images.length;
             images[current].classList.add('active');
         }, 5000);
+
+        // FAQ Accordion Logic
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const answer = item.querySelector('.faq-answer');
+                const icon = item.querySelector('.faq-icon');
+                const isOpen = answer.style.maxHeight !== '0px' && answer.style.maxHeight !== '';
+
+                // Close all others
+                document.querySelectorAll('.faq-answer').forEach(el => {
+                    el.style.maxHeight = '0px';
+                    el.style.opacity = '0';
+                    el.style.paddingTop = '0';
+                });
+                document.querySelectorAll('.faq-icon').forEach(el => el.style.transform = 'rotate(0deg)');
+
+                if (!isOpen) {
+                    answer.style.maxHeight = '200px'; // Arbitrary large value
+                    answer.style.opacity = '1';
+                    icon.style.transform = 'rotate(180deg)';
+                    item.style.borderColor = 'var(--accent)';
+                } else {
+                    item.style.borderColor = 'var(--border)';
+                }
+            });
+        });
     </script>
 </body>
 </html>
