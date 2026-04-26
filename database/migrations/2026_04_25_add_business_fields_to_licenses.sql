@@ -1,0 +1,9 @@
+-- Migration: Add business fields to licenses table
+-- Date: 2026-04-25
+
+ALTER TABLE licenses 
+ADD COLUMN IF NOT EXISTS business_name VARCHAR(255),
+ADD COLUMN IF NOT EXISTS rut VARCHAR(20),
+ADD COLUMN IF NOT EXISTS email VARCHAR(255),
+ADD COLUMN IF NOT EXISTS address VARCHAR(255),
+ADD COLUMN IF NOT EXISTS phone VARCHAR(50);

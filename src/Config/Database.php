@@ -38,12 +38,27 @@ class Database {
 
             try {
                 $dsn = "$driver:host=$host;port=$port;dbname=$db";
-                self::$conn = new PDO($dsn, $user, $pass);
-                self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                self::$conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+                self::$conn = new PDO($dsn, $user, $pass, [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_TIMEOUT => 5 // Timeout de 5 segundos
+                ]);
             } catch(PDOException $e) {
-                error_log("Error de conexión: " . $e->getMessage());
-                die("Error crítico de infraestructura. Por favor, contacte al administrador.");
+                // En lugar de die(), lanzamos una excepción técnica o registramos el error detallado
+                error_log("DB CONNECTION ERROR: " . $e->getMessage());
+                
+                // Si estamos en una API, queremos devolver JSON
+                if (php_sapi_name() !== 'cli') {
+                    header('Content-Type: application/json');
+                    http_response_code(500);
+                    echo json_encode([
+                        'error' => 'Database connection failed',
+                        'detail' => $e->getMessage(),
+                        'code' => 500
+                    ]);
+                    exit;
+                }
+                throw $e;
             }
         }
         return self::$conn;
