@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CajaYa - El Sistema POS Líder para Pymes en Chile</title>
+    <title>CajaYa - El Sistema POS que Cautiva a tus Clientes</title>
     
     <!-- SEO & Meta Tags -->
     <meta name="description" content="Controla tu inventario con el sistema líder para Pymes. Emite boletas, facturas y gestiona tu stock 100% offline. Certificado SII 2026.">
@@ -12,521 +12,264 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Outfit:wght@500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.min.css">
     
     <style>
         :root {
-            --primary: #7c3aed; /* Violet 600 */
-            --primary-light: #a78bfa;
-            --accent: #a855f7; /* Morado claro (CajaYa Logo Style) */
-            --bg-deep: #050506;
-            --bg-card: #0f0f12;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: rgba(255, 255, 255, 0.08);
-            --glass: rgba(15, 15, 18, 0.6);
+            --primary: #a855f7;
+            --bg-deep: #000000;
+            --bg-card: #0a0a0a;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --border: rgba(255, 255, 255, 0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-deep);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3, .font-outfit { font-family: 'Outfit', sans-serif; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-        /* --- TOP BAR --- */
-        .top-bar {
-            background: rgba(124, 58, 237, 0.1);
-            border-bottom: 1px solid var(--border);
-            padding: 8px 0;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-        .top-bar-content { display: flex; justify-content: flex-end; gap: 25px; }
-        .top-bar-content a { color: inherit; text-decoration: none; transition: color 0.3s; }
-        .top-bar-content a:hover { color: #fff; }
-
-        /* --- HEADER --- */
+        /* --- MODERN HEADER --- */
         header {
-            padding: 20px 0;
+            padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: var(--glass);
-            backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
         }
         .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.8rem; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-        .logo span { color: var(--accent); }
-        
-        .nav-menu { display: flex; gap: 30px; }
-        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: all 0.3s; }
-        .nav-link:hover { color: var(--accent); }
+        .nav-menu { display: flex; gap: 40px; }
+        .nav-link { 
+            color: var(--text-muted); 
+            text-decoration: none; 
+            font-weight: 500; 
+            font-size: 0.9rem; 
+            transition: color 0.3s ease; 
+        }
+        .nav-link:hover { color: #fff; }
 
-        .btn {
-            padding: 12px 24px;
-            border-radius: 10px;
+        .btn-neon {
+            background: var(--primary);
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 50px;
             font-weight: 700;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+            animation: pulse-glow 2s infinite;
+            border: none;
         }
-        .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4); background: var(--primary-light); }
-        
-        .btn-outline { border: 1.5px solid var(--border); color: #fff; }
-        .btn-outline:hover { background: rgba(255,255,255,0.05); border-color: #fff; }
 
-        /* --- HERO SECTION (SPLIT) --- */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.6); }
+            100% { box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
+        }
+
+        /* --- HERO SECTION (CAUTIVADORA) --- */
         .hero {
-            padding: 100px 0 80px;
-            position: relative;
-            overflow: hidden;
+            padding: 120px 0;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
         }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -20%;
-            left: -10%;
-            width: 50%;
-            height: 80%;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
-            filter: blur(60px);
-            z-index: -1;
-        }
-
-        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-
-        .hero-content { z-index: 10; }
-        .badge-sii {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+        .hero-badge {
+            display: inline-block;
             background: rgba(168, 85, 247, 0.1);
-            border: 1px solid rgba(168, 85, 247, 0.2);
+            color: var(--primary);
             padding: 6px 16px;
             border-radius: 100px;
-            color: var(--accent);
             font-size: 0.75rem;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 25px;
-            animation: pulse-led 2s infinite;
+            margin-bottom: 30px;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+        .hero-title { 
+            font-size: 5rem; 
+            font-weight: 800; 
+            line-height: 1; 
+            margin-bottom: 30px; 
+            letter-spacing: -3px; 
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #fff 40%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-desc { 
+            font-size: 1.2rem; 
+            color: var(--text-muted); 
+            margin: 0 auto 50px; 
+            max-width: 600px; 
+            line-height: 1.5;
         }
 
-        @keyframes pulse-led {
-            0% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(168, 85, 247, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
-        }
-
-        .hero-title { font-size: 4rem; font-weight: 900; line-height: 1.1; margin-bottom: 25px; letter-spacing: -2px; }
-        .hero-title span { background: linear-gradient(135deg, #fff 0%, var(--primary-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        .hero-desc { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 40px; max-width: 500px; }
-        .hero-btns { display: flex; gap: 20px; }
-
-        /* --- MOCKUP CAROUSEL --- */
-        .hero-visual { position: relative; }
-        .organic-shape {
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(15, 15, 18, 1) 100%);
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            padding: 40px;
-            border: 1px solid var(--border);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            aspect-ratio: 1;
-        }
-        
-        .mockup-img {
-            max-width: 110%;
-            height: auto;
-            border-radius: 12px;
-            position: absolute;
-            transition: all 1s ease-in-out;
-            opacity: 0;
-            transform: scale(0.95);
-        }
-        .mockup-img.active { opacity: 1; transform: scale(1); }
-
-        /* Floating Info Cards */
-        .floating-card {
-            position: absolute;
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            padding: 15px 20px;
-            border-radius: 16px;
-            z-index: 20;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            animation: float 4s ease-in-out infinite;
-        }
-        .card-stats { top: 10%; left: -10%; }
-        .card-users { bottom: 15%; right: -5%; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        /* --- CATEGORIES INFINITE BANNER --- */
+        /* --- CATEGORIES SLIDER --- */
         .categories-banner {
             padding: 40px 0;
-            background: rgba(15, 15, 18, 0.5);
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
             overflow: hidden;
-            white-space: nowrap;
-            position: relative;
+            background: #050505;
         }
-        .categories-banner::before, .categories-banner::after {
-            content: "";
-            position: absolute;
-            top: 0; width: 100px; height: 100%;
-            z-index: 2;
-        }
-        .categories-banner::before { left: 0; background: linear-gradient(to right, var(--bg-deep), transparent); }
-        .categories-banner::after { right: 0; background: linear-gradient(to left, var(--bg-deep), transparent); }
-
         .slider-track {
             display: flex;
-            gap: 60px;
+            gap: 80px;
             animation: scroll 40s linear infinite;
             width: max-content;
         }
         .slider-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
             color: var(--text-muted);
             font-size: 0.9rem;
             font-weight: 600;
-            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .slider-item i { color: var(--accent); font-size: 1.2rem; }
-        .slider-item:hover { color: #fff; }
+        .slider-item i { color: var(--primary); }
 
         @keyframes scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-50% - 30px)); }
+            100% { transform: translateX(calc(-50% - 40px)); }
         }
 
-        /* --- RESPONSIVE ADJUSTMENTS --- */
-        @media (max-width: 992px) {
-            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-            .hero-title { font-size: 3rem; }
-            .hero-desc { margin: 0 auto 40px; }
-            .hero-btns { justify-content: center; }
-            .nav-menu { display: none; }
-            .top-bar-content { justify-content: center; font-size: 0.7rem; }
-            .card-stats { left: 0; top: 0; }
-            .card-users { right: 0; bottom: 0; }
+        /* --- FAQ (SIMPLE & CLEAN) --- */
+        #faq { padding: 120px 0; }
+        .faq-title { font-size: 3rem; font-weight: 800; text-align: center; margin-bottom: 80px; letter-spacing: -1px; }
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover { border-color: rgba(255,255,255,0.1); }
+        .faq-question { padding: 24px; font-weight: 600; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { max-height: 0; opacity: 0; overflow: hidden; transition: all 0.5s ease; padding: 0 24px; color: var(--text-muted); }
+        .faq-item.active .faq-answer { max-height: 200px; opacity: 1; padding-bottom: 24px; }
+        .faq-icon { transition: transform 0.3s; color: var(--text-muted); }
+        .faq-item.active .faq-icon { transform: rotate(180deg); color: #fff; }
+
+        /* --- CTA SECTION --- */
+        #contacto { padding: 120px 0; text-align: center; }
+        .cta-box {
+            padding: 80px 40px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);
+            border: 1px solid var(--border);
+            border-radius: 24px;
         }
 
-        @media (max-width: 480px) {
-            .hero-title { font-size: 2.4rem; }
-            .hero-btns { flex-direction: column; width: 100%; }
-            .btn { width: 100%; justify-content: center; }
-            .badge-sii { margin-bottom: 15px; }
-            .organic-shape { padding: 20px; }
-            .slider-track { animation-duration: 25s; }
-        }
-
-        /* Footer */
-        footer { padding: 80px 0 40px; border-top: 1px solid var(--border); }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; }
-        .footer-logo { margin-bottom: 20px; display: block; }
-        .footer-links h5 { font-weight: 700; margin-bottom: 20px; color: #fff; }
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 12px; }
-        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
-        .footer-links a:hover { color: var(--accent); }
-
+        /* Responsive */
         @media (max-width: 768px) {
-            .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+            .hero-title { font-size: 3rem; letter-spacing: -1px; }
+            .nav-menu { display: none; }
         }
-
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <div class="container top-bar-content">
-            <a href="tel:+56959764771"><i class="fa-solid fa-phone"></i> +56 9 5976 4771</a>
-            <a href="#"><i class="fa-solid fa-circle-question"></i> Centro de ayuda</a>
-            <a href="#"><i class="fa-solid fa-bullhorn"></i> ¡Recomiéndanos!</a>
-        </div>
-    </div>
-
     <header>
         <div class="container nav-wrapper">
-            <a href="#" class="logo">
-                <img src="assets/img/logo.png" alt="CajaYa Logo" style="height: 40px; width: auto;">
+            <a href="#hero" class="logo">
+                <img src="assets/img/logo.png" alt="CajaYa" style="height: 35px;">
             </a>
-            
             <nav class="nav-menu">
-                <a href="#precios" class="nav-link">Precios</a>
-                <a href="#recursos" class="nav-link">¿Qué ofrecemos?</a>
-                <a href="#" class="nav-link">Recursos <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+                <a href="#hero" class="nav-link">Inicio</a>
+                <a href="#categorias" class="nav-link">¿Qué ofrecemos?</a>
+                <a href="#faq" class="nav-link">Preguntas</a>
             </nav>
-
-            <div class="nav-actions">
-                <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn btn-primary">Prueba Gratis</a>
-            </div>
+            <a href="#contacto" class="btn-neon">Empezar Ahora</a>
         </div>
     </header>
 
-    <section class="hero">
+    <section id="hero" class="hero">
         <div class="container">
-            <div class="hero-grid">
-                <div class="hero-content">
-                    <div class="badge-sii"><i class="fa-solid fa-shield-check"></i> SII CERTIFICADO 2026</div>
-                    <h1 class="hero-title">
-                        Controla tu inventario con el <span>Sistema Líder</span> para Pymes.
-                    </h1>
-                    <p class="hero-desc">
-                        Emite boleta, factura electrónica y gestiona tu stock en tiempo real. La solución POS robusta, rápida y 100% offline-ready diseñada para Chile.
-                    </p>
-                    <div class="hero-btns">
-                        <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn btn-primary">Contrata aquí <i class="fa-solid fa-arrow-right"></i></a>
-                        <a href="https://wa.me/56959764771" class="btn btn-outline"><i class="fa-solid fa-play"></i> Ver video</a>
-                    </div>
-                    <div style="margin-top: 30px; display: flex; gap: 20px; font-size: 0.8rem; color: var(--text-muted); font-weight: 600; justify-content: inherit;">
-                        <span><i class="fa-solid fa-check text-success" style="color: #22c55e;"></i> Demo 30 días gratis</span>
-                        <span><i class="fa-solid fa-check text-success" style="color: #22c55e;"></i> Sin tarjetas asociadas</span>
-                    </div>
-                </div>
+            <span class="hero-badge">SII CERTIFICADO 2026</span>
+            <h1 class="hero-title">El POS que cautiva <br> <span class="text-gradient">a tu negocio.</span></h1>
+            <p class="hero-desc">
+                Sincronización en tiempo real, modo offline inteligente y una interfaz diseñada para ser prolija, moderna y elegante.
+            </p>
+            <div style="display: flex; gap: 20px; justify-content: center;">
+                <a href="#contacto" class="btn-neon" style="padding: 15px 40px; font-size: 1.1rem;">Prueba Gratis</a>
+                <a href="https://wa.me/56959764771" class="nav-link d-flex align-items-center" style="font-weight: 700;">Hablar con experto <i class="fa-solid fa-arrow-right ms-2"></i></a>
+            </div>
 
-                <div class="hero-visual">
-                    <div class="floating-card card-stats">
-                        <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Demos Hoy</div>
-                        <div style="font-size: 1.4rem; font-weight: 900; color: #fff;">+ 24</div>
-                    </div>
-
-                    <div class="floating-card card-users">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <div style="background: var(--accent); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                                <i class="fa-solid fa-users"></i>
-                            </div>
-                            <div>
-                                <div style="font-size: 0.6rem; color: var(--text-muted); font-weight: 700;">CLIENTES</div>
-                                <div style="font-size: 1.1rem; font-weight: 900;">+ 12.000</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="organic-shape">
-                        <img src="assets/cajaya_pos_mockup.png" alt="POS CajaYa" class="mockup-img active">
-                        <div class="mockup-img logo-slide" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, transparent 70%);">
-                            <img src="assets/img/logo.png" alt="CajaYa Logo" style="width: 60%; height: auto; filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.5));">
-                        </div>
-                    </div>
-                </div>
+            <div style="margin-top: 80px; position: relative;">
+                <img src="assets/cajaya_pos_mockup.png" alt="CajaYa POS" style="max-width: 90%; border-radius: 12px; box-shadow: 0 50px 100px rgba(0,0,0,0.5);">
             </div>
         </div>
     </section>
 
-    <!-- CATEGORIES SLIDER -->
-    <div class="categories-banner">
+    <div id="categorias" class="categories-banner">
         <div class="slider-track">
-            <!-- First set -->
             <div class="slider-item"><i class="fa-solid fa-utensils"></i> Restoranes</div>
             <div class="slider-item"><i class="fa-solid fa-wrench"></i> Ferreterías</div>
-            <div class="slider-item"><i class="fa-solid fa-drumstick-bite"></i> Carnicerías</div>
-            <div class="slider-item"><i class="fa-solid fa-box-open"></i> Bazares</div>
             <div class="slider-item"><i class="fa-solid fa-shop"></i> Almacenes</div>
-            <div class="slider-item"><i class="fa-solid fa-wine-bottle"></i> Botillerías</div>
             <div class="slider-item"><i class="fa-solid fa-cart-shopping"></i> Minimarkets</div>
-            <div class="slider-item"><i class="fa-solid fa-bread-slice"></i> Panaderías</div>
-            <!-- Duplicate for infinite effect -->
             <div class="slider-item"><i class="fa-solid fa-utensils"></i> Restoranes</div>
             <div class="slider-item"><i class="fa-solid fa-wrench"></i> Ferreterías</div>
-            <div class="slider-item"><i class="fa-solid fa-drumstick-bite"></i> Carnicerías</div>
-            <div class="slider-item"><i class="fa-solid fa-box-open"></i> Bazares</div>
             <div class="slider-item"><i class="fa-solid fa-shop"></i> Almacenes</div>
-            <div class="slider-item"><i class="fa-solid fa-wine-bottle"></i> Botillerías</div>
             <div class="slider-item"><i class="fa-solid fa-cart-shopping"></i> Minimarkets</div>
-            <div class="slider-item"><i class="fa-solid fa-bread-slice"></i> Panaderías</div>
         </div>
     </div>
 
-    <!-- CALL TO ACTION -->
-    <section style="padding: 100px 0; text-align: center;">
+    <section id="faq">
         <div class="container">
-            <h2 style="font-size: 3rem; margin-bottom: 20px;">¿Listo para escalar tu negocio?</h2>
-            <p style="color: var(--text-muted); margin-bottom: 40px;">Únete a las miles de pymes que ya transformaron su gestión con CajaYa.</p>
-            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn btn-primary" style="padding: 18px 40px; font-size: 1.1rem;">Comenzar Demo Gratis</a>
-                <a href="https://wa.me/56959764771" class="btn btn-outline" style="padding: 18px 40px; font-size: 1.1rem;">Hablar con un Experto</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ SECTION -->
-    <section id="faq" style="padding: 100px 0; background: linear-gradient(to bottom, var(--bg-deep), #0a0a0d);">
-        <div class="container" style="max-width: 800px;">
-            <h2 class="font-outfit" style="font-size: 3rem; text-align: center; margin-bottom: 10px;">Preguntas que probablemente</h2>
-            <h2 class="font-outfit" style="font-size: 3rem; text-align: center; margin-bottom: 60px; color: var(--text-muted);">te estás haciendo.</h2>
-
+            <h2 class="faq-title">Preguntas Frecuentes</h2>
             <div class="faq-list">
-                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; cursor: pointer; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                    <div class="faq-question" style="padding: 18px 25px; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-weight: 600; font-size: 1.05rem;">¿Qué significa Licencia Lifetime?</span>
-                        <i class="fa-solid fa-chevron-down faq-icon" style="color: var(--text-muted); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);"></i>
-                    </div>
-                    <div class="faq-answer" style="max-height: 0; opacity: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                        <div style="padding: 0 25px 25px; color: var(--text-muted); font-size: 0.95rem;">
-                            Es un pago único de por vida. No tendrás que pagar mensualidades ni suscripciones para usar las funciones principales de tu sistema de ventas.
-                        </div>
-                    </div>
+                <div class="faq-item">
+                    <div class="faq-question"><span>¿Qué es la licencia Lifetime?</span> <i class="fa-solid fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer">Un pago único para siempre, sin suscripciones mensuales para las funciones core.</div>
                 </div>
-
-                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; cursor: pointer; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                    <div class="faq-question" style="padding: 18px 25px; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-weight: 600; font-size: 1.05rem;">¿Y si cambio de computador?</span>
-                        <i class="fa-solid fa-chevron-down faq-icon" style="color: var(--text-muted); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);"></i>
-                    </div>
-                    <div class="faq-answer" style="max-height: 0; opacity: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                        <div style="padding: 0 25px 25px; color: var(--text-muted); font-size: 0.95rem;">
-                            No hay problema. Tu licencia es transferible. Solo debes contactar a nuestro soporte para liberar el ID anterior y activar el nuevo equipo.
-                        </div>
-                    </div>
+                <div class="faq-item">
+                    <div class="faq-question"><span>¿Funciona sin internet?</span> <i class="fa-solid fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer">Sí, CajaYa está diseñado para operar 100% offline y sincronizar cuando detecte conexión.</div>
                 </div>
-
-                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; cursor: pointer; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                    <div class="faq-question" style="padding: 18px 25px; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-weight: 600; font-size: 1.05rem;">¿Cómo funciona el modo offline?</span>
-                        <i class="fa-solid fa-chevron-down faq-icon" style="color: var(--text-muted); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);"></i>
-                    </div>
-                    <div class="faq-answer" style="max-height: 0; opacity: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                        <div style="padding: 0 25px 25px; color: var(--text-muted); font-size: 0.95rem;">
-                            CajaYa está diseñado para trabajar sin internet. Puedes vender y gestionar stock normalmente, y el sistema sincronizará los datos automáticamente al detectar conexión.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; cursor: pointer; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                    <div class="faq-question" style="padding: 18px 25px; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-weight: 600; font-size: 1.05rem;">¿Incluye soporte técnico?</span>
-                        <i class="fa-solid fa-chevron-down faq-icon" style="color: var(--text-muted); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);"></i>
-                    </div>
-                    <div class="faq-answer" style="max-height: 0; opacity: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                        <div style="padding: 0 25px 25px; color: var(--text-muted); font-size: 0.95rem;">
-                            ¡Sí! Contamos con un equipo especializado en Chile para ayudarte vía WhatsApp o correo ante cualquier duda o inconveniente técnico.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; cursor: pointer; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                    <div class="faq-question" style="padding: 18px 25px; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-weight: 600; font-size: 1.05rem;">¿Puedo agregar más cajas después?</span>
-                        <i class="fa-solid fa-chevron-down faq-icon" style="color: var(--text-muted); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);"></i>
-                    </div>
-                    <div class="faq-answer" style="max-height: 0; opacity: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                        <div style="padding: 0 25px 25px; color: var(--text-muted); font-size: 0.95rem;">
-                            Por supuesto. Puedes escalar tu negocio agregando licencias adicionales para nuevas terminales o sucursales en cualquier momento.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; cursor: pointer; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                    <div class="faq-question" style="padding: 18px 25px; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-weight: 600; font-size: 1.05rem;">¿Es realmente compatible con cualquier impresora?</span>
-                        <i class="fa-solid fa-chevron-down faq-icon" style="color: var(--text-muted); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);"></i>
-                    </div>
-                    <div class="faq-answer" style="max-height: 0; opacity: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                        <div style="padding: 0 25px 25px; color: var(--text-muted); font-size: 0.95rem;">
-                            Es compatible con la gran mayoría de impresoras térmicas y de etiquetas que funcionen con controladores de Windows estándar.
-                        </div>
-                    </div>
+                <div class="faq-item">
+                    <div class="faq-question"><span>¿Tienen soporte técnico?</span> <i class="fa-solid fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer">Sí, contamos con soporte especializado en Chile vía WhatsApp y remoto.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container footer-grid">
-            <div>
-                <a href="#" class="footer-logo logo">
-                    <img src="assets/img/logo.png" alt="CajaYa Logo" style="height: 40px; width: auto; margin-bottom: 20px; display: block;">
-                </a>
-                <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 300px;">
-                    La solución POS más completa de Chile. Potencia tu negocio con tecnología de vanguardia.
-                </p>
+    <section id="contacto">
+        <div class="container">
+            <div class="cta-box">
+                <h2 style="font-size: 3rem; margin-bottom: 20px;">¿Listo para el cambio?</h2>
+                <p style="color: var(--text-muted); margin-bottom: 40px;">Únete a las miles de pymes que ya confían en CajaYa.</p>
+                <a href="https://wa.me/56959764771" class="btn-neon" style="padding: 18px 50px; font-size: 1.2rem;">Contactar por WhatsApp</a>
             </div>
+        </div>
+    </section>
 
-            <div class="footer-links">
-                <h5>Empresa</h5>
-                <ul>
-                    <li><a href="#">Sobre nosotros</a></li>
-                    <li><a href="#">Contacto</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-links">
-                <h5>Contacto</h5>
-                <ul>
-                    <li><a href="tel:+56959764771"><i class="fa-solid fa-phone me-2"></i> +56 9 5976 4771</a></li>
-                    <li><a href="mailto:soporte@cajaya.cl"><i class="fa-solid fa-envelope me-2"></i> soporte@cajaya.cl</a></li>
-                    <li><a href="#"><i class="fa-solid fa-location-dot me-2"></i> Viña del Mar, Chile</a></li>
-                </ul>
-            </div>
+    <footer style="padding: 60px 0; border-top: 1px solid var(--border); text-align: center;">
+        <div class="container">
+            <img src="assets/img/logo.png" alt="CajaYa" style="height: 30px; opacity: 0.5; margin-bottom: 20px;">
+            <p style="color: var(--text-muted); font-size: 0.8rem;">© 2026 CajaYa Chile. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <script>
-        // Simple Carousel Logic for Mockups
-        const slides = document.querySelectorAll('.mockup-img');
-        let current = 0;
-
-        setInterval(() => {
-            slides[current].classList.remove('active');
-            current = (current + 1) % slides.length;
-            slides[current].classList.add('active');
-        }, 5000);
-
-        // FAQ Accordion Logic
+        // FAQ Accordion
         document.querySelectorAll('.faq-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const answer = this.querySelector('.faq-answer');
-                const icon = this.querySelector('.faq-icon');
-                const isOpen = this.classList.contains('active-faq');
-
-                // Primero, cerramos TODOS (incluyendo el actual si estaba abierto)
-                document.querySelectorAll('.faq-item').forEach(el => {
-                    el.classList.remove('active-faq');
-                    const ans = el.querySelector('.faq-answer');
-                    ans.style.maxHeight = '0px';
-                    ans.style.opacity = '0';
-                    el.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
-                });
-
-                // Si NO estaba abierto, lo abrimos ahora
-                if (!isOpen) {
-                    this.classList.add('active-faq');
-                    answer.style.maxHeight = answer.scrollHeight + "px";
-                    answer.style.opacity = '1';
-                    icon.style.transform = 'rotate(180deg)';
-                }
+            item.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
             });
         });
     </script>
+
 </body>
 </html>
