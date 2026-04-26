@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CajaYa - El Sistema POS Líder para Pymes en Chile | SII 2026</title>
     
-    <!-- SEO & Meta Tags -->
     <meta name="description" content="Controla tu inventario con el sistema líder para Pymes en Chile. Emite boletas, facturas electrónicas y reportes X/Z. 100% offline. Certificado SII 2026.">
     
-    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Outfit:wght@500;700;900&display=swap" rel="stylesheet">
@@ -30,7 +28,7 @@
 
         body {
             background-color: var(--bg-deep);
-            background-image: radial-gradient(circle at top right, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+            background-image: radial-gradient(circle at top right, rgba(168, 85, 247, 0.12) 0%, transparent 40%);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
@@ -38,7 +36,14 @@
             position: relative;
         }
 
-        /* --- EFECTO SALES UNIVERSE (SÍMBOLOS MÁS CLAROS) --- */
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 25px; 
+            width: 100%;
+        }
+
+        /* --- EFECTO SALES UNIVERSE --- */
         .sales-universe {
             position: fixed;
             top: 0; left: 0;
@@ -52,10 +57,9 @@
             color: var(--accent);
             font-family: 'Outfit', sans-serif;
             font-weight: 900;
-            opacity: 0.15; /* Un poco más claro como pediste */
+            opacity: 0.18;
             animation: float-random linear infinite;
         }
-
         @keyframes float-random {
             0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
             10% { opacity: 0.25; }
@@ -77,11 +81,7 @@
             z-index: 1100;
             animation: shimmer 4s linear infinite;
         }
-
-        @keyframes shimmer {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
-        }
+        @keyframes shimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
 
         /* --- HEADER --- */
         header {
@@ -104,8 +104,7 @@
         .logo-base, .logo-overlay {
             position: absolute;
             top: 0; left: 0;
-            height: 100%;
-            width: 100%;
+            height: 100%; width: 100%;
             background-image: url('assets/img/logo.png');
             background-size: contain;
             background-repeat: no-repeat;
@@ -116,7 +115,7 @@
             z-index: 2;
         }
         
-        .nav-menu { display: flex; gap: 20px; align-items: center; }
+        .nav-menu { display: flex; gap: 25px; align-items: center; }
         .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: 0.3s; }
         .nav-link:hover { color: var(--accent); }
 
@@ -133,6 +132,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            font-size: 0.95rem;
         }
 
         .btn-green {
@@ -148,19 +148,23 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            font-size: 0.95rem;
         }
 
         /* --- HERO --- */
-        .hero { padding: 80px 0; }
-        .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
-        .hero-title { font-size: 4.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 30px; letter-spacing: -2px; }
+        .hero { padding: 100px 0; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .hero-title { font-size: 4.2rem; font-weight: 900; line-height: 1.1; margin-bottom: 30px; letter-spacing: -2px; }
         .text-gradient { background: linear-gradient(135deg, #fff 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .hero-desc { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 45px; max-width: 550px; }
-        .mockup-img { max-width: 120%; border-radius: 12px; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8)); }
+        .mockup-img { max-width: 100%; border-radius: 12px; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8)); }
+
+        /* --- SECCIONES --- */
+        .section-title { text-align: center; margin-bottom: 60px; font-size: 3.5rem; }
 
         /* --- BENEFICIOS --- */
-        .benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
-        .benefit-card { background: var(--bg-card); padding: 40px; border-radius: 24px; border: 1px solid var(--border); transition: 0.3s; }
+        .benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
+        .benefit-card { background: var(--bg-card); padding: 35px; border-radius: 20px; border: 1px solid var(--border); transition: 0.3s; }
         .benefit-card:hover { border-color: var(--accent); transform: translateY(-5px); }
 
         /* --- PRICING --- */
@@ -186,9 +190,7 @@
         .faq-item.active .faq-answer { padding: 0 25px 25px; max-height: 200px; }
 
         /* --- RESPONSIVE --- */
-        @media (max-width: 1100px) {
-            .benefits-grid { grid-template-columns: repeat(2, 1fr); }
-        }
+        @media (max-width: 1100px) { .benefits-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 992px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
             .hero-title { font-size: 3.2rem; }
@@ -207,7 +209,6 @@
 </head>
 <body>
 
-    <!-- EFECTO SALES UNIVERSE -->
     <div class="sales-universe" id="universe"></div>
 
     <div class="promo-banner">
@@ -222,9 +223,7 @@
             </a>
             <nav class="nav-menu">
                 <a href="#que-ofrecemos" class="nav-link">Beneficios</a>
-                <span class="nav-separator" style="color: rgba(255,255,255,0.1);">|</span>
                 <a href="#precios" class="nav-link">Precios</a>
-                <span class="nav-separator" style="color: rgba(255,255,255,0.1);">|</span>
                 <a href="#faq" class="nav-link">Preguntas</a>
             </nav>
             <a href="https://api.cajaya.cl/auth.php?provider=google" class="btn-neon">Prueba Gratis</a>
@@ -253,12 +252,10 @@
         </div>
     </section>
 
-    <!-- SECTION QUE OFRECEMOS -->
+    <!-- BENEFICIOS -->
     <section id="que-ofrecemos" style="padding: 100px 0; background: rgba(255,255,255,0.01);">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 60px;">
-                <h2 style="font-size: 3.5rem;">¿Qué ofrecemos?</h2>
-            </div>
+            <h2 class="section-title">¿Qué ofrecemos?</h2>
             <div class="benefits-grid">
                 <div class="benefit-card">
                     <i class="fa-solid fa-file-invoice-dollar" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px; display: block;"></i>
@@ -284,12 +281,10 @@
         </div>
     </section>
 
-    <!-- SECTION PRECIOS -->
+    <!-- PRECIOS -->
     <section id="precios" style="padding: 100px 0; background: #08080c;">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 60px;">
-                <h2 style="font-size: 3.5rem;">Planes a tu Medida</h2>
-            </div>
+            <h2 class="section-title">Planes a tu Medida</h2>
             <div class="pricing-grid">
                 <div class="price-card">
                     <h3>Plan Básico</h3>
@@ -329,9 +324,7 @@
     <!-- FAQ -->
     <section id="faq" style="padding: 100px 0;">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 40px;">
-                <h2 style="font-size: 3rem;">Preguntas</h2>
-            </div>
+            <h2 class="section-title" style="font-size: 3rem;">Preguntas</h2>
             <div style="max-width: 800px; margin: 0 auto;">
                 <div class="faq-item">
                     <div class="faq-question">¿Tienen integración con el SII? <i class="fa-solid fa-chevron-down"></i></div>
@@ -354,7 +347,7 @@
     <script>
         const universe = document.getElementById('universe');
         const symbols = ['$', '%', '+', '-', '×', '÷', '='];
-        const symbolCount = 40;
+        const symbolCount = 45;
 
         for (let i = 0; i < symbolCount; i++) {
             const span = document.createElement('span');
@@ -366,6 +359,13 @@
             span.style.animationDuration = (Math.random() * 12 + 18) + 's';
             universe.appendChild(span);
         }
+
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
     </script>
 
 </body>
