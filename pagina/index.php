@@ -327,7 +327,7 @@
                         <li><i class="fa-solid fa-check"></i> Gestión de Inventario</li>
                         <li><i class="fa-solid fa-check"></i> Soporte Premium</li>
                     </ul>
-                    <a href="../mercadopago/checkout.php" class="btn-main" style="background: transparent; border: 1px solid var(--primary); justify-content: center;">Suscribirse</a>
+                    <a href="/mercadopago/checkout.php" class="btn-main" style="background: transparent; border: 1px solid var(--primary); justify-content: center;">Suscribirse</a>
                 </div>
                 <div class="plan-card popular">
                     <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #fff; padding: 6px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 800;">RECOMENDADO</div>
@@ -339,7 +339,7 @@
                         <li><i class="fa-solid fa-check"></i> Multi-Caja Ilimitado</li>
                         <li><i class="fa-solid fa-check"></i> Actualizaciones 2026+</li>
                     </ul>
-                    <a href="../mercadopago/checkout.php" class="btn-main" style="justify-content: center;">Comprar Licencia Ahora</a>
+                    <a href="/mercadopago/checkout.php" class="btn-main" style="justify-content: center;">Comprar Licencia Ahora</a>
                 </div>
                 <div class="plan-card">
                     <h3>Plan Premium</h3>
@@ -349,7 +349,7 @@
                         <li><i class="fa-solid fa-check"></i> Respaldos Automáticos</li>
                         <li><i class="fa-solid fa-check"></i> Soporte Prioritario</li>
                     </ul>
-                    <a href="../mercadopago/checkout.php" class="btn-main" style="background: transparent; border: 1px solid var(--primary); justify-content: center;">Suscribirse</a>
+                    <a href="/mercadopago/checkout.php" class="btn-main" style="background: transparent; border: 1px solid var(--primary); justify-content: center;">Suscribirse</a>
                 </div>
             </div>
         </div>
