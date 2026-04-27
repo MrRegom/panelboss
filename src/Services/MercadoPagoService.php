@@ -52,10 +52,18 @@ class MercadoPagoService
 
             return $preference->init_point; 
         } catch (\Exception $e) {
-            error_log("Mercado Pago v3 Error: " . $e->getMessage());
-            // Imprimir error para debug si estamos en modo desarrollo
+            $errorMsg = $e->getMessage();
+            
+            // Intentar extraer el detalle si es un error de la API
+            if (method_exists($e, 'getApiResponse')) {
+                $response = $e->getApiResponse();
+                $errorMsg .= " - Detalle: " . json_encode($response->getContent());
+            }
+
+            error_log("Mercado Pago v3 Error: " . $errorMsg);
+            
             if (ini_get('display_errors')) {
-                echo "Error MP: " . $e->getMessage();
+                echo "Error detallado de MP: " . $errorMsg;
             }
             return null;
         }
