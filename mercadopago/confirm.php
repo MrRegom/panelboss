@@ -3,6 +3,8 @@
 $status = $_GET['status'] ?? 'failure';
 $payment_id = $_GET['payment_id'] ?? null;
 $external_reference = $_GET['external_reference'] ?? 'Desconocido';
+require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../src/Services/MercadoPagoService.php';
 
 ?>
 <!DOCTYPE html>
