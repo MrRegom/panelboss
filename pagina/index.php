@@ -199,12 +199,13 @@ header('Content-Type: text/html; charset=utf-8');
         .faq-item h4 { margin-bottom: 10px; color: var(--apple-blue); }
 
         /* --- CAROUSEL HERO --- */
-        .carousel-hero { position: relative; overflow: hidden; min-height: 100svh; display: flex; align-items: center; }
-        .carousel-track { display: flex; width: 300%; transition: transform 0.7s cubic-bezier(0.77,0,0.18,1); }
+        .carousel-hero { position: relative; width: 100%; }
+        .carousel-viewport { overflow: hidden; width: 100%; }
+        .carousel-track { display: flex; transition: transform 0.7s cubic-bezier(0.77,0,0.18,1); }
         .carousel-slide {
-            width: 33.333%; flex-shrink: 0; display: flex; flex-direction: column;
+            min-width: 100%; flex-shrink: 0; display: flex; flex-direction: column;
             align-items: center; justify-content: center; text-align: center;
-            padding: 130px 24px 60px;
+            padding: 120px 24px 80px; box-sizing: border-box;
         }
         .slide-badge {
             display: inline-block; background: rgba(0,113,227,0.1); color: var(--apple-blue);
@@ -274,8 +275,8 @@ header('Content-Type: text/html; charset=utf-8');
     <section class="carousel-hero" id="hero">
         <button class="c-arrow c-prev" onclick="moveSlide(-1)">&#8249;</button>
         <button class="c-arrow c-next" onclick="moveSlide(1)">&#8250;</button>
-
-        <div class="carousel-track" id="ctrack">
+        <div class="carousel-viewport">
+            <div class="carousel-track" id="ctrack">
 
             <!-- SLIDE 1: Vender más -->
             <div class="carousel-slide">
@@ -317,6 +318,7 @@ header('Content-Type: text/html; charset=utf-8');
             <div class="c-dot" onclick="goSlide(1)"></div>
             <div class="c-dot" onclick="goSlide(2)"></div>
         </div>
+        </div><!-- /carousel-viewport -->
     </section>
 
     <section class="features" id="beneficios">
@@ -451,7 +453,7 @@ header('Content-Type: text/html; charset=utf-8');
 
         function goSlide(n) {
             current = (n + total) % total;
-            track.style.transform = `translateX(-${current * 33.333}%)`;
+            track.style.transform = `translateX(-${current * 100}%)`;
             dots.forEach((d, i) => d.classList.toggle('active', i === current));
         }
         function moveSlide(dir) { goSlide(current + dir); }
