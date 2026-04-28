@@ -29,30 +29,11 @@
         html { scroll-behavior: smooth; }
 
         body {
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 0% 0%, rgba(124, 58, 237, 0.1) 0%, transparent 35%),
-                radial-gradient(circle at 100% 100%, rgba(79, 70, 229, 0.1) 0%, transparent 35%);
+            background-color: var(--bg-body);
             color: var(--text-main);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            line-height: 1.6;
+            font-family: var(--font-main);
+            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-        }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
-
-        header {
-            padding: 20px 0; background: rgba(7, 7, 10, 0.85); backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border); position: sticky; top: 43px; z-index: 1000;
-        }
-        .header-flex { display: flex; justify-content: space-between; align-items: center; }
-        
-        .logo-box { position: relative; height: 42px; width: 135px; }
-        .logo-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('assets/img/logo.png') no-repeat; background-size: contain; }
-        .logo-white { filter: brightness(0) invert(1); clip-path: inset(0 57% 0 0); z-index: 2; }
-
-        .btn-main {
-            background: var(--gradient); color: #fff; padding: 12px 28px; border-radius: 14px;
             font-weight: 700; text-decoration: none; border: none; cursor: pointer;
             box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3); transition: 0.3s;
             display: inline-flex; align-items: center; gap: 10px; font-size: 0.95rem;
