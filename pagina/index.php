@@ -41,22 +41,6 @@
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
 
-        /* --- SALES UNIVERSE --- */
-        .universe { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; opacity: 0.25; }
-        .symbol { position: absolute; color: var(--primary-light); font-family: 'Outfit'; font-weight: 900; animation: float linear infinite; }
-        @keyframes float { 0% { transform: translateY(105vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.3; } 90% { opacity: 0.3; } 100% { transform: translateY(-5vh) rotate(360deg); opacity: 0; } }
-
-        /* --- TOP BANNER --- */
-        .top-banner {
-            background: linear-gradient(90deg, #4c1d95, #7c3aed, #4c1d95);
-            background-size: 200% auto;
-            color: #fff; text-align: center; padding: 12px 0; font-size: 0.85rem; font-weight: 700;
-            position: sticky; top: 0; z-index: 1500; border-bottom: 1px solid rgba(255,255,255,0.1);
-            animation: move-bg 4s linear infinite;
-        }
-        @keyframes move-bg { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
-
-        /* --- HEADER --- */
         header {
             padding: 20px 0; background: rgba(7, 7, 10, 0.85); backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border); position: sticky; top: 43px; z-index: 1000;
