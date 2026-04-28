@@ -199,36 +199,39 @@ header('Content-Type: text/html; charset=utf-8');
         .faq-item { background: #fff; margin-bottom: 15px; border-radius: 15px; padding: 25px; cursor: pointer; }
         .faq-item h4 { margin-bottom: 10px; color: var(--apple-blue); }
 
-        /* ===== CAROUSEL HERO — Crossfade+Zoom ===== */
+        /* ===== CAROUSEL HERO — Grid-Stack Crossfade ===== */
         .carousel-hero {
             position: relative;
             width: 100%;
-            min-height: 100svh;
             background: #fff;
-            overflow: hidden;
         }
-        .carousel-track { position: relative; width: 100%; }
+        /* El track apila todos los slides en la misma celda del grid */
+        .carousel-track {
+            display: grid;
+            grid-template-areas: "slide";
+            width: 100%;
+        }
         .carousel-slide {
-            position: absolute; inset: 0;
+            grid-area: slide;
             display: grid;
             grid-template-columns: 1fr 1fr;
             align-items: center;
             gap: 40px;
-            padding: 90px 8% 60px;
+            padding: 90px 8% 70px;
             box-sizing: border-box;
             min-height: 100svh;
             opacity: 0;
             transform: scale(1.04);
             transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.23,1,0.32,1);
             pointer-events: none;
-            background: #fff;
+            /* visibility:hidden libera espacio para slides inactivos */
+            visibility: hidden;
         }
         .carousel-slide.active {
             opacity: 1;
             transform: scale(1);
             pointer-events: auto;
-            position: relative;
-            min-height: 100svh;
+            visibility: visible;
         }
         /* Columna texto */
         .slide-text { text-align: left; padding-right: 40px; }
@@ -322,13 +325,13 @@ header('Content-Type: text/html; charset=utf-8');
         }
         @keyframes floatIcon {
             0%   { opacity: 0; transform: translateY(110vh) scale(0.7) rotate(-10deg); }
-            10%  { opacity: 0.22; }
-            50%  { opacity: 0.15; transform: translateY(30vh) scale(1.05) rotate(6deg); }
-            90%  { opacity: 0.18; }
+            10%  { opacity: 0.2; }
+            50%  { opacity: 0.13; transform: translateY(30vh) scale(1.05) rotate(6deg); }
+            90%  { opacity: 0.15; }
             100% { opacity: 0; transform: translateY(-10vh) scale(0.85) rotate(-4deg); }
         }
-        /* Asegurar que todo el contenido quede encima de los iconos flotantes */
-        nav, section, footer, .carousel-hero { position: relative; z-index: 1; }
+        /* El carousel-hero contiene los slides absolutos: overflow:hidden es crítico */
+        .carousel-hero { overflow: hidden !important; }
 
         /* ===== RESPONSIVE GLOBAL ===== */
         @media (max-width: 820px) {
