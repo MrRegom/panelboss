@@ -29,21 +29,87 @@ header('Content-Type: text/html; charset=utf-8');
             overflow-x: hidden;
         }
 
+        /* --- INTRO SCREEN --- */
+        #intro-screen {
+            position: fixed; inset: 0; background: #000; z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            animation: introExit 0.7s cubic-bezier(0.77,0,0.18,1) 2.8s forwards;
+        }
+        #intro-screen.gone { display: none; }
+        .intro-logo {
+            font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 800; color: #fff;
+            letter-spacing: -2px; opacity: 0;
+            animation: introLogoIn 0.8s cubic-bezier(0.23,1,0.32,1) 0.3s forwards;
+        }
+        .intro-logo span { color: #0071E3; }
+        .intro-tag {
+            font-size: clamp(0.9rem, 2vw, 1.1rem); color: #86868B; margin-top: 16px;
+            opacity: 0; letter-spacing: 4px; text-transform: uppercase;
+            animation: introTagIn 0.8s ease 1.1s forwards;
+        }
+        .intro-bar {
+            width: 200px; height: 3px; background: #222; border-radius: 10px;
+            margin-top: 50px; overflow: hidden; opacity: 0;
+            animation: introTagIn 0.5s ease 1.4s forwards;
+        }
+        .intro-bar-fill {
+            height: 100%; background: #0071E3; border-radius: 10px; width: 0%;
+            animation: introBarFill 1.2s cubic-bezier(0.23,1,0.32,1) 1.6s forwards;
+        }
+        @keyframes introLogoIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes introTagIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes introBarFill { from { width: 0%; } to { width: 100%; } }
+        @keyframes introExit {
+            0%   { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.05); pointer-events: none; }
+        }
+
         /* --- BACKGROUND ANIMATION (MATH SYMBOLS) --- */
         .math-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: -1; opacity: 0.15;
+            pointer-events: none; z-index: -1; opacity: 0.28;
         }
         .symbol {
             position: absolute; color: var(--apple-blue); font-weight: 800;
-            animation: float 20s linear infinite; font-size: 24px;
+            animation: float 20s linear infinite;
         }
         @keyframes float {
-            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
+            0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10%  { opacity: 1; }
+            90%  { opacity: 1; }
             100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
+
+        /* --- iMAC SCROLL ANIMATIONS --- */
+        .reveal-left  { opacity: 0; transform: translateX(-60px) rotate(-2deg); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.23,1,0.32,1); }
+        .reveal-right { opacity: 0; transform: translateX(60px) rotate(2deg);  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.23,1,0.32,1); }
+        .reveal-up    { opacity: 0; transform: translateY(50px) scale(0.96);   transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.23,1,0.32,1); }
+        .reveal-left.visible, .reveal-right.visible, .reveal-up.visible { opacity: 1; transform: none; }
+
+        /* iMac floating window cards */
+        .imac-window {
+            background: #fff; border-radius: 16px; overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+            transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s ease;
+        }
+        .imac-window:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.12);
+        }
+        .imac-titlebar {
+            background: #F5F5F7; padding: 10px 16px;
+            display: flex; align-items: center; gap: 7px;
+        }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot-r { background: #FF5F57; }
+        .dot-y { background: #FEBC2E; }
+        .dot-g { background: #28C840; }
 
         /* --- NAVIGATION --- */
         nav {
@@ -140,6 +206,13 @@ header('Content-Type: text/html; charset=utf-8');
 </head>
 <body>
 
+    <!-- INTRO SCREEN -->
+    <div id="intro-screen">
+        <div class="intro-logo">Caja<span>Ya</span></div>
+        <div class="intro-tag">El POS más rápido de Chile</div>
+        <div class="intro-bar"><div class="intro-bar-fill"></div></div>
+    </div>
+
     <div class="math-bg" id="mathBg"></div>
 
     <nav>
@@ -179,16 +252,16 @@ header('Content-Type: text/html; charset=utf-8');
     </section>
 
     <section class="features" id="beneficios">
-        <h2 class="section-title reveal">¿Por qué CajaYa es superior?</h2>
+        <h2 class="section-title reveal-up">¿Por qué CajaYa es superior?</h2>
         <div class="grid">
-            <div class="card reveal"><div style="font-size:32px;margin-bottom:16px">🧾</div><h3>Boletas SII Certificadas</h3><p>Emisión automática de Boletas y Facturas electrónicas. Certificado SII 2026 sin trámites extras.</p></div>
-            <div class="card reveal"><div style="font-size:32px;margin-bottom:16px">📶</div><h3>100% Offline</h3><p>Si se corta internet, sigues vendiendo. CajaYa sincroniza automáticamente al restaurarse la conexión.</p></div>
-            <div class="card reveal"><div style="font-size:32px;margin-bottom:16px">⚡</div><h3>Ventas Ultra-Rápidas</h3><p>Cobra en segundos con lector de código de barras, impresora térmica 58/80mm y gaveta automática.</p></div>
-            <div class="card reveal"><div style="font-size:32px;margin-bottom:16px">📊</div><h3>Reportes en Tiempo Real</h3><p>Dashboard con ventas del día, semana y mes. Cierre de caja automático con desglose completo.</p></div>
-            <div class="card reveal"><div style="font-size:32px;margin-bottom:16px">📦</div><h3>Control de Inventario</h3><p>Alertas automáticas de stock bajo. Gestiona miles de productos con código de barras o categorías.</p></div>
-            <div class="card reveal"><div style="font-size:32px;margin-bottom:16px">🔒</div><h3>Multi-Usuario Seguro</h3><p>Roles de vendedor, supervisor y administrador. Cada empleado con su acceso y límites definidos.</p></div>
+            <div class="imac-window reveal-left"><div class="imac-titlebar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div><div style="padding:30px"><div style="font-size:32px;margin-bottom:12px">🧾</div><h3>Boletas SII Certificadas</h3><p style="color:var(--apple-muted);margin-top:10px;line-height:1.6">Emisión automática de Boletas y Facturas electrónicas. Certificado SII 2026 sin trámites extras.</p></div></div>
+            <div class="imac-window reveal-up"><div class="imac-titlebar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div><div style="padding:30px"><div style="font-size:32px;margin-bottom:12px">📶</div><h3>100% Offline</h3><p style="color:var(--apple-muted);margin-top:10px;line-height:1.6">Si se corta internet, sigues vendiendo. CajaYa sincroniza automáticamente al restaurarse la conexión.</p></div></div>
+            <div class="imac-window reveal-right"><div class="imac-titlebar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div><div style="padding:30px"><div style="font-size:32px;margin-bottom:12px">⚡</div><h3>Ventas Ultra-Rápidas</h3><p style="color:var(--apple-muted);margin-top:10px;line-height:1.6">Cobra en segundos con lector de código de barras, impresora térmica 58/80mm y gaveta automática.</p></div></div>
+            <div class="imac-window reveal-right"><div class="imac-titlebar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div><div style="padding:30px"><div style="font-size:32px;margin-bottom:12px">📊</div><h3>Reportes en Tiempo Real</h3><p style="color:var(--apple-muted);margin-top:10px;line-height:1.6">Dashboard con ventas del día, semana y mes. Cierre de caja automático con desglose completo.</p></div></div>
+            <div class="imac-window reveal-up"><div class="imac-titlebar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div><div style="padding:30px"><div style="font-size:32px;margin-bottom:12px">📦</div><h3>Control de Inventario</h3><p style="color:var(--apple-muted);margin-top:10px;line-height:1.6">Alertas automáticas de stock bajo. Gestiona miles de productos con código de barras o categorías.</p></div></div>
+            <div class="imac-window reveal-left"><div class="imac-titlebar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div><div style="padding:30px"><div style="font-size:32px;margin-bottom:12px">🔒</div><h3>Multi-Usuario Seguro</h3><p style="color:var(--apple-muted);margin-top:10px;line-height:1.6">Roles de vendedor, supervisor y administrador. Cada empleado con su acceso y límites definidos.</p></div></div>
         </div>
-        <div style="text-align:center; margin-top:60px" class="reveal">
+        <div style="text-align:center; margin-top:60px" class="reveal-up">
             <img src="assets/cajaya_hardware_mockup.png" alt="Hardware CajaYa" style="max-width:700px; width:100%; border-radius:20px; box-shadow: 0 30px 60px rgba(0,0,0,0.08);">
         </div>
     </section>
@@ -285,18 +358,22 @@ header('Content-Type: text/html; charset=utf-8');
             container.appendChild(span);
         }
 
-        // iOS-style Scroll Reveal
-        const observer = new IntersectionObserver((entries) => {
+        // Ocultar intro y mostrar página
+        const intro = document.getElementById('intro-screen');
+        setTimeout(() => {
+            intro.addEventListener('animationend', () => intro.classList.add('gone'));
+        }, 2800);
+
+        // iOS-style Scroll Reveal (todos los tipos)
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry, i) => {
                 if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, i * 80);
-                    observer.unobserve(entry.target);
+                    setTimeout(() => entry.target.classList.add('visible'), i * 100);
+                    revealObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-up').forEach(el => revealObserver.observe(el));
     </script>
 </body>
 </html>
