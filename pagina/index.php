@@ -312,22 +312,23 @@ header('Content-Type: text/html; charset=utf-8');
             footer { padding: 30px 16px; }
         }
 
-        /* ===== FLOATING ICONS (reemplazo de math-bg) ===== */
-        .float-icons { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+        /* ===== FLOATING ICONS ===== */
+        .float-icons { position: fixed; inset: 0; pointer-events: none; z-index: -1; }
         .fi {
             position: absolute;
             font-size: 28px;
             opacity: 0;
             animation: floatIcon var(--dur, 18s) var(--delay, 0s) ease-in-out infinite;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.06));
         }
         @keyframes floatIcon {
             0%   { opacity: 0; transform: translateY(110vh) scale(0.7) rotate(-10deg); }
-            10%  { opacity: 0.35; }
-            50%  { opacity: 0.25; transform: translateY(30vh) scale(1.1) rotate(8deg); }
-            90%  { opacity: 0.2; }
-            100% { opacity: 0; transform: translateY(-10vh) scale(0.8) rotate(-5deg); }
+            10%  { opacity: 0.22; }
+            50%  { opacity: 0.15; transform: translateY(30vh) scale(1.05) rotate(6deg); }
+            90%  { opacity: 0.18; }
+            100% { opacity: 0; transform: translateY(-10vh) scale(0.85) rotate(-4deg); }
         }
+        /* Asegurar que todo el contenido quede encima de los iconos flotantes */
+        nav, section, footer, .carousel-hero { position: relative; z-index: 1; }
 
         /* ===== RESPONSIVE GLOBAL ===== */
         @media (max-width: 820px) {
