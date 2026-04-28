@@ -253,6 +253,7 @@ header('Content-Type: text/html; charset=utf-8');
             .t-grid { grid-template-columns: 1fr; }
             .features, .pricing, .faq, .testimonials { padding: 60px 16px; }
         }
+    </style>
 </head>
 <body>
 
