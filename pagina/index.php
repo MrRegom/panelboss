@@ -19,6 +19,7 @@ header('Content-Type: text/html; charset=utf-8');
             --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
+        html { scroll-behavior: smooth; max-width: 100%; overflow-x: hidden; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -198,51 +199,108 @@ header('Content-Type: text/html; charset=utf-8');
         .faq-item { background: #fff; margin-bottom: 15px; border-radius: 15px; padding: 25px; cursor: pointer; }
         .faq-item h4 { margin-bottom: 10px; color: var(--apple-blue); }
 
-        /* --- CAROUSEL HERO --- */
-        .carousel-hero { position: relative; width: 100%; }
-        .carousel-viewport { overflow: hidden; width: 100%; }
-        .carousel-track { display: flex; transition: transform 0.7s cubic-bezier(0.77,0,0.18,1); }
+        /* --- CAROUSEL HERO (Bulletproof) --- */
+        .carousel-hero {
+            position: relative;
+            width: 100%;
+            overflow: hidden;   /* clave: clip aqui */
+            background: var(--white);
+        }
+        .carousel-track {
+            display: flex;
+            will-change: transform;
+            transition: transform 0.75s cubic-bezier(0.77, 0, 0.18, 1);
+        }
         .carousel-slide {
-            min-width: 100%; flex-shrink: 0; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; text-align: center;
-            padding: 120px 24px 80px; box-sizing: border-box;
+            flex: 0 0 100vw;    /* exactamente el ancho del viewport */
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            padding: 110px 20px 70px;
+            box-sizing: border-box;
+            overflow: hidden;
         }
         .slide-badge {
-            display: inline-block; background: rgba(0,113,227,0.1); color: var(--apple-blue);
-            font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-            padding: 6px 16px; border-radius: 980px; border: 1px solid rgba(0,113,227,0.2);
-            margin-bottom: 24px;
+            display: inline-block;
+            background: rgba(0,113,227,0.08);
+            color: var(--apple-blue);
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            padding: 6px 16px; border-radius: 980px;
+            border: 1px solid rgba(0,113,227,0.15);
+            margin-bottom: 20px;
         }
-        .slide-h1 { font-size: clamp(2.2rem, 7vw, 5rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 16px; }
-        .slide-p { font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--apple-muted); max-width: 680px; margin: 0 auto 40px; line-height: 1.5; }
-        .slide-img { width: 90%; max-width: 900px; border-radius: 20px; box-shadow: 0 40px 80px rgba(0,0,0,0.1); margin-top: 40px; }
-        /* Carousel dots */
-        .carousel-dots { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
-        .c-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: 0.3s; cursor: pointer; }
-        .c-dot.active { background: var(--apple-blue); width: 24px; border-radius: 4px; }
-        /* Carousel arrows */
-        .c-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: 1px solid var(--border); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; z-index: 10; transition: 0.2s; backdrop-filter: blur(10px); }
-        .c-arrow:hover { background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .c-prev { left: 20px; }
-        .c-next { right: 20px; }
+        .slide-h1 {
+            font-size: clamp(1.8rem, 6vw, 4.5rem);
+            font-weight: 800; letter-spacing: -0.03em;
+            line-height: 1.1; margin-bottom: 16px;
+            max-width: 800px;
+        }
+        .slide-p {
+            font-size: clamp(0.95rem, 2vw, 1.2rem);
+            color: var(--apple-muted);
+            max-width: 600px; margin: 0 auto 32px;
+            line-height: 1.6;
+        }
+        .slide-img {
+            width: 100%; max-width: 820px;
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+            margin-top: 32px;
+            display: block;
+        }
+        /* Dots */
+        .carousel-dots {
+            display: flex; gap: 8px;
+            justify-content: center;
+            padding: 20px 0;
+        }
+        .c-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #D2D2D7; transition: all 0.3s;
+            cursor: pointer; border: none;
+        }
+        .c-dot.active { background: var(--apple-blue); width: 22px; border-radius: 4px; }
+        /* Arrows */
+        .c-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 50%; width: 44px; height: 44px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 20px; z-index: 10;
+            transition: 0.2s; backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .c-arrow:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+        .c-prev { left: 16px; }
+        .c-next { right: 16px; }
         /* Trust bar */
-        .trust-bar { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 12px; font-size: 13px; color: var(--apple-muted); }
+        .trust-bar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; font-size: 13px; color: var(--apple-muted); margin-bottom: 8px; }
 
+        /* ===== RESPONSIVE GLOBAL ===== */
         @media (max-width: 768px) {
-            .hero h1, .slide-h1 { font-size: 2.2rem; }
+            .slide-h1 { font-size: 1.8rem; }
+            .slide-p { font-size: 0.95rem; }
+            .carousel-slide { padding: 100px 16px 60px; }
+            .c-arrow { display: none; }
             .p-card.featured { transform: scale(1); }
             .nav-links { display: none; }
             .nav-content { padding: 0 16px; }
-            .section-title { font-size: 28px; }
-            .carousel-slide { padding: 120px 16px 80px; }
+            .section-title { font-size: 26px; margin-bottom: 30px; }
             .grid { grid-template-columns: 1fr; }
             .price-grid { grid-template-columns: 1fr; }
             .t-grid { grid-template-columns: 1fr; }
-            .c-arrow { display: none; }
             .features, .pricing, .faq, .testimonials { padding: 60px 16px; }
-            .p-card { padding: 30px 20px; }
-            .imac-frame { padding: 10px; border-radius: 16px; }
-            .btn-gmail { font-size: 14px; padding: 10px 18px; margin-left: 0; }
+            .p-card { padding: 28px 20px; }
+            .imac-frame { padding: 10px; border-radius: 14px; }
+            .btn-gmail { font-size: 14px; padding: 10px 16px; }
+            .slide-img { border-radius: 12px; }
+            .imac-window { border-radius: 14px; }
+            footer { padding: 30px 16px; }
         }
     </style>
 </head>
@@ -275,50 +333,49 @@ header('Content-Type: text/html; charset=utf-8');
     <section class="carousel-hero" id="hero">
         <button class="c-arrow c-prev" onclick="moveSlide(-1)">&#8249;</button>
         <button class="c-arrow c-next" onclick="moveSlide(1)">&#8250;</button>
-        <div class="carousel-viewport">
-            <div class="carousel-track" id="ctrack">
 
-            <!-- SLIDE 1: Vender más -->
+        <div class="carousel-track" id="ctrack">
+
+            <!-- SLIDE 1 -->
             <div class="carousel-slide">
-                <span class="slide-badge">✨ Nuevo 2026 — SII Certificado</span>
-                <h1 class="slide-h1">Tu negocio vende más.<br><span style="color:var(--apple-blue)">Tú trabajas menos.</span></h1>
-                <p class="slide-p">El punto de venta más rápido de Chile. 100% Offline, Boletas Electrónicas y cierre de caja automático.</p>
+                <span class="slide-badge">&#10024; Nuevo 2026 &mdash; SII Certificado</span>
+                <h1 class="slide-h1">Tu negocio vende m&aacute;s.<br><span style="color:var(--apple-blue)">T&uacute; trabajas menos.</span></h1>
+                <p class="slide-p">El punto de venta m&aacute;s r&aacute;pido de Chile. 100% Offline, Boletas Electr&oacute;nicas y cierre de caja autom&aacute;tico.</p>
                 <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:16px">
                     <a href="/mercadopago/checkout.php" class="btn-apple">Comprar Ahora</a>
                     <a href="/api/auth/google" class="btn-gmail">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
                         Prueba Gratis con Google
                     </a>
                 </div>
-                <div class="trust-bar"><span>✓ SII 2026</span><span>✓ +400 Pymes</span><span>✓ 30 Días Garantía</span></div>
-                <img src="assets/cajaya_pos_mockup.png" alt="CajaYa POS" class="slide-img reveal">
+                <div class="trust-bar"><span>&#10003; SII 2026</span><span>&#10003; +400 Pymes</span><span>&#10003; 30 D&iacute;as Garant&iacute;a</span></div>
+                <img src="assets/cajaya_pos_mockup.png" alt="CajaYa POS" class="slide-img">
             </div>
 
-            <!-- SLIDE 2: Offline Power -->
+            <!-- SLIDE 2 -->
             <div class="carousel-slide">
-                <span class="slide-badge">📶 100% Offline</span>
-                <h1 class="slide-h1">¿Se cayó el internet?<br><span style="color:var(--apple-blue)">CajaYa sigue vendiendo.</span></h1>
-                <p class="slide-p">Nuestra tecnología offline-first garantiza que nunca pierdas una venta. Sincroniza con el SII automáticamente al volver la conexión.</p>
+                <span class="slide-badge">&#128246; 100% Offline</span>
+                <h1 class="slide-h1">&iquest;Se cay&oacute; el internet?<br><span style="color:var(--apple-blue)">CajaYa sigue vendiendo.</span></h1>
+                <p class="slide-p">Tecnolog&iacute;a offline-first que garantiza que nunca pierdas una venta. Sincroniza con el SII autom&aacute;ticamente.</p>
                 <a href="/mercadopago/checkout.php" class="btn-apple">Ver Planes desde $20.000/mes</a>
-                <img src="assets/cajaya_pos_v2.png" alt="CajaYa Offline" class="slide-img" style="margin-top:40px">
+                <img src="assets/cajaya_pos_v2.png" alt="CajaYa Offline" class="slide-img">
             </div>
 
-            <!-- SLIDE 3: Hardware -->
+            <!-- SLIDE 3 -->
             <div class="carousel-slide">
-                <span class="slide-badge">🖨️ Listo para tu hardware</span>
+                <span class="slide-badge">&#128424; Listo para tu hardware</span>
                 <h1 class="slide-h1">Compatible con<br><span style="color:var(--apple-blue)">todo tu equipamiento.</span></h1>
-                <p class="slide-p">Impresoras térmicas 58/80mm, gaveta automática, lector de código de barras y pantalla para cliente. Plug & Play.</p>
-                <a href="/mercadopago/checkout.php" class="btn-apple">Empezar Ahora →</a>
-                <img src="assets/cajaya_hardware_mockup.png" alt="CajaYa Hardware" class="slide-img" style="margin-top:40px">
+                <p class="slide-p">Impresoras t&eacute;rmicas 58/80mm, gaveta autom&aacute;tica y lector de c&oacute;digo de barras. Plug &amp; Play.</p>
+                <a href="/mercadopago/checkout.php" class="btn-apple">Empezar Ahora &rarr;</a>
+                <img src="assets/cajaya_hardware_mockup.png" alt="CajaYa Hardware" class="slide-img">
             </div>
         </div>
 
         <div class="carousel-dots">
-            <div class="c-dot active" onclick="goSlide(0)"></div>
-            <div class="c-dot" onclick="goSlide(1)"></div>
-            <div class="c-dot" onclick="goSlide(2)"></div>
+            <button class="c-dot active" onclick="goSlide(0)"></button>
+            <button class="c-dot" onclick="goSlide(1)"></button>
+            <button class="c-dot" onclick="goSlide(2)"></button>
         </div>
-        </div><!-- /carousel-viewport -->
     </section>
 
     <section class="features" id="beneficios">
