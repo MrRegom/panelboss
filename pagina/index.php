@@ -198,9 +198,50 @@ header('Content-Type: text/html; charset=utf-8');
         .faq-item { background: #fff; margin-bottom: 15px; border-radius: 15px; padding: 25px; cursor: pointer; }
         .faq-item h4 { margin-bottom: 10px; color: var(--apple-blue); }
 
+        /* --- CAROUSEL HERO --- */
+        .carousel-hero { position: relative; overflow: hidden; min-height: 100svh; display: flex; align-items: center; }
+        .carousel-track { display: flex; width: 300%; transition: transform 0.7s cubic-bezier(0.77,0,0.18,1); }
+        .carousel-slide {
+            width: 33.333%; flex-shrink: 0; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center;
+            padding: 130px 24px 60px;
+        }
+        .slide-badge {
+            display: inline-block; background: rgba(0,113,227,0.1); color: var(--apple-blue);
+            font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+            padding: 6px 16px; border-radius: 980px; border: 1px solid rgba(0,113,227,0.2);
+            margin-bottom: 24px;
+        }
+        .slide-h1 { font-size: clamp(2.2rem, 7vw, 5rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 16px; }
+        .slide-p { font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--apple-muted); max-width: 680px; margin: 0 auto 40px; line-height: 1.5; }
+        .slide-img { width: 90%; max-width: 900px; border-radius: 20px; box-shadow: 0 40px 80px rgba(0,0,0,0.1); margin-top: 40px; }
+        /* Carousel dots */
+        .carousel-dots { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
+        .c-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: 0.3s; cursor: pointer; }
+        .c-dot.active { background: var(--apple-blue); width: 24px; border-radius: 4px; }
+        /* Carousel arrows */
+        .c-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: 1px solid var(--border); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; z-index: 10; transition: 0.2s; backdrop-filter: blur(10px); }
+        .c-arrow:hover { background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .c-prev { left: 20px; }
+        .c-next { right: 20px; }
+        /* Trust bar */
+        .trust-bar { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 12px; font-size: 13px; color: var(--apple-muted); }
+
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
+            .hero h1, .slide-h1 { font-size: 2.2rem; }
             .p-card.featured { transform: scale(1); }
+            .nav-links { display: none; }
+            .nav-content { padding: 0 16px; }
+            .section-title { font-size: 28px; }
+            .carousel-slide { padding: 120px 16px 80px; }
+            .grid { grid-template-columns: 1fr; }
+            .price-grid { grid-template-columns: 1fr; }
+            .t-grid { grid-template-columns: 1fr; }
+            .c-arrow { display: none; }
+            .features, .pricing, .faq, .testimonials { padding: 60px 16px; }
+            .p-card { padding: 30px 20px; }
+            .imac-frame { padding: 10px; border-radius: 16px; }
+            .btn-gmail { font-size: 14px; padding: 10px 18px; margin-left: 0; }
         }
     </style>
 </head>
@@ -208,7 +249,8 @@ header('Content-Type: text/html; charset=utf-8');
 
     <!-- INTRO SCREEN -->
     <div id="intro-screen">
-        <div class="intro-logo">Caja<span>Ya</span></div>
+        <img src="assets/img/logo.png" alt="CajaYa" style="height:60px;margin-bottom:20px;opacity:0;animation:introLogoIn 0.8s cubic-bezier(0.23,1,0.32,1) 0.3s forwards" onerror="this.style.display='none';document.getElementById('intro-txt').style.display='block'">
+        <div id="intro-txt" class="intro-logo" style="display:none">Caja<span>Ya</span></div>
         <div class="intro-tag">El POS más rápido de Chile</div>
         <div class="intro-bar"><div class="intro-bar-fill"></div></div>
     </div>
@@ -229,25 +271,51 @@ header('Content-Type: text/html; charset=utf-8');
         </div>
     </nav>
 
-    <section class="hero">
-        <h1>Tu negocio vende más.</h1>
-        <h2>Tú trabajas menos.</h2>
-        <p>El punto de venta certificado por el SII 2026 que funciona 100% offline.<br>Gestiona ventas, stock y facturación electrónica desde un solo lugar.</p>
-        <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-bottom: 20px;">
-            <a href="/mercadopago/checkout.php" class="btn-apple">Comprar Ahora</a>
-            <a href="/api/auth/google" class="btn-gmail">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-                Descarga de Prueba con Google
-            </a>
-        </div>
-        <p style="font-size:13px; color:var(--apple-muted)">✓ SII Certificado 2026 &nbsp;&nbsp; ✓ +400 Pymes Felices &nbsp;&nbsp; ✓ 30 Días de Garantía</p>
+    <section class="carousel-hero" id="hero">
+        <button class="c-arrow c-prev" onclick="moveSlide(-1)">&#8249;</button>
+        <button class="c-arrow c-next" onclick="moveSlide(1)">&#8250;</button>
 
-        <div class="imac-mockup reveal">
-            <div class="imac-frame">
-                <div class="imac-screen">
-                    <img src="assets/cajaya_pos_mockup.png" alt="CajaYa App - Punto de Venta">
+        <div class="carousel-track" id="ctrack">
+
+            <!-- SLIDE 1: Vender más -->
+            <div class="carousel-slide">
+                <span class="slide-badge">✨ Nuevo 2026 — SII Certificado</span>
+                <h1 class="slide-h1">Tu negocio vende más.<br><span style="color:var(--apple-blue)">Tú trabajas menos.</span></h1>
+                <p class="slide-p">El punto de venta más rápido de Chile. 100% Offline, Boletas Electrónicas y cierre de caja automático.</p>
+                <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:16px">
+                    <a href="/mercadopago/checkout.php" class="btn-apple">Comprar Ahora</a>
+                    <a href="/api/auth/google" class="btn-gmail">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                        Prueba Gratis con Google
+                    </a>
                 </div>
+                <div class="trust-bar"><span>✓ SII 2026</span><span>✓ +400 Pymes</span><span>✓ 30 Días Garantía</span></div>
+                <img src="assets/cajaya_pos_mockup.png" alt="CajaYa POS" class="slide-img reveal">
             </div>
+
+            <!-- SLIDE 2: Offline Power -->
+            <div class="carousel-slide">
+                <span class="slide-badge">📶 100% Offline</span>
+                <h1 class="slide-h1">¿Se cayó el internet?<br><span style="color:var(--apple-blue)">CajaYa sigue vendiendo.</span></h1>
+                <p class="slide-p">Nuestra tecnología offline-first garantiza que nunca pierdas una venta. Sincroniza con el SII automáticamente al volver la conexión.</p>
+                <a href="/mercadopago/checkout.php" class="btn-apple">Ver Planes desde $20.000/mes</a>
+                <img src="assets/cajaya_pos_v2.png" alt="CajaYa Offline" class="slide-img" style="margin-top:40px">
+            </div>
+
+            <!-- SLIDE 3: Hardware -->
+            <div class="carousel-slide">
+                <span class="slide-badge">🖨️ Listo para tu hardware</span>
+                <h1 class="slide-h1">Compatible con<br><span style="color:var(--apple-blue)">todo tu equipamiento.</span></h1>
+                <p class="slide-p">Impresoras térmicas 58/80mm, gaveta automática, lector de código de barras y pantalla para cliente. Plug & Play.</p>
+                <a href="/mercadopago/checkout.php" class="btn-apple">Empezar Ahora →</a>
+                <img src="assets/cajaya_hardware_mockup.png" alt="CajaYa Hardware" class="slide-img" style="margin-top:40px">
+            </div>
+        </div>
+
+        <div class="carousel-dots">
+            <div class="c-dot active" onclick="goSlide(0)"></div>
+            <div class="c-dot" onclick="goSlide(1)"></div>
+            <div class="c-dot" onclick="goSlide(2)"></div>
         </div>
     </section>
 
@@ -374,6 +442,32 @@ header('Content-Type: text/html; charset=utf-8');
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-up').forEach(el => revealObserver.observe(el));
+
+        // --- CAROUSEL ---
+        let current = 0;
+        const total = 3;
+        const track = document.getElementById('ctrack');
+        const dots = document.querySelectorAll('.c-dot');
+
+        function goSlide(n) {
+            current = (n + total) % total;
+            track.style.transform = `translateX(-${current * 33.333}%)`;
+            dots.forEach((d, i) => d.classList.toggle('active', i === current));
+        }
+        function moveSlide(dir) { goSlide(current + dir); }
+
+        // Autoplay cada 5 segundos
+        let autoplay = setInterval(() => moveSlide(1), 5000);
+        document.querySelector('.carousel-hero').addEventListener('mouseenter', () => clearInterval(autoplay));
+        document.querySelector('.carousel-hero').addEventListener('mouseleave', () => { autoplay = setInterval(() => moveSlide(1), 5000); });
+
+        // Swipe táctil para móvil
+        let startX = 0;
+        track.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+        track.addEventListener('touchend', e => {
+            const diff = startX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) moveSlide(diff > 0 ? 1 : -1);
+        });
     </script>
 </body>
 </html>
