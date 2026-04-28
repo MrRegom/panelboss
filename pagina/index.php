@@ -207,25 +207,28 @@ header('Content-Type: text/html; charset=utf-8');
             background: #fff;
             overflow: hidden;
         }
-        /* Slides apilados con position:absolute → crossfade en vez de slide */
-        .carousel-track { position: relative; width: 100%; min-height: 100svh; }
+        .carousel-track { position: relative; width: 100%; }
         .carousel-slide {
             position: absolute; inset: 0;
             display: grid;
             grid-template-columns: 1fr 1fr;
             align-items: center;
-            padding: 90px 6% 60px;
+            gap: 40px;
+            padding: 90px 8% 60px;
             box-sizing: border-box;
+            min-height: 100svh;
             opacity: 0;
             transform: scale(1.04);
             transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.23,1,0.32,1);
             pointer-events: none;
+            background: #fff;
         }
         .carousel-slide.active {
             opacity: 1;
             transform: scale(1);
             pointer-events: auto;
-            position: relative; /* active ocupa flujo normal para definir alto */
+            position: relative;
+            min-height: 100svh;
         }
         /* Columna texto */
         .slide-text { text-align: left; padding-right: 40px; }
@@ -282,19 +285,20 @@ header('Content-Type: text/html; charset=utf-8');
         .c-prev { left: 16px; } .c-next { right: 16px; }
         /* ===== RESPONSIVE ===== */
         @media (max-width: 820px) {
-            .carousel-slide {
-                grid-template-columns: 1fr;
+            .carousel-slide, .carousel-slide.active {
+                grid-template-columns: 1fr !important;
+                min-height: auto;
                 padding: 100px 20px 40px;
-                text-align: center;
             }
             .slide-text { padding-right: 0; text-align: center; }
             .slide-btns { justify-content: center; }
             .trust-bar { justify-content: center; }
-            .slide-visual { margin-top: 24px; }
+            .slide-visual { margin-top: 16px; order: 2; }
+            .slide-text { order: 1; }
             .slide-img { max-width: 100%; animation: none; }
             .c-arrow { display: none; }
-            .slide-h1 { font-size: 2rem; }
-            .slide-p { font-size: 0.97rem; max-width: 100%; }
+            .slide-h1 { font-size: 1.9rem; }
+            .slide-p { font-size: 0.96rem; max-width: 100%; }
             .nav-links { display: none; }
             .nav-content { padding: 0 16px; }
             .section-title { font-size: 26px; }
