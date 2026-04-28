@@ -6,7 +6,7 @@ header('Content-Type: text/html; charset=utf-8');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CajaYa - Apple Style POS</title>
+    <title>CajaYa - El Punto de Venta más rápido de Chile</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,7 +15,8 @@ header('Content-Type: text/html; charset=utf-8');
             --apple-silver: #F5F5F7;
             --apple-muted: #86868B;
             --white: #FFFFFF;
-            --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            --border: rgba(0,0,0,0.1);
+            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,161 +27,108 @@ header('Content-Type: text/html; charset=utf-8');
             font-family: 'Inter', -apple-system, sans-serif;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            scroll-behavior: smooth;
+        }
+
+        /* --- BACKGROUND ANIMATION (MATH SYMBOLS) --- */
+        .math-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: -1; opacity: 0.15;
+        }
+        .symbol {
+            position: absolute; color: var(--apple-blue); font-weight: 800;
+            animation: float 20s linear infinite; font-size: 24px;
+        }
+        @keyframes float {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
         /* --- NAVIGATION --- */
         nav {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            height: 52px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 2000;
+            border-bottom: 1px solid var(--border);
+            height: 52px; display: flex; align-items: center; justify-content: center;
+            position: fixed; width: 100%; top: 0; z-index: 2000;
         }
-
-        .nav-content { width: 1024px; display: flex; justify-content: space-between; padding: 0 20px; }
-        .logo { font-weight: 700; font-size: 1.2rem; color: var(--apple-gray); text-decoration: none; letter-spacing: -0.5px; }
-        .nav-links a { color: var(--apple-gray); text-decoration: none; font-size: 12px; margin-left: 30px; opacity: 0.8; font-weight: 400; transition: 0.3s; }
-        .nav-links a:hover { opacity: 1; }
-
-        /* --- HERO SECTION (SPECTACULAR) --- */
-        .hero {
-            padding: 160px 20px 80px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 10vw, 5.5rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.05;
-            margin-bottom: 20px;
-        }
-
-        .hero h2 {
-            font-size: clamp(1.5rem, 4vw, 2.8rem);
-            color: var(--apple-blue);
-            font-weight: 600;
-            margin-bottom: 40px;
-        }
-
-        .hero p {
-            font-size: 21px;
-            color: var(--apple-muted);
-            max-width: 700px;
-            margin-bottom: 50px;
-            line-height: 1.4;
-        }
-
-        .cta-group { display: flex; gap: 20px; align-items: center; }
-        .btn-buy {
-            background: var(--apple-blue);
-            color: white;
-            padding: 14px 28px;
-            border-radius: 980px;
-            font-size: 17px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        .btn-buy:hover { transform: scale(1.05); background: #0077ED; }
+        .nav-content { width: 1024px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .logo-box { height: 30px; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-box img { height: 100%; }
+        .logo-text { font-weight: 700; color: var(--apple-gray); font-size: 1.2rem; letter-spacing: -0.5px; }
         
-        .btn-learn { color: var(--apple-blue); text-decoration: none; font-size: 19px; font-weight: 500; }
-        .btn-learn:after { content: ' >'; }
-        .btn-learn:hover { text-decoration: underline; }
+        .nav-links a { color: var(--apple-gray); text-decoration: none; font-size: 12px; margin-left: 30px; opacity: 0.8; transition: 0.3s; }
+        .nav-links a:hover { opacity: 1; color: var(--apple-blue); }
 
-        /* --- IMAC MOCKUP EFFECT --- */
-        .mockup-container {
-            width: 100%;
-            max-width: 1100px;
-            margin: 80px auto 0;
-            padding: 0 20px;
+        /* --- HERO --- */
+        .hero { padding: 150px 20px 60px; text-align: center; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.8rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 15px; }
+        .hero h2 { font-size: clamp(1.2rem, 3vw, 2.2rem); color: var(--apple-blue); font-weight: 600; margin-bottom: 30px; }
+        .hero p { font-size: 21px; color: var(--apple-muted); max-width: 800px; margin: 0 auto 40px; }
+
+        .btn-apple {
+            background: var(--apple-blue); color: white; padding: 12px 28px; border-radius: 980px;
+            font-size: 17px; font-weight: 500; text-decoration: none; transition: var(--transition);
+            display: inline-block;
+        }
+        .btn-apple:hover { transform: scale(1.05); background: #0077ED; box-shadow: 0 10px 20px rgba(0,113,227,0.2); }
+
+        /* --- IMAC MOCKUP --- */
+        .imac-mockup {
+            max-width: 1000px; margin: 60px auto 0; padding: 0 20px;
             perspective: 2000px;
         }
-
         .imac-frame {
-            background: #000;
-            padding: 2.5%;
-            border-radius: 30px 30px 0 0;
-            box-shadow: 0 50px 100px rgba(0,0,0,0.1);
-            transform: rotateX(5deg);
-            transition: var(--transition);
+            background: #000; padding: 20px; border-radius: 30px 30px 5px 5px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.1); transform: rotateX(5deg);
         }
-
-        .imac-screen {
-            background: var(--apple-silver);
-            aspect-ratio: 16/9;
-            border-radius: 10px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
+        .imac-screen { background: #fff; border-radius: 10px; overflow: hidden; aspect-ratio: 16/9; }
         .imac-screen img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- FEATURES (APPLE GRID) --- */
-        .features { background: var(--apple-silver); padding: 100px 20px; text-align: center; }
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 20px;
-            max-width: 1080px;
-            margin: 0 auto;
-        }
+        /* --- FEATURES GRID --- */
+        .section-title { font-size: 40px; font-weight: 700; text-align: center; margin-bottom: 60px; letter-spacing: -1px; }
+        .features { padding: 100px 5%; background: var(--apple-silver); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+        .card { background: #fff; padding: 40px; border-radius: 24px; transition: var(--transition); border: 1px solid transparent; }
+        .card:hover { transform: translateY(-5px); border-color: var(--apple-blue); }
+        .card h3 { font-size: 24px; margin-bottom: 15px; }
+        .card p { color: var(--apple-muted); line-height: 1.6; }
 
-        .feature-card {
-            background: var(--white);
-            border-radius: 28px;
-            padding: 50px;
-            text-align: left;
-            transition: var(--transition);
-            overflow: hidden;
-            position: relative;
-        }
+        /* --- PRICING --- */
+        .pricing { padding: 100px 5%; background: #fff; }
+        .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; }
+        .p-card { padding: 50px 30px; border-radius: 32px; border: 1px solid var(--border); text-align: center; transition: 0.3s; }
+        .p-card.featured { border: 2px solid var(--apple-blue); position: relative; transform: scale(1.05); }
+        .p-card.featured::top { content: 'Recomendado'; }
+        .p-price { font-size: 48px; font-weight: 700; margin: 20px 0; }
 
-        .feature-card:hover { transform: scale(1.01); }
-        .feature-card h3 { font-size: 28px; font-weight: 600; margin-bottom: 15px; }
-        .feature-card p { font-size: 17px; color: var(--apple-muted); line-height: 1.5; }
-
-        /* --- PRICING (LUXURY) --- */
-        .pricing { padding: 120px 20px; text-align: center; }
-        .price-card {
-            max-width: 500px;
-            margin: 0 auto;
-            background: var(--white);
-            border: 1px solid var(--apple-silver);
-            border-radius: 30px;
-            padding: 60px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.03);
-        }
-        .price-tag { font-size: 64px; font-weight: 700; margin: 20px 0; }
-        .price-label { color: var(--apple-muted); text-transform: uppercase; letter-spacing: 2px; font-size: 12px; font-weight: 700; }
+        /* --- FAQ --- */
+        .faq { padding: 100px 5%; background: var(--apple-silver); }
+        .faq-box { max-width: 800px; margin: 0 auto; text-align: left; }
+        .faq-item { background: #fff; margin-bottom: 15px; border-radius: 15px; padding: 25px; cursor: pointer; }
+        .faq-item h4 { margin-bottom: 10px; color: var(--apple-blue); }
 
         @media (max-width: 768px) {
-            .feature-grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 3.5rem; }
+            .hero h1 { font-size: 3rem; }
+            .p-card.featured { transform: scale(1); }
         }
     </style>
 </head>
 <body>
 
+    <div class="math-bg" id="mathBg"></div>
+
     <nav>
         <div class="nav-content">
-            <a href="#" class="logo">CajaYa</a>
+            <a href="/" class="logo-box">
+                <img src="assets/img/logo.png" alt="Logo" onerror="this.style.display='none'">
+                <span class="logo-text">CajaYa</span>
+            </a>
             <div class="nav-links">
-                <a href="#funciona">Cómo funciona</a>
+                <a href="#beneficios">Beneficios</a>
                 <a href="#planes">Planes</a>
-                <a href="/mercadopago/checkout.php" class="btn-buy" style="padding: 6px 15px; font-size: 12px;">Comprar</a>
+                <a href="#faq">Preguntas</a>
             </div>
         </div>
     </nav>
@@ -188,44 +136,95 @@ header('Content-Type: text/html; charset=utf-8');
     <section class="hero">
         <h1>Tu negocio vende más.</h1>
         <h2>Tú trabajas menos.</h2>
-        <p>Controla tus ventas, stock y facturación con el sistema POS más rápido y elegante de Chile. 100% Offline y Certificado SII 2026.</p>
-        <div class="cta-group">
-            <a href="/mercadopago/checkout.php" class="btn-buy">Empezar ahora</a>
-            <a href="https://wa.me/56912345678" class="btn-learn">Consultar por WhatsApp</a>
-        </div>
+        <p>El punto de venta certificado por el SII 2026 que funciona 100% offline. Potencia tu gestión con la elegancia de Apple y la robustez de CajaYa.</p>
+        <a href="/mercadopago/checkout.php" class="btn-apple">Empezar Prueba Gratis</a>
 
-        <div class="mockup-container">
+        <div class="imac-mockup">
             <div class="imac-frame">
                 <div class="imac-screen">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000" alt="Dashboard CajaYa">
+                    <!-- FOTO REAL DE LA APP -->
+                    <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?auto=format&fit=crop&q=80&w=1200" alt="App Real CajaYa">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="features" id="funciona">
-        <div class="feature-grid">
-            <div class="feature-card">
-                <h3>Dashboard Inteligente</h3>
-                <p>Mira tus ganancias reales al instante. Gráficos de ventas y alertas de stock bajo automáticas.</p>
-                <div style="margin-top: 30px; height: 200px; background: var(--apple-silver); border-radius: 15px;"></div>
+    <section class="features" id="beneficios">
+        <h2 class="section-title">¿Por qué CajaYa es superior?</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Integración SII</h3>
+                <p>Emisión automática de Boletas y Facturas electrónicas. Cumple con la normativa 2026 sin esfuerzo.</p>
             </div>
-            <div class="feature-card">
-                <h3>Ventas Ultra-Rápidas</h3>
-                <p>Vende 100% Offline. Compatible con gavetas, scanners e impresoras térmicas de 58/80mm.</p>
-                <div style="margin-top: 30px; height: 200px; background: var(--apple-silver); border-radius: 15px;"></div>
+            <div class="card">
+                <h3>100% Offline</h3>
+                <p>¿Se cayó el internet? No importa. CajaYa sigue vendiendo y sincroniza todo cuando vuelve la conexión.</p>
+            </div>
+            <div class="card">
+                <h3>Control Total</h3>
+                <p>Gestión de inventario, reportes de ventas y cierre de caja en un solo clic desde tu celular o PC.</p>
             </div>
         </div>
     </section>
 
     <section class="pricing" id="planes">
-        <div class="price-card">
-            <span class="price-label">Oferta Limitada</span>
-            <div class="price-tag">$180.000</div>
-            <p style="margin-bottom: 40px;">Licencia Perpetua. Sin mensualidades. Actualizaciones 2026 incluidas.</p>
-            <a href="/mercadopago/checkout.php" class="btn-buy" style="display: block; width: 100%;">Comprar Licencia Ahora</a>
+        <h2 class="section-title">Planes para cada etapa</h2>
+        <div class="price-grid">
+            <div class="p-card">
+                <h3>Plan Básico</h3>
+                <div class="p-price">$20.000<span style="font-size: 16px; font-weight: 400;">/mes</span></div>
+                <p>Ideal para negocios que comienzan.</p>
+                <hr style="margin: 20px 0; opacity: 0.1;">
+                <a href="/mercadopago/checkout.php" class="btn-apple" style="background: transparent; color: var(--apple-blue); border: 1px solid var(--apple-blue);">Suscribirse</a>
+            </div>
+            <div class="p-card featured">
+                <h3>Plan Lifetime</h3>
+                <div class="p-price">$180.000</div>
+                <p>Único pago para siempre. Ahorras $360.000 el primer año.</p>
+                <hr style="margin: 20px 0; opacity: 0.1;">
+                <a href="/mercadopago/checkout.php" class="btn-apple">Comprar Ahora</a>
+            </div>
+            <div class="p-card">
+                <h3>Plan Premium</h3>
+                <div class="p-price">$35.000<span style="font-size: 16px; font-weight: 400;">/mes</span></div>
+                <p>Soporte prioritario y multi-caja.</p>
+                <hr style="margin: 20px 0; opacity: 0.1;">
+                <a href="/mercadopago/checkout.php" class="btn-apple" style="background: transparent; color: var(--apple-blue); border: 1px solid var(--apple-blue);">Suscribirse</a>
+            </div>
         </div>
     </section>
 
+    <section class="faq" id="faq">
+        <h2 class="section-title">Preguntas Frecuentes</h2>
+        <div class="faq-box">
+            <div class="faq-item">
+                <h4>¿Cómo recibo mi licencia?</h4>
+                <p>Tras el pago con Mercado Pago, recibirás un correo instantáneo con tus credenciales y el link de descarga.</p>
+            </div>
+            <div class="faq-item">
+                <h4>¿Realmente funciona sin internet?</h4>
+                <p>Sí. Nuestra arquitectura permite vender localmente y sincronizar con el SII automáticamente al detectar conexión.</p>
+            </div>
+            <div class="faq-item">
+                <h4>¿Tienen soporte técnico?</h4>
+                <p>Contamos con un equipo experto en Chile disponible vía WhatsApp para ayudarte en la instalación y uso diario.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const symbols = ['+', '-', '%', '$', '=', '×', '÷'];
+        const container = document.getElementById('mathBg');
+        for (let i = 0; i < 25; i++) {
+            const span = document.createElement('span');
+            span.className = 'symbol';
+            span.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+            span.style.left = Math.random() * 100 + 'vw';
+            span.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            span.style.animationDelay = (Math.random() * 20) + 's';
+            span.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            container.appendChild(span);
+        }
+    </script>
 </body>
 </html>
