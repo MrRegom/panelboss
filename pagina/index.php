@@ -311,101 +311,54 @@ header('Content-Type: text/html; charset=utf-8');
             .imac-window { border-radius: 14px; }
             footer { padding: 30px 16px; }
         }
-        .carousel-track {
-            display: flex;
-            will-change: transform;
-            transition: transform 0.75s cubic-bezier(0.77, 0, 0.18, 1);
+
+        /* ===== FLOATING ICONS (reemplazo de math-bg) ===== */
+        .float-icons { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+        .fi {
+            position: absolute;
+            font-size: 28px;
+            opacity: 0;
+            animation: floatIcon var(--dur, 18s) var(--delay, 0s) ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.06));
         }
-        .carousel-slide {
-            flex: 0 0 100vw;    /* exactamente el ancho del viewport */
-            width: 100vw;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            text-align: center;
-            padding: 110px 20px 70px;
-            box-sizing: border-box;
-            overflow: hidden;
+        @keyframes floatIcon {
+            0%   { opacity: 0; transform: translateY(110vh) scale(0.7) rotate(-10deg); }
+            10%  { opacity: 0.35; }
+            50%  { opacity: 0.25; transform: translateY(30vh) scale(1.1) rotate(8deg); }
+            90%  { opacity: 0.2; }
+            100% { opacity: 0; transform: translateY(-10vh) scale(0.8) rotate(-5deg); }
         }
-        .slide-badge {
-            display: inline-block;
-            background: rgba(0,113,227,0.08);
-            color: var(--apple-blue);
-            font-size: 11px; font-weight: 700;
-            letter-spacing: 2px; text-transform: uppercase;
-            padding: 6px 16px; border-radius: 980px;
-            border: 1px solid rgba(0,113,227,0.15);
-            margin-bottom: 20px;
-        }
-        .slide-h1 {
-            font-size: clamp(1.8rem, 6vw, 4.5rem);
-            font-weight: 800; letter-spacing: -0.03em;
-            line-height: 1.1; margin-bottom: 16px;
-            max-width: 800px;
-        }
-        .slide-p {
-            font-size: clamp(0.95rem, 2vw, 1.2rem);
-            color: var(--apple-muted);
-            max-width: 600px; margin: 0 auto 32px;
-            line-height: 1.6;
-        }
-        .slide-img {
-            width: 100%; max-width: 820px;
-            border-radius: 16px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
-            margin-top: 32px;
-            display: block;
-        }
-        /* Dots */
-        .carousel-dots {
-            display: flex; gap: 8px;
-            justify-content: center;
-            padding: 20px 0;
-        }
-        .c-dot {
-            width: 8px; height: 8px; border-radius: 50%;
-            background: #D2D2D7; transition: all 0.3s;
-            cursor: pointer; border: none;
-        }
-        .c-dot.active { background: var(--apple-blue); width: 22px; border-radius: 4px; }
-        /* Arrows */
-        .c-arrow {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(255,255,255,0.9);
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 50%; width: 44px; height: 44px;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; font-size: 20px; z-index: 10;
-            transition: 0.2s; backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        }
-        .c-arrow:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
-        .c-prev { left: 16px; }
-        .c-next { right: 16px; }
-        /* Trust bar */
-        .trust-bar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; font-size: 13px; color: var(--apple-muted); margin-bottom: 8px; }
 
         /* ===== RESPONSIVE GLOBAL ===== */
-        @media (max-width: 768px) {
-            .slide-h1 { font-size: 1.8rem; }
-            .slide-p { font-size: 0.95rem; }
-            .carousel-slide { padding: 100px 16px 60px; }
+        @media (max-width: 820px) {
+            .carousel-slide, .carousel-slide.active {
+                display: flex !important;
+                flex-direction: column !important;
+                min-height: auto !important;
+                padding: 100px 20px 50px !important;
+            }
+            .slide-text { padding-right: 0; text-align: center; order: 1; }
+            .slide-visual { order: 2; margin-top: 24px; }
+            .slide-btns { justify-content: center; }
+            .trust-bar { justify-content: center; }
+            .slide-img { max-width: 100%; animation: none; }
             .c-arrow { display: none; }
-            .p-card.featured { transform: scale(1); }
+            .slide-h1 { font-size: 1.9rem; }
+            .slide-p { font-size: 0.95rem; max-width: 100%; }
             .nav-links { display: none; }
             .nav-content { padding: 0 16px; }
-            .section-title { font-size: 26px; margin-bottom: 30px; }
+            .section-title { font-size: 24px; margin-bottom: 30px; }
             .grid { grid-template-columns: 1fr; }
             .price-grid { grid-template-columns: 1fr; }
             .t-grid { grid-template-columns: 1fr; }
+            .p-card.featured { transform: scale(1); }
             .features, .pricing, .faq, .testimonials { padding: 60px 16px; }
             .p-card { padding: 28px 20px; }
-            .imac-frame { padding: 10px; border-radius: 14px; }
+            .imac-frame { padding: 8px; border-radius: 12px; }
             .btn-gmail { font-size: 14px; padding: 10px 16px; }
-            .slide-img { border-radius: 12px; }
-            .imac-window { border-radius: 14px; }
+            .imac-window { border-radius: 12px; }
             footer { padding: 30px 16px; }
+            .float-icons { display: none; }
         }
     </style>
 </head>
@@ -419,7 +372,7 @@ header('Content-Type: text/html; charset=utf-8');
         <div class="intro-bar"><div class="intro-bar-fill"></div></div>
     </div>
 
-    <div class="math-bg" id="mathBg"></div>
+    <div class="float-icons" id="floatIcons"></div>
 
     <nav>
         <div class="nav-content">
@@ -618,6 +571,25 @@ header('Content-Type: text/html; charset=utf-8');
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-up').forEach(el => revealObserver.observe(el));
+
+        // --- FLOATING ICONS (CajaYa themed) ---
+        const cajaIcons = ['🧾','💳','🏪','📊','⚡','💰','🔒','📱','🖨️','☁️','📦','🛒','💵','📈','🏷️','🧮'];
+        const floatContainer = document.getElementById('floatIcons');
+        cajaIcons.forEach((icon, i) => {
+            const el = document.createElement('span');
+            el.className = 'fi';
+            el.textContent = icon;
+            el.style.cssText = `left:${5 + (i * 6.2) % 90}vw; --dur:${14 + (i*3)%12}s; --delay:-${i*1.5}s;`;
+            floatContainer.appendChild(el);
+        });
+        // Segunda tanda desfasada
+        cajaIcons.slice(0, 8).forEach((icon, i) => {
+            const el = document.createElement('span');
+            el.className = 'fi';
+            el.textContent = icon;
+            el.style.cssText = `left:${(i * 11 + 3) % 92}vw; --dur:${16 + (i*2)%10}s; --delay:-${i*2.3+7}s; font-size:${20 + (i*4)%14}px;`;
+            floatContainer.appendChild(el);
+        });
 
         // --- CAROUSEL CROSSFADE+ZOOM ---
         let current = 0;
