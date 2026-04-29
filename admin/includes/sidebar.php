@@ -36,6 +36,12 @@
                         <p>Licencias</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="./planes.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'planes.php' ? 'active' : '' ?>">
+                        <i class="nav-icon fa-solid fa-tags"></i>
+                        <p>Gestión de Planes</p>
+                    </a>
+                </li>
 
                 <li class="nav-header x-small text-muted mb-2 px-3 mt-4">SISTEMA</li>
                 <li class="nav-item">
