@@ -19,60 +19,78 @@ class MercadoPagoService
         \MercadoPago\MercadoPagoConfig::setAccessToken($accessToken);
     }
 
-    /**
-     * Crea una preferencia de pago (Link de cobro) usando SDK v3
-     */
     public function createPreference($title, $price, $external_reference)
     {
-        try {
-            $client = new \MercadoPago\Client\Preference\PreferenceClient();
-            
-            $preference = $client->create([
-                "items" => [
-                    [
-                        "id" => $external_reference,
-                        "title" => $title,
-                        "quantity" => 1,
-                        "unit_price" => (float)$price,
-                        "currency_id" => "CLP"
-                    ]
-                ],
-                "external_reference" => $external_reference
-            ]);
+        $accessToken = $_ENV['MP_ACCESS_TOKEN'] ?? '';
+        $url = "https://api.mercadopago.com/checkout/preferences";
+        
+        $data = [
+            "items" => [
+                [
+                    "id" => $external_reference,
+                    "title" => $title,
+                    "quantity" => 1,
+                    "unit_price" => (float)$price,
+                    "currency_id" => "CLP"
+                ]
+            ],
+            "back_urls" => [
+                "success" => "https://cajaya.cl/mercadopago/confirm.php?status=success",
+                "failure" => "https://cajaya.cl/mercadopago/confirm.php?status=failure",
+                "pending" => "https://cajaya.cl/mercadopago/confirm.php?status=pending"
+            ],
+            "auto_return" => "approved",
+            "external_reference" => $external_reference,
+            "notification_url" => "https://cajaya.cl/mercadopago/webhook.php"
+        ];
 
-            return $preference->init_point; 
-        } catch (\Exception $e) {
-            $this->logError($e);
-            return null;
-        }
-    }
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Authorization: Bearer $accessToken",
+            "Content-Type: application/json",
+            "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        ]);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
 
-    /**
-     * Obtiene los detalles de un pago específico por su ID.
-     * Útil para validar notificaciones de Webhook.
-     */
-    public function getPayment($paymentId)
-    {
-        try {
-            $client = new \MercadoPago\Client\Payment\PaymentClient();
-            return $client->get($paymentId);
-        } catch (\Exception $e) {
-            $this->logError($e);
-            return null;
-        }
-    }
+        $result = json_decode($response, true);
 
-    private function logError(\Exception $e)
-    {
-        $errorMsg = $e->getMessage();
-        if (method_exists($e, 'getApiResponse')) {
-            $response = $e->getApiResponse();
-            $errorMsg .= " - Detalle: " . json_encode($response->getContent());
+        if ($httpCode >= 200 && $httpCode < 300 && isset($result['init_point'])) {
+            return $result['init_point'];
         }
-        error_log("Mercado Pago v3 Error: " . $errorMsg);
+
+        $errorMsg = "HTTP $httpCode - " . $response;
+        error_log("Error Manual MP: " . $errorMsg);
         
         if (ini_get('display_errors')) {
-            echo "Error detallado de MP: " . $errorMsg;
+            echo "Error detallado de MP (cURL): " . $errorMsg;
         }
+
+        return null;
+    }
+
+    public function getPayment($paymentId)
+    {
+        $accessToken = $_ENV['MP_ACCESS_TOKEN'] ?? '';
+        $url = "https://api.mercadopago.com/v1/payments/$paymentId";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Authorization: Bearer $accessToken",
+            "User-Agent: CajaYa-POS/1.0"
+        ]);
+        
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return json_decode($response, true);
     }
 }
