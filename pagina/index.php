@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php — Landing Page CAJAYA CLEAN MODERN (NO IMAGE TEXT DISTRACTION)
+ * index.php — Landing Page CAJAYA CLEAN & ELITE (MAX PURITY)
  */
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/Config/Database.php';
@@ -21,7 +21,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>CajaYa — El POS Definitivo para tu Minimarket</title>
+    <title>CajaYa — El POS Líder para tu Minimarket</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -46,24 +46,31 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .nav-content { width: 1400px; display: flex; justify-content: space-between; align-items: center; padding: 0 50px; }
         .nav-logo img { height: 40px; }
 
-        /* Hero Refinado */
+        /* Hero Elite - Eliminación de distracciones */
         .hero { position: relative; width: 100%; height: 85vh; background: #000; overflow: hidden; z-index: 1000; margin-top: 112px; }
         .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.5s ease; display: flex; align-items: center; }
         .slide.active { opacity: 1; }
         
-        .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden; }
+        .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: #000; }
         .slide-bg img { 
             width: 100%; 
             height: 100%; 
             object-fit: cover; 
-            filter: brightness(0.6) blur(2px); /* Blur para ocultar errores de la imagen AI */
-            transform: scale(1.1); /* Compensar el blur en los bordes */
+            filter: brightness(0.5) blur(1px);
+            transform: scale(1.1);
         }
+        /* Bloqueo sólido a la izquierda para borrar letras de la IA */
         .slide-bg::after { 
             content: ''; 
             position: absolute; 
             top: 0; left: 0; width: 100%; height: 100%; 
-            background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 60%, transparent 100%); 
+            background: linear-gradient(90deg, #000 0%, #000 35%, rgba(0,0,0,0.4) 70%, transparent 100%); 
+        }
+
+        /* Variación para la segunda slide */
+        .slide.alt-view .slide-bg img { 
+            transform: scale(1.2) scaleX(-1); /* Espejo para que parezca otra foto */
+            filter: brightness(0.4) grayscale(0.2);
         }
 
         .slide-content { position: relative; z-index: 10; width: 1200px; margin: 0 auto; padding: 0 60px; color: #fff; }
@@ -117,7 +124,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
 <body>
 
     <div id="preloader">
-        <img src="assets/img/logo.png" class="preloader-logo" alt="CajaYa Minimarket">
+        <img src="assets/img/logo.png" class="preloader-logo" alt="CajaYa Elite">
     </div>
 
     <div class="test-banner">🚀 EL POS Nº1 PARA MINIMARKETS EN CHILE — INTEGRACIÓN SII 2026 🚀</div>
@@ -125,7 +132,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
     <nav id="navbar">
         <div class="nav-content">
             <a href="#" class="nav-logo"><img src="assets/img/logo.png" alt="CajaYa Official"></a>
-            <div style="font-weight:800; font-size:11px; color:var(--brand-purple); letter-spacing:2px;">ESTÁNDAR COMERCIAL CHILENO</div>
+            <div style="font-weight:800; font-size:11px; color:var(--brand-purple); letter-spacing:2px;">TECNOLOGÍA PARA TU ÉXITO</div>
         </div>
     </nav>
 
@@ -134,16 +141,16 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             <div class="slide active">
                 <div class="slide-bg"><img src="banner1.png" alt="Minimarket Clean"></div>
                 <div class="slide-content">
-                    <h1>Tu Negocio Merece<br>Vender con Elegancia.</h1>
-                    <p>CajaYa es la tecnología que transforma tu minimarket. Rapidez absoluta, control total de stock y cumplimiento SII garantizado.</p>
-                    <a href="#planes" class="btn-brand">Ver Planes de Éxito</a>
+                    <h1>Vende con Rapidez,<br>Controla con Elegancia.</h1>
+                    <p>CajaYa es la herramienta definitiva para tu minimarket. Boletas SII automáticas y control de stock en la palma de tu mano.</p>
+                    <a href="#planes" class="btn-brand">Ver Planes de Inversión</a>
                 </div>
             </div>
-            <div class="slide">
-                <div class="slide-bg"><img src="banner2.png" alt="POS Modern"></div>
+            <div class="slide alt-view">
+                <div class="slide-bg"><img src="banner1.png" alt="POS Modern"></div>
                 <div class="slide-content">
-                    <h1>Vende Sin Pausas,<br>Incluso Sin Internet.</h1>
-                    <p>Nuestra arquitectura Offline-First asegura que tu caja nunca se detenga. El aliado perfecto para el comerciante chileno moderno.</p>
+                    <h1>Tu Negocio Merece<br>Lo Mejor de la Tecnología.</h1>
+                    <p>Diseñado para el comercio chileno moderno. Offline-First para que nunca dejes de vender, pase lo que pase.</p>
                     <a href="#planes" class="btn-brand" style="background:var(--brand-blue)">Comenzar Ahora</a>
                 </div>
             </div>
@@ -158,7 +165,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 <ul class="p-features">
                     <li><i class="fa-solid fa-check-circle"></i> 1 Punto de Venta Full</li>
                     <li><i class="fa-solid fa-check-circle"></i> Boletas Electrónicas SII</li>
-                    <li><i class="fa-solid fa-check-circle"></i> Inventario en Tiempo Real</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Inventario Inteligente</li>
                     <li><i class="fa-solid fa-check-circle"></i> Soporte VIP WhatsApp</li>
                 </ul>
                 <a href="/mercadopago/checkout.php?plan=mensual" class="btn-p outline">Seleccionar</a>
@@ -166,11 +173,11 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             <div class="p-card featured reveal">
                 <h4>PLAN LIFETIME</h4>
                 <div class="p-price">$<?php echo $pLifetime; ?></div>
-                <p style="font-size:12px; color:var(--gray); margin-top:-30px; margin-bottom:30px; font-weight:800;">PROPIEDAD DEFINITIVA. PAGO ÚNICO.</p>
+                <p style="font-size:12px; color:var(--gray); margin-top:-30px; margin-bottom:30px; font-weight:800;">TUYO PARA SIEMPRE. PAGO ÚNICO.</p>
                 <ul class="p-features">
                     <li><i class="fa-solid fa-check-circle"></i> 3 Puntos de Venta Full</li>
                     <li><i class="fa-solid fa-check-circle"></i> Boletas y Facturas SII</li>
-                    <li><i class="fa-solid fa-check-circle"></i> Analítica de Negocio</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Analítica Business Intelligence</li>
                     <li><i class="fa-solid fa-check-circle"></i> Actualizaciones Eternas</li>
                 </ul>
                 <a href="/mercadopago/checkout.php?plan=lifetime" class="btn-p solid">Comprar Licencia</a>
@@ -193,11 +200,11 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         <div class="f-grid">
             <div class="f-col">
                 <img src="assets/img/logo.png" style="height:45px; margin-bottom:30px; filter:brightness(0) invert(1);" alt="CajaYa Logo">
-                <p style="opacity:0.4; line-height:1.8;">Impulsando el crecimiento de los minimarkets y almacenes en todo Chile.</p>
+                <p style="opacity:0.4; line-height:1.8;">Impulsando la transformación digital de los minimarkets en todo Chile.</p>
             </div>
             <div class="f-col">
                 <h4>Producto</h4>
-                <a href="#">Tecnología SII</a>
+                <a href="#">Motor SII</a>
                 <a href="#planes">Precios</a>
             </div>
             <div class="f-col">
@@ -207,7 +214,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             </div>
         </div>
         <div class="f-bottom">
-            <p>&copy; 2026 CajaYa S.A. Ingeniería Chilena de Clase Mundial.</p>
+            <p>&copy; 2026 CajaYa S.A. Ingeniería Chilena de Elite.</p>
         </div>
     </footer>
 
