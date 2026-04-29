@@ -1,7 +1,10 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../src/Services/MercadoPagoService.php';
 
-// Cargar .env (buscando en la raíz o en public/)
+use App\Services\MercadoPagoService;
+
+// Cargar .env manualmente si Dotenv falla
 if (file_exists(__DIR__ . '/../.env')) {
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
     $dotenv->load();
@@ -10,25 +13,10 @@ if (file_exists(__DIR__ . '/../.env')) {
     $dotenv->load();
 }
 
-use App\Services\MercadoPagoService;
-
-// Definición de planes y precios
-$planes = [
-    'mensual'  => ['nombre' => 'CajaYa - Plan Mensual',  'precio' => 20000],
-    'anual'    => ['nombre' => 'CajaYa - Plan Anual',    'precio' => 180000],
-    'lifetime' => ['nombre' => 'CajaYa - Plan Lifetime', 'precio' => 180000],
-    'empresa'  => ['nombre' => 'CajaYa - Plan Empresa',  'precio' => 35000],
-];
-
-$planKey = $_GET['plan'] ?? 'lifetime';
-if (!isset($planes[$planKey])) {
-    die("Plan no válido.");
-}
-
-$planData = $planes[$planKey];
-$planName = $_GET['plan'] ?? 'Lifetime';
-$price = 10; // Precio simbólico para prueba de fuego
-$orderId = "TEST_" . time();
+// FORZAMOS PRECIO DE PRUEBA
+$planName = "CajaYa - Plan Lifetime (Prueba)";
+$price = 10; 
+$orderId = "TEST_FORCE_" . time();
 
 $mp = new MercadoPagoService();
 $paymentUrl = $mp->createPreference($planName, $price, $orderId);
