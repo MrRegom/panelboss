@@ -1,15 +1,14 @@
 <?php
-require_once __DIR__ . '/../../vendor/autoload.php';
+/**
+ * mercadopago/success.php — Página de Éxito
+ */
 
-// Cargar .env
-if (file_exists(__DIR__ . '/../../.env')) {
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
-    $dotenv->load();
-}
+// Ya no necesitamos cargar .env aquí para mostrar el mensaje de éxito simple.
+// Si necesitasemos la base de datos, los servicios se encargan internamente.
 
-$payment_id = $_GET['payment_id'] ?? null;
-$status = $_GET['status'] ?? null;
-$external_reference = $_GET['external_reference'] ?? null;
+$payment_id = $_GET['payment_id'] ?? ($_GET['collection_id'] ?? 'N/A');
+$status = $_GET['status'] ?? 'approved';
+$external_reference = $_GET['external_reference'] ?? 'N/A';
 
 ?>
 <!DOCTYPE html>
@@ -105,16 +104,16 @@ $external_reference = $_GET['external_reference'] ?? null;
 <body>
     <div class="container">
         <div class="icon-box">✓</div>
-        <h1>¡Gracias por tu compra!</h1>
-        <p>Tu pago ha sido procesado exitosamente. Tu licencia de CajaYa se activará en unos segundos.</p>
+        <h1>¡Pago Confirmado!</h1>
+        <p>Tu transacción se completó con éxito. Tu licencia de CajaYa está siendo activada.</p>
         
         <div class="details">
-            <div><span>ID de Pago:</span> <b>#<?php echo htmlspecialchars($payment_id); ?></b></div>
+            <div><span>ID de Operación:</span> <b>#<?php echo htmlspecialchars($payment_id); ?></b></div>
             <div><span>Estado:</span> <b>Aprobado</b></div>
             <div><span>Referencia:</span> <b><?php echo htmlspecialchars($external_reference); ?></b></div>
         </div>
 
-        <a href="/" class="btn">Ir al Inicio</a>
+        <a href="/" class="btn">Volver al Inicio</a>
     </div>
 </body>
 </html>
