@@ -43,12 +43,12 @@ class MercadoPagoService
                     $accessToken = trim($matches[1], "\"' ");
                 }
             } else {
-                return "ERROR: No encontré el archivo .env en ninguna ruta conocida desde " . __DIR__;
+                die("ERROR FATAL: No encontré el archivo .env en ninguna ruta conocida desde " . __DIR__);
             }
         }
 
         if (empty($accessToken)) {
-            return "ERROR: Archivo .env encontrado en $foundEnv pero MP_ACCESS_TOKEN está vacío o mal escrito.";
+            die("ERROR FATAL: Archivo .env encontrado en $foundEnv pero MP_ACCESS_TOKEN está vacío o mal escrito.");
         }
 
         $url = "https://api.mercadopago.com/checkout/preferences";
