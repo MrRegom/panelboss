@@ -39,8 +39,13 @@ class MercadoPagoService
 
             if ($foundEnv) {
                 $content = file_get_contents($foundEnv);
-                if (preg_match('/MP_ACCESS_TOKEN\s*=\s*(.*)/', $content, $matches)) {
-                    $accessToken = trim($matches[1], "\"' ");
+                // Regex ultra-flexible: busca MP_ACCESS_TOKEN al inicio de cualquier línea, ignorando espacios
+                if (preg_match('/^\s*MP_ACCESS_TOKEN\s*=\s*[\'"]?([^\s\'"]+)[\'"]?/m', $content, $matches)) {
+                    $accessToken = $matches[1];
+                } else {
+                    // Si falla, listar qué variables SÍ encontró para diagnosticar
+                    preg_match_all('/^\s*([A-Z0-0_]+)\s*=/m', $content, $allKeys);
+                    die("ERROR: No encontré MP_ACCESS_TOKEN en $foundEnv. Variables detectadas en el archivo: " . implode(', ', $allKeys[1]));
                 }
             } else {
                 die("ERROR FATAL: No encontré el archivo .env en ninguna ruta conocida desde " . __DIR__);
