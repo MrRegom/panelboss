@@ -5,11 +5,9 @@
  * Recibe notificaciones asíncronas de pagos.
  */
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
-// Cargar .env
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
+// El entorno se cargará automáticamente dentro de los servicios si es necesario.
 
 use App\Services\MercadoPagoService;
 use App\Services\LicenseService;
