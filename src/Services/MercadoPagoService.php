@@ -21,12 +21,19 @@ class MercadoPagoService
 
     public function createPreference($title, $price, $external_reference)
     {
-        // Intentar leer de varias fuentes por si acaso
-        $accessToken = $_ENV['MP_ACCESS_TOKEN'] ?? getenv('MP_ACCESS_TOKEN') ?? '';
+        // DEBUG: Ver qué variables MP_ existen realmente
+        $allVars = array_merge($_ENV, $_SERVER);
+        $mpVarsFound = [];
+        foreach ($allVars as $key => $val) {
+            if (strpos($key, 'MP_') === 0) {
+                $mpVarsFound[] = "$key (" . strlen($val) . " chars)";
+            }
+        }
+        
+        $accessToken = $_ENV['MP_ACCESS_TOKEN'] ?? $_SERVER['MP_ACCESS_TOKEN'] ?? getenv('MP_ACCESS_TOKEN') ?? '';
         
         if (empty($accessToken)) {
-            $envPath = realpath(__DIR__ . '/../../.env');
-            return "Error: No se encontró el MP_ACCESS_TOKEN. Verificando ruta .env: " . ($envPath ?: 'No existe');
+            return "ERROR CRÍTICO: Token vacío. Variables encontradas: " . implode(', ', $mpVarsFound);
         }
 
         $url = "https://api.mercadopago.com/checkout/preferences";
