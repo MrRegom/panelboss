@@ -21,11 +21,31 @@ class MercadoPagoService
 
     public function createPreference($title, $price, $external_reference)
     {
-        // Cargar el token desde el entorno
+        // 1. Intentar de $_ENV (estándar)
         $accessToken = $_ENV['MP_ACCESS_TOKEN'] ?? getenv('MP_ACCESS_TOKEN') ?? '';
         
+        // 2. Si falla, buscar el archivo .env "a mano"
         if (empty($accessToken)) {
-            die("ERROR CRÍTICO: No se pudo cargar el MP_ACCESS_TOKEN. Asegúrate de que el archivo .env sea legible y tenga la variable.");
+            $dirs = [
+                __DIR__ . '/../../.env',           // Raíz desde Services
+                __DIR__ . '/../../public/.env',    // Public desde Services
+                $_SERVER['DOCUMENT_ROOT'] . '/.env',
+                $_SERVER['DOCUMENT_ROOT'] . '/../.env'
+            ];
+            
+            foreach ($dirs as $path) {
+                if (file_exists($path)) {
+                    $content = file_get_contents($path);
+                    if (preg_match('/^\s*MP_ACCESS_TOKEN\s*=\s*[\'"]?([^\s\'"]+)[\'"]?/m', $content, $matches)) {
+                        $accessToken = $matches[1];
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (empty($accessToken)) {
+            die("ERROR CRÍTICO: No se pudo cargar el MP_ACCESS_TOKEN tras buscar en 4 rutas. Verifica que el archivo .env en 'public/' tenga permisos de lectura para el servidor web.");
         }
 
         $url = "https://api.mercadopago.com/checkout/preferences";
