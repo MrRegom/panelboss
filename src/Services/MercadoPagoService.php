@@ -41,9 +41,10 @@ class MercadoPagoService
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             "Authorization: Bearer $accessToken",
-            "Content-Type: application/json",
-            "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+            "Content-Type: application/json"
         ]);
+        // Mimetizarse EXACTAMENTE con curl
+        curl_setopt($ch, CURLOPT_USERAGENT, "curl/7.81.0");
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         
         $response = curl_exec($ch);
@@ -56,11 +57,12 @@ class MercadoPagoService
             return $result['init_point'];
         }
 
-        $errorMsg = "HTTP $httpCode - " . $response;
+        $tokenDebug = substr($accessToken, 0, 15) . "...";
+        $errorMsg = "HTTP $httpCode - Token [$tokenDebug] - Resp: " . $response;
         error_log("Error Manual MP: " . $errorMsg);
         
         if (ini_get('display_errors')) {
-            echo "Error detallado de MP (cURL): " . $errorMsg;
+            echo "Error detallado de MP (cURL Debug): " . $errorMsg;
         }
 
         return null;
