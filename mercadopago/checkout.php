@@ -4,20 +4,36 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+
+// Cargar .env
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
 use App\Services\MercadoPagoService;
 
-// Datos de la orden
-$planName = "CajaYa - Plan Lifetime";
-$price = 180000;
-$orderId = "CJY-" . time();
+// Definición de planes y precios
+$planes = [
+    'mensual'  => ['nombre' => 'CajaYa - Plan Mensual',  'precio' => 20000],
+    'anual'    => ['nombre' => 'CajaYa - Plan Anual',    'precio' => 180000],
+    'lifetime' => ['nombre' => 'CajaYa - Plan Lifetime', 'precio' => 180000],
+    'empresa'  => ['nombre' => 'CajaYa - Plan Empresa',  'precio' => 35000],
+];
+
+$planKey = $_GET['plan'] ?? 'lifetime';
+if (!isset($planes[$planKey])) {
+    die("Plan no válido.");
+}
+
+$planData = $planes[$planKey];
+$planName = $planData['nombre'];
+$price    = $planData['precio'];
+$orderId  = "CJY-" . strtoupper($planKey) . "-" . time();
 
 $mp = new MercadoPagoService();
 $paymentUrl = $mp->createPreference($planName, $price, $orderId);
 
 if ($paymentUrl) {
-    // Redirección inmediata al Checkout Pro de Mercado Pago
     header("Location: " . $paymentUrl);
     exit;
 } else {

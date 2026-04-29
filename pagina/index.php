@@ -370,7 +370,7 @@ header('Content-Type: text/html; charset=utf-8');
                     <li>Soporte por WhatsApp</li>
                     <li>Actualizaciones incluidas</li>
                 </ul>
-                <a href="/mercadopago/checkout.php" class="btn-apple" style="background:transparent;color:var(--apple-blue);border:1px solid var(--apple-blue);display:block;text-align:center">Comenzar</a>
+                <a href="/mercadopago/checkout.php?plan=mensual" class="btn-apple" style="background:transparent;color:var(--apple-blue);border:1px solid var(--apple-blue);display:block;text-align:center">Comenzar</a>
             </div>
             <div class="p-card featured reveal">
                 <span class="badge-rec">⭐ Más Popular</span>
@@ -386,7 +386,7 @@ header('Content-Type: text/html; charset=utf-8');
                     <li>Soporte prioritario</li>
                     <li>Actualizaciones de por vida</li>
                 </ul>
-                <a href="/mercadopago/checkout.php" class="btn-apple" style="display:block;text-align:center">Comprar Ahora</a>
+                <a href="/mercadopago/checkout.php?plan=lifetime" class="btn-apple" style="display:block;text-align:center">Comprar Ahora</a>
             </div>
             <div class="p-card reveal">
                 <h3>Plan Empresa</h3>
@@ -400,7 +400,7 @@ header('Content-Type: text/html; charset=utf-8');
                     <li>API de integración</li>
                     <li>Soporte dedicado 24/7</li>
                 </ul>
-                <a href="/mercadopago/checkout.php" class="btn-apple" style="background:transparent;color:var(--apple-blue);border:1px solid var(--apple-blue);display:block;text-align:center">Contactar</a>
+                <a href="/mercadopago/checkout.php?plan=empresa" class="btn-apple" style="background:transparent;color:var(--apple-blue);border:1px solid var(--apple-blue);display:block;text-align:center">Contratar</a>
             </div>
         </div>
     </section>
