@@ -8,22 +8,18 @@ require_once __DIR__ . '/../../src/Services/MercadoPagoService.php';
 
 use App\Services\MercadoPagoService;
 
-// Forzar carga de .env desde la raíz de public
-if (file_exists(__DIR__ . '/../../.env')) {
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
-    $dotenv->load();
-}
-
-// PRECIO BLOQUEADO A 10 PESOS PARA PRUEBA DE PRODUCCIÓN
+// PRECIO BLOQUEADO A 10 PESOS
 $price = 10;
 $name = "Plan CajaYa (Prueba Real 10 CLP)";
 $orderId = "FINAL_TEST_" . time();
 
+// El servicio se encarga de buscar el TOKEN en el .env automáticamente
 $mp = new MercadoPagoService();
 $url = $mp->createPreference($name, $price, $orderId);
 
 if ($url) {
     header("Location: " . $url);
+    exit;
 } else {
-    echo "Error al generar el link de pago.";
+    echo "Error: No se pudo generar el link de pago. Verifica que el archivo .env tenga el MP_ACCESS_TOKEN correcto.";
 }
