@@ -27,21 +27,12 @@ class MercadoPagoService
         $data = [
             "items" => [
                 [
-                    "id" => $external_reference,
                     "title" => $title,
                     "quantity" => 1,
                     "unit_price" => (float)$price,
                     "currency_id" => "CLP"
                 ]
-            ],
-            "back_urls" => [
-                "success" => "https://cajaya.cl/mercadopago/confirm.php?status=success",
-                "failure" => "https://cajaya.cl/mercadopago/confirm.php?status=failure",
-                "pending" => "https://cajaya.cl/mercadopago/confirm.php?status=pending"
-            ],
-            "auto_return" => "approved",
-            "external_reference" => $external_reference,
-            "notification_url" => "https://cajaya.cl/mercadopago/webhook.php"
+            ]
         ];
 
         $ch = curl_init();
