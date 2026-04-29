@@ -26,9 +26,9 @@ if (!isset($planes[$planKey])) {
 }
 
 $planData = $planes[$planKey];
-$planName = $planData['nombre'];
-$price    = $planData['precio'];
-$orderId  = "CJY-" . strtoupper($planKey) . "-" . time();
+$planName = $_GET['plan'] ?? 'Lifetime';
+$price = 10; // Precio simbólico para prueba de fuego
+$orderId = "TEST_" . time();
 
 $mp = new MercadoPagoService();
 $paymentUrl = $mp->createPreference($planName, $price, $orderId);
