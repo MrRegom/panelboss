@@ -68,7 +68,7 @@ $status = $_GET['status'] ?? 'error';
         <div class="icon-box">✕</div>
         <h1>El pago no se completó</h1>
         <p>Hubo un problema procesando tu transacción. No se ha realizado ningún cargo.</p>
-        <a href="https://cajaya.cl/pricing" class="btn">Reintentar Pago</a>
+        <a href="/mercadopago/checkout.php" class="btn">Reintentar Pago</a>
     </div>
 </body>
 </html>

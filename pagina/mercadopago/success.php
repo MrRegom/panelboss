@@ -114,7 +114,7 @@ $external_reference = $_GET['external_reference'] ?? null;
             <div><span>Referencia:</span> <b><?php echo htmlspecialchars($external_reference); ?></b></div>
         </div>
 
-        <a href="https://cajaya.cl/dashboard" class="btn">Ir a mi Panel</a>
+        <a href="/" class="btn">Ir al Inicio</a>
     </div>
 </body>
 </html>
