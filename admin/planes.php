@@ -23,7 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['slug'], $_POST['price
     }
 }
 
-$plans = $planRepo->getAll();
+$plansRaw = $planRepo->getAll();
+$plans = array_filter($plansRaw, function($p) {
+    return in_array($p['slug'], ['mensual', 'lifetime', 'empresa']);
+});
 ?>
 <!DOCTYPE html>
 <html lang="es" data-bs-theme="dark">
