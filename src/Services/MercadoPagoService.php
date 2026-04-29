@@ -37,14 +37,7 @@ class MercadoPagoService
                         "currency_id" => "CLP"
                     ]
                 ],
-                "back_urls" => [
-                    "success" => "https://cajaya.cl/mercadopago/confirm.php?status=success",
-                    "failure" => "https://cajaya.cl/mercadopago/confirm.php?status=failure",
-                    "pending" => "https://cajaya.cl/mercadopago/confirm.php?status=pending"
-                ],
-                "auto_return" => "approved",
-                "external_reference" => $external_reference,
-                "notification_url" => "https://cajaya.cl/mercadopago/webhook.php"
+                "external_reference" => $external_reference
             ]);
 
             return $preference->init_point; 
