@@ -25,7 +25,7 @@ class MercadoPagoService
         $accessToken = $_ENV['MP_ACCESS_TOKEN'] ?? getenv('MP_ACCESS_TOKEN') ?? '';
         
         if (empty($accessToken)) {
-            return false;
+            die("ERROR CRÍTICO: No se pudo cargar el MP_ACCESS_TOKEN. Asegúrate de que el archivo .env sea legible y tenga la variable.");
         }
 
         $url = "https://api.mercadopago.com/checkout/preferences";
@@ -68,7 +68,8 @@ class MercadoPagoService
             return $json['init_point'] ?? false;
         }
 
-        return false;
+        // Si falla, queremos ver POR QUÉ
+        die("ERROR MP: HTTP $httpCode - Respuesta: $response");
     }
 
     public function getPayment($paymentId)
