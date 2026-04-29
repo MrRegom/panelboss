@@ -25,27 +25,26 @@ class MercadoPagoService
     public function createPreference($title, $price, $external_reference)
     {
         try {
-            $client = new PreferenceClient();
-
-            // URLs de retorno
-            $backUrls = [
-                "success" => "https://" . $_SERVER['HTTP_HOST'] . "/mercadopago/confirm.php?status=success",
-                "failure" => "https://" . $_SERVER['HTTP_HOST'] . "/mercadopago/confirm.php?status=failure",
-                "pending" => "https://" . $_SERVER['HTTP_HOST'] . "/mercadopago/confirm.php?status=pending"
-            ];
-
+            $client = new \MercadoPago\Client\Preference\PreferenceClient();
+            
             $preference = $client->create([
                 "items" => [
                     [
+                        "id" => $external_reference,
                         "title" => $title,
                         "quantity" => 1,
                         "unit_price" => (float)$price,
                         "currency_id" => "CLP"
                     ]
                 ],
-                "back_urls" => $backUrls,
+                "back_urls" => [
+                    "success" => "https://cajaya.cl/mercadopago/confirm.php?status=success",
+                    "failure" => "https://cajaya.cl/mercadopago/confirm.php?status=failure",
+                    "pending" => "https://cajaya.cl/mercadopago/confirm.php?status=pending"
+                ],
                 "auto_return" => "approved",
-                "external_reference" => $external_reference
+                "external_reference" => $external_reference,
+                "notification_url" => "https://cajaya.cl/mercadopago/webhook.php"
             ]);
 
             return $preference->init_point; 
