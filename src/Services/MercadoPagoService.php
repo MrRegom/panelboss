@@ -13,14 +13,10 @@ class MercadoPagoService
 {
     public function __construct()
     {
-        // Configuración para SDK v3 usando variables de entorno
+        // En SDK v3, basta con setear el Access Token. 
+        // El SDK detecta si es producción o sandbox automáticamente por el prefijo APP_USR- o TEST-.
         $accessToken = $_ENV['MP_ACCESS_TOKEN'] ?? '';
-        MercadoPagoConfig::setAccessToken($accessToken);
-        
-        // Configurar el entorno según .env (Default: Local/Sandbox)
-        $env = ($_ENV['MP_ENV'] ?? 'sandbox') === 'production' 
-               ? MercadoPagoConfig::LOCAL // En SDK v3 LOCAL se usa para producción si no se especifica otra cosa, o simplemente se deja el token de producción
-               : MercadoPagoConfig::LOCAL; 
+        \MercadoPago\MercadoPagoConfig::setAccessToken($accessToken);
     }
 
     /**

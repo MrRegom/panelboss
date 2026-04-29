@@ -29,12 +29,13 @@ class Database {
             }
 
             // Configuración con valores por defecto para entorno Local (XAMPP)
-            $host = $_ENV['DB_HOST'] ?? 'localhost';
-            $port = $_ENV['DB_PORT'] ?? '5433';
-            $db   = $_ENV['DB_NAME'] ?? 'cajaya';
-            $user = $_ENV['DB_USER'] ?? 'postgres';
-            $pass = $_ENV['DB_PASS'] ?? 'Rgomez2025..';
-            $driver = $_ENV['DB_DRIVER'] ?? 'pgsql';
+            // Configuración con soporte para múltiples nombres de variables (Local vs Servidor)
+            $host   = $_ENV['DB_HOST']     ?? 'localhost';
+            $port   = $_ENV['DB_PORT']     ?? '5433';
+            $db     = $_ENV['DB_NAME']     ?? $_ENV['DB_DATABASE'] ?? 'cajaya';
+            $user   = $_ENV['DB_USER']     ?? $_ENV['DB_USERNAME'] ?? 'postgres';
+            $pass   = $_ENV['DB_PASS']     ?? $_ENV['DB_PASSWORD'] ?? 'Rgomez2025..';
+            $driver = $_ENV['DB_DRIVER']   ?? 'pgsql';
 
             try {
                 $dsn = "$driver:host=$host;port=$port;dbname=$db";

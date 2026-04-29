@@ -14,7 +14,7 @@ $dotenv->load();
 use App\Services\MercadoPagoService;
 use App\Services\LicenseService;
 use App\Services\EmailService;
-use App\Core\Database;
+use App\Config\Database;
 
 // Responder 200 OK de inmediato
 http_response_code(200);

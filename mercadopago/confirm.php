@@ -5,7 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
-use App\Core\Database;
+use App\Config\Database;
 
 $status = $_GET['status'] ?? 'failure';
 $payment_id = $_GET['payment_id'] ?? null;
