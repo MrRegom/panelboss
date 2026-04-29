@@ -1,6 +1,6 @@
 <?php
 /**
- * admin/planes.php — Gestión de Precios (INTEGRADO EN PANEL)
+ * admin/planes.php — Gestión de Precios (VERSION DEFINITIVA 3 PLANES)
  */
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/Config/Database.php';
@@ -19,13 +19,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['slug'], $_POST['price
     $slug = $_POST['slug'];
     $price = (float)$_POST['price'];
     if ($planRepo->updatePrice($slug, $price)) {
-        $message = "Precio actualizado con éxito.";
+        $message = "Precio del plan " . strtoupper($slug) . " actualizado con éxito.";
     }
 }
 
+// Obtener solo los 3 planes comerciales
 $plansRaw = $planRepo->getAll();
 $plans = array_filter($plansRaw, function($p) {
     return in_array($p['slug'], ['mensual', 'lifetime', 'empresa']);
+});
+
+// Ordenar para que siempre salgan en el mismo orden
+usort($plans, function($a, $b) {
+    $order = ['mensual' => 1, 'lifetime' => 2, 'empresa' => 3];
+    return ($order[$a['slug']] ?? 9) - ($order[$b['slug']] ?? 9);
 });
 ?>
 <!DOCTYPE html>
@@ -34,10 +41,18 @@ $plans = array_filter($plansRaw, function($p) {
     <meta charset="UTF-8">
     <title>Gestión de Planes | PanelBoss PRO</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/admin-custom.css">
+    <style>
+        body { font-family: 'Outfit', sans-serif; }
+        .card-plan { 
+            background: rgba(255,255,255,0.03); 
+            border: 1px solid rgba(255,255,255,0.05) !important; 
+            transition: all 0.3s ease;
+        }
+        .card-plan:hover { border-color: #0071E3 !important; transform: translateY(-5px); }
+    </style>
 </head>
 <body class="layout-fixed sidebar-expand-lg">
     <div class="app-wrapper">
@@ -50,9 +65,7 @@ $plans = array_filter($plansRaw, function($p) {
                     <li class="nav-item dropdown user-menu"> 
                         <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown"> 
                             <span class="d-none d-md-inline fw-semibold me-2"><?= $_SESSION['user_name'] ?? 'Admin' ?></span>
-                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
-                                <i class="fa-solid fa-user-tie text-white small"></i>
-                            </div>
+                            <i class="fa-solid fa-circle-user fs-4"></i>
                         </a>
                     </li>
                 </ul>
@@ -64,12 +77,8 @@ $plans = array_filter($plansRaw, function($p) {
         <main class="app-main">
             <div class="app-content-header py-4">
                 <div class="container-fluid px-4">
-                    <div class="row align-items-center">
-                        <div class="col-sm-6">
-                            <h3 class="fw-semibold mb-0">Configuración Comercial</h3>
-                            <p class="text-muted small">Gestión de precios y planes de suscripción</p>
-                        </div>
-                    </div>
+                    <h3 class="fw-bold mb-0">Gestión Comercial</h3>
+                    <p class="text-muted small">Configuración de los 3 planes principales de la landing page.</p>
                 </div>
             </div>
             
@@ -85,16 +94,16 @@ $plans = array_filter($plansRaw, function($p) {
                     <div class="row g-4">
                         <?php foreach ($plans as $plan): ?>
                         <div class="col-md-4">
-                            <div class="card shadow-sm border-0 h-100" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05) !important;">
+                            <div class="card card-plan shadow-sm h-100">
                                 <div class="card-body p-4">
-                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="d-flex justify-content-between mb-3">
                                         <div class="bg-primary bg-opacity-10 text-primary p-2 rounded-3">
-                                            <i class="fa-solid fa-tags"></i>
+                                            <i class="fa-solid fa-gem"></i>
                                         </div>
-                                        <span class="badge bg-dark border border-secondary text-muted"><?= strtoupper($plan['slug']) ?></span>
+                                        <span class="badge bg-dark border border-secondary"><?= strtoupper($plan['slug']) ?></span>
                                     </div>
-                                    <h5 class="fw-bold mb-1"><?= htmlspecialchars($plan['name']) ?></h5>
-                                    <p class="text-muted small mb-4"><?= htmlspecialchars($plan['description'] ?? 'Plan estándar de servicio CajaYa.') ?></p>
+                                    <h5 class="fw-bold"><?= htmlspecialchars($plan['name']) ?></h5>
+                                    <p class="text-muted small mb-4">Gestión de precio para el despliegue dinámico en CajaYa.cl</p>
                                     
                                     <form method="POST">
                                         <input type="hidden" name="slug" value="<?= $plan['slug'] ?>">
@@ -105,8 +114,8 @@ $plans = array_filter($plansRaw, function($p) {
                                                 <input type="number" name="price" class="form-control bg-dark border-secondary fw-bold text-white" value="<?= (int)$plan['price'] ?>" required>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary w-100 shadow-sm">
-                                            <i class="fa-solid fa-save me-2"></i> Actualizar Precio
+                                        <button type="submit" class="btn btn-primary w-100 fw-bold py-2">
+                                            <i class="fa-solid fa-rotate me-2"></i> Actualizar Precio
                                         </button>
                                     </form>
                                 </div>
@@ -115,11 +124,11 @@ $plans = array_filter($plansRaw, function($p) {
                         <?php endforeach; ?>
                     </div>
 
-                    <div class="mt-5 p-4 rounded-4" style="background: rgba(255,159,10, 0.05); border: 1px dashed rgba(255,159,10, 0.2);">
-                        <h6 class="text-warning fw-bold mb-2"><i class="fa-solid fa-triangle-exclamation me-2"></i> Zona de Pruebas</h6>
+                    <div class="mt-5 p-4 rounded-4 bg-warning bg-opacity-10 border border-warning border-opacity-25">
+                        <h6 class="text-warning fw-bold mb-2"><i class="fa-solid fa-shield-halved me-2"></i> Modo Operaciones</h6>
                         <p class="text-muted small mb-0">
-                            Para realizar validaciones de pago sin gastar dinero real, baja el precio del plan <strong>lifetime</strong> a 100. 
-                            Una vez terminada la prueba, asegúrate de volver a subirlo a su precio comercial para evitar pérdidas.
+                            Recuerda que para pruebas de integración, puedes bajar el precio del plan <strong>Lifetime</strong> a 100. 
+                            No olvides restaurarlo a su valor comercial (180.000) antes del lanzamiento oficial.
                         </p>
                     </div>
 
