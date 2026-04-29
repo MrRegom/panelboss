@@ -21,19 +21,34 @@ class MercadoPagoService
 
     public function createPreference($title, $price, $external_reference)
     {
-        // DEBUG: Ver qué variables MP_ existen realmente
-        $allVars = array_merge($_ENV, $_SERVER);
-        $mpVarsFound = [];
-        foreach ($allVars as $key => $val) {
-            if (strpos($key, 'MP_') === 0) {
-                $mpVarsFound[] = "$key (" . strlen($val) . " chars)";
-            }
-        }
-        
+        // 1. Intentar leer de variables de entorno normales
         $accessToken = $_ENV['MP_ACCESS_TOKEN'] ?? $_SERVER['MP_ACCESS_TOKEN'] ?? getenv('MP_ACCESS_TOKEN') ?? '';
         
+        // 2. Si falla, BUSCAR el archivo .env manualmente
         if (empty($accessToken)) {
-            return "ERROR CRÍTICO: Token vacío. Variables encontradas: " . implode(', ', $mpVarsFound);
+            $currentDir = __DIR__;
+            $foundEnv = null;
+            // Buscar hasta 4 niveles arriba
+            for ($i = 0; $i < 4; $i++) {
+                $check = $currentDir . '/.env';
+                if (file_exists($check)) { $foundEnv = $check; break; }
+                $checkPublic = $currentDir . '/public/.env';
+                if (file_exists($checkPublic)) { $foundEnv = $checkPublic; break; }
+                $currentDir = dirname($currentDir);
+            }
+
+            if ($foundEnv) {
+                $content = file_get_contents($foundEnv);
+                if (preg_match('/MP_ACCESS_TOKEN\s*=\s*(.*)/', $content, $matches)) {
+                    $accessToken = trim($matches[1], "\"' ");
+                }
+            } else {
+                return "ERROR: No encontré el archivo .env en ninguna ruta conocida desde " . __DIR__;
+            }
+        }
+
+        if (empty($accessToken)) {
+            return "ERROR: Archivo .env encontrado en $foundEnv pero MP_ACCESS_TOKEN está vacío o mal escrito.";
         }
 
         $url = "https://api.mercadopago.com/checkout/preferences";
