@@ -21,39 +21,11 @@ class MercadoPagoService
 
     public function createPreference($title, $price, $external_reference)
     {
-        // 1. Intentar leer de variables de entorno normales
-        $accessToken = $_ENV['MP_ACCESS_TOKEN'] ?? $_SERVER['MP_ACCESS_TOKEN'] ?? getenv('MP_ACCESS_TOKEN') ?? '';
+        // Cargar el token desde el entorno
+        $accessToken = $_ENV['MP_ACCESS_TOKEN'] ?? getenv('MP_ACCESS_TOKEN') ?? '';
         
-        // 2. Si falla, BUSCAR el archivo .env manualmente
         if (empty($accessToken)) {
-            $currentDir = __DIR__;
-            $foundEnv = null;
-            // Buscar hasta 4 niveles arriba
-            for ($i = 0; $i < 4; $i++) {
-                $check = $currentDir . '/.env';
-                if (file_exists($check)) { $foundEnv = $check; break; }
-                $checkPublic = $currentDir . '/public/.env';
-                if (file_exists($checkPublic)) { $foundEnv = $checkPublic; break; }
-                $currentDir = dirname($currentDir);
-            }
-
-            if ($foundEnv) {
-                $content = file_get_contents($foundEnv);
-                // Regex ultra-flexible: busca MP_ACCESS_TOKEN al inicio de cualquier línea, ignorando espacios
-                if (preg_match('/^\s*MP_ACCESS_TOKEN\s*=\s*[\'"]?([^\s\'"]+)[\'"]?/m', $content, $matches)) {
-                    $accessToken = $matches[1];
-                } else {
-                    // Si falla, listar qué variables SÍ encontró para diagnosticar
-                    preg_match_all('/^\s*([A-Z0-0_]+)\s*=/m', $content, $allKeys);
-                    die("ERROR: No encontré MP_ACCESS_TOKEN en $foundEnv. Variables detectadas en el archivo: " . implode(', ', $allKeys[1]));
-                }
-            } else {
-                die("ERROR FATAL: No encontré el archivo .env en ninguna ruta conocida desde " . __DIR__);
-            }
-        }
-
-        if (empty($accessToken)) {
-            die("ERROR FATAL: Archivo .env encontrado en $foundEnv pero MP_ACCESS_TOKEN está vacío o mal escrito.");
+            return false;
         }
 
         $url = "https://api.mercadopago.com/checkout/preferences";
@@ -66,40 +38,37 @@ class MercadoPagoService
                     "unit_price" => (float)$price,
                     "currency_id" => "CLP"
                 ]
-            ]
+            ],
+            "external_reference" => (string)$external_reference,
+            "back_urls" => [
+                "success" => "https://cajaya.cl/mercadopago/success.php",
+                "failure" => "https://cajaya.cl/mercadopago/failure.php",
+                "pending" => "https://cajaya.cl/mercadopago/pending.php"
+            ],
+            "auto_return" => "approved",
+            "notification_url" => "https://cajaya.cl/api/mercadopago/webhook.php"
         ];
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
+        $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            "Authorization: Bearer $accessToken",
-            "Content-Type: application/json"
-        ]);
-        // Mimetizarse EXACTAMENTE con curl
-        curl_setopt($ch, CURLOPT_USERAGENT, "curl/7.81.0");
+        curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Authorization: Bearer ' . $accessToken,
+            'Content-Type: application/json',
+            'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+        ]);
+
         $response = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        $result = json_decode($response, true);
-
-        if ($httpCode >= 200 && $httpCode < 300 && isset($result['init_point'])) {
-            return $result['init_point'];
+        if ($httpCode === 201 || $httpCode === 200) {
+            $json = json_decode($response, true);
+            return $json['init_point'] ?? false;
         }
 
-        $tokenDebug = substr($accessToken, 0, 15) . "...";
-        $errorMsg = "HTTP $httpCode - Token [$tokenDebug] - Resp: " . $response;
-        error_log("Error Manual MP: " . $errorMsg);
-        
-        if (ini_get('display_errors')) {
-            echo "Error detallado de MP (cURL Debug): " . $errorMsg;
-        }
-
-        return null;
+        return false;
     }
 
     public function getPayment($paymentId)

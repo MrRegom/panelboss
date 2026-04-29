@@ -1,12 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-// Activar errores para ver qué está pasando realmente
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // Cargar .env (buscando en la raíz o en public/)
