@@ -3,7 +3,8 @@
         "firebase/php-jwt": "^6.0",
         "phpmailer/phpmailer": "^7.0",
         "transbank/transbank-sdk": "^5.1",
-        "mercadopago/dx-php": "^3.9"
+        "mercadopago/dx-php": "^3.9",
+        "google/apiclient": "^2.19"
     },
     "autoload": {
         "psr-4": {
