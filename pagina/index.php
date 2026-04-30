@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php — Landing Page CAJAYA ELITE FINAL V17.1 (MOBILE OPTIMIZED)
+ * index.php — Landing Page CAJAYA ELITE FINAL V17.2 (MOBILE REFINED)
  */
 session_start();
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -279,11 +279,15 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         @media (max-width: 768px) {
             .hero h1 { font-size: 3.5rem; }
             .hero p { font-size: 1.1rem; }
-            .plans-container { padding: 60px 5%; }
-            .plan-card.featured { transform: scale(1); margin: 20px 0; }
+            .plans-container { padding: 40px 5% 20px; }
+            .plan-card { padding: 40px 25px; text-align: center; }
+            .plan-card h3, .price, .price-sub { text-align: center !important; }
+            .plan-features { display: inline-block; text-align: left; margin: 30px auto; }
+            .badge { left: 50% !important; transform: translateX(-50%) !important; }
+            .plan-card.featured { transform: scale(1); margin: 30px 0; }
             
-            .early-access { padding: 80px 5%; }
-            .early-container { padding: 60px 25px; border-radius: 40px; }
+            .early-access { padding: 20px 5% 60px; }
+            .early-container { padding: 50px 25px; border-radius: 40px; }
             .early-content h2 { font-size: 2.5rem; letter-spacing: -1px; }
             .early-content p { font-size: 1.1rem; margin-bottom: 40px; }
             
