@@ -118,9 +118,14 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             background: #fff; padding: 70px 40px; border-radius: 45px; 
             position: relative; transition: var(--transition-elite); box-shadow: 0 10px 40px rgba(0,0,0,0.02);
             display: flex; flex-direction: column; align-items: center; text-align: center;
+            border: 3px solid transparent;
         }
-        .p-card:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 50px 100px rgba(106,55,183,0.12); }
-        .p-card.featured { border: 3px solid var(--primary-glow); z-index: 10; }
+        .p-card:hover { 
+            transform: translateY(-15px) scale(1.02); 
+            box-shadow: 0 50px 100px rgba(106,55,183,0.12);
+            border-color: var(--primary-glow);
+        }
+        .p-card.featured { border-color: var(--primary-glow); z-index: 10; }
         .badge-elite { position: absolute; top: -15px; right: 30px; background: var(--primary); color: #fff; padding: 10px 25px; border-radius: 50px; font-size: 12px; font-weight: 900; }
         
         .price-box { font-size: 4.5rem; font-weight: 900; color: var(--primary); margin: 20px 0; display: flex; align-items: baseline; }
@@ -140,13 +145,18 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .faq-item.active .faq-body { padding-bottom: 35px; max-height: 200px; opacity: 1; }
         .faq-item.active { background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
 
-        /* FOOTER ULTRA MODERN (V25) */
+        /* FOOTER ULTRA MODERN (V26) */
         footer { 
             padding: 160px 10% 60px; 
-            background: linear-gradient(135deg, #2D1452 0%, #6A37B7 100%);
+            background: linear-gradient(145deg, #1A0B2E 0%, #321958 45%, #6A37B7 100%);
             color: #fff; position: relative; overflow: hidden;
         }
-        .f-wave { position: absolute; top: -1px; left: 0; width: 100%; transform: rotate(180deg); }
+        footer::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(157, 108, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .f-wave { position: absolute; top: -1px; left: 0; width: 100%; transform: rotate(180deg); z-index: 5; }
         .f-wave svg { display: block; width: calc(160% + 1.3px); height: 90px; fill: #fff; }
         
         .f-grid { display: grid; grid-template-columns: 2.5fr 1fr 1fr 1.2fr; gap: 80px; position: relative; z-index: 10; }
