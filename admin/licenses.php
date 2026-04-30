@@ -95,17 +95,33 @@ $db = Database::getConnection();
                 <form id="formGenerateLicense">
                     <div class="modal-body p-4">
                         <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">EMPRESA</label>
+                            <select class="form-select bg-dark border-secondary text-white" name="company_id" required>
+                                <option value="">Seleccione una empresa...</option>
+                                <?php
+                                $companies = $db->query("SELECT id, name FROM companies ORDER BY name ASC")->fetchAll();
+                                foreach($companies as $c) {
+                                    echo "<option value='{$c['id']}'>{$c['name']}</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">LICENSE KEY (DEJAR VACÍO PARA AUTO-GENERAR)</label>
+                            <input type="text" class="form-control bg-dark border-secondary text-white" name="custom_key" placeholder="Ej: DEVELOPER-TEST">
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label text-muted small fw-bold">PLAN</label>
-                            <select class="form-select bg-dark border-secondary" name="plan" required>
+                            <select class="form-select bg-dark border-secondary text-white" name="plan" required>
                                 <option value="BASIC">BASIC</option>
                                 <option value="PRO">PRO</option>
                                 <option value="ENTERPRISE">ENTERPRISE</option>
+                                <option value="DEMO">DEMO</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label text-muted small fw-bold">FECHA DE EXPIRACIÓN (OPCIONAL)</label>
-                            <input type="date" class="form-control bg-dark border-secondary" name="expires_at">
-                            <div class="form-text text-muted">Dejar vacío para licencia perpetua.</div>
+                            <input type="date" class="form-control bg-dark border-secondary text-white" name="expires_at">
                         </div>
                     </div>
                     <div class="modal-footer border-top border-white border-opacity-10">
