@@ -58,8 +58,10 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         }
         nav.scrolled { background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); height: 70px; box-shadow: 0 4px 30px rgba(0,0,0,0.03); }
         .nav-logo img { height: 35px; }
-        .nav-links a { color: var(--text-dark); text-decoration: none; font-weight: 700; font-size: 14px; margin-left: 30px; }
-        .btn-wa { background: #25D366; color: #fff !important; padding: 10px 22px; border-radius: 50px; font-weight: 800; box-shadow: 0 10px 20px rgba(37,211,102,0.2); }
+        .nav-links a { color: var(--text-dark); text-decoration: none; font-weight: 700; font-size: 14px; margin-left: 20px; transition: 0.3s; }
+        .btn-nav-purple { background: var(--primary); color: #fff !important; padding: 10px 22px; border-radius: 50px; font-weight: 800; box-shadow: 0 10px 20px rgba(106,55,183,0.15); }
+        .btn-wa { background: #25D366; color: #fff !important; padding: 10px 22px; border-radius: 50px; font-weight: 800; box-shadow: 0 10px 20px rgba(37,211,102,0.15); }
+        .btn-nav-purple:hover, .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
 
         /* HERO CAROUSEL */
         .hero-carousel { position: relative; height: 100vh; overflow: hidden; background: #fff; }
@@ -149,14 +151,16 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .btn-cta { width: 100%; background: var(--primary-soft); color: var(--primary); text-decoration: none; padding: 22px; border-radius: 20px; font-weight: 900; text-transform: uppercase; transition: 0.3s; }
         .p-card.featured .btn-cta { background: var(--primary); color: #fff; }
 
-        /* FAQ */
-        .section-faq { padding: 100px 10%; background: #fff; text-align: center; }
-        .faq-container { max-width: 800px; margin: 60px auto 0; text-align: left; }
-        .faq-item { margin-bottom: 15px; border-radius: 25px; background: var(--bg-off); overflow: hidden; cursor: pointer; transition: 0.3s; }
-        .faq-item h4 { padding: 30px 40px; font-size: 1.2rem; display: flex; justify-content: space-between; align-items: center; }
-        .faq-body { padding: 0 40px 0; max-height: 0; opacity: 0; transition: 0.5s ease; color: var(--text-light); line-height: 1.7; }
-        .faq-item.active .faq-body { padding-bottom: 35px; max-height: 200px; opacity: 1; }
-        .faq-item.active { background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        /* FAQ MODERN (V30) */
+        .section-faq { padding: 120px 10%; background: var(--bg-off); text-align: center; }
+        .faq-container { max-width: 900px; margin: 60px auto 0; text-align: left; }
+        .faq-item { margin-bottom: 20px; border-radius: 30px; background: #fff; border: 1px solid rgba(0,0,0,0.03); box-shadow: 0 10px 30px rgba(0,0,0,0.02); transition: 0.4s; overflow: hidden; cursor: pointer; }
+        .faq-item h4 { padding: 35px 45px; font-size: 1.3rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center; color: var(--text-dark); }
+        .faq-item i { color: var(--primary); transition: 0.4s; font-size: 1.1rem; }
+        .faq-body { padding: 0 45px 0; max-height: 0; opacity: 0; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text-light); font-size: 1.1rem; line-height: 1.8; }
+        .faq-item.active { border-color: var(--primary-soft); box-shadow: 0 30px 60px rgba(106,55,183,0.08); }
+        .faq-item.active .faq-body { padding-bottom: 40px; max-height: 300px; opacity: 1; }
+        .faq-item.active i { transform: rotate(45deg); color: var(--text-dark); }
 
         /* FOOTER MIDNIGHT ELITE (V28) */
         footer { 
@@ -197,7 +201,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
     <nav id="navbar">
         <a href="#" class="nav-logo"><img src="assets/img/logo.png"></a>
         <div class="nav-links">
-            <a href="#planes">Planes</a>
+            <a href="#planes" class="btn-nav-purple">Planes Élite</a>
             <a href="https://wa.me/56900000000" target="_blank" class="btn-wa">Soporte WhatsApp</a>
         </div>
     </nav>
@@ -237,7 +241,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         </div>
     </section>
 
-    <section class="section-poder" id="poder">
+    <section class="section-poder" id="poder" style="background: var(--bg-off);">
         <div class="header-elite">
             <h2 class="reveal">El Poder de <span>CajaYa.</span></h2>
             <p class="reveal" style="color: var(--text-light); margin-top: 20px; font-size: 1.3rem;">La tecnología que tu negocio merece.</p>
