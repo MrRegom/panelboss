@@ -9,10 +9,14 @@ require_once __DIR__ . '/../src/Repositories/PlanRepository.php';
 
 use App\Repositories\PlanRepository;
 
-$planRepo = new PlanRepository();
-$plansRaw = $planRepo->getAll();
 $plans = [];
-foreach ($plansRaw as $p) { $plans[trim(strtolower($p['slug']))] = $p; }
+try {
+    $planRepo = new PlanRepository();
+    $plansRaw = $planRepo->getAll();
+    foreach ($plansRaw as $p) { $plans[trim(strtolower($p['slug']))] = $p; }
+} catch (\Exception $e) {
+    error_log("CAJAYA: DB Fail, using static defaults. " . $e->getMessage());
+}
 
 $pMensual  = number_format($plans['mensual']['price']  ?? 20000, 0, ',', '.');
 $pLifetime = number_format($plans['lifetime']['price'] ?? 180000, 0, ',', '.');

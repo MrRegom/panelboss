@@ -45,20 +45,8 @@ class Database {
                     PDO::ATTR_TIMEOUT => 5 // Timeout de 5 segundos
                 ]);
             } catch(PDOException $e) {
-                // En lugar de die(), lanzamos una excepción técnica o registramos el error detallado
                 error_log("DB CONNECTION ERROR: " . $e->getMessage());
-                
-                // Si estamos en una API, queremos devolver JSON
-                if (php_sapi_name() !== 'cli') {
-                    header('Content-Type: application/json');
-                    http_response_code(500);
-                    echo json_encode([
-                        'error' => 'Database connection failed',
-                        'detail' => $e->getMessage(),
-                        'code' => 500
-                    ]);
-                    exit;
-                }
+                // No matamos el proceso con exit, lanzamos la excepcion para que la App decida
                 throw $e;
             }
         }
