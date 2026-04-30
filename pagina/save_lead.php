@@ -29,19 +29,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </body>
         </html>";
 
-        // Ajuste específico para Hostinger/Cpanel (V40)
+        // Ajuste Grado Industrial para Hostinger/Gmail (V41)
         $from_email = "admin@cajaya.cl"; 
+        $boundary = md5(time());
+        $message_id = "<" . time() . md5($email) . "@cajaya.cl>";
+
         $headers  = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: CajaYa Elite <$from_email>" . "\r\n";
         $headers .= "Reply-To: $email" . "\r\n";
+        $headers .= "Return-Path: $from_email" . "\r\n";
+        $headers .= "Message-ID: $message_id" . "\r\n";
+        $headers .= "X-Priority: 1 (Highest)" . "\r\n";
         $headers .= "X-Mailer: PHP/" . phpversion();
 
         // El parámetro -f es vital en Hostinger para evitar el rechazo del servidor
         $result = mail($to, $subject, $message, $headers, "-f$from_email");
         
-        // Log de depuración (V40)
-        $log_entry = date("[Y-m-d H:i:s] ") . "To: $to | Result: " . ($result ? "OK" : "FAIL") . " | From: $from_email\n";
+        // Log de depuración (V41)
+        $log_entry = date("[Y-m-d H:i:s] ") . "To: $to | Result: " . ($result ? "OK" : "FAIL") . " | MsgID: $message_id\n";
         @file_put_contents(__DIR__ . '/mail_debug.log', $log_entry, FILE_APPEND);
 
         // 2. Respaldo Local (JSON) - Seguridad ante fallos de mail
