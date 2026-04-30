@@ -1,12 +1,15 @@
 <?php
 /**
- * save_lead.php — Controlador Unificado de Captación de Prospectos (V49 - Official DB Sync)
+ * save_lead.php — Controlador Unificado de Captación de Prospectos (V50 - Native Connection)
  */
 
+// 1. Carga de dependencias oficiales del proyecto
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/Exception.php';
 require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/SMTP.php';
 
+use App\Config\Database;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -19,11 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $provider = strip_tags(trim($_POST['provider'] ?? 'manual'));
 
     if (!empty($email)) {
-        // --- 1. PERSISTENCIA EN TABLA OFICIAL 'leads' (V49) ---
+        // --- 1. PERSISTENCIA USANDO CONEXIÓN OFICIAL (V50) ---
         $db_status = "PENDING";
         try {
-            $dsn = "pgsql:host=localhost;port=5433;dbname=cajaya";
-            $pdo = new PDO($dsn, 'postgres', 'Rgomez2025..', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+            $pdo = Database::getConnection(); // Uso de la conexión maestra del proyecto
             
             $sql = "INSERT INTO public.leads (full_name, email, whatsapp, provider) 
                     VALUES (:nombre, :email, :whatsapp, :provider)
@@ -40,8 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':provider' => $provider
             ]);
             $db_status = "OK";
-        } catch (PDOException $e) {
+        } catch (\Exception $e) {
             $db_status = "Error DB: " . $e->getMessage();
+            error_log("CAJAYA V50 ERROR: " . $e->getMessage());
         }
 
         // --- 2. NOTIFICACIÓN POR CORREO ---
@@ -64,12 +67,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->Subject = "🚀 NUEVO PROSPECTO: $nombre";
             $mail->Body = "
             <div style='font-family: Arial, sans-serif; padding: 20px;'>
-                <h2 style='color: #6A37B7;'>🔥 Nuevo Lead (Panel Oficial)</h2>
+                <h2 style='color: #6A37B7;'>🔥 Nuevo Lead Registrado</h2>
                 <p><strong>Nombre:</strong> $nombre</p>
                 <p><strong>Email:</strong> $email</p>
                 <p><strong>WhatsApp:</strong> $whatsapp</p>
-                <p><strong>Proveedor:</strong> $provider</p>
-                <p><strong>Fecha:</strong> " . date("d/m/Y H:i:s") . "</p>
+                <p><strong>DB Sync:</strong> $db_status</p>
             </div>";
 
             $mail->send();
