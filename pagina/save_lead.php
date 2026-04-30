@@ -29,16 +29,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </body>
         </html>";
 
+        // Ajuste específico para Hostinger/Cpanel (V40)
+        $from_email = "admin@cajaya.cl"; 
         $headers  = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= "From: CajaYa Elite <webmaster@cajaya.cl>" . "\r\n";
+        $headers .= "From: CajaYa Elite <$from_email>" . "\r\n";
         $headers .= "Reply-To: $email" . "\r\n";
         $headers .= "X-Mailer: PHP/" . phpversion();
 
-        $result = mail($to, $subject, $message, $headers);
+        // El parámetro -f es vital en Hostinger para evitar el rechazo del servidor
+        $result = mail($to, $subject, $message, $headers, "-f$from_email");
         
-        // Log de depuración para el Senior (V36)
-        file_put_contents(__DIR__ . '/mail_debug.log', date("[Y-m-d H:i:s] ") . "Mail sent to $to. Result: " . ($result ? "OK" : "FAIL") . "\n", FILE_APPEND);
+        // Log de depuración (V40)
+        $log_entry = date("[Y-m-d H:i:s] ") . "To: $to | Result: " . ($result ? "OK" : "FAIL") . " | From: $from_email\n";
+        @file_put_contents(__DIR__ . '/mail_debug.log', $log_entry, FILE_APPEND);
 
         // 2. Respaldo Local (JSON) - Seguridad ante fallos de mail
         $leadData = [
@@ -56,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $currentLeads[] = $leadData;
         file_put_contents($logPath, json_encode($currentLeads, JSON_PRETTY_PRINT));
 
-        echo json_encode(['status' => 'success']);
+        echo json_encode(['status' => 'success', 'mail_sent' => $result]);
         exit;
     }
 }
