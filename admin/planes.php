@@ -1,9 +1,8 @@
 <?php
 /**
- * admin/planes.php — Gestión de Precios (AUTO-SANACIÓN PARA HOSTINGER)
+ * admin/planes.php — Gestión de Precios
  */
-require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../src/Config/Database.php';
+require_once __DIR__ . '/includes/bootstrap.php';
 
 use App\Config\Database;
 use App\Services\AuthService;

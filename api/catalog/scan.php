@@ -1,13 +1,17 @@
 <?php
 /**
  * api/catalog/scan.php — Endpoint para escaneo de productos desde App externa
- * Requiere: barcode, license_key
  */
 header('Content-Type: application/json');
 
-require_once __DIR__ . '/../../vendor/autoload.php';
-require_once __DIR__ . '/../../src/Config/Database.php';
-require_once __DIR__ . '/../../src/Repositories/MasterProductRepository.php';
+// Descubrimiento robusto de la raíz del proyecto
+$baseDir = __DIR__;
+while ($baseDir !== dirname($baseDir) && !file_exists($baseDir . '/vendor/autoload.php')) {
+    $baseDir = dirname($baseDir);
+}
+define('PROJECT_ROOT', $baseDir);
+
+require_once PROJECT_ROOT . '/vendor/autoload.php';
 
 use App\Config\Database;
 use App\Repositories\MasterProductRepository;

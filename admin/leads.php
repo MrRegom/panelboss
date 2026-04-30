@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/includes/bootstrap.php';
 use App\Services\AuthService;
 use App\Config\Database;
 use App\Repositories\LeadRepository;

@@ -1,10 +1,16 @@
 <?php
 /**
  * api/catalog/image.php — Servidor Seguro de Imágenes
- * Entrega la imagen solo si la licencia es válida.
  */
-require_once __DIR__ . '/../../vendor/autoload.php';
-require_once __DIR__ . '/../../src/Config/Database.php';
+// Descubrimiento robusto de la raíz del proyecto
+$baseDir = __DIR__;
+while ($baseDir !== dirname($baseDir) && !file_exists($baseDir . '/vendor/autoload.php')) {
+    $baseDir = dirname($baseDir);
+}
+define('PROJECT_ROOT', $baseDir);
+
+require_once PROJECT_ROOT . '/vendor/autoload.php';
+require_once PROJECT_ROOT . '/src/Config/Database.php';
 
 use App\Config\Database;
 
@@ -45,10 +51,11 @@ try {
         exit;
     }
 
-    $filePath = __DIR__ . '/../../' . $product['image_path'];
+    $filePath = PROJECT_ROOT . DIRECTORY_SEPARATOR . $product['image_path'];
 
     if (!file_exists($filePath)) {
         header("HTTP/1.1 404 Not Found");
+        echo "DEBUG: Archivo no encontrado en path real: " . $filePath;
         exit;
     }
 
