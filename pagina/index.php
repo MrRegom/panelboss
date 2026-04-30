@@ -175,14 +175,15 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .btn-white:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
 
         /* MODAL GLASS (V31) */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(13, 11, 20, 0.85); backdrop-filter: blur(15px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(13, 11, 20, 0.85); backdrop-filter: blur(15px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px; cursor: pointer; }
         .modal-glass { 
-            background: rgba(255,255,255,0.95); padding: 60px; border-radius: 40px; width: 100%; max-width: 550px; 
-            position: relative; animation: modalUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(255,255,255,0.98); padding: 60px; border-radius: 40px; width: 100%; max-width: 550px; 
+            position: relative; animation: modalUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); cursor: default;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
         }
         @keyframes modalUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .modal-close { position: absolute; top: 30px; right: 30px; font-size: 24px; cursor: pointer; opacity: 0.3; transition: 0.3s; }
-        .modal-close:hover { opacity: 1; color: var(--primary); }
+        .modal-close { position: absolute; top: 30px; right: 30px; font-size: 28px; cursor: pointer; opacity: 0.5; transition: 0.3s; color: var(--text-dark); }
+        .modal-close:hover { opacity: 1; color: var(--primary); transform: rotate(90deg); }
 
         /* FOOTER MIDNIGHT ELITE (V28) */
         footer { 
@@ -400,8 +401,15 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
 
         document.querySelectorAll('.faq-item h4').forEach(it => it.addEventListener('click', () => it.parentElement.classList.toggle('active')));
 
-        function openModal() { document.getElementById('leadModal').style.display = 'flex'; }
+        function openModal() { 
+            document.getElementById('leadModal').style.display = 'flex'; 
+            document.querySelector('#leadModal .form-input').focus();
+        }
         function closeModal() { document.getElementById('leadModal').style.display = 'none'; }
+        
+        document.getElementById('leadModal').addEventListener('click', (e) => {
+            if(e.target.id === 'leadModal') closeModal();
+        });
 
         let slide = 0;
         function moveCarousel(idx) { 
