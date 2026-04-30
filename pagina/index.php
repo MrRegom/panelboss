@@ -351,17 +351,32 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
 
                 <!-- Botón de Acceso Rápido Estilo Google (V38) -->
                 <div id="google-capture-area" style="margin-bottom:30px;">
-                    <button onclick="focusGmail()" class="btn-google-elite">
-                        <i class="fa-brands fa-google"></i> Continuar con Gmail
-                    </button>
+                    <div id="g_id_onload"
+                         data-client_id="TU_GOOGLE_CLIENT_ID_AQUI"
+                         data-callback="handleGoogleLead"
+                         data-auto_prompt="true">
+                    </div>
+                    <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_blue" data-text="continue_with" data-size="large" data-logo_alignment="left"></div>
                 </div>
+                
+                <script>
+                    // V39: Fallback visual si no hay Client ID pero con soporte One-Tap preparado
+                    if(document.querySelector('[data-client_id="TU_GOOGLE_CLIENT_ID_AQUI"]')) {
+                        const area = document.getElementById('google-capture-area');
+                        if (!window.google) {
+                            area.innerHTML = `<button onclick="focusGmail()" class="btn-google-elite">
+                                <i class="fa-brands fa-google"></i> Continuar con Gmail
+                            </button>`;
+                        }
+                    }
+                </script>
 
                 <div style="display:flex; align-items:center; margin-bottom:30px; opacity:0.3;"><hr style="flex:1;"><span style="padding:0 15px; font-size:12px;">O USA TU CORREO</span><hr style="flex:1;"></div>
 
                 <form onsubmit="handleLead(event, this, true)" class="form-grid">
-                    <div class="input-wrap"><i class="fa-solid fa-user"></i><input type="text" name="nombre" class="form-input" placeholder="Nombre completo" required></div>
-                    <div class="input-wrap"><i class="fa-solid fa-envelope"></i><input type="email" name="email" class="form-input" placeholder="Tu Gmail Corporativo" required></div>
-                    <div class="input-wrap"><i class="fa-solid fa-whatsapp"></i><input type="text" name="whatsapp" class="form-input" placeholder="Tu WhatsApp (Ej: +569...)" required></div>
+                    <div class="input-wrap"><i class="fa-solid fa-user"></i><input type="text" name="nombre" class="form-input" placeholder="Nombre completo" autocomplete="name" required></div>
+                    <div class="input-wrap"><i class="fa-solid fa-envelope"></i><input type="email" name="email" class="form-input" placeholder="Tu Gmail Corporativo" autocomplete="email" required></div>
+                    <div class="input-wrap"><i class="fa-solid fa-whatsapp"></i><input type="text" name="whatsapp" class="form-input" placeholder="Tu WhatsApp (Ej: +569...)" autocomplete="tel" required></div>
                     <button type="submit" class="btn-primary" style="width: 100%; margin-top:10px;">Descargar Demo Ahora</button>
                 </form>
             </div>
@@ -419,8 +434,16 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         document.querySelectorAll('.faq-item h4').forEach(it => it.addEventListener('click', () => it.parentElement.classList.toggle('active')));
 
         function openModal() { 
-            document.getElementById('leadModal').style.display = 'flex'; 
-            document.querySelector('#leadModal .form-input').focus();
+            const m = document.getElementById('leadModal');
+            m.style.display = 'flex'; 
+            
+            // Auto-relleno desde Memoria (V39)
+            const saved = JSON.parse(localStorage.getItem('cajaya_lead') || '{}');
+            if(saved.nombre) m.querySelector('[name="nombre"]').value = saved.nombre;
+            if(saved.email) m.querySelector('[name="email"]').value = saved.email;
+            if(saved.whatsapp) m.querySelector('[name="whatsapp"]').value = saved.whatsapp;
+            
+            m.querySelector('.form-input').focus();
         }
         function closeModal() { document.getElementById('leadModal').style.display = 'none'; }
         
@@ -459,6 +482,14 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             try {
                 const r = await fetch('save_lead.php', { method: 'POST', body: new FormData(f) });
                 if(r.ok) {
+                    // Guardar en memoria para "Menos Clics" la próxima vez (V39)
+                    const data = new FormData(f);
+                    localStorage.setItem('cajaya_lead', JSON.stringify({
+                        nombre: data.get('nombre'),
+                        email: data.get('email'),
+                        whatsapp: data.get('whatsapp')
+                    }));
+
                     // SUPERNOVA ELITE (V37) - EXPLOSIÓN TOTAL
                     const end = Date.now() + 3000;
                     const colors = ['#6A37B7', '#ffffff', '#FFD700', '#25D366'];
