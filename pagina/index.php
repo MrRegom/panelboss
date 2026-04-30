@@ -145,19 +145,17 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .faq-item.active .faq-body { padding-bottom: 35px; max-height: 200px; opacity: 1; }
         .faq-item.active { background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
 
-        /* FOOTER MIDNIGHT ELITE (V27) */
+        /* FOOTER MIDNIGHT ELITE (V28) */
         footer { 
-            padding: 180px 10% 80px; 
+            padding: 160px 10% 60px; 
             background: #0D0B14;
-            color: #fff; position: relative; overflow: hidden;
+            color: #fff; position: relative; overflow: visible;
         }
-        footer::before {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(135deg, rgba(106, 55, 183, 0.1) 0%, transparent 100%);
-            pointer-events: none;
+        .f-wave { 
+            position: absolute; top: -90px; left: 0; width: 100%; height: 100px; 
+            z-index: 1; pointer-events: none;
         }
-        .f-wave { position: absolute; top: -1px; left: 0; width: 100%; transform: rotate(180deg); z-index: 5; }
-        .f-wave svg { display: block; width: 100%; height: 100px; fill: #fff; }
+        .f-wave svg { display: block; width: 100%; height: 100%; }
         
         .f-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; position: relative; z-index: 10; }
         .f-col img { height: 40px; margin-bottom: 30px; filter: brightness(0) invert(1); }
@@ -273,7 +271,11 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
     </section>
 
     <footer>
-        <div class="f-wave"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path></svg></div>
+        <div class="f-wave">
+            <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path fill="#ffffff" fill-opacity="1" d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,144C672,139,768,181,864,202.7C960,224,1056,224,1152,197.3C1248,171,1344,117,1392,90.7L1440,64L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+            </svg>
+        </div>
         <div class="f-grid">
             <div class="f-col">
                 <img src="assets/img/logo.png">
