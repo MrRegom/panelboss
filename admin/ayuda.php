@@ -74,9 +74,15 @@ AuthService::check();
                                 <div class="mb-5">
                                     <h5 class="text-info"><i class="fa-solid fa-list-check me-2"></i> 1. Catálogo Completo</h5>
                                     <p class="text-muted small">Retorna el maestro de productos actualizado (+7,000 items).</p>
-                                    <div class="bg-black p-3 rounded-3 border border-secondary d-flex align-items-center">
-                                        <span class="badge bg-success me-3">GET</span>
-                                        <code>https://panel.cajaya.cl/api/catalog/list.php?license_key=DEVELOPER-TEST</code>
+                                    <div class="bg-black p-3 rounded-3 border border-secondary mb-3">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="badge bg-success me-3">GET</span>
+                                            <code>https://panel.cajaya.cl/api/catalog/list.php?license_key=DEVELOPER-TEST</code>
+                                        </div>
+                                    </div>
+                                    <p class="text-muted x-small">Prueba rápida desde terminal (CMD/Bash):</p>
+                                    <div class="bg-dark p-2 rounded border border-warning border-opacity-25">
+                                        <code class="text-warning small">curl -X GET "https://panel.cajaya.cl/api/catalog/list.php?license_key=DEVELOPER-TEST"</code>
                                     </div>
                                 </div>
 
