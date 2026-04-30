@@ -66,10 +66,15 @@ try {
         exit;
     }
 
-    // 3. Entregar Imagen con Headers correctos
+    // 3. Entregar Imagen con Headers profesionales
     $mimeType = mime_content_type($filePath);
+    $filename = basename($filePath);
+
     header("Content-Type: $mimeType");
     header("Content-Length: " . filesize($filePath));
+    
+    // Forzamos al navegador a reconocer el nombre y extensión real del archivo
+    header("Content-Disposition: inline; filename=\"$filename\"");
     
     // Cache de 1 día para no saturar el servidor, pero validando licencia siempre
     header("Cache-Control: private, max-age=86400"); 
