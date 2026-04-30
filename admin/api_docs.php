@@ -1,0 +1,93 @@
+<?php
+/**
+ * admin/api_docs.php — Portal de Documentación Oficial
+ */
+require_once __DIR__ . '/includes/bootstrap.php';
+use App\Services\AuthService;
+AuthService::check(); // Asegura que solo tú puedas ver la doc
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CajaYa - API Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #0071E3; --bg: #ffffff; --text: #1d1d1f; --code-bg: #f5f5f7; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); margin: 0; padding: 0; }
+        .container { max-width: 850px; margin: 0 auto; padding: 60px 40px; }
+        header { border-bottom: 1px solid #eee; margin-bottom: 40px; padding-bottom: 20px; }
+        .logo { font-size: 24px; font-weight: 700; color: var(--primary); letter-spacing: -1px; }
+        h1 { font-size: 42px; font-weight: 700; margin: 10px 0; letter-spacing: -1.5px; }
+        h2 { font-size: 24px; font-weight: 600; margin-top: 40px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .badge { background: #e8f2ff; color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; }
+        pre { background: #1c1c1e; color: #fff; padding: 20px; border-radius: 12px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.5; }
+        .method { font-weight: 700; color: #34c759; margin-right: 10px; }
+        .endpoint { color: var(--primary); font-weight: 500; }
+        .params-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .params-table th, .params-table td { text-align: left; padding: 12px; border-bottom: 1px solid #eee; font-size: 14px; }
+        .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid #eee; color: #888; font-size: 12px; text-align: center; }
+        @media print { .container { padding: 0; } pre { white-space: pre-wrap; } .no-print { display: none; } }
+        .btn-print { background: var(--primary); color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-block; margin-bottom: 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="no-print" style="text-align: right;">
+            <div class="btn-print" onclick="window.print()">Imprimir a PDF</div>
+        </div>
+        <header>
+            <div class="logo">CajaYa Enterprise</div>
+            <h1>Documentación de API</h1>
+            <p>Guía de integración para el Catálogo Maestro de Productos v1.1</p>
+        </header>
+
+        <section>
+            <span class="badge">Estatus: Activa</span>
+            <h2>1. Introducción</h2>
+            <p>Esta API permite a la aplicación móvil de CajaYa sincronizar el catálogo global de productos de forma segura.</p>
+            <p><strong>Servidor Base:</strong> <code>https://panel.cajaya.cl/api/catalog/</code></p>
+        </section>
+
+        <section>
+            <h2>2. Credenciales de Desarrollo</h2>
+            <pre>LICENSE_KEY: DEVELOPER-TEST</pre>
+        </section>
+
+        <section>
+            <h2>3. Sincronización de Productos</h2>
+            <p><span class="method">GET</span> <span class="endpoint">/list.php</span></p>
+            <table class="params-table">
+                <thead><tr><th>Parámetro</th><th>Tipo</th><th>Descripción</th></tr></thead>
+                <tbody><tr><td><code>license_key</code></td><td>String</td><td>Clave de licencia activa (Obligatorio).</td></tr></tbody>
+            </table>
+            <p><strong>Respuesta de ejemplo:</strong></p>
+            <pre>
+{
+  "success": true,
+  "count": 7342,
+  "data": [
+    {
+      "barcode": "7802237001217",
+      "name": "7 Especias Suk 70Gr",
+      "category": "Despensa",
+      "image_url": "https://panel.cajaya.cl/api/catalog/image.php?barcode=7802237001217&license_key=DEVELOPER-TEST"
+    }
+  ]
+}</pre>
+        </section>
+
+        <section>
+            <h2>4. Carga de Imágenes</h2>
+            <p><span class="method">GET</span> <span class="endpoint">/image.php</span></p>
+            <p>Utilice el campo <code>image_url</code> para cargar fotos en la App.</p>
+        </section>
+
+        <div class="footer">
+            &copy; 2026 CajaYa Enterprise Solutions. <br>
+            Optimizado para exportación a PDF.
+        </div>
+    </div>
+</body>
+</html>
