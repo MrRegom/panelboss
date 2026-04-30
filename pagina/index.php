@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php — Landing Page CAJAYA ELITE FINAL V17 (PEARL CELEBRATION)
+ * index.php — Landing Page CAJAYA ELITE FINAL V17.1 (MOBILE OPTIMIZED)
  */
 session_start();
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -274,6 +274,31 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         
         .success-msg { display: none; font-size: 2rem; font-weight: 800; color: var(--primary); animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1); }
         #celeb-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; display: none; }
+
+        /* RESPONSIVE FIXES */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .plans-container { padding: 60px 5%; }
+            .plan-card.featured { transform: scale(1); margin: 20px 0; }
+            
+            .early-access { padding: 80px 5%; }
+            .early-container { padding: 60px 25px; border-radius: 40px; }
+            .early-content h2 { font-size: 2.5rem; letter-spacing: -1px; }
+            .early-content p { font-size: 1.1rem; margin-bottom: 40px; }
+            
+            .lead-form { grid-template-columns: 1fr; gap: 15px; }
+            .input-group { grid-column: span 1 !important; }
+            .lead-input { padding: 18px 20px 18px 55px; font-size: 15px; }
+            .input-group i { left: 20px; font-size: 16px; }
+            .btn-submit { grid-column: span 1; padding: 20px; font-size: 14px; border-radius: 20px; }
+            
+            .faq-section { padding: 80px 5%; }
+            .section-header h2 { font-size: 2.5rem; }
+            .footer { padding: 80px 5% 40px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 50px; text-align: center; }
+            .f-col h4::after { left: 50%; transform: translateX(-50%); }
+        }
 
         /* REVEAL */
         .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition-mac); }
