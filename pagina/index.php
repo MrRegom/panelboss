@@ -140,25 +140,31 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .faq-item.active .faq-body { padding-bottom: 35px; max-height: 200px; opacity: 1; }
         .faq-item.active { background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
 
-        /* FOOTER (CLEAN PURPLE) */
+        /* FOOTER ULTRA MODERN (V25) */
         footer { 
-            padding: 150px 10% 60px; 
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            padding: 160px 10% 60px; 
+            background: linear-gradient(135deg, #2D1452 0%, #6A37B7 100%);
             color: #fff; position: relative; overflow: hidden;
         }
         .f-wave { position: absolute; top: -1px; left: 0; width: 100%; transform: rotate(180deg); }
-        .f-wave svg { display: block; width: calc(160% + 1.3px); height: 80px; fill: #fff; }
+        .f-wave svg { display: block; width: calc(160% + 1.3px); height: 90px; fill: #fff; }
         
-        .f-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; position: relative; z-index: 10; }
-        .f-col img { height: 35px; margin-bottom: 25px; filter: brightness(0) invert(1); }
-        .f-col h5 { font-size: 13px; opacity: 0.5; margin-bottom: 25px; letter-spacing: 3px; text-transform: uppercase; }
-        .f-col a { color: #fff; text-decoration: none; display: block; margin-bottom: 15px; opacity: 0.7; transition: 0.3s; }
-        .f-col a:hover { opacity: 1; transform: translateX(10px); color: var(--primary-glow); }
+        .f-grid { display: grid; grid-template-columns: 2.5fr 1fr 1fr 1.2fr; gap: 80px; position: relative; z-index: 10; }
+        .f-col img { height: 45px; margin-bottom: 30px; filter: brightness(0) invert(1); }
+        .f-col p { color: rgba(255,255,255,0.7); line-height: 1.8; font-size: 15px; max-width: 320px; }
+        .f-col h5 { font-size: 13px; color: var(--primary-glow); margin-bottom: 35px; letter-spacing: 4px; text-transform: uppercase; font-weight: 900; }
+        .f-col a { color: #fff; text-decoration: none; display: block; margin-bottom: 18px; opacity: 0.6; transition: 0.3s; font-size: 15px; position: relative; width: fit-content; }
+        .f-col a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -3px; left: 0; background: var(--primary-glow); transition: 0.3s; }
+        .f-col a:hover { opacity: 1; color: var(--primary-glow); }
+        .f-col a:hover::after { width: 100%; }
+
+        .f-bottom { margin-top: 100px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; opacity: 0.4; font-size: 12px; letter-spacing: 2px; }
 
         @media (max-width: 1024px) {
             .grid-poder, .grid-planes { grid-template-columns: 1fr; }
             .f-grid { grid-template-columns: 1fr; text-align: center; }
-            .f-col { align-items: center; }
+            .f-col { align-items: center; display: flex; flex-direction: column; }
+            .f-bottom { flex-direction: column; gap: 20px; text-align: center; }
             .slide { justify-content: center; padding: 0 5%; }
             .hero-content { text-align: center; }
             .hero-content p { border-left: none; border-top: 5px solid var(--primary); padding-top: 25px; }
@@ -261,12 +267,33 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
     <footer>
         <div class="f-wave"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path></svg></div>
         <div class="f-grid">
-            <div class="f-col"><img src="assets/img/logo.png"><p>Tecnología líder para el retail en Chile.</p></div>
-            <div class="f-col"><h5>PRODUCTO</h5><a href="#">Panel</a><a href="#">App</a></div>
-            <div class="f-col"><h5>SOPORTE</h5><a href="#">Ayuda</a><a href="#">WhatsApp</a></div>
-            <div class="f-col"><h5>LEGAL</h5><a href="#">Privacidad</a></div>
+            <div class="f-col">
+                <img src="assets/img/logo.png">
+                <p>Potenciando el retail independiente en Chile con tecnología de clase mundial.</p>
+            </div>
+            <div class="f-col">
+                <h5>PLATAFORMA</h5>
+                <a href="#">Panel Maestro</a>
+                <a href="#">Descargar App</a>
+                <a href="#">Guía de Uso</a>
+            </div>
+            <div class="f-col">
+                <h5>SOPORTE</h5>
+                <a href="#">Centro de Ayuda</a>
+                <a href="#">WhatsApp VIP</a>
+                <a href="#">Contacto</a>
+            </div>
+            <div class="f-col">
+                <h5>LEGAL</h5>
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+                <a href="#">Contrato</a>
+            </div>
         </div>
-        <div style="text-align:center; margin-top:80px; opacity:0.2; font-size:12px;">&copy; 2026 CAJAYA.</div>
+        <div class="f-bottom">
+            <span>&copy; 2026 CAJAYA ELITE. TODOS LOS DERECHOS RESERVADOS.</span>
+            <span>RM, SANTIAGO DE CHILE</span>
+        </div>
     </footer>
 
     <script>
