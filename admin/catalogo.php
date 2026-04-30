@@ -1,6 +1,6 @@
 <?php
 /**
- * admin/catalogo.php — Gestión Minimalista y Eficiente del Catálogo Maestro
+ * admin/catalogo.php — Gestión Ultra-Simplificada (Código y Nombre Separados)
  */
 
 require_once __DIR__ . '/includes/bootstrap.php';
@@ -33,41 +33,24 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
         :root { --accent: #0071E3; --bg: #0d1117; --border: rgba(255,255,255,0.1); }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: #c9d1d9; font-size: 13px; }
         
-        /* Compact DataTable */
-        .table { margin: 0 !important; border: 1px solid var(--border); }
-        .table thead th { 
-            background: #161b22; color: #8b949e; font-size: 11px; text-transform: uppercase; 
-            padding: 10px 15px; border-bottom: 1px solid var(--border);
-        }
+        .table { border: 1px solid var(--border); }
+        .table thead th { background: #161b22; color: #8b949e; font-size: 11px; padding: 10px 15px; border-bottom: 1px solid var(--border); }
         .table tbody td { padding: 8px 15px !important; border-bottom: 1px solid var(--border); vertical-align: middle; }
-        .table tbody tr:hover { background: rgba(255,255,255,0.02); }
-
-        /* Minimal Elements */
+        
         .img-mini { width: 32px; height: 32px; object-fit: contain; background: #fff; border-radius: 4px; padding: 2px; }
-        .ean-tech { 
-            font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #58a6ff; 
-            cursor: pointer; padding: 2px 6px; background: rgba(88,166,255,0.1); border-radius: 4px;
-        }
+        .ean-tech { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #58a6ff; cursor: pointer; background: rgba(88,166,255,0.1); padding: 2px 6px; border-radius: 4px; }
+        
         .btn-action { 
             padding: 4px 8px; font-size: 12px; border-radius: 4px; border: 1px solid var(--border);
-            background: transparent; color: #8b949e; cursor: pointer;
+            background: transparent; color: #8b949e; cursor: pointer; margin-left: 4px;
         }
         .btn-action:hover { color: #fff; border-color: #fff; }
+        .btn-action.view { color: #58a6ff; border-color: rgba(88,166,255,0.3); }
 
-        /* Minimalist Modal */
         .modal-content { background: #161b22 !important; border: 1px solid var(--border); border-radius: 8px; }
-        .modal-header { border-bottom: 1px solid var(--border); padding: 12px 20px; }
-        .modal-footer { border-top: 1px solid var(--border); padding: 12px 20px; }
-        .form-control, .form-select { 
-            background: #0d1117 !important; border: 1px solid var(--border) !important; 
-            border-radius: 4px; color: #fff !important; font-size: 13px; padding: 8px 12px;
-        }
-        .form-control:focus { border-color: var(--accent) !important; box-shadow: none; }
-
-        /* Search Box */
-        .dataTables_filter input { 
-            background: #0d1117; border: 1px solid var(--border); border-radius: 4px; padding: 5px 10px; color: #fff;
-        }
+        .form-control, .form-select { background: #0d1117 !important; border: 1px solid var(--border) !important; border-radius: 4px; color: #fff !important; font-size: 13px; }
+        
+        .filter-bar { background: #161b22; padding: 12px 20px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 15px; }
     </style>
 </head>
 <body class="layout-fixed sidebar-expand-lg">
@@ -85,10 +68,24 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
         <main class="app-main p-3">
             <div class="container-fluid">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="fw-bold m-0 text-white">Catálogo Maestro <span class="text-muted fw-normal fs-6 ms-2">| Gestión Directa</span></h5>
-                    <button class="btn btn-primary btn-sm px-3" onclick="openModal()" style="border-radius: 4px;">
+                    <h5 class="fw-bold m-0 text-white">Catálogo Maestro</h5>
+                    <button class="btn btn-primary btn-sm px-4" onclick="openModal()" style="border-radius: 4px;">
                         <i class="fa-solid fa-plus me-1"></i> NUEVO PRODUCTO
                     </button>
+                </div>
+
+                <div class="filter-bar">
+                    <div class="row align-items-end">
+                        <div class="col-md-3">
+                            <label class="small text-muted mb-1">Categoría:</label>
+                            <select id="filterCategory" class="form-select form-select-sm">
+                                <option value="">Todas</option>
+                                <?php foreach($categories as $cat): ?>
+                                    <option value="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['name']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="table-responsive">
@@ -96,10 +93,10 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
                         <thead>
                             <tr>
                                 <th style="width: 40px">IMG</th>
-                                <th>EAN / NOMBRE</th>
-                                <th>MARCA</th>
+                                <th style="width: 140px">CÓDIGO (EAN)</th>
+                                <th>ARTÍCULO / DESCRIPCIÓN</th>
                                 <th>CATEGORÍA</th>
-                                <th class="text-end" style="width: 100px">ACCIONES</th>
+                                <th class="text-end" style="width: 110px">ACCIONES</th>
                             </tr>
                         </thead>
                     </table>
@@ -108,31 +105,27 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
         </main>
     </div>
 
-    <!-- Modal Minimalista -->
+    <!-- Modal Simplificado -->
     <div class="modal fade" id="modalProduct" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header border-0">
                     <h6 class="modal-title fw-bold" id="modalTitle">Producto</h6>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="formProduct">
                     <input type="hidden" name="id" id="prod_id">
-                    <div class="modal-body p-3">
+                    <div class="modal-body p-4">
                         <div class="row g-3">
                             <div class="col-12">
-                                <label class="small text-muted mb-1">EAN BARCODE</label>
+                                <label class="small text-muted mb-1">CÓDIGO EAN</label>
                                 <input type="text" class="form-control" name="barcode" id="prod_barcode" required>
                             </div>
                             <div class="col-12">
-                                <label class="small text-muted mb-1">DESCRIPCIÓN</label>
+                                <label class="small text-muted mb-1">NOMBRE COMPLETO</label>
                                 <input type="text" class="form-control" name="name" id="prod_name" required>
                             </div>
-                            <div class="col-6">
-                                <label class="small text-muted mb-1">MARCA</label>
-                                <input type="text" class="form-control" name="brand" id="prod_brand">
-                            </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <label class="small text-muted mb-1">CATEGORÍA</label>
                                 <select class="form-select" name="category_id" id="prod_category">
                                     <option value="">- Seleccionar -</option>
@@ -143,9 +136,8 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link text-muted p-0 me-3 text-decoration-none" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary px-4 btn-sm">GUARDAR</button>
+                    <div class="modal-footer border-0">
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">GUARDAR</button>
                     </div>
                 </form>
             </div>
@@ -166,7 +158,12 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
         table = $('#catalogTable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: 'api/get_master_catalog.php',
+            ajax: {
+                url: 'api/get_master_catalog.php',
+                data: function(d) {
+                    d.category_id = $('#filterCategory').val();
+                }
+            },
             pageLength: 50,
             ordering: false,
             columns: [
@@ -177,28 +174,25 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
                         return `<img src="${img}" class="img-mini">`;
                     }
                 },
-                { 
-                    data: 'name',
-                    render: function(data, type, row) {
-                        return `<div class="d-flex align-items-center gap-2"><span class="ean-tech" onclick="copyEan('${row.barcode}')">${row.barcode}</span> <span class="text-white">${data}</span></div>`;
-                    }
-                },
-                { data: 'brand', render: (d) => d || '-' },
-                { data: 'category_name', render: (d) => d || '-' },
+                { data: 'barcode', render: (d) => `<span class="ean-tech" onclick="copyEan('${d}')">${d}</span>` },
+                { data: 'name', render: (d) => `<span class="text-white fw-medium">${d}</span>` },
+                { data: 'category_name', render: (d) => `<span class="small text-uppercase text-muted">${d || '-'}</span>` },
                 { 
                     data: null, 
                     className: 'text-end',
                     render: function(data, type, row) {
                         return `
+                            <button class="btn-action view" onclick='openModal(${JSON.stringify(row)})'><i class="fa-solid fa-eye"></i></button>
                             <button class="btn-action" onclick='openModal(${JSON.stringify(row)})'><i class="fa-solid fa-pen"></i></button>
-                            <button class="btn-action" onclick="deleteProd(${row.id})"><i class="fa-solid fa-trash"></i></button>
                         `;
                     }
                 }
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
-            dom: '<"p-2 d-flex justify-content-between align-items-center"<"d-flex align-items-center"l><"d-flex"f>>rt<"p-2 d-flex justify-content-between align-items-center"ip>'
+            dom: '<"p-2 d-flex justify-content-between align-items-center"lf>rt<"p-2 d-flex justify-content-between align-items-center"ip>'
         });
+
+        $('#filterCategory').on('change', function() { table.ajax.reload(); });
 
         $('#formProduct').on('submit', function(e) {
             e.preventDefault();
@@ -220,24 +214,17 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
     function openModal(data = null) {
         $('#formProduct')[0].reset();
         if(data) {
-            $('#modalTitle').text('Editar Producto');
+            $('#modalTitle').text('Ficha de Producto');
             $('#prod_id').val(data.id);
             $('#prod_barcode').val(data.barcode).prop('readonly', true);
             $('#prod_name').val(data.name);
-            $('#prod_brand').val(data.brand);
             $('#prod_category').val(data.category_id);
         } else {
-            $('#modalTitle').text('Nuevo Producto');
+            $('#modalTitle').text('Nuevo Registro');
             $('#prod_id').val('');
             $('#prod_barcode').prop('readonly', false);
         }
         $('#modalProduct').modal('show');
-    }
-
-    function deleteProd(id) {
-        if(confirm('¿Eliminar producto?')) {
-            $.post('api/delete_product.php', { id: id }, function() { table.ajax.reload(null, false); });
-        }
     }
     </script>
 </body>
