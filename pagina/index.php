@@ -91,8 +91,11 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         /* Pricing */
         .pricing { padding: 120px 5%; background: #fff; }
         .p-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 40px; max-width: 1350px; margin: 0 auto; }
-        .p-card { background: #fff; padding: 60px 45px; border-radius: 40px; border: 2px solid #f2f2f2; transition: var(--transition); cursor: pointer; position: relative; overflow: hidden; }
-        .p-card.selected { border: 3px solid var(--brand-purple); background: #faf8ff; transform: scale(1.02); }
+        .p-card { background: #fff; padding: 60px 45px; border-radius: 40px; border: 2px solid #f2f2f2; transition: var(--transition); cursor: pointer; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.02); z-index: 1; }
+        .p-card::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(transparent, var(--brand-purple), transparent 30%); animation: rotateB 5s linear infinite; opacity: 0; transition: 0.3s; z-index: -1; }
+        .p-card:hover::after { opacity: 0.2; }
+        @keyframes rotateB { 100% { transform: rotate(360deg); } }
+        .p-card.selected { border: 3px solid var(--brand-purple); background: #faf8ff; transform: scale(1.02); box-shadow: 0 20px 50px rgba(106,27,154,0.1); }
         .p-price { font-size: 55px; font-weight: 800; margin-bottom: 40px; }
 
         /* FAQ RESTORED & IMPROVED */
