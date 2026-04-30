@@ -343,12 +343,25 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                     <p style="color:var(--text-light);">La forma más rápida de entrar a la Élite.</p>
                 </div>
 
-                <!-- Google Button Placeholder (Requiere Client ID) -->
-                <div id="g_id_onload"
-                     data-client_id="TU_GOOGLE_CLIENT_ID_AQUI"
-                     data-callback="handleGoogleLead">
+                <!-- Botón de Google o Fast-Fill (V37) -->
+                <div id="google-capture-area" style="margin-bottom:30px; display:flex; justify-content:center;">
+                    <div id="g_id_onload"
+                         data-client_id="TU_GOOGLE_CLIENT_ID_AQUI"
+                         data-callback="handleGoogleLead">
+                    </div>
+                    <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_blue" data-text="continue_with" data-size="large" data-logo_alignment="left"></div>
                 </div>
-                <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_blue" data-text="continue_with" data-size="large" data-logo_alignment="left" style="margin-bottom:30px; display:flex; justify-content:center;"></div>
+
+                <!-- Fallback Button if Google fails or is placeholder -->
+                <script>
+                    if(document.querySelector('[data-client_id="TU_GOOGLE_CLIENT_ID_AQUI"]')) {
+                        const area = document.getElementById('google-capture-area');
+                        area.innerHTML = `<button onclick="focusGmail()" class="btn-wa" style="background:#fff; color:#444; border:1px solid #ddd; width:100%; box-shadow:0 5px 15px rgba(0,0,0,0.05); font-size:14px; display:flex; align-items:center; justify-content:center; gap:10px;">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" style="height:18px;"> 
+                            Continuar con Gmail
+                        </button>`;
+                    }
+                </script>
 
                 <div style="display:flex; align-items:center; margin-bottom:30px; opacity:0.3;"><hr style="flex:1;"><span style="padding:0 15px; font-size:12px;">O USA TU CORREO</span><hr style="flex:1;"></div>
 
@@ -440,6 +453,10 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             });
         });
 
+        function focusGmail() {
+            document.querySelector('#leadModal input[name="email"]').focus();
+        }
+
         async function handleLead(e, f, isModal) {
             if(e) e.preventDefault();
             const b = f.querySelector('button'); 
@@ -449,27 +466,21 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             try {
                 const r = await fetch('save_lead.php', { method: 'POST', body: new FormData(f) });
                 if(r.ok) {
-                    // GRAND FINALE ANIMATION (V36) - 3 SEGUNDOS DE FUEGOS
-                    const duration = 3 * 1000;
-                    const animationEnd = Date.now() + duration;
-                    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 10001 };
+                    // SUPERNOVA ELITE (V37) - EXPLOSIÓN TOTAL
+                    const end = Date.now() + 3000;
+                    const colors = ['#6A37B7', '#ffffff', '#FFD700', '#25D366'];
 
-                    const randomInRange = (min, max) => Math.random() * (max - min) + min;
-
-                    const interval = setInterval(function() {
-                        const timeLeft = animationEnd - Date.now();
-                        if (timeLeft <= 0) return clearInterval(interval);
-
-                        const particleCount = 50 * (timeLeft / duration);
-                        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
-                        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
-                    }, 250);
+                    (function frame() {
+                        confetti({ particleCount: 7, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
+                        confetti({ particleCount: 7, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
+                        if (Date.now() < end) requestAnimationFrame(frame);
+                    }());
 
                     const container = isModal ? document.querySelector('.modal-glass') : f.parentElement;
                     container.innerHTML = `<div style="text-align:center; padding:60px; animation: modalUp 0.8s ease;">
                         <div class="reveal visible"><i class="fa-solid fa-crown" style="font-size:6rem; color:#FFD700; margin-bottom:30px; filter: drop-shadow(0 0 20px rgba(255,215,0,0.5));"></i></div>
-                        <h3 style="color:var(--primary); font-size:3rem; margin-bottom:15px; font-family:'Outfit';">¡Bienvenido al Futuro!</h3>
-                        <p style="color:var(--text-light); font-size:1.4rem;">Tu acceso prioritario a CajaYa está listo.<br>Te contactaremos por WhatsApp de inmediato.</p>
+                        <h2 style="color:var(--primary); font-size:3.5rem; margin-bottom:15px; font-family:'Outfit';">¡Nivel Élite!</h2>
+                        <p style="color:var(--text-light); font-size:1.5rem;">Bienvenido a la nueva era de tu negocio.<br>Un consultor experto te contactará de inmediato.</p>
                     </div>`;
                     if(isModal) setTimeout(closeModal, 6000);
                 }
