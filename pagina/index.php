@@ -1,11 +1,7 @@
 <?php
 /**
- * index.php — Landing Page CAJAYA ELITE FINAL V14.1 (DEBUG MODE)
+ * index.php — Landing Page CAJAYA ELITE FINAL V14.2
  */
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-
 session_start();
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/Config/Database.php';
