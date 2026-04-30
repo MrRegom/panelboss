@@ -9,9 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $whatsapp = strip_tags(trim($_POST['whatsapp'] ?? ''));
 
     if (!empty($email)) {
-        // 1. Notificación por Correo (Mejorada V35)
+        // --- MOTOR SMTP DIRECTO (V43) ---
+        $smtp_host = "ssl://smtp.gmail.com";
+        $smtp_port = 465;
+        $smtp_user = "reltzerspa@gmail.com";
+        $smtp_pass = "Reltzer2026.."; // RECUERDA: Si falla, usa una 'App Password' de Google
+
         $to      = "reltzerspa@gmail.com";
-        $subject = "=?UTF-8?B?".base64_encode("🔥 NUEVO PROSPECTO: CajaYa Elite")."?=";
+        $subject = "🔥 NUEVO PROSPECTO: CajaYa Elite";
         
         $message = "
         <html>
@@ -29,28 +34,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </body>
         </html>";
 
-        // Ajuste Grado Industrial para Hostinger/Gmail (V41)
-        $from_email = "admin@cajaya.cl"; 
-        $boundary = md5(time());
-        $message_id = "<" . time() . md5($email) . "@cajaya.cl>";
+        // Función SMTP Local para no depender de librerías externas
+        function sendSMTP($to, $subject, $message, $host, $port, $user, $pass) {
+            $socket = fsockopen($host, $port, $errno, $errstr, 15);
+            if (!$socket) return "Error Socket: $errstr";
+            
+            $res = fgets($socket, 256);
+            fputs($socket, "EHLO " . $_SERVER['HTTP_HOST'] . "\r\n");
+            $res = fgets($socket, 256);
+            fputs($socket, "AUTH LOGIN\r\n");
+            $res = fgets($socket, 256);
+            fputs($socket, base64_encode($user) . "\r\n");
+            $res = fgets($socket, 256);
+            fputs($socket, base64_encode($pass) . "\r\n");
+            $res = fgets($socket, 256);
+            
+            if (strpos($res, '235') === false) return "Auth Failed: " . $res;
 
-        $headers  = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= "From: CajaYa Elite <$from_email>" . "\r\n";
-        $headers .= "Reply-To: $email" . "\r\n";
-        $headers .= "Return-Path: $from_email" . "\r\n";
-        $headers .= "Message-ID: $message_id" . "\r\n";
-        $headers .= "X-Priority: 1 (Highest)" . "\r\n";
-        $headers .= "X-Mailer: PHP/" . phpversion();
+            fputs($socket, "MAIL FROM: <$user>\r\n");
+            $res = fgets($socket, 256);
+            fputs($socket, "RCPT TO: <$to>\r\n");
+            $res = fgets($socket, 256);
+            fputs($socket, "DATA\r\n");
+            $res = fgets($socket, 256);
 
-        // El parámetro -f es vital en Hostinger para evitar el rechazo del servidor
-        $result = mail($to, $subject, $message, $headers, "-f$from_email");
+            $headers  = "MIME-Version: 1.0\r\n";
+            $headers .= "Content-type: text/html; charset=UTF-8\r\n";
+            $headers .= "To: $to\r\n";
+            $headers .= "From: CajaYa Elite <$user>\r\n";
+            $headers .= "Subject: $subject\r\n\r\n";
+
+            fputs($socket, $headers . $message . "\r\n.\r\n");
+            $res = fgets($socket, 256);
+            fputs($socket, "QUIT\r\n");
+            fclose($socket);
+            return "OK";
+        }
+
+        $result_smtp = sendSMTP($to, $subject, $message, $smtp_host, $smtp_port, $smtp_user, $smtp_pass);
         
-        // Log de depuración (V41)
-        $log_entry = date("[Y-m-d H:i:s] ") . "To: $to | Result: " . ($result ? "OK" : "FAIL") . " | MsgID: $message_id\n";
-        @file_put_contents(__DIR__ . '/mail_debug.log', $log_entry, FILE_APPEND);
+        // Log de depuración (V43)
+        file_put_contents(__DIR__ . '/mail_debug.log', date("[Y-m-d H:i:s] ") . "SMTP Result: $result_smtp\n", FILE_APPEND);
 
-        // 2. Respaldo Local (JSON) - Seguridad ante fallos de mail
+        // 2. Respaldo Local (JSON) - Seguridad ante fallos
         $leadData = [
             'nombre'   => $nombre,
             'email'    => $email,
@@ -66,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $currentLeads[] = $leadData;
         file_put_contents($logPath, json_encode($currentLeads, JSON_PRETTY_PRINT));
 
-        echo json_encode(['status' => 'success', 'mail_sent' => $result]);
+        echo json_encode(['status' => 'success', 'smtp' => $result_smtp]);
         exit;
     }
 }
