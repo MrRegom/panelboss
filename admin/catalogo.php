@@ -1,6 +1,6 @@
 <?php
 /**
- * admin/catalogo.php — Gestión Avanzada con Edición de Imágenes
+ * admin/catalogo.php — Gestión Avanzada con Carga de Imágenes (Versión Corregida)
  */
 
 require_once __DIR__ . '/includes/bootstrap.php';
@@ -33,12 +33,13 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
         :root { --accent: #0071E3; --bg: #0d1117; --border: rgba(255,255,255,0.1); }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: #c9d1d9; font-size: 13px; }
         
+        /* Table Compact */
         .table { border: 1px solid var(--border); }
         .table thead th { background: #161b22; color: #8b949e; font-size: 11px; padding: 10px 15px; border-bottom: 1px solid var(--border); }
-        .table tbody td { padding: 8px 15px !important; border-bottom: 1px solid var(--border); vertical-align: middle; }
+        .table tbody td { padding: 6px 15px !important; border-bottom: 1px solid var(--border); vertical-align: middle; }
         
         .img-mini { width: 32px; height: 32px; object-fit: contain; background: #fff; border-radius: 4px; padding: 2px; cursor: pointer; }
-        .ean-tech { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #58a6ff; cursor: pointer; background: rgba(88,166,255,0.1); padding: 2px 6px; border-radius: 4px; }
+        .ean-tech { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #58a6ff; cursor: pointer; background: rgba(88,166,255,0.05); padding: 2px 6px; border-radius: 4px; }
         
         .btn-action { 
             padding: 4px 8px; font-size: 12px; border-radius: 4px; border: 1px solid var(--border);
@@ -47,23 +48,23 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
         .btn-action:hover { color: #fff; border-color: #fff; }
         .btn-action.view { color: #58a6ff; border-color: rgba(88,166,255,0.3); }
 
+        /* Modal Elite */
         .modal-content { background: #161b22 !important; border: 1px solid var(--border); border-radius: 12px; }
         .form-control, .form-select { background: #0d1117 !important; border: 1px solid var(--border) !important; border-radius: 6px; color: #fff !important; font-size: 13px; padding: 10px; }
         
-        .filter-bar { background: #161b22; padding: 12px 20px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 15px; }
-
-        /* Photo Upload Area */
-        .upload-area { 
-            width: 100%; height: 120px; border: 2px dashed var(--border); border-radius: 8px; 
-            display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; position: relative;
+        /* Photo Area */
+        .photo-upload-container {
+            width: 100%; height: 160px; border: 2px dashed var(--border); border-radius: 10px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            cursor: pointer; position: relative; overflow: hidden; background: #0d1117;
+            transition: 0.2s;
         }
-        .upload-area:hover { border-color: var(--accent); }
-        .upload-area img { max-height: 100%; object-fit: contain; }
-        .upload-area .overlay { position: absolute; background: rgba(0,0,0,0.5); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; }
-        .upload-area:hover .overlay { opacity: 1; }
+        .photo-upload-container:hover { border-color: var(--accent); background: rgba(0, 113, 227, 0.05); }
+        .photo-upload-container img { max-height: 100%; object-fit: contain; z-index: 1; }
+        .photo-upload-container .upload-hint { position: absolute; bottom: 10px; font-size: 10px; color: #555; z-index: 2; }
+        .photo-upload-container .camera-icon { color: #555; font-size: 24px; position: absolute; z-index: 0; }
 
-        /* Epic View */
-        .epic-photo { max-width: 100%; border-radius: 12px; background: #fff; padding: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .epic-photo-view { max-width: 100%; max-height: 350px; object-fit: contain; background: #fff; border-radius: 12px; padding: 10px; margin-bottom: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body class="layout-fixed sidebar-expand-lg">
@@ -87,17 +88,15 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
                     </button>
                 </div>
 
-                <div class="filter-bar">
-                    <div class="row align-items-end">
-                        <div class="col-md-3">
-                            <label class="small text-muted mb-1">Categoría:</label>
-                            <select id="filterCategory" class="form-select form-select-sm">
-                                <option value="">Todas</option>
-                                <?php foreach($categories as $cat): ?>
-                                    <option value="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['name']) ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
+                <div class="row mb-3 align-items-end g-2">
+                    <div class="col-md-3">
+                        <label class="small text-muted mb-1">Filtrar por Categoría:</label>
+                        <select id="filterCategory" class="form-select form-select-sm">
+                            <option value="">Todas</option>
+                            <?php foreach($categories as $cat): ?>
+                                <option value="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['name']) ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                 </div>
 
@@ -118,32 +117,35 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
         </main>
     </div>
 
-    <!-- Modal Form (Create/Edit) -->
+    <!-- Modal Form (Crear/Editar) -->
     <div class="modal fade" id="modalEdit" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h6 class="modal-title fw-bold" id="editModalTitle">Producto</h6>
+                <div class="modal-header">
+                    <h6 class="modal-title fw-bold" id="editModalTitle">Ficha de Producto</h6>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="formProduct" enctype="multipart/form-data">
                     <input type="hidden" name="id" id="prod_id">
                     <div class="modal-body p-4">
                         <div class="row g-3">
-                            <div class="col-12 text-center mb-2">
-                                <div class="upload-area" onclick="$('#prod_image').click()">
-                                    <img src="https://placehold.co/120x120?text=Subir+Foto" id="preview_img">
-                                    <div class="overlay"><i class="fa-solid fa-camera fa-2x"></i></div>
+                            <!-- Area de Foto -->
+                            <div class="col-12 mb-2">
+                                <div class="photo-upload-container" onclick="$('#prod_image').click()">
+                                    <i class="fa-solid fa-camera camera-icon"></i>
+                                    <img src="" id="preview_img" style="display:none">
+                                    <div class="upload-hint">Click para cargar foto del producto</div>
                                 </div>
                                 <input type="file" name="image" id="prod_image" class="d-none" accept="image/*">
                             </div>
+                            
                             <div class="col-12">
                                 <label class="small text-muted mb-1">CÓDIGO EAN</label>
-                                <input type="text" class="form-control" name="barcode" id="prod_barcode" required>
+                                <input type="text" class="form-control" name="barcode" id="prod_barcode" required placeholder="Ej: 7800000000000">
                             </div>
                             <div class="col-12">
                                 <label class="small text-muted mb-1">NOMBRE COMPLETO</label>
-                                <input type="text" class="form-control" name="name" id="prod_name" required>
+                                <input type="text" class="form-control" name="name" id="prod_name" required placeholder="Nombre descriptivo">
                             </div>
                             <div class="col-12">
                                 <label class="small text-muted mb-1">CATEGORÍA</label>
@@ -156,22 +158,22 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer border-0">
-                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">GUARDAR CAMBIOS</button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">GUARDAR REGISTRO</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Modal View (Epic Photo) -->
+    <!-- Modal View (Épico) -->
     <div class="modal fade" id="modalView" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body p-4 text-center">
-                    <h5 id="view_name" class="fw-bold text-white mb-3">Nombre del Producto</h5>
-                    <img src="" id="view_img" class="epic-photo mb-3">
-                    <div id="view_barcode" class="ean-tech d-inline-block px-4 py-2">000000000000</div>
+                    <h5 id="view_name" class="fw-bold text-white mb-3">Nombre</h5>
+                    <img src="" id="view_img" class="epic-photo-view">
+                    <div id="view_barcode" class="ean-tech d-inline-block px-4 py-2 fs-6">000000000000</div>
                     <div class="mt-4">
                         <button class="btn btn-secondary btn-sm px-4" data-bs-dismiss="modal">Cerrar</button>
                     </div>
@@ -205,7 +207,7 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
                     data: 'image_path',
                     render: function(data, type, row) {
                         const img = data ? `/api/catalog/image.php?barcode=${row.barcode}&license_key=${licenseKey}` : 'https://placehold.co/50x50?text=📦';
-                        return `<img src="${img}" class="img-mini" onclick="openViewModal(${JSON.stringify(row).replace(/"/g, '&quot;')})">`;
+                        return `<img src="${img}" class="img-mini" onclick='openViewModal(${JSON.stringify(row).replace(/'/g, "&apos;")})'>`;
                     }
                 },
                 { data: 'barcode', render: (d) => `<span class="ean-tech" onclick="copyEan('${d}')">${d}</span>` },
@@ -215,10 +217,10 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
                     data: null, 
                     className: 'text-end',
                     render: function(data, type, row) {
-                        const rowData = JSON.stringify(row).replace(/"/g, '&quot;');
+                        const rowData = JSON.stringify(row).replace(/'/g, "&apos;");
                         return `
-                            <button class="btn-action view" onclick="openViewModal(${rowData})"><i class="fa-solid fa-eye"></i></button>
-                            <button class="btn-action" onclick="openEditModal(${rowData})"><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn-action view" onclick='openViewModal(${rowData})' title="Ver Detalle"><i class="fa-solid fa-eye"></i></button>
+                            <button class="btn-action" onclick='openEditModal(${rowData})' title="Editar"><i class="fa-solid fa-pen"></i></button>
                         `;
                     }
                 }
@@ -234,7 +236,10 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
             const file = this.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) { $('#preview_img').attr('src', e.target.result); }
+                reader.onload = function(e) { 
+                    $('#preview_img').attr('src', e.target.result).show();
+                    $('.camera-icon, .upload-hint').hide();
+                }
                 reader.readAsDataURL(file);
             }
         });
@@ -261,19 +266,25 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
 
     function openEditModal(data = null) {
         $('#formProduct')[0].reset();
+        $('#preview_img').hide();
+        $('.camera-icon, .upload-hint').show();
+        
         if(data) {
             $('#editModalTitle').text('Editar Producto');
             $('#prod_id').val(data.id);
             $('#prod_barcode').val(data.barcode).prop('readonly', true);
             $('#prod_name').val(data.name);
             $('#prod_category').val(data.category_id);
-            const img = data.image_path ? `/api/catalog/image.php?barcode=${data.barcode}&license_key=${licenseKey}` : 'https://placehold.co/120x120?text=Subir+Foto';
-            $('#preview_img').attr('src', img);
+            
+            if(data.image_path) {
+                const imgUrl = `/api/catalog/image.php?barcode=${data.barcode}&license_key=${licenseKey}`;
+                $('#preview_img').attr('src', imgUrl).show();
+                $('.camera-icon, .upload-hint').hide();
+            }
         } else {
-            $('#editModalTitle').text('Nuevo Registro');
+            $('#editModalTitle').text('Nuevo Producto');
             $('#prod_id').val('');
             $('#prod_barcode').prop('readonly', false);
-            $('#preview_img').attr('src', 'https://placehold.co/120x120?text=Subir+Foto');
         }
         $('#modalEdit').modal('show');
     }
