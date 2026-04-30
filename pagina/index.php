@@ -75,6 +75,19 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .hero-content p { font-size: 1.5rem; color: var(--text-light); margin-bottom: 50px; border-left: 5px solid var(--primary); padding-left: 30px; max-width: 600px; }
         .btn-primary { background: var(--primary); color: #fff; padding: 22px 50px; border-radius: 18px; text-decoration: none; font-weight: 800; display: inline-block; transition: 0.3s; box-shadow: 0 15px 30px rgba(106,55,183,0.3); border: none; cursor: pointer; text-transform: uppercase; }
         .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(106,55,183,0.4); }
+        
+        /* CAROUSEL ARROWS (V29) */
+        .c-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 60px; height: 60px; background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50%; color: var(--primary); display: flex;
+            align-items: center; justify-content: center; font-size: 20px;
+            cursor: pointer; z-index: 100; transition: 0.4s;
+        }
+        .c-arrow:hover { background: var(--primary); color: #fff; transform: translateY(-50%) scale(1.1); box-shadow: 0 10px 30px rgba(106,55,183,0.3); }
+        .c-prev { left: 40px; }
+        .c-next { right: 40px; }
 
         /* PEARL FORM (SOLID & VISIBLE) */
         .pearl-form { 
@@ -190,6 +203,8 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
     </nav>
 
     <section class="hero">
+        <div class="c-arrow c-prev" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></div>
+        <div class="c-arrow c-next" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></div>
         <div class="hero-carousel">
             <div class="carousel-track" id="heroTrack">
                 <div class="slide">
@@ -323,8 +338,22 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         document.querySelectorAll('.faq-item').forEach(it => it.addEventListener('click', () => it.classList.toggle('active')));
 
         let slide = 0;
-        function moveCarousel(idx) { slide = idx; document.getElementById('heroTrack').style.transform = `translateX(-${idx*100}%)`; }
-        setInterval(() => { slide = (slide+1)%2; moveCarousel(slide); }, 8000);
+        function moveCarousel(idx) { 
+            slide = idx; 
+            document.getElementById('heroTrack').style.transform = `translateX(-${idx*100}%)`; 
+        }
+        function nextSlide() { slide = (slide + 1) % 2; moveCarousel(slide); }
+        function prevSlide() { slide = (slide - 1 + 2) % 2; moveCarousel(slide); }
+        
+        let autoPlay = setInterval(nextSlide, 9000);
+        
+        // Reset timer on manual click
+        document.querySelectorAll('.c-arrow').forEach(btn => {
+            btn.addEventListener('click', () => {
+                clearInterval(autoPlay);
+                autoPlay = setInterval(nextSlide, 10000);
+            });
+        });
 
         async function handleLead(e, f) {
             e.preventDefault();
