@@ -1,9 +1,8 @@
 <?php
 /**
- * admin/api/save_product.php — Guardar/Actualizar producto en el catálogo maestro
+ * admin/api/save_product.php — Manejo de Productos con Carga de Imágenes
  */
 
-// Descubrimiento robusto de la raíz del proyecto
 $baseDir = __DIR__;
 while ($baseDir !== dirname($baseDir) && !file_exists($baseDir . '/vendor/autoload.php')) {
     $baseDir = dirname($baseDir);
@@ -13,44 +12,73 @@ define('PROJECT_ROOT', $baseDir);
 require_once PROJECT_ROOT . '/vendor/autoload.php';
 
 use App\Services\AuthService;
-use App\Repositories\MasterProductRepository;
+use App\Config\Database;
 
 AuthService::check();
 
 header('Content-Type: application/json');
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    exit(json_encode(['success' => false, 'message' => 'Método no permitido']));
-}
-
 try {
-    $repo = new MasterProductRepository();
+    $db = Database::getConnection();
     
-    $data = [
-        'name'        => $_POST['name'] ?? '',
-        'barcode'     => $_POST['barcode'] ?? '',
-        'brand'       => $_POST['brand'] ?? '',
-        'category_id' => !empty($_POST['category_id']) ? (int)$_POST['category_id'] : null,
-        'description' => $_POST['description'] ?? '',
-        'image_path'  => $_POST['image_path'] ?? null, // Podríamos mejorar esto con upload de archivos luego
-        'is_active'   => isset($_POST['is_active']) ? (bool)$_POST['is_active'] : true
-    ];
+    $id = !empty($_POST['id']) ? (int)$_POST['id'] : null;
+    $barcode = $_POST['barcode'] ?? '';
+    $name = $_POST['name'] ?? '';
+    $brand = $_POST['brand'] ?? '';
+    $categoryId = !empty($_POST['category_id']) ? (int)$_POST['category_id'] : null;
+    
+    $imagePath = null;
 
-    if (!empty($_POST['id'])) {
-        $data['id'] = (int)$_POST['id'];
+    // Manejo de Imagen
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $uploadDir = PROJECT_ROOT . '/public/storage/catalog/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+        $fileName = $barcode . '.' . $ext;
+        $targetFile = $uploadDir . $fileName;
+
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
+            $imagePath = 'catalog/' . $fileName;
+        }
     }
 
-    if (empty($data['name']) || empty($data['barcode'])) {
-        exit(json_encode(['success' => false, 'message' => 'Nombre y Código de Barras son obligatorios']));
+    if ($id) {
+        // UPDATE
+        $sql = "UPDATE master_products SET name = :name, brand = :brand, category_id = :cat_id";
+        if ($imagePath) $sql .= ", image_path = :img";
+        $sql .= " WHERE id = :id";
+
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':name', $name);
+        $stmt->bindValue(':brand', $brand);
+        $stmt->bindValue(':cat_id', $categoryId, \PDO::PARAM_INT);
+        if ($imagePath) $stmt->bindValue(':img', $imagePath);
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $message = "Producto actualizado correctamente";
+    } else {
+        // INSERT
+        $sql = "INSERT INTO master_products (barcode, name, brand, category_id, image_path) 
+                VALUES (:barcode, :name, :brand, :cat_id, :img)";
+        
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':barcode', $barcode);
+        $stmt->bindValue(':name', $name);
+        $stmt->bindValue(':brand', $brand);
+        $stmt->bindValue(':cat_id', $categoryId, \PDO::PARAM_INT);
+        $stmt->bindValue(':img', $imagePath);
+        $stmt->execute();
+
+        $message = "Producto creado correctamente";
     }
 
-    $success = $repo->save($data);
-
-    echo json_encode([
-        'success' => $success,
-        'message' => $success ? 'Producto guardado correctamente' : 'Error al guardar el producto'
-    ]);
+    echo json_encode(['success' => true, 'message' => $message]);
 
 } catch (\Exception $e) {
-    echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 }
