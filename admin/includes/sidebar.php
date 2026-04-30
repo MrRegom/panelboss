@@ -42,6 +42,12 @@
                         <p>Gestión de Planes</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="./catalogo.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'catalogo.php' ? 'active' : '' ?>">
+                        <i class="nav-icon fa-solid fa-boxes-stacked"></i>
+                        <p>Catálogo Maestro</p>
+                    </a>
+                </li>
 
                 <li class="nav-header x-small text-muted mb-2 px-3 mt-4">SISTEMA</li>
                 <li class="nav-item">
