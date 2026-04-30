@@ -31,6 +31,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
@@ -504,22 +505,73 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
 
         function handleGoogleLead(response) {
             const data = jwt_decode(response.credential);
-            const formData = new FormData();
-            formData.append('nombre', data.name);
-            formData.append('email', data.email);
-            formData.append('whatsapp', 'Captura vía Google');
+            const container = document.querySelector('.modal-glass');
             
-            // Simulación de envío con data de Google
-            fetch('save_lead.php', { method: 'POST', body: formData }).then(r => {
+            // Transformación del modal para pedir WhatsApp (V48)
+            container.innerHTML = `
+                <div style="text-align:center; padding:40px; animation: modalUp 0.6s ease;">
+                    <img src="${data.picture}" style="width:80px; height:80px; border-radius:50%; border:3px solid var(--primary); margin-bottom:20px; box-shadow:0 10px 20px rgba(0,0,0,0.1);">
+                    <h3 style="color:var(--primary); font-size:2rem; margin-bottom:10px; font-family:'Outfit';">¡Hola, ${data.given_name}!</h3>
+                    <p style="color:var(--text-light); margin-bottom:30px;">Solo nos falta tu WhatsApp para enviarte la Demo ahora mismo.</p>
+                    
+                    <form onsubmit="finishGoogleLead(event, this, '${data.name}', '${data.email}')" class="lead-form">
+                        <div class="input-group" style="margin-bottom:20px;">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <input type="tel" name="whatsapp" placeholder="+569..." required class="form-input" autofocus>
+                        </div>
+                        <button type="submit" class="btn-elite" style="width:100%; height:60px;">
+                            <i class="fa-solid fa-bolt"></i> ACTIVAR DEMO GRATIS
+                        </button>
+                    </form>
+                </div>
+            `;
+            container.querySelector('input[name="whatsapp"]').focus();
+        }
+
+        async function finishGoogleLead(e, f, nombre, email) {
+            e.preventDefault();
+            const formData = new FormData(f);
+            formData.append('nombre', nombre);
+            formData.append('email', email);
+            
+            // Llamamos a la función de envío principal (isModal = true)
+            handleLead(e, f.parentElement, true, formData);
+        }
+
+        // Modificamos handleLead para aceptar formData externo (V48)
+        async function handleLead(e, container_el, isModal, externalData = null) {
+            if(e) e.preventDefault();
+            const form = externalData ? null : container_el.querySelector('form');
+            const btn = container_el.querySelector('button');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ACTIVANDO...';
+            
+            const dataToSend = externalData || new FormData(form);
+
+            try {
+                const r = await fetch('save_lead.php', { method: 'POST', body: dataToSend });
                 if(r.ok) {
-                    confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
-                    document.querySelector('.modal-glass').innerHTML = `<div style="text-align:center; padding:40px;">
-                        <h3 style="color:var(--primary); font-size:2.5rem; margin-bottom:15px;">¡Gracias, ${data.given_name}!</h3>
-                        <p style="color:var(--text-light);">Hemos capturado tu Gmail: ${data.email}.<br>Te contactaremos a la brevedad.</p>
+                    // Guardar en memoria
+                    localStorage.setItem('cajaya_lead', JSON.stringify({
+                        nombre: dataToSend.get('nombre'),
+                        email: dataToSend.get('email'),
+                        whatsapp: dataToSend.get('whatsapp')
+                    }));
+
+                    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+
+                    const target = isModal ? document.querySelector('.modal-glass') : container_el;
+                    target.innerHTML = `<div style="text-align:center; padding:60px; animation: modalUp 0.8s ease;">
+                        <i class="fa-solid fa-crown" style="font-size:6rem; color:#FFD700; margin-bottom:30px;"></i>
+                        <h2 style="color:var(--primary); font-size:3.5rem; margin-bottom:15px; font-family:'Outfit';">¡Nivel Élite!</h2>
+                        <p style="color:var(--text-light); font-size:1.5rem;">Bienvenido, ${dataToSend.get('nombre')}.<br>Tu Demo está siendo preparada.</p>
                     </div>`;
-                    setTimeout(closeModal, 5000);
+                    setTimeout(closeModal, 6000);
                 }
-            });
+            } catch(err) {
+                btn.innerHTML = 'REINTENTAR';
+            }
         }
     </script>
 </body>
