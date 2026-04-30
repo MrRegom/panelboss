@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php — Landing Page CAJAYA ELITE FINAL V16 (DARK GLASS)
+ * index.php — Landing Page CAJAYA ELITE FINAL V17 (PEARL CELEBRATION)
  */
 session_start();
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -224,52 +224,56 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .f-col a:hover::after { width: 100%; }
         .f-col p { color: rgba(255,255,255,0.6); line-height: 1.8; font-size: 15px; }
 
-        /* EARLY ACCESS - DARK PREMIUM GLASS */
+        /* EARLY ACCESS - PEARL PREMIUM GLASS */
         .early-access { 
-            padding: 150px 8%; background: var(--bg-white); position: relative;
+            padding: 150px 8%; background: #fdfdfd; position: relative; overflow: hidden;
         }
         .early-container { 
             max-width: 1100px; margin: 0 auto; 
-            background: linear-gradient(145deg, #0f0a1a 0%, #050505 100%);
-            padding: 100px 50px; border-radius: 60px; color: #fff;
-            box-shadow: 0 50px 150px rgba(0,0,0,0.5);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(30px);
+            padding: 100px 50px; border-radius: 60px; color: var(--text-dark);
+            box-shadow: 0 40px 100px rgba(106,55,183,0.08);
             position: relative; overflow: hidden;
             display: flex; flex-direction: column; align-items: center;
-            border: 1px solid rgba(106,55,183,0.1);
+            border: 1px solid rgba(255,255,255,0.8);
         }
         .early-container::before {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(106,55,183,0.1) 0%, transparent 70%);
-            animation: rotate-bg 25s linear infinite;
+            background: radial-gradient(circle, rgba(106,55,183,0.05) 0%, transparent 70%);
+            animation: rotate-bg 30s linear infinite;
         }
         
         .early-content { position: relative; z-index: 2; width: 100%; max-width: 800px; text-align: center; }
-        .early-content h2 { font-family: 'Outfit', sans-serif; font-size: 3.8rem; margin-bottom: 25px; letter-spacing: -3px; }
+        .early-content h2 { font-family: 'Outfit', sans-serif; font-size: 3.8rem; margin-bottom: 25px; letter-spacing: -3px; color: var(--primary); }
         .early-content h2 span { color: var(--primary-glow); }
-        .early-content p { font-size: 1.4rem; opacity: 0.6; margin-bottom: 60px; font-weight: 300; }
+        .early-content p { font-size: 1.4rem; color: #666; margin-bottom: 60px; font-weight: 300; }
         
         .lead-form { 
             display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; 
         }
         .input-group { position: relative; width: 100%; }
-        .input-group i { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); color: var(--primary-glow); font-size: 18px; opacity: 0.8; }
+        .input-group i { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); color: var(--primary); font-size: 18px; opacity: 0.5; }
         
         .lead-input { 
-            width: 100%; padding: 22px 25px 22px 65px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.05); 
-            background: rgba(255,255,255,0.03); color: #fff; font-size: 16px; 
-            backdrop-filter: blur(20px); transition: all 0.4s ease;
+            width: 100%; padding: 22px 25px 22px 65px; border-radius: 25px; border: 1px solid rgba(106,55,183,0.1); 
+            background: #fff; color: var(--text-dark); font-size: 16px; 
+            transition: all 0.4s ease;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
         }
-        .lead-input::placeholder { color: rgba(255,255,255,0.2); }
-        .lead-input:focus { background: rgba(255,255,255,0.08); outline: none; border-color: var(--primary-glow); box-shadow: 0 0 40px rgba(106,55,183,0.2); }
+        .lead-input::placeholder { color: #aaa; }
+        .lead-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 30px rgba(106,55,183,0.1); transform: translateY(-2px); }
         
         .btn-submit { 
             grid-column: span 2; background: var(--primary); color: #fff; border: none; padding: 25px; 
             border-radius: 25px; font-weight: 900; text-transform: uppercase; letter-spacing: 4px;
             cursor: pointer; transition: 0.5s; font-size: 16px; margin-top: 20px;
-            box-shadow: 0 20px 50px rgba(106,55,183,0.3);
+            box-shadow: 0 20px 40px rgba(106,55,183,0.3);
         }
-        .btn-submit:hover { transform: translateY(-8px); box-shadow: 0 30px 70px rgba(106,55,183,0.5); background: var(--primary-glow); }
-        .success-msg { display: none; font-size: 2rem; font-weight: 800; animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .btn-submit:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(106,55,183,0.4); background: var(--primary-glow); }
+        
+        .success-msg { display: none; font-size: 2rem; font-weight: 800; color: var(--primary); animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        #celeb-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; display: none; }
 
         /* REVEAL */
         .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition-mac); }
@@ -363,6 +367,10 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             </div>
         </div>
     </section>
+
+    </section>
+
+    <canvas id="celeb-canvas"></canvas>
 
     <section class="early-access">
         <div class="early-container reveal">
@@ -489,6 +497,58 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         observer.observe(document.getElementById('plan-cards'));
 
+        // CELEBRATION ENGINE
+        function launchCelebration() {
+            const canvas = document.getElementById('celeb-canvas');
+            canvas.style.display = 'block';
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            let particles = [];
+            const colors = ['#6A37B7', '#9D50BB', '#FFD700', '#FFFFFF'];
+            
+            class Particle {
+                constructor() {
+                    this.x = canvas.width / 2;
+                    this.y = canvas.height / 2;
+                    this.angle = Math.random() * Math.PI * 2;
+                    this.speed = Math.random() * 8 + 2;
+                    this.friction = 0.95;
+                    this.gravity = 0.15;
+                    this.size = Math.random() * 6 + 2;
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                    this.opacity = 1;
+                }
+                update() {
+                    this.speed *= this.friction;
+                    this.x += Math.cos(this.angle) * this.speed;
+                    this.y += Math.sin(this.angle) * this.speed + this.gravity;
+                    this.opacity -= 0.01;
+                }
+                draw() {
+                    ctx.globalAlpha = this.opacity;
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            for(let i=0; i<150; i++) particles.push(new Particle());
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach((p, i) => {
+                    if(p.opacity <= 0) particles.splice(i, 1);
+                    else { p.update(); p.draw(); }
+                });
+                if(particles.length > 0) requestAnimationFrame(animate);
+                else canvas.style.display = 'none';
+            }
+            animate();
+        }
+
         // LEAD FORM HANDLING
         document.getElementById('leadForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -505,6 +565,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 if (resp.ok) {
                     form.style.display = 'none';
                     success.style.display = 'block';
+                    launchCelebration(); // ¡BOOM!
                 }
             } catch (err) {
                 console.error(err);
