@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $smtp_host = "ssl://smtp.gmail.com";
         $smtp_port = 465;
         $smtp_user = "reltzerspa@gmail.com";
-        $smtp_pass = "Reltzer2026.."; // RECUERDA: Si falla, usa una 'App Password' de Google
+        $smtp_pass = "eism hymp wnzq maqj"; // Credencial Maestra validada (V44)
 
         $to      = "reltzerspa@gmail.com";
         $subject = "🔥 NUEVO PROSPECTO: CajaYa Elite";

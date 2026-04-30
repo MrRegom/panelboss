@@ -349,27 +349,15 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                     <p style="color:var(--text-light);">La forma más rápida de entrar a la Élite.</p>
                 </div>
 
-                <!-- Botón de Acceso Rápido Estilo Google (V38) -->
-                <div id="google-capture-area" style="margin-bottom:30px;">
+                <!-- Botón de Google Real (V44) -->
+                <div id="google-capture-area" style="margin-bottom:30px; display:flex; justify-content:center;">
                     <div id="g_id_onload"
-                         data-client_id="TU_GOOGLE_CLIENT_ID_AQUI"
+                         data-client_id="630347695888-uaeq5t3h6i9urd5lfmn7odovlauhmrau.apps.googleusercontent.com"
                          data-callback="handleGoogleLead"
                          data-auto_prompt="true">
                     </div>
                     <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_blue" data-text="continue_with" data-size="large" data-logo_alignment="left"></div>
                 </div>
-                
-                <script>
-                    // V39: Fallback visual si no hay Client ID pero con soporte One-Tap preparado
-                    if(document.querySelector('[data-client_id="TU_GOOGLE_CLIENT_ID_AQUI"]')) {
-                        const area = document.getElementById('google-capture-area');
-                        if (!window.google) {
-                            area.innerHTML = `<button onclick="focusGmail()" class="btn-google-elite">
-                                <i class="fa-brands fa-google"></i> Continuar con Gmail
-                            </button>`;
-                        }
-                    }
-                </script>
 
                 <div style="display:flex; align-items:center; margin-bottom:30px; opacity:0.3;"><hr style="flex:1;"><span style="padding:0 15px; font-size:12px;">O USA TU CORREO</span><hr style="flex:1;"></div>
 
