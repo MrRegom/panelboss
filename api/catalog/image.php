@@ -8,6 +8,10 @@ require_once __DIR__ . '/../../src/Config/Database.php';
 
 use App\Config\Database;
 
+// DEBUG TEMPORAL
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 $barcode    = $_GET['barcode'] ?? null;
 $licenseKey = $_GET['license_key'] ?? null;
 
