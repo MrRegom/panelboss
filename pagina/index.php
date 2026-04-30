@@ -151,16 +151,36 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .btn-cta { width: 100%; background: var(--primary-soft); color: var(--primary); text-decoration: none; padding: 22px; border-radius: 20px; font-weight: 900; text-transform: uppercase; transition: 0.3s; }
         .p-card.featured .btn-cta { background: var(--primary); color: #fff; }
 
-        /* FAQ MODERN (V30) */
-        .section-faq { padding: 120px 10%; background: var(--bg-off); text-align: center; }
-        .faq-container { max-width: 900px; margin: 60px auto 0; text-align: left; }
-        .faq-item { margin-bottom: 20px; border-radius: 30px; background: #fff; border: 1px solid rgba(0,0,0,0.03); box-shadow: 0 10px 30px rgba(0,0,0,0.02); transition: 0.4s; overflow: hidden; cursor: pointer; }
-        .faq-item h4 { padding: 35px 45px; font-size: 1.3rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center; color: var(--text-dark); }
-        .faq-item i { color: var(--primary); transition: 0.4s; font-size: 1.1rem; }
-        .faq-body { padding: 0 45px 0; max-height: 0; opacity: 0; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text-light); font-size: 1.1rem; line-height: 1.8; }
-        .faq-item.active { border-color: var(--primary-soft); box-shadow: 0 30px 60px rgba(106,55,183,0.08); }
-        .faq-item.active .faq-body { padding-bottom: 40px; max-height: 300px; opacity: 1; }
-        .faq-item.active i { transform: rotate(45deg); color: var(--text-dark); }
+        /* FAQ ELITE MINIMALIST (V31) */
+        .section-faq { padding: 120px 10%; background: #fff; text-align: center; }
+        .faq-container { max-width: 850px; margin: 60px auto 0; text-align: left; }
+        .faq-item { border-bottom: 1px solid #eee; transition: 0.3s; }
+        .faq-item h4 { padding: 35px 0; font-size: 1.25rem; font-weight: 600; display: flex; justify-content: space-between; align-items: center; color: var(--text-dark); cursor: pointer; }
+        .faq-item i { font-size: 0.9rem; opacity: 0.3; transition: 0.4s; }
+        .faq-body { max-height: 0; opacity: 0; overflow: hidden; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text-light); line-height: 1.8; }
+        .faq-item.active .faq-body { padding-bottom: 35px; max-height: 200px; opacity: 1; }
+        .faq-item.active i { transform: rotate(45deg); opacity: 1; color: var(--primary); }
+
+        /* RIBBON CTA (V31) */
+        .ribbon-cta { 
+            background: linear-gradient(90deg, #2D1452, #6A37B7); 
+            padding: 60px 10%; color: #fff; display: flex; align-items: center; justify-content: space-between; 
+            border-radius: 0; position: relative; z-index: 10;
+        }
+        .ribbon-text h3 { font-family: 'Outfit', sans-serif; font-size: 2.2rem; margin-bottom: 5px; letter-spacing: -1px; }
+        .ribbon-text p { opacity: 0.7; font-size: 1.1rem; }
+        .btn-white { background: #fff; color: var(--primary); padding: 18px 40px; border-radius: 15px; font-weight: 800; text-decoration: none; transition: 0.3s; border: none; cursor: pointer; text-transform: uppercase; font-size: 14px; }
+        .btn-white:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+
+        /* MODAL GLASS (V31) */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(13, 11, 20, 0.85); backdrop-filter: blur(15px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal-glass { 
+            background: rgba(255,255,255,0.95); padding: 60px; border-radius: 40px; width: 100%; max-width: 550px; 
+            position: relative; animation: modalUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes modalUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .modal-close { position: absolute; top: 30px; right: 30px; font-size: 24px; cursor: pointer; opacity: 0.3; transition: 0.3s; }
+        .modal-close:hover { opacity: 1; color: var(--primary); }
 
         /* FOOTER MIDNIGHT ELITE (V28) */
         footer { 
@@ -253,6 +273,14 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         </div>
     </section>
 
+    <div class="ribbon-cta reveal">
+        <div class="ribbon-text">
+            <h3>Prueba la potencia de CajaYa hoy mismo.</h3>
+            <p>Captura la eficiencia de un sistema de clase mundial en tu negocio.</p>
+        </div>
+        <button onclick="openModal()" class="btn-white">Obtener Demo Gratis</button>
+    </div>
+
     <section class="section-planes" id="planes">
         <div class="header-elite" style="text-align: center;">
             <h2 class="reveal">Planes a tu <span>Medida.</span></h2>
@@ -290,6 +318,21 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
     </section>
 
     <footer>
+        <div class="modal-overlay" id="leadModal">
+            <div class="modal-glass">
+                <i class="fa-solid fa-xmark modal-close" onclick="closeModal()"></i>
+                <div style="text-align:center; margin-bottom:40px;">
+                    <h2 style="font-family:'Outfit'; font-size:2.5rem; color:var(--primary); margin-bottom:10px;">¡Tu Demo te espera!</h2>
+                    <p style="color:var(--text-light);">Completa estos datos y descarga el instalador al instante.</p>
+                </div>
+                <form onsubmit="handleLead(event, this)" class="form-grid">
+                    <div class="input-wrap"><i class="fa-solid fa-envelope"></i><input type="email" name="email" class="form-input" placeholder="Tu Gmail Corporativo" required></div>
+                    <div class="input-wrap"><i class="fa-solid fa-whatsapp"></i><input type="text" name="whatsapp" class="form-input" placeholder="Tu WhatsApp (Ej: +569...)" required></div>
+                    <button type="submit" class="btn-primary" style="width: 100%; margin-top:10px;">Descargar Demo Ahora</button>
+                </form>
+            </div>
+        </div>
+
         <div class="f-wave">
             <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
                 <path fill="#ffffff" fill-opacity="1" d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,144C672,139,768,181,864,202.7C960,224,1056,224,1152,197.3C1248,171,1344,117,1392,90.7L1440,64L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
@@ -339,7 +382,10 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         const obs = new IntersectionObserver(ents => ents.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-        document.querySelectorAll('.faq-item').forEach(it => it.addEventListener('click', () => it.classList.toggle('active')));
+        document.querySelectorAll('.faq-item h4').forEach(it => it.addEventListener('click', () => it.parentElement.classList.toggle('active')));
+
+        function openModal() { document.getElementById('leadModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('leadModal').style.display = 'none'; }
 
         let slide = 0;
         function moveCarousel(idx) { 
