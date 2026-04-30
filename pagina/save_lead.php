@@ -9,74 +9,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $whatsapp = strip_tags(trim($_POST['whatsapp'] ?? ''));
 
     if (!empty($email)) {
-        // --- MOTOR SMTP DIRECTO (V43) ---
-        $smtp_host = "ssl://smtp.gmail.com";
-        $smtp_port = 465;
-        $smtp_user = "reltzerspa@gmail.com";
-        $smtp_pass = "eism hymp wnzq maqj"; // Credencial Maestra validada (V44)
+        // --- MOTOR PHPMailer NATIVO (V45 - Mirroring Licencias) ---
+        require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/Exception.php';
+        require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+        require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/SMTP.php';
 
-        $to      = "reltzerspa@gmail.com";
-        $subject = "🔥 NUEVO PROSPECTO: CajaYa Elite";
-        
-        $message = "
-        <html>
-        <head><title>Nuevo Prospecto</title></head>
-        <body style='font-family: Arial, sans-serif; line-height: 1.6; color: #333;'>
-            <div style='background: #6A37B7; color: #fff; padding: 20px; text-align: center; border-radius: 10px 10px 0 0;'>
-                <h2 style='margin: 0;'>🚀 ¡Nuevo Lead Capturado!</h2>
-            </div>
-            <div style='padding: 30px; border: 1px solid #eee; border-radius: 0 0 10px 10px;'>
-                <p><strong>Nombre:</strong> $nombre</p>
-                <p><strong>Email:</strong> $email</p>
-                <p><strong>WhatsApp:</strong> $whatsapp</p>
-                <p><strong>Fecha:</strong> " . date("d/m/Y H:i:s") . "</p>
-            </div>
-        </body>
-        </html>";
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\Exception;
 
-        // Función SMTP Local para no depender de librerías externas
-        function sendSMTP($to, $subject, $message, $host, $port, $user, $pass) {
-            $socket = fsockopen($host, $port, $errno, $errstr, 15);
-            if (!$socket) return "Error Socket: $errstr";
+        $mail = new PHPMailer(true);
+        $result_smtp = "FAIL";
+
+        try {
+            // Configuración idéntica a EmailService.php
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'reltzerspa@gmail.com';
+            $mail->Password   = 'eism hymp wnzq maqj'; // Credencial Maestra validada
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;
+            $mail->CharSet    = 'UTF-8';
+
+            // Destinatarios
+            $mail->setFrom('reltzerspa@gmail.com', 'CajaYa Elite');
+            $mail->addAddress('reltzerspa@gmail.com', 'Admin CajaYa');
+
+            // Contenido
+            $mail->isHTML(true);
+            $mail->Subject = "🚀 NUEVO PROSPECTO: $nombre (CajaYa Elite)";
             
-            $res = fgets($socket, 256);
-            fputs($socket, "EHLO " . $_SERVER['HTTP_HOST'] . "\r\n");
-            $res = fgets($socket, 256);
-            fputs($socket, "AUTH LOGIN\r\n");
-            $res = fgets($socket, 256);
-            fputs($socket, base64_encode($user) . "\r\n");
-            $res = fgets($socket, 256);
-            fputs($socket, base64_encode($pass) . "\r\n");
-            $res = fgets($socket, 256);
-            
-            if (strpos($res, '235') === false) return "Auth Failed: " . $res;
+            $mail->Body = "
+            <html>
+            <body style='font-family: Arial, sans-serif; line-height: 1.6; color: #333;'>
+                <div style='background: #6A37B7; color: #fff; padding: 20px; text-align: center; border-radius: 10px 10px 0 0;'>
+                    <h2 style='margin: 0;'>🔥 ¡Nuevo Lead Capturado!</h2>
+                </div>
+                <div style='padding: 30px; border: 1px solid #eee; border-radius: 0 0 10px 10px;'>
+                    <p><strong>Nombre:</strong> $nombre</p>
+                    <p><strong>Email:</strong> $email</p>
+                    <p><strong>WhatsApp:</strong> $whatsapp</p>
+                    <p><strong>Fecha:</strong> " . date("d/m/Y H:i:s") . "</p>
+                    <hr style='border: 0; border-top: 1px solid #eee; margin: 20px 0;'>
+                    <p style='font-size: 12px; color: #999; text-align: center;'>Este es un mensaje automático de tu sistema CajaYa Elite.</p>
+                </div>
+            </body>
+            </html>";
 
-            fputs($socket, "MAIL FROM: <$user>\r\n");
-            $res = fgets($socket, 256);
-            fputs($socket, "RCPT TO: <$to>\r\n");
-            $res = fgets($socket, 256);
-            fputs($socket, "DATA\r\n");
-            $res = fgets($socket, 256);
-
-            $headers  = "MIME-Version: 1.0\r\n";
-            $headers .= "Content-type: text/html; charset=UTF-8\r\n";
-            $headers .= "To: $to\r\n";
-            $headers .= "From: CajaYa Elite <$user>\r\n";
-            $headers .= "Subject: $subject\r\n\r\n";
-
-            fputs($socket, $headers . $message . "\r\n.\r\n");
-            $res = fgets($socket, 256);
-            fputs($socket, "QUIT\r\n");
-            fclose($socket);
-            return "OK";
+            $mail->send();
+            $result_smtp = "OK";
+        } catch (Exception $e) {
+            $result_smtp = "Error: " . $mail->ErrorInfo;
+            error_log("Error SMTP V45: " . $mail->ErrorInfo);
         }
-
-        $result_smtp = sendSMTP($to, $subject, $message, $smtp_host, $smtp_port, $smtp_user, $smtp_pass);
         
-        // Log de depuración (V43)
-        file_put_contents(__DIR__ . '/mail_debug.log', date("[Y-m-d H:i:s] ") . "SMTP Result: $result_smtp\n", FILE_APPEND);
+        // Log de depuración (V45)
+        file_put_contents(__DIR__ . '/mail_debug.log', date("[Y-m-d H:i:s] ") . "PHPMailer Result: $result_smtp\n", FILE_APPEND);
 
-        // 2. Respaldo Local (JSON) - Seguridad ante fallos
+        // 2. Respaldo Local (JSON)
         $leadData = [
             'nombre'   => $nombre,
             'email'    => $email,
