@@ -1,9 +1,8 @@
 <?php
 /**
- * save_lead.php — Controlador de Captación de Prospectos CajaYa Elite (V46)
+ * save_lead.php — Controlador de Captación de Prospectos CajaYa Elite (V47 - DB Ready)
  */
 
-// 1. Declaraciones Top-Level (Obligatorio para que no se cuelgue)
 require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/Exception.php';
 require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/SMTP.php';
@@ -19,32 +18,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $whatsapp = strip_tags(trim($_POST['whatsapp'] ?? ''));
 
     if (!empty($email)) {
+        // --- 1. PERSISTENCIA EN BASE DE DATOS (V47) ---
+        $db_status = "PENDING";
+        try {
+            $dsn = "pgsql:host=localhost;port=5433;dbname=cajaya";
+            $pdo = new PDO($dsn, 'postgres', 'Rgomez2025..', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+            
+            $sql = "INSERT INTO public.prospectos (nombre, email, whatsapp) 
+                    VALUES (:nombre, :email, :whatsapp)
+                    ON CONFLICT (email) DO UPDATE SET 
+                        nombre = EXCLUDED.nombre, 
+                        whatsapp = EXCLUDED.whatsapp, 
+                        fecha = now();";
+            
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':nombre'   => $nombre,
+                ':email'    => $email,
+                ':whatsapp' => $whatsapp
+            ]);
+            $db_status = "OK";
+        } catch (PDOException $e) {
+            $db_status = "Error DB: " . $e->getMessage();
+            error_log("Error DB Prospectos: " . $e->getMessage());
+        }
+
+        // --- 2. NOTIFICACIÓN POR CORREO (PHPMailer V46) ---
         $mail = new PHPMailer(true);
         $result_smtp = "FAIL";
 
         try {
-            // Configuración del Servidor (Copiada de EmailService.php)
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
             $mail->Username   = 'reltzerspa@gmail.com';
-            $mail->Password   = 'eism hymp wnzq maqj'; // Credencial Maestra
+            $mail->Password   = 'eism hymp wnzq maqj'; 
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
             $mail->CharSet    = 'UTF-8';
-            $mail->Timeout    = 20; // 20 segundos de espera
+            $mail->Timeout    = 20;
 
-            // Destinatarios
             $mail->setFrom('reltzerspa@gmail.com', 'CajaYa Elite');
             $mail->addAddress('reltzerspa@gmail.com', 'Admin CajaYa');
 
-            // Contenido
             $mail->isHTML(true);
             $mail->Subject = "🚀 NUEVO PROSPECTO: $nombre (CajaYa Elite)";
-            
             $mail->Body = "
-            <html>
-            <body style='font-family: Arial, sans-serif; line-height: 1.6; color: #333;'>
+            <div style='font-family: Arial, sans-serif; color: #333;'>
                 <div style='background: #6A37B7; color: #fff; padding: 20px; text-align: center; border-radius: 10px 10px 0 0;'>
                     <h2 style='margin: 0;'>🔥 ¡Nuevo Lead Capturado!</h2>
                 </div>
@@ -52,12 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <p><strong>Nombre:</strong> $nombre</p>
                     <p><strong>Email:</strong> $email</p>
                     <p><strong>WhatsApp:</strong> $whatsapp</p>
+                    <p><strong>Estado DB:</strong> $db_status</p>
                     <p><strong>Fecha:</strong> " . date("d/m/Y H:i:s") . "</p>
-                    <hr style='border: 0; border-top: 1px solid #eee; margin: 20px 0;'>
-                    <p style='font-size: 12px; color: #999; text-align: center;'>Notificación generada por CajaYa Landing V46.</p>
                 </div>
-            </body>
-            </html>";
+            </div>";
 
             $mail->send();
             $result_smtp = "OK";
@@ -65,26 +83,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $result_smtp = "Error: " . $mail->ErrorInfo;
         }
         
-        // Log de depuración (V46)
-        @file_put_contents(__DIR__ . '/mail_debug.log', date("[Y-m-d H:i:s] ") . "V46 Result: $result_smtp\n", FILE_APPEND);
+        // Log de depuración
+        @file_put_contents(__DIR__ . '/mail_debug.log', date("[Y-m-d H:i:s] ") . "V47 - DB: $db_status | SMTP: $result_smtp\n", FILE_APPEND);
 
-        // Respaldo Local (JSON)
-        $leadData = [
-            'nombre'   => $nombre,
-            'email'    => $email,
-            'whatsapp' => $whatsapp,
-            'fecha'    => date("Y-m-d H:i:s")
-        ];
-        
+        // 3. RESPALDO EN JSON (Seguridad Senior)
+        $leadData = ['nombre'=>$nombre, 'email'=>$email, 'whatsapp'=>$whatsapp, 'fecha'=>date("Y-m-d H:i:s")];
         $logPath = __DIR__ . '/leads_log.json';
-        $currentLeads = [];
-        if (file_exists($logPath)) {
-            $currentLeads = json_decode(file_get_contents($logPath), true) ?? [];
-        }
+        $currentLeads = file_exists($logPath) ? json_decode(file_get_contents($logPath), true) ?? [] : [];
         $currentLeads[] = $leadData;
         @file_put_contents($logPath, json_encode($currentLeads, JSON_PRETTY_PRINT));
 
-        echo json_encode(['status' => 'success', 'smtp' => $result_smtp]);
+        echo json_encode(['status' => 'success', 'db' => $db_status, 'smtp' => $result_smtp]);
         exit;
     }
 }
