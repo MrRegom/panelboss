@@ -18,6 +18,11 @@ $limit = 20;
 $offset = ($page - 1) * $limit;
 
 $products = $repo->list($limit, $offset, $search);
+
+// Obtenemos una licencia activa para previsualizar las fotos en el panel
+$db = Database::getConnection();
+$stmtLic = $db->query("SELECT license_key FROM licenses WHERE status = 'active' LIMIT 1");
+$licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
 ?>
 <!DOCTYPE html>
 <html lang="es" data-bs-theme="dark">
@@ -95,7 +100,7 @@ $products = $repo->list($limit, $offset, $search);
                         <div class="product-card">
                             <div class="img-container">
                                 <?php if ($p['image_path']): ?>
-                                    <img src="/<?= $p['image_path'] ?>" alt="<?= htmlspecialchars($p['name']) ?>">
+                                    <img src="/api/catalog/image.php?barcode=<?= $p['barcode'] ?>&license_key=<?= $licenseKey ?>" alt="<?= htmlspecialchars($p['name']) ?>">
                                 <?php else: ?>
                                     <i class="fa-solid fa-image fa-2x opacity-10"></i>
                                 <?php endif; ?>

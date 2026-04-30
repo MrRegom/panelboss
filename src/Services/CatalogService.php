@@ -17,8 +17,8 @@ class CatalogService
     public function __construct()
     {
         $this->repository = new MasterProductRepository();
-        // Definimos la ruta de almacenamiento base
-        $this->storagePath = dirname(__DIR__, 2) . '/public/storage/products';
+        // Ruta protegida FUERA de la carpeta pública
+        $this->storagePath = dirname(__DIR__, 2) . '/storage/products';
         
         // Asegurar que existan los directorios
         if (!is_dir($this->storagePath . '/originals')) {
