@@ -53,9 +53,16 @@ try {
 
     $filePath = PROJECT_ROOT . DIRECTORY_SEPARATOR . $product['image_path'];
 
+    // Si no existe en la raíz, intentar en la carpeta pública (común en despliegues compartidos)
+    if (!file_exists($filePath)) {
+        $filePath = PROJECT_ROOT . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . $product['image_path'];
+    }
+
     if (!file_exists($filePath)) {
         header("HTTP/1.1 404 Not Found");
-        echo "DEBUG: Archivo no encontrado en path real: " . $filePath;
+        echo "DEBUG: Archivo no encontrado. Buscado en:\n";
+        echo "1. " . PROJECT_ROOT . DIRECTORY_SEPARATOR . $product['image_path'] . "\n";
+        echo "2. " . PROJECT_ROOT . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . $product['image_path'];
         exit;
     }
 
