@@ -30,6 +30,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
     <title>CajaYa Elite — El Futuro de tu Negocio</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --primary: #6A37B7;
@@ -263,12 +264,12 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                     <div class="pearl-form reveal">
                         <h2>Únete a la <span>Élite</span></h2>
                         <p>Déjanos tus datos y un consultor experto te contactará hoy mismo.</p>
-                        <form onsubmit="handleLead(event, this)" class="form-grid">
-                            <div class="input-wrap"><i class="fa-solid fa-user"></i><input type="text" name="nombre" class="form-input" placeholder="Nombre completo" required></div>
-                            <div class="input-wrap"><i class="fa-solid fa-envelope"></i><input type="email" name="email" class="form-input" placeholder="Correo electrónico" required></div>
-                            <div class="input-wrap"><i class="fa-solid fa-whatsapp"></i><input type="text" name="whatsapp" class="form-input" placeholder="WhatsApp" required></div>
-                            <button type="submit" class="btn-primary" style="width: 100%;">Solicitar Info Ahora</button>
-                        </form>
+                    <form onsubmit="handleLead(event, this, false)" class="form-grid">
+                        <div class="input-wrap"><i class="fa-solid fa-user"></i><input type="text" name="nombre" class="form-input" placeholder="Nombre completo" required></div>
+                        <div class="input-wrap"><i class="fa-solid fa-envelope"></i><input type="email" name="email" class="form-input" placeholder="Correo electrónico" required></div>
+                        <div class="input-wrap"><i class="fa-solid fa-whatsapp"></i><input type="text" name="whatsapp" class="form-input" placeholder="WhatsApp" required></div>
+                        <button type="submit" class="btn-primary" style="width: 100%;">Solicitar Info Ahora</button>
+                    </form>
                     </div>
                 </div>
             </div>
@@ -337,9 +338,10 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 <i class="fa-solid fa-xmark modal-close" onclick="closeModal()"></i>
                 <div style="text-align:center; margin-bottom:40px;">
                     <h2 style="font-family:'Outfit'; font-size:2.5rem; color:var(--primary); margin-bottom:10px;">¡Tu Demo te espera!</h2>
-                    <p style="color:var(--text-light);">Completa estos datos y descarga el instalador al instante.</p>
+                    <p style="color:var(--text-light);">Completa tus datos y descarga el instalador al instante.</p>
                 </div>
-                <form onsubmit="handleLead(event, this)" class="form-grid">
+                <form onsubmit="handleLead(event, this, true)" class="form-grid">
+                    <div class="input-wrap"><i class="fa-solid fa-user"></i><input type="text" name="nombre" class="form-input" placeholder="Nombre completo" required></div>
                     <div class="input-wrap"><i class="fa-solid fa-envelope"></i><input type="email" name="email" class="form-input" placeholder="Tu Gmail Corporativo" required></div>
                     <div class="input-wrap"><i class="fa-solid fa-whatsapp"></i><input type="text" name="whatsapp" class="form-input" placeholder="Tu WhatsApp (Ej: +569...)" required></div>
                     <button type="submit" class="btn-primary" style="width: 100%; margin-top:10px;">Descargar Demo Ahora</button>
@@ -419,13 +421,27 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             });
         });
 
-        async function handleLead(e, f) {
+        async function handleLead(e, f, isModal) {
             e.preventDefault();
-            const b = f.querySelector('button'); b.innerHTML = 'ENVIANDO...';
+            const b = f.querySelector('button'); 
+            const originalText = b.innerHTML;
+            b.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ENVIANDO...';
+            
             try {
                 const r = await fetch('save_lead.php', { method: 'POST', body: new FormData(f) });
-                if(r.ok) f.innerHTML = '<h3 style="color:var(--primary); padding:30px;">¡Recibido!</h3>';
-            } catch(e) { b.innerHTML = 'REINTENTAR'; }
+                if(r.ok) {
+                    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#6A37B7', '#9D6CFF', '#ffffff'] });
+                    f.innerHTML = `<div style="text-align:center; padding:40px;">
+                        <i class="fa-solid fa-circle-check" style="font-size:4rem; color:#25D366; margin-bottom:20px;"></i>
+                        <h3 style="color:var(--primary); font-size:2rem; margin-bottom:10px;">¡Solicitud Recibida!</h3>
+                        <p style="color:var(--text-light);">Un consultor te contactará en breve.</p>
+                    </div>`;
+                    if(isModal) setTimeout(closeModal, 4000);
+                }
+            } catch(e) { 
+                b.innerHTML = 'REINTENTAR'; 
+                setTimeout(() => b.innerHTML = originalText, 2000);
+            }
         }
     </script>
 </body>
