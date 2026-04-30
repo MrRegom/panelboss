@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php — Landing Page CAJAYA ELITE FINAL V14.2
+ * index.php — Landing Page CAJAYA ELITE FINAL V15 (LEAD MAGNET)
  */
 session_start();
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -224,6 +224,44 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .f-col a:hover::after { width: 100%; }
         .f-col p { color: rgba(255,255,255,0.6); line-height: 1.8; font-size: 15px; }
 
+        /* EARLY ACCESS SECTION */
+        .early-access { 
+            background: var(--bg-white); padding: 120px 8%; text-align: center; position: relative;
+        }
+        .early-container { 
+            max-width: 800px; margin: 0 auto; background: var(--primary); 
+            padding: 80px 50px; border-radius: 50px; color: #fff;
+            box-shadow: 0 40px 100px rgba(106,55,183,0.3);
+            position: relative; overflow: hidden;
+        }
+        .early-container::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate-bg 15s linear infinite;
+        }
+        @keyframes rotate-bg { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        
+        .early-content { position: relative; z-index: 2; }
+        .early-content h2 { font-family: 'Outfit', sans-serif; font-size: 3rem; margin-bottom: 20px; letter-spacing: -1px; }
+        .early-content p { font-size: 1.2rem; opacity: 0.8; margin-bottom: 40px; }
+        
+        .lead-form { display: flex; flex-direction: column; gap: 15px; max-width: 500px; margin: 0 auto; }
+        .lead-input { 
+            padding: 20px 30px; border-radius: 20px; border: none; background: rgba(255,255,255,0.1); 
+            color: #fff; font-size: 16px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);
+            transition: 0.3s;
+        }
+        .lead-input::placeholder { color: rgba(255,255,255,0.5); }
+        .lead-input:focus { background: rgba(255,255,255,0.2); outline: none; border-color: #fff; }
+        
+        .btn-submit { 
+            background: #fff; color: var(--primary); border: none; padding: 20px; 
+            border-radius: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px;
+            cursor: pointer; transition: 0.3s; margin-top: 10px;
+        }
+        .btn-submit:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+        .success-msg { display: none; font-size: 1.5rem; font-weight: 800; animation: fadeInUp 0.5s forwards; }
+
         /* REVEAL */
         .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition-mac); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -313,6 +351,25 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                     <li><i class="fa-solid fa-building"></i> Auditoría de Inventarios</li>
                 </ul>
                 <a href="auth/google_redirect.php?plan=empresa" class="btn-plan">Hablar con Ventas</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="early-access">
+        <div class="early-container reveal">
+            <div class="early-content">
+                <h2>Lanzamiento Oficial en <span>10 Días</span></h2>
+                <p>Sé el primero en obtener acceso a la versión Pro con beneficios exclusivos para fundadores.</p>
+                <form id="leadForm" class="lead-form">
+                    <input type="text" name="nombre" class="lead-input" placeholder="Tu Nombre" required>
+                    <input type="email" name="email" class="lead-input" placeholder="Tu Correo Electrónico" required>
+                    <input type="text" name="whatsapp" class="lead-input" placeholder="Tu WhatsApp (Ej: +569...)" required>
+                    <button type="submit" class="btn-submit">Asegurar mi Cupo</button>
+                </form>
+                <div id="successMsg" class="success-msg">
+                    <i class="fa-solid fa-circle-check" style="font-size: 50px; margin-bottom: 20px;"></i>
+                    <br>¡Bienvenido a la Élite!<br>Te contactaremos muy pronto.
+                </div>
             </div>
         </div>
     </section>
@@ -413,6 +470,31 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         observer.observe(document.getElementById('plan-cards'));
+
+        // LEAD FORM HANDLING
+        document.getElementById('leadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('.btn-submit');
+            const form = e.target;
+            const success = document.getElementById('successMsg');
+            
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Procesando...';
+            btn.disabled = true;
+
+            const formData = new FormData(form);
+            try {
+                const resp = await fetch('save_lead.php', { method: 'POST', body: formData });
+                if (resp.ok) {
+                    form.style.display = 'none';
+                    success.style.display = 'block';
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Hubo un error, por favor intenta de nuevo.');
+                btn.innerHTML = 'Asegurar mi Cupo';
+                btn.disabled = false;
+            }
+        });
     </script>
 </body>
 </html>
