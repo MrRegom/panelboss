@@ -48,6 +48,12 @@
                         <p>Catálogo Maestro</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="./index.php?page=docs" class="nav-link <?= (isset($_GET['page']) && $_GET['page'] == 'docs') ? 'active' : '' ?>">
+                        <i class="nav-icon fa-solid fa-book-bookmark text-primary"></i>
+                        <p>Documentación API</p>
+                    </a>
+                </li>
 
                 <li class="nav-header x-small text-muted mb-2 px-3 mt-4">SISTEMA</li>
                 <li class="nav-item">

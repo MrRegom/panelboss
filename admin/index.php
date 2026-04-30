@@ -56,76 +56,142 @@ try {
 
         <!-- Contenido Profesional -->
         <main class="app-main">
-            <div class="app-content-header py-4">
-                <div class="container-fluid px-4">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h3 class="fw-semibold mb-0">Vista General</h3>
-                            <p class="text-muted small">Resumen ejecutivo del ecosistema CajaYa</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="app-content">
-                <div class="container-fluid px-4">
-                    <!-- Cards Estilo SaaS (Fila de 4) -->
-                    <div class="row g-4">
-                        <div class="col-lg-3">
-                            <div class="small-box">
-                                <div class="inner">
-                                    <p>Total Licencias</p>
-                                    <h2><?= number_format($total_licenses) ?></h2>
-                                </div>
-                                <div class="icon"> <i class="fa-solid fa-id-card"></i> </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="small-box">
-                                <div class="inner">
-                                    <p>Terminales Online</p>
-                                    <h2><?= number_format($active_licenses) ?></h2>
-                                </div>
-                                <div class="icon"> <i class="fa-solid fa-signal"></i> </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="small-box">
-                                <div class="inner">
-                                    <p>Empresas Activas</p>
-                                    <h2><?= number_format($total_companies) ?></h2>
-                                </div>
-                                <div class="icon"> <i class="fa-solid fa-briefcase"></i> </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="small-box" style="background: var(--primary); color: white;">
-                                <div class="inner">
-                                    <p>Prospectos (Leads)</p>
-                                    <h2><?= number_format($total_leads) ?></h2>
-                                </div>
-                                <div class="icon" style="color: rgba(255,255,255,0.3)"> <i class="fa-solid fa-user-plus"></i> </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Sección de Información de Infraestructura -->
-                    <div class="row mt-4">
-                        <div class="col-12">
-                            <div class="card p-4">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="fw-semibold mb-0">Estado de Infraestructura</h5>
-                                    <span class="badge bg-primary bg-opacity-10 text-primary border-0">Estable</span>
-                                </div>
-                                <p class="text-muted small mb-0">
-                                    Núcleo de servicios desplegado sobre **PostgreSQL 17** (Puerto 5433). 
-                                    La arquitectura multi-tenant está sincronizada y lista para escalamiento horizontal.
-                                </p>
+            <?php if (isset($_GET['page']) && $_GET['page'] === 'docs'): ?>
+                <!-- VISTA DE DOCUMENTACIÓN -->
+                <div class="app-content-header py-4">
+                    <div class="container-fluid px-4">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3 class="fw-bold mb-0 text-primary">📘 Documentación Técnica de la API</h3>
+                                <p class="text-muted small">Guía de integración para desarrolladores externos</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <div class="app-content">
+                    <div class="container-fluid px-4">
+                        <div class="card p-5 shadow-sm border-0" style="background: #1a2234;">
+                            <h4 class="fw-bold mb-4">1. Punto de Enlace (Endpoint)</h4>
+                            <p>El catálogo se sirve de forma dinámica mediante una clave de licencia activa.</p>
+                            <div class="bg-black p-3 rounded-3 mb-4 border border-secondary">
+                                <span class="badge bg-success mb-2">GET</span>
+                                <code class="text-info d-block">https://panel.cajaya.cl/api/catalog/list.php?license_key=TU_LICENCIA</code>
+                            </div>
+
+                            <h4 class="fw-bold mb-4 mt-5">2. Parámetros de Consulta</h4>
+                            <table class="table table-dark table-hover border-secondary">
+                                <thead>
+                                    <tr>
+                                        <th>Parámetro</th>
+                                        <th>Tipo</th>
+                                        <th>Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>license_key</code></td>
+                                        <td>String</td>
+                                        <td>Clave de licencia activa (Ej: <code>DEVELOPER-TEST</code>)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h4 class="fw-bold mb-4 mt-5">3. Respuesta del Sistema</h4>
+                            <p>El sistema responde con un objeto JSON estandarizado:</p>
+                            <pre class="bg-black text-info p-4 rounded-3 border border-secondary"><code>{
+  "success": true,
+  "data": [
+    {
+      "barcode": "8434165469037",
+      "name": "Galleta Diet Sandwich De Cacao Gullón 210Gr",
+      "brand": "Sin Marca",
+      "category_name": "Snacks y Galletas",
+      "image_url": "https://panel.cajaya.cl/api/catalog/image.php?barcode=..."
+    }
+  ]
+}</code></pre>
+
+                            <div class="alert alert-warning bg-warning bg-opacity-10 border-warning border-opacity-25 text-warning mt-5">
+                                <i class="fa-solid fa-circle-info me-2"></i>
+                                <strong>Importante:</strong> Las imágenes se sirven mediante un proxy seguro que requiere el <code>license_key</code> para cada petición.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php else: ?>
+                <!-- VISTA ORIGINAL DEL DASHBOARD -->
+                <div class="app-content-header py-4">
+                    <div class="container-fluid px-4">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h3 class="fw-semibold mb-0">Vista General</h3>
+                                <p class="text-muted small">Resumen ejecutivo del ecosistema CajaYa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="app-content">
+                    <div class="container-fluid px-4">
+                        <!-- Cards Estilo SaaS (Fila de 4) -->
+                        <div class="row g-4">
+                            <div class="col-lg-3">
+                                <div class="small-box">
+                                    <div class="inner">
+                                        <p>Total Licencias</p>
+                                        <h2><?= number_format($total_licenses) ?></h2>
+                                    </div>
+                                    <div class="icon"> <i class="fa-solid fa-id-card"></i> </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="small-box">
+                                    <div class="inner">
+                                        <p>Terminales Online</p>
+                                        <h2><?= number_format($active_licenses) ?></h2>
+                                    </div>
+                                    <div class="icon"> <i class="fa-solid fa-signal"></i> </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="small-box">
+                                    <div class="inner">
+                                        <p>Empresas Activas</p>
+                                        <h2><?= number_format($total_companies) ?></h2>
+                                    </div>
+                                    <div class="icon"> <i class="fa-solid fa-briefcase"></i> </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="small-box" style="background: var(--primary); color: white;">
+                                    <div class="inner">
+                                        <p>Prospectos (Leads)</p>
+                                        <h2><?= number_format($total_leads) ?></h2>
+                                    </div>
+                                    <div class="icon" style="color: rgba(255,255,255,0.3)"> <i class="fa-solid fa-user-plus"></i> </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección de Información de Infraestructura -->
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="card p-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="fw-semibold mb-0">Estado de Infraestructura</h5>
+                                        <span class="badge bg-primary bg-opacity-10 text-primary border-0">Estable</span>
+                                    </div>
+                                    <p class="text-muted small mb-0">
+                                        Núcleo de servicios desplegado sobre **PostgreSQL 17** (Puerto 5433). 
+                                        La arquitectura multi-tenant está sincronizada y lista para escalamiento horizontal.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
         </main>
     </div>
 
