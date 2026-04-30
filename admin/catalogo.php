@@ -1,6 +1,6 @@
 <?php
 /**
- * admin/catalogo.php — Gestión Ultra-Simplificada (Código y Nombre Separados)
+ * admin/catalogo.php — Gestión Avanzada con Edición de Imágenes
  */
 
 require_once __DIR__ . '/includes/bootstrap.php';
@@ -37,7 +37,7 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
         .table thead th { background: #161b22; color: #8b949e; font-size: 11px; padding: 10px 15px; border-bottom: 1px solid var(--border); }
         .table tbody td { padding: 8px 15px !important; border-bottom: 1px solid var(--border); vertical-align: middle; }
         
-        .img-mini { width: 32px; height: 32px; object-fit: contain; background: #fff; border-radius: 4px; padding: 2px; }
+        .img-mini { width: 32px; height: 32px; object-fit: contain; background: #fff; border-radius: 4px; padding: 2px; cursor: pointer; }
         .ean-tech { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #58a6ff; cursor: pointer; background: rgba(88,166,255,0.1); padding: 2px 6px; border-radius: 4px; }
         
         .btn-action { 
@@ -47,10 +47,23 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
         .btn-action:hover { color: #fff; border-color: #fff; }
         .btn-action.view { color: #58a6ff; border-color: rgba(88,166,255,0.3); }
 
-        .modal-content { background: #161b22 !important; border: 1px solid var(--border); border-radius: 8px; }
-        .form-control, .form-select { background: #0d1117 !important; border: 1px solid var(--border) !important; border-radius: 4px; color: #fff !important; font-size: 13px; }
+        .modal-content { background: #161b22 !important; border: 1px solid var(--border); border-radius: 12px; }
+        .form-control, .form-select { background: #0d1117 !important; border: 1px solid var(--border) !important; border-radius: 6px; color: #fff !important; font-size: 13px; padding: 10px; }
         
         .filter-bar { background: #161b22; padding: 12px 20px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 15px; }
+
+        /* Photo Upload Area */
+        .upload-area { 
+            width: 100%; height: 120px; border: 2px dashed var(--border); border-radius: 8px; 
+            display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; position: relative;
+        }
+        .upload-area:hover { border-color: var(--accent); }
+        .upload-area img { max-height: 100%; object-fit: contain; }
+        .upload-area .overlay { position: absolute; background: rgba(0,0,0,0.5); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; }
+        .upload-area:hover .overlay { opacity: 1; }
+
+        /* Epic View */
+        .epic-photo { max-width: 100%; border-radius: 12px; background: #fff; padding: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body class="layout-fixed sidebar-expand-lg">
@@ -69,7 +82,7 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
             <div class="container-fluid">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="fw-bold m-0 text-white">Catálogo Maestro</h5>
-                    <button class="btn btn-primary btn-sm px-4" onclick="openModal()" style="border-radius: 4px;">
+                    <button class="btn btn-primary btn-sm px-4" onclick="openEditModal()" style="border-radius: 4px;">
                         <i class="fa-solid fa-plus me-1"></i> NUEVO PRODUCTO
                     </button>
                 </div>
@@ -105,18 +118,25 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
         </main>
     </div>
 
-    <!-- Modal Simplificado -->
-    <div class="modal fade" id="modalProduct" tabindex="-1">
+    <!-- Modal Form (Create/Edit) -->
+    <div class="modal fade" id="modalEdit" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header border-0">
-                    <h6 class="modal-title fw-bold" id="modalTitle">Producto</h6>
+                    <h6 class="modal-title fw-bold" id="editModalTitle">Producto</h6>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <form id="formProduct">
+                <form id="formProduct" enctype="multipart/form-data">
                     <input type="hidden" name="id" id="prod_id">
                     <div class="modal-body p-4">
                         <div class="row g-3">
+                            <div class="col-12 text-center mb-2">
+                                <div class="upload-area" onclick="$('#prod_image').click()">
+                                    <img src="https://placehold.co/120x120?text=Subir+Foto" id="preview_img">
+                                    <div class="overlay"><i class="fa-solid fa-camera fa-2x"></i></div>
+                                </div>
+                                <input type="file" name="image" id="prod_image" class="d-none" accept="image/*">
+                            </div>
                             <div class="col-12">
                                 <label class="small text-muted mb-1">CÓDIGO EAN</label>
                                 <input type="text" class="form-control" name="barcode" id="prod_barcode" required>
@@ -137,9 +157,25 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
                         </div>
                     </div>
                     <div class="modal-footer border-0">
-                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">GUARDAR</button>
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">GUARDAR CAMBIOS</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal View (Epic Photo) -->
+    <div class="modal fade" id="modalView" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body p-4 text-center">
+                    <h5 id="view_name" class="fw-bold text-white mb-3">Nombre del Producto</h5>
+                    <img src="" id="view_img" class="epic-photo mb-3">
+                    <div id="view_barcode" class="ean-tech d-inline-block px-4 py-2">000000000000</div>
+                    <div class="mt-4">
+                        <button class="btn btn-secondary btn-sm px-4" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -160,9 +196,7 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
             serverSide: true,
             ajax: {
                 url: 'api/get_master_catalog.php',
-                data: function(d) {
-                    d.category_id = $('#filterCategory').val();
-                }
+                data: function(d) { d.category_id = $('#filterCategory').val(); }
             },
             pageLength: 50,
             ordering: false,
@@ -171,7 +205,7 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
                     data: 'image_path',
                     render: function(data, type, row) {
                         const img = data ? `/api/catalog/image.php?barcode=${row.barcode}&license_key=${licenseKey}` : 'https://placehold.co/50x50?text=📦';
-                        return `<img src="${img}" class="img-mini">`;
+                        return `<img src="${img}" class="img-mini" onclick="openViewModal(${JSON.stringify(row).replace(/"/g, '&quot;')})">`;
                     }
                 },
                 { data: 'barcode', render: (d) => `<span class="ean-tech" onclick="copyEan('${d}')">${d}</span>` },
@@ -181,9 +215,10 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
                     data: null, 
                     className: 'text-end',
                     render: function(data, type, row) {
+                        const rowData = JSON.stringify(row).replace(/"/g, '&quot;');
                         return `
-                            <button class="btn-action view" onclick='openModal(${JSON.stringify(row)})'><i class="fa-solid fa-eye"></i></button>
-                            <button class="btn-action" onclick='openModal(${JSON.stringify(row)})'><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn-action view" onclick="openViewModal(${rowData})"><i class="fa-solid fa-eye"></i></button>
+                            <button class="btn-action" onclick="openEditModal(${rowData})"><i class="fa-solid fa-pen"></i></button>
                         `;
                     }
                 }
@@ -194,37 +229,67 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
 
         $('#filterCategory').on('change', function() { table.ajax.reload(); });
 
+        // Preview Image logic
+        $('#prod_image').on('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) { $('#preview_img').attr('src', e.target.result); }
+                reader.readAsDataURL(file);
+            }
+        });
+
         $('#formProduct').on('submit', function(e) {
             e.preventDefault();
-            $.post('api/save_product.php', $(this).serialize(), function(res) {
-                if(res.success) {
-                    $('#modalProduct').modal('hide');
-                    table.ajax.reload(null, false);
+            const formData = new FormData(this);
+            $.ajax({
+                url: 'api/save_product.php',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+                    if(res.success) {
+                        Swal.fire({ icon: 'success', title: res.message, toast: true, position: 'top-end', showConfirmButton: false, timer: 1500 });
+                        $('#modalEdit').modal('hide');
+                        table.ajax.reload(null, false);
+                    }
                 }
-            }, 'json');
+            });
         });
     });
+
+    function openEditModal(data = null) {
+        $('#formProduct')[0].reset();
+        if(data) {
+            $('#editModalTitle').text('Editar Producto');
+            $('#prod_id').val(data.id);
+            $('#prod_barcode').val(data.barcode).prop('readonly', true);
+            $('#prod_name').val(data.name);
+            $('#prod_category').val(data.category_id);
+            const img = data.image_path ? `/api/catalog/image.php?barcode=${data.barcode}&license_key=${licenseKey}` : 'https://placehold.co/120x120?text=Subir+Foto';
+            $('#preview_img').attr('src', img);
+        } else {
+            $('#editModalTitle').text('Nuevo Registro');
+            $('#prod_id').val('');
+            $('#prod_barcode').prop('readonly', false);
+            $('#preview_img').attr('src', 'https://placehold.co/120x120?text=Subir+Foto');
+        }
+        $('#modalEdit').modal('show');
+    }
+
+    function openViewModal(data) {
+        $('#view_name').text(data.name);
+        $('#view_barcode').text(data.barcode);
+        const img = data.image_path ? `/api/catalog/image.php?barcode=${data.barcode}&license_key=${licenseKey}` : 'https://placehold.co/300x300?text=Sin+Imagen';
+        $('#view_img').attr('src', img);
+        $('#modalView').modal('show');
+    }
 
     function copyEan(text) {
         navigator.clipboard.writeText(text).then(() => {
             Swal.fire({ icon: 'success', title: 'Copiado', toast: true, position: 'top-end', showConfirmButton: false, timer: 1000 });
         });
-    }
-
-    function openModal(data = null) {
-        $('#formProduct')[0].reset();
-        if(data) {
-            $('#modalTitle').text('Ficha de Producto');
-            $('#prod_id').val(data.id);
-            $('#prod_barcode').val(data.barcode).prop('readonly', true);
-            $('#prod_name').val(data.name);
-            $('#prod_category').val(data.category_id);
-        } else {
-            $('#modalTitle').text('Nuevo Registro');
-            $('#prod_id').val('');
-            $('#prod_barcode').prop('readonly', false);
-        }
-        $('#modalProduct').modal('show');
     }
     </script>
 </body>
