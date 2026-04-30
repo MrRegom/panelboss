@@ -49,7 +49,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="./index.php?page=docs" class="nav-link <?= (isset($_GET['page']) && $_GET['page'] == 'docs') ? 'active' : '' ?>">
+                    <a href="./ayuda.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'ayuda.php' ? 'active' : '' ?>">
                         <i class="nav-icon fa-solid fa-book-bookmark text-primary"></i>
                         <p>Documentación API</p>
                     </a>
