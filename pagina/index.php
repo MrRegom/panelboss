@@ -30,6 +30,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
     <title>CajaYa Elite — El Futuro de tu Negocio</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
@@ -337,10 +338,20 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         <div class="modal-overlay" id="leadModal">
             <div class="modal-glass">
                 <i class="fa-solid fa-xmark modal-close" onclick="closeModal()"></i>
-                <div style="text-align:center; margin-bottom:40px;">
+                <div style="text-align:center; margin-bottom:30px;">
                     <h2 style="font-family:'Outfit'; font-size:2.5rem; color:var(--primary); margin-bottom:10px;">¡Tu Demo te espera!</h2>
-                    <p style="color:var(--text-light);">Completa tus datos y descarga el instalador al instante.</p>
+                    <p style="color:var(--text-light);">La forma más rápida de entrar a la Élite.</p>
                 </div>
+
+                <!-- Google Button Placeholder (Requiere Client ID) -->
+                <div id="g_id_onload"
+                     data-client_id="TU_GOOGLE_CLIENT_ID_AQUI"
+                     data-callback="handleGoogleLead">
+                </div>
+                <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_blue" data-text="continue_with" data-size="large" data-logo_alignment="left" style="margin-bottom:30px; display:flex; justify-content:center;"></div>
+
+                <div style="display:flex; align-items:center; margin-bottom:30px; opacity:0.3;"><hr style="flex:1;"><span style="padding:0 15px; font-size:12px;">O USA TU CORREO</span><hr style="flex:1;"></div>
+
                 <form onsubmit="handleLead(event, this, true)" class="form-grid">
                     <div class="input-wrap"><i class="fa-solid fa-user"></i><input type="text" name="nombre" class="form-input" placeholder="Nombre completo" required></div>
                     <div class="input-wrap"><i class="fa-solid fa-envelope"></i><input type="email" name="email" class="form-input" placeholder="Tu Gmail Corporativo" required></div>
@@ -430,26 +441,57 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         });
 
         async function handleLead(e, f, isModal) {
-            e.preventDefault();
+            if(e) e.preventDefault();
             const b = f.querySelector('button'); 
-            const originalText = b.innerHTML;
-            b.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ENVIANDO...';
+            const originalText = b ? b.innerHTML : '';
+            if(b) b.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ENVIANDO...';
             
             try {
                 const r = await fetch('save_lead.php', { method: 'POST', body: new FormData(f) });
                 if(r.ok) {
-                    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#6A37B7', '#9D6CFF', '#ffffff'] });
-                    f.innerHTML = `<div style="text-align:center; padding:40px;">
-                        <i class="fa-solid fa-circle-check" style="font-size:4rem; color:#25D366; margin-bottom:20px;"></i>
-                        <h3 style="color:var(--primary); font-size:2rem; margin-bottom:10px;">¡Solicitud Recibida!</h3>
-                        <p style="color:var(--text-light);">Un consultor te contactará en breve.</p>
+                    // SUPERNOVA BURST (V35)
+                    const count = 200;
+                    const defaults = { origin: { y: 0.7 }, zIndex: 10001, colors: ['#6A37B7', '#9D6CFF', '#ffffff', '#25D366'] };
+                    function fire(particleRatio, opts) { confetti(Object.assign({}, defaults, opts, { particleCount: Math.floor(count * particleRatio) })); }
+                    
+                    fire(0.25, { spread: 26, startVelocity: 55 });
+                    fire(0.2, { spread: 60 });
+                    fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+                    fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+                    fire(0.1, { spread: 120, startVelocity: 45 });
+
+                    const container = isModal ? document.querySelector('.modal-glass') : f.parentElement;
+                    container.innerHTML = `<div style="text-align:center; padding:40px;">
+                        <div class="reveal visible"><i class="fa-solid fa-rocket" style="font-size:5rem; color:var(--primary); margin-bottom:30px; animation: bounce 2s infinite;"></i></div>
+                        <h3 style="color:var(--primary); font-size:2.5rem; margin-bottom:15px; font-family:'Outfit';">¡Bienvenido a la Élite!</h3>
+                        <p style="color:var(--text-light); font-size:1.2rem;">Tu acceso a CajaYa está siendo procesado.<br>Un consultor experto te contactará en breve.</p>
                     </div>`;
-                    if(isModal) setTimeout(closeModal, 4000);
+                    if(isModal) setTimeout(closeModal, 5000);
                 }
             } catch(e) { 
-                b.innerHTML = 'REINTENTAR'; 
-                setTimeout(() => b.innerHTML = originalText, 2000);
+                if(b) b.innerHTML = 'REINTENTAR'; 
+                setTimeout(() => { if(b) b.innerHTML = originalText; }, 2000);
             }
+        }
+
+        function handleGoogleLead(response) {
+            const data = jwt_decode(response.credential);
+            const formData = new FormData();
+            formData.append('nombre', data.name);
+            formData.append('email', data.email);
+            formData.append('whatsapp', 'Captura vía Google');
+            
+            // Simulación de envío con data de Google
+            fetch('save_lead.php', { method: 'POST', body: formData }).then(r => {
+                if(r.ok) {
+                    confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+                    document.querySelector('.modal-glass').innerHTML = `<div style="text-align:center; padding:40px;">
+                        <h3 style="color:var(--primary); font-size:2.5rem; margin-bottom:15px;">¡Gracias, ${data.given_name}!</h3>
+                        <p style="color:var(--text-light);">Hemos capturado tu Gmail: ${data.email}.<br>Te contactaremos a la brevedad.</p>
+                    </div>`;
+                    setTimeout(closeModal, 5000);
+                }
+            });
         }
     </script>
 </body>

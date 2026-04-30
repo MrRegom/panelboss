@@ -9,20 +9,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $whatsapp = strip_tags(trim($_POST['whatsapp'] ?? ''));
 
     if (!empty($email)) {
-        // 1. Notificación por Correo
+        // 1. Notificación por Correo (Mejorada V35)
         $to      = "reltzerspa@gmail.com";
-        $subject = "🔥 NUEVO INTERESADO: CajaYa Elite";
-        $message = "Has recibido un nuevo prospecto interesado en el lanzamiento de CajaYa Elite:\n\n";
-        $message .= "Nombre: $nombre\n";
-        $message .= "Email: $email\n";
-        $message .= "WhatsApp: $whatsapp\n";
-        $message .= "Fecha: " . date("d/m/Y H:i:s") . "\n";
+        $subject = "=?UTF-8?B?".base64_encode("🔥 NUEVO PROSPECTO: CajaYa Elite")."?=";
         
-        $headers = "From: webmaster@cajaya.cl" . "\r\n" .
-                   "Reply-To: $email" . "\r\n" .
-                   "X-Mailer: PHP/" . phpversion();
+        $message = "
+        <html>
+        <head><title>Nuevo Prospecto</title></head>
+        <body style='font-family: Arial, sans-serif; line-height: 1.6; color: #333;'>
+            <div style='background: #6A37B7; color: #fff; padding: 20px; text-align: center; border-radius: 10px 10px 0 0;'>
+                <h2 style='margin: 0;'>🚀 ¡Nuevo Lead Capturado!</h2>
+            </div>
+            <div style='padding: 30px; border: 1px solid #eee; border-radius: 0 0 10px 10px;'>
+                <p><strong>Nombre:</strong> $nombre</p>
+                <p><strong>Email:</strong> $email</p>
+                <p><strong>WhatsApp:</strong> $whatsapp</p>
+                <p><strong>Fecha:</strong> " . date("d/m/Y H:i:s") . "</p>
+            </div>
+        </body>
+        </html>";
 
-        @mail($to, $subject, $message, $headers);
+        $headers  = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= "From: CajaYa Elite <webmaster@cajaya.cl>" . "\r\n";
+        $headers .= "Reply-To: $email" . "\r\n";
+        $headers .= "X-Mailer: PHP/" . phpversion();
+
+        mail($to, $subject, $message, $headers);
 
         // 2. Respaldo Local (JSON) - Seguridad ante fallos de mail
         $leadData = [
