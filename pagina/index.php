@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php — Landing Page CAJAYA ELITE FINAL V15.1 (PRO FORM)
+ * index.php — Landing Page CAJAYA ELITE FINAL V16 (DARK GLASS)
  */
 session_start();
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -224,50 +224,52 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .f-col a:hover::after { width: 100%; }
         .f-col p { color: rgba(255,255,255,0.6); line-height: 1.8; font-size: 15px; }
 
-        /* EARLY ACCESS - PRO GLASS DESIGN */
+        /* EARLY ACCESS - DARK PREMIUM GLASS */
         .early-access { 
             padding: 150px 8%; background: var(--bg-white); position: relative;
         }
         .early-container { 
-            max-width: 1000px; margin: 0 auto; background: var(--primary); 
+            max-width: 1100px; margin: 0 auto; 
+            background: linear-gradient(145deg, #0f0a1a 0%, #050505 100%);
             padding: 100px 50px; border-radius: 60px; color: #fff;
-            box-shadow: 0 50px 120px rgba(106,55,183,0.35);
+            box-shadow: 0 50px 150px rgba(0,0,0,0.5);
             position: relative; overflow: hidden;
             display: flex; flex-direction: column; align-items: center;
+            border: 1px solid rgba(106,55,183,0.1);
         }
         .early-container::before {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-            animation: rotate-bg 20s linear infinite;
+            background: radial-gradient(circle, rgba(106,55,183,0.1) 0%, transparent 70%);
+            animation: rotate-bg 25s linear infinite;
         }
         
-        .early-content { position: relative; z-index: 2; width: 100%; max-width: 800px; }
-        .early-content h2 { font-family: 'Outfit', sans-serif; font-size: 3.5rem; margin-bottom: 25px; letter-spacing: -2px; }
-        .early-content h2 span { background: #fff; color: var(--primary); padding: 0 15px; border-radius: 15px; }
-        .early-content p { font-size: 1.3rem; opacity: 0.9; margin-bottom: 60px; font-weight: 300; }
+        .early-content { position: relative; z-index: 2; width: 100%; max-width: 800px; text-align: center; }
+        .early-content h2 { font-family: 'Outfit', sans-serif; font-size: 3.8rem; margin-bottom: 25px; letter-spacing: -3px; }
+        .early-content h2 span { color: var(--primary-glow); }
+        .early-content p { font-size: 1.4rem; opacity: 0.6; margin-bottom: 60px; font-weight: 300; }
         
         .lead-form { 
             display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; 
         }
         .input-group { position: relative; width: 100%; }
-        .input-group i { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); opacity: 0.6; font-size: 18px; }
+        .input-group i { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); color: var(--primary-glow); font-size: 18px; opacity: 0.8; }
         
         .lead-input { 
-            width: 100%; padding: 22px 25px 22px 65px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.2); 
-            background: rgba(255,255,255,0.08); color: #fff; font-size: 16px; 
-            backdrop-filter: blur(15px); transition: all 0.4s ease;
+            width: 100%; padding: 22px 25px 22px 65px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.05); 
+            background: rgba(255,255,255,0.03); color: #fff; font-size: 16px; 
+            backdrop-filter: blur(20px); transition: all 0.4s ease;
         }
-        .lead-input::placeholder { color: rgba(255,255,255,0.4); }
-        .lead-input:focus { background: rgba(255,255,255,0.15); outline: none; border-color: #fff; box-shadow: 0 0 30px rgba(255,255,255,0.1); }
+        .lead-input::placeholder { color: rgba(255,255,255,0.2); }
+        .lead-input:focus { background: rgba(255,255,255,0.08); outline: none; border-color: var(--primary-glow); box-shadow: 0 0 40px rgba(106,55,183,0.2); }
         
         .btn-submit { 
-            grid-column: span 2; background: #fff; color: var(--primary); border: none; padding: 25px; 
-            border-radius: 25px; font-weight: 900; text-transform: uppercase; letter-spacing: 3px;
-            cursor: pointer; transition: 0.4s; font-size: 16px; margin-top: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            grid-column: span 2; background: var(--primary); color: #fff; border: none; padding: 25px; 
+            border-radius: 25px; font-weight: 900; text-transform: uppercase; letter-spacing: 4px;
+            cursor: pointer; transition: 0.5s; font-size: 16px; margin-top: 20px;
+            box-shadow: 0 20px 50px rgba(106,55,183,0.3);
         }
-        .btn-submit:hover { transform: translateY(-5px); box-shadow: 0 30px 60px rgba(0,0,0,0.2); background: #f8f8f8; }
-        .success-msg { display: none; font-size: 1.8rem; font-weight: 800; animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .btn-submit:hover { transform: translateY(-8px); box-shadow: 0 30px 70px rgba(106,55,183,0.5); background: var(--primary-glow); }
+        .success-msg { display: none; font-size: 2rem; font-weight: 800; animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1); }
 
         /* REVEAL */
         .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition-mac); }
@@ -365,8 +367,8 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
     <section class="early-access">
         <div class="early-container reveal">
             <div class="early-content">
-                <h2>Lanzamiento Oficial en <span>10 Días</span></h2>
-                <p>Únete a los fundadores y obtén un beneficio exclusivo por tiempo limitado.</p>
+                <h2>Lanzamiento en <span>10 Días</span></h2>
+                <p>Únete a los fundadores y obtén un beneficio exclusivo.</p>
                 <form id="leadForm" class="lead-form">
                     <div class="input-group">
                         <i class="fa-solid fa-user"></i>
@@ -378,12 +380,12 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                     </div>
                     <div class="input-group" style="grid-column: span 2;">
                         <i class="fa-solid fa-whatsapp"></i>
-                        <input type="text" name="whatsapp" class="lead-input" placeholder="WhatsApp de contacto (Ej: +569...)" required>
+                        <input type="text" name="whatsapp" class="lead-input" placeholder="WhatsApp de contacto" required>
                     </div>
                     <button type="submit" class="btn-submit">¡Infórmame más!</button>
                 </form>
                 <div id="successMsg" class="success-msg">
-                    <i class="fa-solid fa-star" style="font-size: 50px; margin-bottom: 25px; color: #FFD700;"></i>
+                    <i class="fa-solid fa-star" style="font-size: 60px; margin-bottom: 25px; color: var(--primary-glow);"></i>
                     <br>¡SOLICITUD RECIBIDA!<br>Pronto conocerás el poder de CajaYa.
                 </div>
             </div>
