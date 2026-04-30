@@ -151,7 +151,13 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .p-features li { margin-bottom: 15px; font-size: 15px; display: flex; align-items: center; color: var(--text-light); }
         .p-features li i { color: var(--primary); margin-right: 12px; font-size: 18px; }
         .btn-cta { width: 100%; background: var(--primary-soft); color: var(--primary); text-decoration: none; padding: 22px; border-radius: 20px; font-weight: 900; text-transform: uppercase; transition: 0.3s; }
-        .p-card.featured .btn-cta { background: var(--primary); color: #fff; }
+        .btn-google-elite { 
+            background: #fff; color: #444; border: 1px solid #e0e0e0; width: 100%; padding: 15px; border-radius: 50px; 
+            font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 12px; 
+            cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.05); font-family: 'Inter', sans-serif;
+        }
+        .btn-google-elite:hover { background: #f8f9fa; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); border-color: #ccc; }
+        .btn-google-elite i { color: #DB4437; font-size: 1.1rem; }
 
         /* FAQ ULTRA MODERN (V32) */
         .section-faq { padding: 120px 10%; background: var(--bg-off); text-align: center; }
@@ -343,25 +349,12 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                     <p style="color:var(--text-light);">La forma más rápida de entrar a la Élite.</p>
                 </div>
 
-                <!-- Botón de Google o Fast-Fill (V37) -->
-                <div id="google-capture-area" style="margin-bottom:30px; display:flex; justify-content:center;">
-                    <div id="g_id_onload"
-                         data-client_id="TU_GOOGLE_CLIENT_ID_AQUI"
-                         data-callback="handleGoogleLead">
-                    </div>
-                    <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_blue" data-text="continue_with" data-size="large" data-logo_alignment="left"></div>
+                <!-- Botón de Acceso Rápido Estilo Google (V38) -->
+                <div id="google-capture-area" style="margin-bottom:30px;">
+                    <button onclick="focusGmail()" class="btn-google-elite">
+                        <i class="fa-brands fa-google"></i> Continuar con Gmail
+                    </button>
                 </div>
-
-                <!-- Fallback Button if Google fails or is placeholder -->
-                <script>
-                    if(document.querySelector('[data-client_id="TU_GOOGLE_CLIENT_ID_AQUI"]')) {
-                        const area = document.getElementById('google-capture-area');
-                        area.innerHTML = `<button onclick="focusGmail()" class="btn-wa" style="background:#fff; color:#444; border:1px solid #ddd; width:100%; box-shadow:0 5px 15px rgba(0,0,0,0.05); font-size:14px; display:flex; align-items:center; justify-content:center; gap:10px;">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" style="height:18px;"> 
-                            Continuar con Gmail
-                        </button>`;
-                    }
-                </script>
 
                 <div style="display:flex; align-items:center; margin-bottom:30px; opacity:0.3;"><hr style="flex:1;"><span style="padding:0 15px; font-size:12px;">O USA TU CORREO</span><hr style="flex:1;"></div>
 
