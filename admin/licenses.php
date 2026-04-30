@@ -148,24 +148,47 @@ $db = Database::getConnection();
         </div>
     </div>
 
-    <!-- Modal: Editar Expiración -->
-    <div class="modal fade" id="modalEditExpiration" tabindex="-1">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
+    <!-- Modal: Editar Licencia Completo -->
+    <div class="modal fade" id="modalEditLicense" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg" style="background-color: var(--bg-card);">
                 <div class="modal-header border-bottom border-white border-opacity-10">
-                    <h5 class="modal-title fw-bold text-warning"><i class="fa-solid fa-calendar-day me-2"></i>Vencimiento</h5>
+                    <h5 class="modal-title fw-bold text-warning"><i class="fa-solid fa-pen-to-square me-2"></i>Editar Licencia</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <form id="formEditExpiration">
+                <form id="formEditLicense">
                     <div class="modal-body p-4">
                         <input type="hidden" name="id" id="edit_license_id">
+                        <input type="hidden" name="action" value="update_full">
+                        
                         <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">NUEVA FECHA</label>
-                            <input type="date" class="form-control bg-dark border-secondary" name="expires_at" id="edit_expires_at" required>
+                            <label class="form-label text-muted small fw-bold">EMPRESA</label>
+                            <select class="form-select bg-dark border-secondary text-white" name="company_id" id="edit_company_id" required>
+                                <option value="">Seleccione una empresa...</option>
+                                <?php foreach($companies as $c): ?>
+                                    <option value="<?= $c['id'] ?>"><?= $c['name'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">PLAN</label>
+                            <select class="form-select bg-dark border-secondary text-white" name="plan" id="edit_plan" required>
+                                <option value="BASIC">BASIC</option>
+                                <option value="PRO">PRO</option>
+                                <option value="ENTERPRISE">ENTERPRISE</option>
+                                <option value="DEMO">DEMO</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">NUEVA FECHA DE EXPIRACIÓN</label>
+                            <input type="date" class="form-control bg-dark border-secondary text-white" name="expires_at" id="edit_expires_at">
                         </div>
                     </div>
                     <div class="modal-footer border-top border-white border-opacity-10">
-                        <button type="submit" class="btn btn-primary w-100">Actualizar Fecha</button>
+                        <button type="button" class="btn btn-link text-muted text-decoration-none" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary px-4">Guardar Cambios</button>
                     </div>
                 </form>
             </div>
@@ -300,45 +323,33 @@ $db = Database::getConnection();
             $('#modalCompanyDetails').modal('show');
         });
 
-        // Abrir Modal Editar Expiración
+        // Abrir Modal Editar Licencia Completo
         $('#licensesTable').on('click', '.btn-edit', function() {
-            const id = $(this).data('id');
-            const date = $(this).data('date');
-            $('#edit_license_id').val(id);
-            if(date) $('#edit_expires_at').val(date.split(' ')[0]);
-            $('#modalEditExpiration').modal('show');
+            const data = table.row($(this).closest('tr')).data();
+            $('#edit_license_id').val(data.id);
+            $('#edit_company_id').val(data.company_id || '');
+            $('#edit_plan').val(data.plan || 'BASIC');
+            if(data.expires_at) $('#edit_expires_at').val(data.expires_at.split(' ')[0]);
+            $('#modalEditLicense').modal('show');
         });
 
-        // Guardar Nueva Fecha
-        $('#formEditExpiration').on('submit', function(e) {
+        // Guardar Cambios de Licencia (Edición Completa)
+        $('#formEditLicense').on('submit', function(e) {
             e.preventDefault();
             const $btn = $(this).find('button[type="submit"]');
             const originalText = $btn.html();
             
-            $btn.prop('disabled', true).html('<i class="fas fa-sync fa-spin me-2"></i> Procesando cambios...');
-            Swal.fire({ 
-                title: 'Sincronizando con el servidor...', 
-                html: 'Aplicando nueva fecha de expiración',
-                allowOutsideClick: false, 
-                didOpen: () => { Swal.showLoading() } 
-            });
-
+            $btn.prop('disabled', true).html('<i class="fas fa-sync fa-spin me-2"></i> Actualizando registro...');
+            
             $.post('api/update_license.php', $(this).serialize(), function(response) {
-                // Forzamos 2.5 segundos de "épica"
-                setTimeout(() => {
-                    if(response.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: '¡Actualización Exitosa!',
-                            text: 'La licencia ha sido actualizada correctamente.',
-                            timer: 2000,
-                            showConfirmButton: false
-                        }).then(() => location.reload());
-                    } else {
-                        Swal.fire('Error', response.message, 'error');
-                        $btn.prop('disabled', false).html(originalText);
-                    }
-                }, 2500);
+                if(response.success) {
+                    Swal.fire({ icon: 'success', title: '¡Actualizado!', text: 'Los datos de la licencia han sido modificados.', timer: 1500, showConfirmButton: false });
+                    $('#modalEditLicense').modal('hide');
+                    table.ajax.reload();
+                } else {
+                    Swal.fire('Error', response.message, 'error');
+                }
+                $btn.prop('disabled', false).html(originalText);
             }, 'json');
         });
 
