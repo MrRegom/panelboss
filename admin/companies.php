@@ -50,7 +50,7 @@ AuthService::check();
                             <p class="text-muted small">Administración de clientes y tenants</p>
                         </div>
                         <div class="col-sm-6 text-end">
-                            <button class="btn btn-primary shadow-sm" onclick="alert('Módulo de empresa en desarrollo')">
+                            <button class="btn btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#modalAddCompany">
                                 <i class="fa-solid fa-plus me-2"></i> AGREGAR EMPRESA
                             </button>
                         </div>
@@ -80,27 +80,78 @@ AuthService::check();
         </main>
     </div>
 
+    <!-- Modal: Agregar Empresa -->
+    <div class="modal fade" id="modalAddCompany" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg" style="background-color: var(--bg-card);">
+                <div class="modal-header border-bottom border-white border-opacity-10">
+                    <h5 class="modal-title fw-bold">Registrar Nueva Empresa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="formAddCompany">
+                    <div class="modal-body p-4">
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">NOMBRE DE LA EMPRESA</label>
+                            <input type="text" class="form-control bg-dark border-secondary text-white" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">RUT / ID FISCAL</label>
+                            <input type="text" class="form-control bg-dark border-secondary text-white" name="rut">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">EMAIL DE CONTACTO</label>
+                            <input type="email" class="form-control bg-dark border-secondary text-white" name="email">
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top border-white border-opacity-10">
+                        <button type="button" class="btn btn-link text-muted text-decoration-none" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary px-4">Guardar Empresa</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
     $(document).ready(function() {
-        $('#companiesTable').DataTable({
+        const table = $('#companiesTable').DataTable({
             ajax: 'api/get_companies.php',
             columns: [
                 { data: 'id', render: function(data){ return '<span class="text-muted small">#'+data+'</span>'; } },
-                { data: 'name', render: function(data){ return '<span class="fw-medium">'+data+'</span>'; } },
+                { data: 'name', render: function(data){ return '<span class="fw-medium text-info">'+data+'</span>'; } },
                 { data: 'rut' },
-                { data: 'created_at', render: function(data){ return new Date(data).toLocaleDateString(); } },
+                { data: 'created_at', render: function(data){ return data ? new Date(data).toLocaleDateString() : 'N/A'; } },
                 { data: null, className: 'text-end', render: function(data){
-                    return '<button class="btn btn-sm btn-outline-primary border-0"><i class="fa-solid fa-pencil"></i></button>';
+                    return '<button class="btn btn-sm btn-dark"><i class="fa-solid fa-pencil text-primary"></i></button>';
                 }}
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
             dom: '<"row mb-3"<"col-sm-6"l><"col-sm-6"f>>rt<"row mt-3"<"col-sm-6"i><"col-sm-6"p>>'
+        });
+
+        $('#formAddCompany').on('submit', function(e) {
+            e.preventDefault();
+            const $btn = $(this).find('button[type="submit"]');
+            $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Guardando...');
+            
+            $.post('api/save_company.php', $(this).serialize(), function(res) {
+                if(res.success) {
+                    Swal.fire('Éxito', res.message, 'success');
+                    $('#modalAddCompany').modal('hide');
+                    table.ajax.reload();
+                    $('#formAddCompany')[0].reset();
+                } else {
+                    Swal.fire('Error', res.message, 'error');
+                }
+                $btn.prop('disabled', false).html('Guardar Empresa');
+            }, 'json');
         });
     });
     </script>
