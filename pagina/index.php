@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php — Landing Page CAJAYA ELITE FINAL V17.2 (MOBILE REFINED)
+ * index.php — Landing Page CAJAYA ELITE FINAL V18.1 (PERFECT FLOW)
  */
 session_start();
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -26,8 +26,8 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>CAJAYA — El Motor de tu Crecimiento</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CajaYa Elite — El Software para tu Negocio</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -45,7 +45,6 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
         body { background: var(--bg-white); color: var(--text-dark); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-        /* PRELOADER */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #fff; display: flex; align-items: center; justify-content: center;
@@ -54,7 +53,6 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .pre-logo { width: 140px; animation: pulse 2s infinite ease-in-out; }
         @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } }
 
-        /* NAVIGATION */
         nav { 
             position: fixed; top: 0; width: 100%; height: 80px; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center; padding: 0 5%;
@@ -66,272 +64,66 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .nav-links a:hover { color: var(--primary); }
         .btn-wa { background: #25D366; color: #fff !important; padding: 10px 22px; border-radius: 50px; font-weight: 700; box-shadow: 0 10px 20px rgba(37,211,102,0.2); }
 
-        /* HERO - MOBILE CENTERED */
-        .hero { 
-            position: relative; height: 100vh; width: 100%; 
-            background: url('assets/img/banner_super.png') center right/cover no-repeat;
-            display: flex; align-items: center; padding: 0 8%;
-        }
-        .hero-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 35%, rgba(255,255,255,0) 100%);
-            z-index: 1;
-        }
-
-        .hero-content { position: relative; z-index: 10; max-width: 850px; }
-        .hero-content h1 { 
-            font-family: 'Outfit', sans-serif; font-size: clamp(3rem, 8vw, 5.8rem); 
-            line-height: 0.9; font-weight: 900; color: var(--text-dark); margin-bottom: 30px; letter-spacing: -3px;
-        }
+        .hero-carousel { position: relative; height: 100vh; overflow: hidden; background: url('assets/img/banner_super.png') center/cover; }
+        .carousel-track { display: flex; height: 100%; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .slide { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 0 8%; }
+        
+        .hero-content { max-width: 850px; text-align: left; }
+        .hero-content h1 { font-family: 'Outfit', sans-serif; font-size: clamp(3rem, 8vw, 5.8rem); line-height: 0.9; font-weight: 900; margin-bottom: 30px; letter-spacing: -3px; }
         .hero-content h1 span { color: var(--primary); }
-        .hero-content p { 
-            font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--text-light); line-height: 1.6; 
-            margin-bottom: 50px; max-width: 650px; border-left: 5px solid var(--primary); padding-left: 30px;
-        }
-        .btn-cta { 
-            background: var(--primary); color: #fff; text-decoration: none; padding: 24px 50px; 
-            border-radius: 20px; font-weight: 700; display: inline-block; transition: var(--transition-mac);
-            box-shadow: 0 20px 40px rgba(106,55,183,0.3); font-size: 16px;
-        }
-        .btn-cta:hover { transform: translateY(-8px) scale(1.05); box-shadow: 0 30px 60px rgba(106,55,183,0.4); background: var(--primary-dark); }
+        .hero-content p { font-size: 1.5rem; color: var(--text-light); margin-bottom: 50px; }
+        .btn-primary { background: var(--primary); color: #fff; padding: 24px 50px; border-radius: 20px; text-decoration: none; font-weight: 700; display: inline-block; }
 
-        /* PLANES - CARDS WITH DELICATE AURORA LIGHT */
-        .section-padding { padding: 150px 8%; background: var(--bg-off); position: relative; }
+        .product-desc { background: #fff; padding: 120px 8%; text-align: center; }
+        .desc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
+        .desc-item { padding: 40px; border-radius: 30px; background: #f9f9f9; transition: 0.3s; }
+        .desc-item:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .desc-item i { font-size: 40px; color: var(--primary); margin-bottom: 20px; }
+        .desc-item h3 { margin-bottom: 15px; font-size: 1.5rem; }
+
+        .section-padding { padding: 150px 8%; background: var(--bg-off); }
         .section-header { text-align: center; margin-bottom: 100px; }
         .section-header h2 { font-family: 'Outfit', sans-serif; font-size: 4rem; letter-spacing: -2px; }
         .section-header h2 span { color: var(--primary); }
         
         .p-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; }
-        .p-card { 
-            background: #fff; padding: 80px 50px; border-radius: 40px; flex: 1; min-width: 350px; max-width: 450px;
-            position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.02); 
-            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); display: flex; flex-direction: column; 
-            opacity: 0; transform: translateY(50px);
-            z-index: 1; overflow: visible;
-        }
-        
-        /* THE DELICATE AURORA (SPOTLIGHT EFFECT) */
-        .p-card::before {
-            content: ''; position: absolute; inset: -1px; 
-            background: linear-gradient(135deg, transparent 30%, rgba(157,108,255,0.4) 50%, transparent 70%);
-            background-size: 200% 200%;
-            border-radius: 41px; z-index: -1; opacity: 0; transition: 1s;
-            animation: aurora 6s linear infinite;
-        }
-        .p-card.featured::before, .p-card:hover::before { opacity: 1; }
-        
-        @keyframes aurora {
-            0% { background-position: -100% -100%; }
-            100% { background-position: 100% 100%; }
-        }
-
-        .p-card::after {
-            content: ''; position: absolute; inset: 0; background: inherit; border-radius: 40px; z-index: -1;
-        }
-
-        .p-card.visible { opacity: 1; transform: translateY(0); }
-        .p-card:hover { transform: translateY(-12px); box-shadow: 0 40px 80px rgba(106,55,183,0.1); }
-        .p-card:active { transform: scale(0.98); }
-
-        .p-card.featured { background: var(--primary); }
-        .p-card.featured * { color: #fff !important; }
-        .p-card.featured .btn-plan { background: #fff; color: var(--primary) !important; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
-        .p-card.featured::before { 
-            background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.6) 50%, transparent 70%);
-            background-size: 200% 200%;
-        }
-
-        /* SUGGESTED BADGE - HIGH VISIBILITY */
-        .badge-sugerido {
-            position: absolute; top: -18px; right: 40px; 
-            background: var(--primary-dark); color: #fff !important; 
-            padding: 10px 25px; border-radius: 50px; 
-            font-size: 11px; font-weight: 900; letter-spacing: 1.5px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255,255,255,0.1);
-            z-index: 100;
-            text-transform: uppercase;
-        }
-
+        .p-card { background: #fff; padding: 80px 50px; border-radius: 40px; flex: 1; min-width: 350px; max-width: 450px; box-shadow: 0 10px 40px rgba(0,0,0,0.02); }
+        .badge-sugerido { position: absolute; top: -18px; right: 40px; background: var(--primary-dark); color: #fff !important; padding: 10px 25px; border-radius: 50px; font-size: 11px; font-weight: 900; z-index: 100; text-transform: uppercase; }
         .p-card h3 { font-size: 14px; color: var(--primary); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 25px; font-weight: 900; }
-        .p-price { font-size: 70px; font-weight: 900; font-family: 'Outfit', sans-serif; margin-bottom: 40px; letter-spacing: -4px; }
-        .p-price span { font-size: 20px; opacity: 0.5; letter-spacing: 0; }
-        
+        .price { font-size: 3.5rem; font-weight: 900; letter-spacing: -2px; line-height: 1; margin: 20px 0; display: flex; align-items: baseline; justify-content: center; }
+        .price-sub { font-size: 1.1rem; opacity: 0.5; font-weight: 600; margin-left: 5px; }
         .p-features { list-style: none; margin-bottom: 50px; flex-grow: 1; }
-        .p-features li { margin-bottom: 18px; font-size: 16px; color: var(--text-light); display: flex; align-items: center; }
-        .p-features li i { color: var(--primary); margin-right: 15px; font-size: 18px; transition: 0.3s; }
-        .p-card:hover .p-features li i { transform: scale(1.3); }
+        .p-features li { margin-bottom: 18px; font-size: 15px; color: var(--text-light); display: flex; align-items: center; text-align: left; }
+        .p-features li i { color: var(--primary); margin-right: 15px; font-size: 16px; }
+        .btn-plan { background: var(--primary-soft); color: var(--primary); text-decoration: none; padding: 22px; display: block; border-radius: 20px; text-align: center; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; }
+        .btn-plan:hover { transform: scale(1.02); background: var(--primary); color: #fff; }
 
-        .btn-plan { 
-            background: var(--primary-soft); color: var(--primary); text-decoration: none; padding: 22px; 
-            border-radius: 20px; text-align: center; font-weight: 800; text-transform: uppercase; 
-            letter-spacing: 2px; font-size: 14px; transition: 0.3s;
-        }
-        .btn-plan:hover { transform: scale(1.05); }
-
-        /* FAQ - ANIMATED & FUN */
-        .faq-section { background: #fff; padding: 150px 5%; }
-        .faq-container { max-width: 900px; margin: 0 auto; }
-        .faq-item { 
-            background: var(--bg-off); border-radius: 35px; margin-bottom: 20px; 
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); border: 2px solid transparent;
-            overflow: hidden;
-        }
-        .faq-header { padding: 35px 50px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .faq-header h4 { font-size: 20px; font-weight: 800; color: var(--text-dark); transition: 0.3s; }
-        .faq-header i { 
-            background: #fff; width: 45px; height: 45px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--primary); font-size: 18px; transition: 0.5s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        .faq-body { max-height: 0; padding: 0 50px; overflow: hidden; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); color: var(--text-light); line-height: 1.8; }
+        footer { padding: 120px 8% 60px; background: #111; color: #fff; }
+        .f-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
         
-        .faq-item.active { background: #fff; border-color: var(--primary); transform: scale(1.02); box-shadow: 0 30px 60px rgba(106,55,183,0.1); }
-        .faq-item.active .faq-header h4 { color: var(--primary); }
-        .faq-item.active i { transform: rotate(135deg); background: var(--primary); color: #fff; }
-        .faq-item.active .faq-body { max-height: 400px; padding-bottom: 45px; }
-
-        /* FOOTER - VIBRANT */
-        footer { 
-            padding: 120px 8% 60px; 
-            padding: 150px 8% 60px; 
-            background: linear-gradient(-45deg, var(--primary-dark), var(--primary), #5a2ea3, var(--primary-glow));
-            background-size: 400% 400%;
-            animation: footer-gradient 15s ease infinite;
-            color: #fff; position: relative; overflow: hidden;
-        }
-        @keyframes footer-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        
-        .footer-wave {
-            position: absolute; top: 0; left: 0; width: 100%; overflow: hidden; line-height: 0;
-        }
-        .footer-wave svg { position: relative; display: block; width: calc(100% + 1.3px); height: 70px; }
-        .footer-wave .shape-fill { fill: var(--bg-off); }
-
-        footer::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            opacity: 0.03; pointer-events: none;
-        }
-        .f-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 80px; position: relative; z-index: 2; }
-        .f-col img { height: 65px; margin-bottom: 35px; filter: brightness(0) invert(1); transition: 0.5s; }
-        .f-col img:hover { transform: scale(1.05) rotate(-2deg); }
-        .f-col h5 { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 30px; letter-spacing: 3px; text-transform: uppercase; }
-        .f-col a { color: #fff; text-decoration: none; display: block; margin-bottom: 15px; font-size: 16px; transition: 0.3s; opacity: 0.7; position: relative; width: fit-content; }
-        .f-col a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: #fff; transition: 0.3s; }
-        .f-col a:hover { opacity: 1; color: #fff; }
-        .f-col a:hover::after { width: 100%; }
-        .f-col p { color: rgba(255,255,255,0.6); line-height: 1.8; font-size: 15px; }
-
-        /* EARLY ACCESS - PEARL PREMIUM GLASS */
-        .early-access { 
-            padding: 150px 8%; background: #fdfdfd; position: relative; overflow: hidden;
-        }
-        .early-container { 
-            max-width: 1100px; margin: 0 auto; 
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(30px);
-            padding: 100px 50px; border-radius: 60px; color: var(--text-dark);
-            box-shadow: 0 40px 100px rgba(106,55,183,0.08);
-            position: relative; overflow: hidden;
-            display: flex; flex-direction: column; align-items: center;
-            border: 1px solid rgba(255,255,255,0.8);
-        }
-        .early-container::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(106,55,183,0.05) 0%, transparent 70%);
-            animation: rotate-bg 30s linear infinite;
-        }
-        
-        .early-content { position: relative; z-index: 2; width: 100%; max-width: 800px; text-align: center; }
-        .early-content h2 { font-family: 'Outfit', sans-serif; font-size: 3.8rem; margin-bottom: 25px; letter-spacing: -3px; color: var(--primary); }
-        .early-content h2 span { color: var(--primary-glow); }
-        .early-content p { font-size: 1.4rem; color: #666; margin-bottom: 60px; font-weight: 300; }
-        
-        .lead-form { 
-            display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; 
-        }
-        .input-group { position: relative; width: 100%; }
-        .input-group i { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); color: var(--primary); font-size: 18px; opacity: 0.5; }
-        
-        .lead-input { 
-            width: 100%; padding: 22px 25px 22px 65px; border-radius: 25px; border: 1px solid rgba(106,55,183,0.1); 
-            background: #fff; color: var(--text-dark); font-size: 16px; 
-            transition: all 0.4s ease;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
-        }
-        .lead-input::placeholder { color: #aaa; }
-        .lead-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 30px rgba(106,55,183,0.1); transform: translateY(-2px); }
-        
-        .btn-submit { 
-            grid-column: span 2; background: var(--primary); color: #fff; border: none; padding: 25px; 
-            border-radius: 25px; font-weight: 900; text-transform: uppercase; letter-spacing: 4px;
-            cursor: pointer; transition: 0.5s; font-size: 16px; margin-top: 20px;
-            box-shadow: 0 20px 40px rgba(106,55,183,0.3);
-        }
-        .btn-submit:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(106,55,183,0.4); background: var(--primary-glow); }
-        
-        .success-msg { display: none; font-size: 2rem; font-weight: 800; color: var(--primary); animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1); }
-        #celeb-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; display: none; }
-
-        /* RESPONSIVE FIXES */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3.5rem; }
-            .hero p { font-size: 1.1rem; }
-            .plans-container { padding: 40px 5% 20px; }
-            .plan-card { padding: 40px 25px; text-align: center; }
-            .plan-card h3, .price, .price-sub { text-align: center !important; }
-            .plan-features { display: inline-block; text-align: left; margin: 30px auto; }
-            .badge { left: 50% !important; transform: translateX(-50%) !important; }
-            .plan-card.featured { transform: scale(1); margin: 30px 0; }
+            .hero-carousel { height: auto; min-height: 100vh; }
+            .slide { padding: 120px 5% 60px; }
+            .hero-content h1 { font-size: 2.8rem; text-align: center; }
+            .hero-content p { font-size: 1.1rem; text-align: center; }
+            .hero-btns { display: flex; flex-direction: column; gap: 15px; align-items: center; }
             
-            .early-access { padding: 20px 5% 60px; }
-            .early-container { padding: 50px 25px; border-radius: 40px; }
-            .early-content h2 { font-size: 2.5rem; letter-spacing: -1px; }
-            .early-content p { font-size: 1.1rem; margin-bottom: 40px; }
+            .desc-grid { grid-template-columns: 1fr; }
+            .p-grid { gap: 20px; }
+            .p-card { min-width: 100%; padding: 40px 25px; }
+            .price { font-size: 3rem; }
             
-            .lead-form { grid-template-columns: 1fr; gap: 15px; }
-            .input-group { grid-column: span 1 !important; }
-            .lead-input { padding: 18px 20px 18px 55px; font-size: 15px; }
-            .input-group i { left: 20px; font-size: 16px; }
-            .btn-submit { grid-column: span 1; padding: 20px; font-size: 14px; border-radius: 20px; }
-            
-            .faq-section { padding: 80px 5%; }
-            .section-header h2 { font-size: 2.5rem; }
-            .footer { padding: 80px 5% 40px; }
-            .footer-grid { grid-template-columns: 1fr; gap: 50px; text-align: center; }
-            .f-col h4::after { left: 50%; transform: translateX(-50%); }
+            footer { padding: 80px 5% 40px; }
+            .f-grid { grid-template-columns: 1fr !important; text-align: center !important; gap: 50px; }
+            .f-col { align-items: center !important; }
         }
-
-        /* REVEAL */
         .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition-mac); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
-
-        /* MOBILE OPTIMIZATION - ALL CENTERED */
-        @media (max-width: 1024px) {
-            .hero { padding: 0 5%; text-align: center; }
-            .hero-overlay { background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.75) 100%); }
-            .hero-content { margin: 0 auto; }
-            .hero-content p { border-left: none; border-top: 5px solid var(--primary); padding-left: 0; padding-top: 20px; margin: 0 auto 50px; }
-            .section-header { text-align: center; }
-            .p-grid { gap: 30px; }
-            .f-grid { grid-template-columns: 1fr; gap: 60px; text-align: center; }
-            .f-col a { transform: none; }
-            .f-col a:hover { transform: scale(1.1); }
-            nav { padding: 0 20px; }
-            .nav-links { display: none; } /* On mobile we usually have a menu, but staying simple as requested */
-            .faq-header { padding: 25px 30px; }
-            .faq-body { padding: 0 30px; }
-            .faq-header h4 { font-size: 17px; }
-        }
     </style>
 </head>
 <body>
 
-    <div id="preloader">
-        <img src="assets/img/logo.png" class="pre-logo" alt="CajaYa">
-    </div>
+    <div id="preloader"><img src="assets/img/logo.png" class="pre-logo" alt="CajaYa"></div>
 
     <nav id="navbar">
         <a href="#" class="nav-logo"><img src="assets/img/logo.png" alt="CajaYa"></a>
@@ -342,11 +134,65 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
     </nav>
 
     <section class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="reveal">El Cerebro Digital para tu <span>Minimarket y Pyme.</span></h1>
-            <p class="reveal">CajaYa potencia el crecimiento de tu negocio con tecnología de elite. Controla tus ventas, stock y cumple con el SII de la forma más prolija y eficiente del mercado.</p>
-            <a href="#planes" class="btn-cta reveal">Descubre los Planes</a>
+        <div class="hero-carousel">
+        <div class="carousel-track" id="heroTrack">
+            <div class="slide hero">
+                <div class="hero-content">
+                    <h1 class="reveal">El Software para tu <span>Supermercado</span>.</h1>
+                    <p class="reveal">La plataforma Élite diseñada para minimizar tus tiempos de espera y maximizar tus ganancias en Minimarkets y Pymes.</p>
+                    <div class="hero-btns reveal">
+                        <a href="#planes" class="btn-primary" style="margin-right: 15px;">Ver Planes</a>
+                        <button onclick="moveCarousel(1)" style="background: rgba(106,55,183,0.1); border: 1px solid var(--primary); color: var(--primary); padding: 22px 40px; border-radius: 20px; font-weight: 700; cursor: pointer; transition: 0.3s;">¡Infórmame más!</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 2: Quick Form -->
+            <div class="slide" style="background: var(--bg-off);">
+                <div class="early-container" style="width: 100%; max-width: 800px; padding: 60px 40px; border: 1px solid rgba(106,55,183,0.1); background: #fff;">
+                    <div class="early-content">
+                        <h2 style="font-size: 2.5rem; margin-bottom: 15px;">Únete a la <span>Élite</span></h2>
+                        <p style="margin-bottom: 40px;">Déjanos tus datos y obtén una consultoría estratégica gratuita.</p>
+                        <form onsubmit="handleLead(event, this)" class="lead-form" style="grid-template-columns: 1fr;">
+                            <div class="input-group">
+                                <i class="fa-solid fa-user"></i>
+                                <input type="text" name="nombre" class="lead-input" placeholder="Nombre completo" required>
+                            </div>
+                            <div class="input-group">
+                                <i class="fa-solid fa-envelope"></i>
+                                <input type="email" name="email" class="lead-input" placeholder="Correo electrónico" required>
+                            </div>
+                            <button type="submit" class="btn-submit" style="width: 100%;">¡Activar ahora!</button>
+                        </form>
+                        <button onclick="moveCarousel(0)" style="margin-top: 25px; background: transparent; border: none; color: var(--primary); font-weight: 700; cursor: pointer; text-decoration: underline;">Volver al inicio</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="product-desc" id="desc">
+        <div class="section-header">
+            <h2 class="reveal">El Poder de <span>CajaYa.</span></h2>
+        </div>
+        <div class="desc-grid">
+            <div class="desc-item reveal">
+                <i class="fa-solid fa-bolt"></i>
+                <h3>Velocidad Extrema</h3>
+                <p>Ventas en menos de 2 segundos. Diseñado para no hacer esperar a tus clientes.</p>
+            </div>
+            <div class="desc-item reveal">
+                <i class="fa-solid fa-cloud"></i>
+                <h3>Nube Híbrida</h3>
+                <p>¿Sin internet? No hay problema. CajaYa sigue funcionando y sincroniza todo al volver.</p>
+            </div>
+            <div class="desc-item reveal">
+                <i class="fa-solid fa-chart-line"></i>
+                <h3>Control Total</h3>
+                <p>Stock, ventas y reportes en tiempo real desde cualquier lugar del mundo.</p>
+            </div>
+        </div>
+        <div class="reveal" style="margin-top: 60px;">
+            <button onclick="document.getElementById('early').scrollIntoView();" class="btn-primary" style="font-size: 1.1rem; padding: 25px 60px;">¡Quiero esta tecnología en mi negocio!</button>
         </div>
     </section>
 
@@ -358,7 +204,10 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         <div class="p-grid" id="plan-cards">
             <div class="p-card reveal">
                 <h3>PLAN EMPRENDE</h3>
-                <div class="p-price">$<?php echo $pMensual; ?><span>/mes</span></div>
+                <div class="price">
+                    $<?php echo $pMensual; ?>
+                    <span class="price-sub">/mes</span>
+                </div>
                 <ul class="p-features">
                     <li><i class="fa-solid fa-circle-check"></i> <b>Catálogo Maestro (+20k SKU)</b></li>
                     <li><i class="fa-solid fa-circle-check"></i> Boletas SII Ilimitadas</li>
@@ -371,8 +220,10 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             <div class="p-card featured reveal">
                 <div class="badge-sugerido">Sugerido por CajaYa</div>
                 <h3>LICENCIA ÉLITE</h3>
-                <div class="p-price">$<?php echo $pLifetime; ?></div>
-                <p style="margin-top:-30px; margin-bottom:30px; font-weight:800; font-size:12px; letter-spacing:2px; opacity:0.8; color:#fff;">PAGO ÚNICO • PROPIEDAD TOTAL</p>
+                <div class="price">
+                    $<?php echo $pLifetime; ?>
+                </div>
+                <p style="margin-top:-30px; margin-bottom:30px; font-weight:800; font-size:12px; letter-spacing:2px; opacity:0.8; color:#fff; text-align: center;">PAGO ÚNICO • PROPIEDAD TOTAL</p>
                 <ul class="p-features">
                     <li><i class="fa-solid fa-crown"></i> <b>Todo el Plan Emprende</b></li>
                     <li><i class="fa-solid fa-crown"></i> 3 Cajas Simultáneas</li>
@@ -385,7 +236,10 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
 
             <div class="p-card reveal">
                 <h3>RED EMPRESA</h3>
-                <div class="p-price">$<?php echo $pEmpresa; ?><span>/mes</span></div>
+                <div class="price">
+                    $<?php echo $pEmpresa; ?>
+                    <span class="price-sub">/mes</span>
+                </div>
                 <ul class="p-features">
                     <li><i class="fa-solid fa-building"></i> <b>Multi-sucursal Centralizado</b></li>
                     <li><i class="fa-solid fa-building"></i> Facturación y Guías</li>
@@ -401,7 +255,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
 
     <canvas id="celeb-canvas"></canvas>
 
-    <section class="early-access">
+    <section class="early-access" id="early">
         <div class="early-container reveal">
             <div class="early-content">
                 <h2>Lanzamiento en <span>10 Días</span></h2>
@@ -578,7 +432,39 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             animate();
         }
 
-        // LEAD FORM HANDLING
+        // CAROUSEL LOGIC
+        function moveCarousel(index) {
+            const track = document.getElementById('heroTrack');
+            track.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        async function handleLead(e, formElement) {
+            e.preventDefault();
+            const btn = formElement.querySelector('.btn-submit');
+            const success = document.createElement('div');
+            success.innerHTML = '¡Enviado!';
+            success.style.color = '#fff';
+            success.style.fontWeight = 'bold';
+            success.style.marginTop = '20px';
+            
+            btn.innerHTML = '...';
+            btn.disabled = true;
+
+            const formData = new FormData(formElement);
+            try {
+                const resp = await fetch('save_lead.php', { method: 'POST', body: formData });
+                if (resp.ok) {
+                    formElement.style.display = 'none';
+                    formElement.parentNode.appendChild(success);
+                    launchCelebration();
+                }
+            } catch (err) {
+                btn.innerHTML = 'Error';
+                btn.disabled = false;
+            }
+        }
+
+        // LEAD FORM HANDLING (FOOTER ONE)
         document.getElementById('leadForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = e.target.querySelector('.btn-submit');
