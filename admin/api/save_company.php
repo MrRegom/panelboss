@@ -20,7 +20,7 @@ if (!$name) {
 
 try {
     $db = Database::getConnection();
-    $stmt = $db->prepare("INSERT INTO companies (name, rut, email, created_at) VALUES (:name, :rut, :email, datetime('now'))");
+    $stmt = $db->prepare("INSERT INTO companies (name, rut, email, created_at) VALUES (:name, :rut, :email, NOW())");
     $stmt->execute(['name' => $name, 'rut' => $rut, 'email' => $email]);
 
     echo json_encode(['success' => true, 'message' => 'Empresa creada con éxito']);
