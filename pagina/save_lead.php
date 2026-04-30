@@ -1,7 +1,17 @@
 <?php
 /**
- * save_lead.php — Controlador de Captación de Prospectos
+ * save_lead.php — Controlador de Captación de Prospectos CajaYa Elite (V46)
  */
+
+// 1. Declaraciones Top-Level (Obligatorio para que no se cuelgue)
+require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/Exception.php';
+require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre   = strip_tags(trim($_POST['nombre']   ?? ''));
@@ -9,27 +19,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $whatsapp = strip_tags(trim($_POST['whatsapp'] ?? ''));
 
     if (!empty($email)) {
-        // --- MOTOR PHPMailer NATIVO (V45 - Mirroring Licencias) ---
-        require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/Exception.php';
-        require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/PHPMailer.php';
-        require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/SMTP.php';
-
-        use PHPMailer\PHPMailer\PHPMailer;
-        use PHPMailer\PHPMailer\Exception;
-
         $mail = new PHPMailer(true);
         $result_smtp = "FAIL";
 
         try {
-            // Configuración idéntica a EmailService.php
+            // Configuración del Servidor (Copiada de EmailService.php)
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
             $mail->Username   = 'reltzerspa@gmail.com';
-            $mail->Password   = 'eism hymp wnzq maqj'; // Credencial Maestra validada
+            $mail->Password   = 'eism hymp wnzq maqj'; // Credencial Maestra
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
             $mail->CharSet    = 'UTF-8';
+            $mail->Timeout    = 20; // 20 segundos de espera
 
             // Destinatarios
             $mail->setFrom('reltzerspa@gmail.com', 'CajaYa Elite');
@@ -51,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <p><strong>WhatsApp:</strong> $whatsapp</p>
                     <p><strong>Fecha:</strong> " . date("d/m/Y H:i:s") . "</p>
                     <hr style='border: 0; border-top: 1px solid #eee; margin: 20px 0;'>
-                    <p style='font-size: 12px; color: #999; text-align: center;'>Este es un mensaje automático de tu sistema CajaYa Elite.</p>
+                    <p style='font-size: 12px; color: #999; text-align: center;'>Notificación generada por CajaYa Landing V46.</p>
                 </div>
             </body>
             </html>";
@@ -60,13 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $result_smtp = "OK";
         } catch (Exception $e) {
             $result_smtp = "Error: " . $mail->ErrorInfo;
-            error_log("Error SMTP V45: " . $mail->ErrorInfo);
         }
         
-        // Log de depuración (V45)
-        file_put_contents(__DIR__ . '/mail_debug.log', date("[Y-m-d H:i:s] ") . "PHPMailer Result: $result_smtp\n", FILE_APPEND);
+        // Log de depuración (V46)
+        @file_put_contents(__DIR__ . '/mail_debug.log', date("[Y-m-d H:i:s] ") . "V46 Result: $result_smtp\n", FILE_APPEND);
 
-        // 2. Respaldo Local (JSON)
+        // Respaldo Local (JSON)
         $leadData = [
             'nombre'   => $nombre,
             'email'    => $email,
@@ -80,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $currentLeads = json_decode(file_get_contents($logPath), true) ?? [];
         }
         $currentLeads[] = $leadData;
-        file_put_contents($logPath, json_encode($currentLeads, JSON_PRETTY_PRINT));
+        @file_put_contents($logPath, json_encode($currentLeads, JSON_PRETTY_PRINT));
 
         echo json_encode(['status' => 'success', 'smtp' => $result_smtp]);
         exit;
