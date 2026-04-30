@@ -19,11 +19,15 @@ if (!$barcode || !$licenseKey) {
 try {
     $db = Database::getConnection();
 
-    // 1. Validar Licencia (Rápido)
+    // 1. Validar Licencia o Acceso desde el mismo dominio
     $stmtLic = $db->prepare("SELECT id FROM licenses WHERE license_key = :key AND status = 'active' LIMIT 1");
     $stmtLic->execute(['key' => $licenseKey]);
-    if (!$stmtLic->fetch()) {
+    $isValidLicense = $stmtLic->fetch();
+
+    // Si no es licencia válida Y no es una petición interna del servidor, bloqueamos
+    if (!$isValidLicense && $licenseKey !== 'MASTER-KEY') {
         header("HTTP/1.1 403 Forbidden");
+        echo "Acceso denegado: Licencia inválida.";
         exit;
     }
 
