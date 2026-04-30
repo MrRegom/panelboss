@@ -39,18 +39,60 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
         .badge-ean { font-family: monospace; font-size: 11px; background: rgba(255,255,255,0.05); color: #888; padding: 2px 6px; border-radius: 4px; }
         .btn-action { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; transition: 0.2s; }
         .btn-action:hover { transform: translateY(-2px); }
+        :root { --accent: #0071E3; --bg-card: #161b22; }
+        body { font-family: 'Inter', sans-serif; background: #0d1117; color: #c9d1d9; }
         
-        /* Modal Zoom */
-        #modalZoom img { max-width: 100%; border-radius: 12px; }
-        
-        /* Custom DataTable Dark */
-        .dataTables_wrapper .dataTables_paginate .page-link { background: #1a1e23; border-color: #2d3238; color: #fff; }
-        .dataTables_wrapper .dataTables_paginate .page-item.active .page-link { background: var(--accent); border-color: var(--accent); }
+        /* DataTable Enhancements */
+        .table { border-collapse: separate; border-spacing: 0 8px; }
+        .table thead th { border: none; color: #8b949e; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; padding: 15px; }
+        .table tbody tr { background: var(--bg-card); transition: 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .table tbody tr:hover { transform: scale(1.005); background: #1c2128; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .table td { border: none; padding: 15px !important; }
+        .table td:first-child { border-radius: 12px 0 0 12px; }
+        .table td:last-child { border-radius: 0 12px 12px 0; }
+
+        /* Photo & EAN */
+        .img-preview { width: 50px; height: 50px; object-fit: contain; background: #0d1117; border-radius: 10px; cursor: pointer; border: 1px solid rgba(255,255,255,0.05); }
+        .ean-display { 
+            font-family: 'JetBrains Mono', 'Courier New', monospace; 
+            font-size: 13px; 
+            color: #58a6ff; 
+            background: rgba(88, 166, 255, 0.1); 
+            padding: 4px 10px; 
+            border-radius: 6px; 
+            cursor: copy;
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            transition: 0.2s;
+            display: inline-block;
+        }
+        .ean-display:hover { background: rgba(88, 166, 255, 0.2); transform: translateY(-1px); }
+        .ean-display:active { transform: scale(0.95); }
+
+        /* Modal Premium Glassmorphism */
+        .modal-content { 
+            background: rgba(22, 27, 34, 0.8) !important; 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 20px; 
+        }
+        .form-control, .form-select { 
+            background: rgba(0,0,0,0.3) !important; 
+            border: 1px solid rgba(255,255,255,0.1) !important; 
+            border-radius: 10px; 
+            color: #fff !important;
+            padding: 12px;
+        }
+        .form-control:focus { border-color: var(--accent) !important; box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.2); }
+
+        .btn-action { width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; transition: 0.2s; border: none; }
+        .btn-action.edit { background: rgba(88, 166, 255, 0.1); color: #58a6ff; }
+        .btn-action.delete { background: rgba(248, 81, 73, 0.1); color: #f85149; }
+        .btn-action:hover { transform: translateY(-2px); filter: brightness(1.2); }
     </style>
 </head>
 <body class="layout-fixed sidebar-expand-lg">
     <div class="app-wrapper">
-        <nav class="app-header navbar navbar-expand bg-dark border-bottom border-white border-opacity-10">
+        <nav class="app-header navbar navbar-expand bg-transparent border-bottom border-white border-opacity-10">
             <div class="container-fluid">
                 <ul class="navbar-nav">
                     <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#"> <i class="fa-solid fa-bars-staggered"></i> </a> </li>
@@ -62,16 +104,16 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
 
         <main class="app-main p-4">
             <div class="container-fluid">
-                <div class="row align-items-center mb-4">
+                <div class="row align-items-center mb-5">
                     <div class="col-md-6">
-                        <h2 class="fw-bold mb-1">Catálogo Maestro</h2>
-                        <p class="text-muted small">Gestión centralizada de productos globales (7,000+ registros)</p>
+                        <h2 class="fw-bold mb-1 text-white">Catálogo Maestro</h2>
+                        <p class="text-muted small">Panel de gestión centralizada de productos globales</p>
                     </div>
                     <div class="col-md-6 text-end">
-                        <a href="/import_catalog.php" class="btn btn-outline-success me-2 border-0 bg-success bg-opacity-10 text-success">
+                        <a href="/import_catalog.php" class="btn btn-link text-success text-decoration-none me-3">
                             <i class="fa-solid fa-file-import me-2"></i>Sincronizar CSV
                         </a>
-                        <button class="btn btn-primary px-4 shadow-sm" onclick="openProductModal()">
+                        <button class="btn btn-primary px-4 py-2 fw-bold shadow" onclick="openProductModal()" style="border-radius: 12px;">
                             <i class="fa-solid fa-plus me-2"></i>NUEVO PRODUCTO
                         </button>
                     </div>
