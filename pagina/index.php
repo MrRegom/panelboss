@@ -1,6 +1,6 @@
 <?php
 /**
- * index.php — Landing Page CAJAYA ELITE FINAL V22 (MASTER EDITION)
+ * index.php — Landing Page CAJAYA ELITE V23 (THE LUXURY BALANCE)
  */
 session_start();
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -33,191 +33,197 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
     <style>
         :root {
             --primary: #6A37B7;
-            --primary-dark: #4A268A;
+            --primary-dark: #321958;
             --primary-glow: #9D6CFF;
             --primary-soft: #F4F0FF;
-            --text-dark: #1D1D1F;
-            --text-light: #6E6E73;
+            --text-dark: #121214;
+            --text-light: #52525B;
             --bg-white: #FFFFFF;
-            --bg-off: #FBFBFE;
-            --transition-mac: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+            --bg-off: #F8FAFC;
+            --transition-elite: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
         body { background: var(--bg-white); color: var(--text-dark); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
+        /* PRELOADER */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #fff; display: flex; align-items: center; justify-content: center;
-            z-index: 10000; transition: opacity 1.2s ease-out;
+            z-index: 10000; transition: opacity 0.8s ease-out;
         }
-        .pre-logo { width: 140px; animation: pulse 2s infinite ease-in-out; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } }
+        .pre-logo { width: 120px; animation: pulse 1.5s infinite ease-in-out; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.05); opacity: 1; } }
 
+        /* NAV */
         nav { 
-            position: fixed; top: 0; width: 100%; height: 80px; z-index: 1000;
-            display: flex; justify-content: space-between; align-items: center; padding: 0 5%;
-            transition: var(--transition-mac);
+            position: fixed; top: 0; width: 100%; height: 90px; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center; padding: 0 8%;
+            transition: var(--transition-elite);
         }
-        nav.scrolled { background: rgba(255,255,255,0.85); backdrop-filter: blur(25px); height: 70px; box-shadow: 0 4px 30px rgba(0,0,0,0.02); }
-        .nav-logo img { height: 35px; }
-        .nav-links a { color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 14px; margin-left: 30px; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary); }
-        .btn-wa { background: #25D366; color: #fff !important; padding: 10px 22px; border-radius: 50px; font-weight: 700; box-shadow: 0 10px 20px rgba(37,211,102,0.2); }
+        nav.scrolled { background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); height: 75px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); }
+        .nav-logo img { height: 40px; }
+        .nav-links a { color: var(--text-dark); text-decoration: none; font-weight: 700; font-size: 14px; margin-left: 40px; transition: 0.3s; }
+        .btn-wa { background: #22C55E; color: #fff !important; padding: 12px 28px; border-radius: 50px; font-weight: 800; box-shadow: 0 10px 25px rgba(34,197,94,0.3); }
 
-        /* HERO CAROUSEL LEFT ALIGNED */
+        /* HERO CAROUSEL LUXURY */
         .hero-carousel { position: relative; height: 100vh; overflow: hidden; background: #fff; }
         .carousel-track { display: flex; height: 100%; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
-        .slide { min-width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: flex-start; padding: 0 8%; }
+        .slide { min-width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: flex-start; padding: 0 10%; }
         
-        .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-        .slide-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 40%, transparent 100%); z-index: 2; }
+        .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transform: scale(1.02); }
+        .slide-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.85) 45%, transparent 100%); z-index: 2; }
 
-        .hero-content { position: relative; z-index: 10; max-width: 750px; text-align: left; }
-        .hero-content h1 { font-family: 'Outfit', sans-serif; font-size: clamp(3rem, 7vw, 5rem); line-height: 0.9; font-weight: 900; margin-bottom: 30px; letter-spacing: -4px; color: var(--text-dark); }
+        .hero-content { position: relative; z-index: 10; max-width: 800px; }
+        .hero-content h1 { font-family: 'Outfit', sans-serif; font-size: clamp(3.5rem, 8vw, 6rem); line-height: 0.85; font-weight: 900; margin-bottom: 35px; letter-spacing: -5px; color: var(--text-dark); }
         .hero-content h1 span { color: var(--primary); }
-        .hero-content p { font-size: 1.4rem; color: var(--text-light); margin-bottom: 50px; border-left: 5px solid var(--primary); padding-left: 30px; }
-        .btn-primary { background: var(--primary); color: #fff; padding: 24px 50px; border-radius: 20px; text-decoration: none; font-weight: 700; display: inline-block; transition: 0.3s; box-shadow: 0 20px 40px rgba(106,55,183,0.3); }
-
-        /* SOLID PEARL FORM */
-        .pearl-container { 
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
-            padding: 60px 50px; border-radius: 50px; color: var(--text-dark);
-            box-shadow: 0 40px 100px rgba(0,0,0,0.1);
-            border: 1px solid #fff; text-align: center;
-            max-width: 550px; width: 100%;
-        }
-        .pearl-container h2 { font-family: 'Outfit', sans-serif; font-size: 2.8rem; margin-bottom: 15px; color: var(--primary); letter-spacing: -2px; }
-        .pearl-container p { color: var(--text-light); font-size: 1.1rem; margin-bottom: 35px; }
+        .hero-content p { font-size: 1.6rem; color: var(--text-light); margin-bottom: 50px; border-left: 8px solid var(--primary); padding-left: 35px; max-width: 650px; line-height: 1.4; }
         
-        .lead-form { display: grid; grid-template-columns: 1fr; gap: 15px; width: 100%; }
-        .input-group { position: relative; }
-        .input-group i { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); color: var(--primary); opacity: 0.5; }
-        .lead-input { 
-            width: 100%; padding: 20px 25px 20px 60px; border-radius: 20px; border: 1px solid rgba(106,55,183,0.1); 
-            background: #fff; color: var(--text-dark); font-size: 16px; transition: 0.4s;
+        /* THE FORM - PEARL LUXURY */
+        .pearl-form { 
+            background: rgba(255,255,255,0.92); backdrop-filter: blur(25px);
+            padding: 55px; border-radius: 45px; border: 1px solid #fff;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.08);
+            width: 100%; max-width: 550px; text-align: center;
         }
-        .lead-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 30px rgba(106,55,183,0.1); }
-        .btn-submit { 
-            background: var(--primary); color: #fff; border: none; padding: 22px; 
-            border-radius: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px;
+        .pearl-form h2 { font-family: 'Outfit', sans-serif; font-size: 3rem; margin-bottom: 15px; color: var(--text-dark); letter-spacing: -2px; }
+        .pearl-form h2 span { color: var(--primary); }
+        .pearl-form p { color: var(--text-light); font-size: 1.2rem; margin-bottom: 40px; }
+        
+        .form-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .input-wrap { position: relative; }
+        .input-wrap i { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); color: var(--primary); opacity: 0.6; font-size: 18px; }
+        .form-input { 
+            width: 100%; padding: 22px 25px 22px 65px; border-radius: 22px; border: 1px solid rgba(0,0,0,0.05); 
+            background: #fff; color: var(--text-dark); font-size: 16px; transition: 0.3s;
+        }
+        .form-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 30px rgba(106,55,183,0.1); }
+        .btn-luxury { 
+            background: var(--primary); color: #fff; border: none; padding: 25px; 
+            border-radius: 22px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px;
             cursor: pointer; transition: 0.5s; box-shadow: 0 15px 40px rgba(106,55,183,0.3);
         }
+        .btn-luxury:hover { transform: scale(1.02); background: var(--primary-dark); }
 
-        /* PODER CAJAYA MODERN */
-        .product-desc { background: #fff; padding: 120px 8%; text-align: center; }
-        .section-header h2 { font-family: 'Outfit', sans-serif; font-size: 4rem; letter-spacing: -2px; }
-        .desc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
-        .desc-item { padding: 50px 40px; border-radius: 40px; background: var(--bg-off); transition: 0.5s; border-bottom: 5px solid transparent; }
-        .desc-item:hover { transform: translateY(-15px); border-bottom-color: var(--primary); box-shadow: 0 40px 80px rgba(0,0,0,0.06); }
-        .desc-item i { font-size: 50px; color: var(--primary); margin-bottom: 25px; display: inline-block; animation: float 3s infinite ease-in-out; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-        /* PLAN CARDS WITH ANIMATION */
-        .section-padding { padding: 150px 8%; background: var(--bg-off); }
-        .p-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; }
-        .p-card { 
-            background: #fff; padding: 80px 50px; border-radius: 45px; flex: 1; min-width: 350px; max-width: 450px;
-            position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.02); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        /* PODER CAJAYA - HIGH CONTRAST */
+        .section-poder { background: #fff; padding: 150px 10%; text-align: center; }
+        .header-elite h2 { font-family: 'Outfit', sans-serif; font-size: 4.5rem; letter-spacing: -3px; font-weight: 900; }
+        .header-elite h2 span { color: var(--primary); }
+        .grid-poder { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 80px; }
+        .card-poder { 
+            padding: 60px 45px; border-radius: 45px; background: var(--bg-off); 
+            transition: var(--transition-elite); border: 2px solid transparent; text-align: center;
         }
-        .p-card.featured { transform: scale(1.05); border: 3px solid var(--primary-glow); z-index: 10; box-shadow: 0 50px 100px rgba(106,55,183,0.15); }
-        .p-card.featured::after { content: ''; position: absolute; inset: -10px; border-radius: 55px; background: var(--primary-glow); opacity: 0.1; z-index: -1; animation: pulse-glow 2s infinite; }
-        @keyframes pulse-glow { 0% { transform: scale(1); opacity: 0.1; } 50% { transform: scale(1.05); opacity: 0.2; } 100% { transform: scale(1); opacity: 0.1; } }
+        .card-poder:hover { 
+            transform: translateY(-20px) scale(1.03); 
+            background: #fff; border-color: var(--primary-soft);
+            box-shadow: 0 50px 100px rgba(106,55,183,0.08);
+        }
+        .card-poder i { font-size: 60px; color: var(--primary); margin-bottom: 35px; }
+        .card-poder h3 { font-size: 2rem; font-weight: 900; margin-bottom: 20px; color: var(--text-dark); }
+        .card-poder p { font-size: 1.1rem; color: var(--text-light); line-height: 1.6; }
+
+        /* PLANES - ANIMATED */
+        .section-planes { padding: 150px 8%; background: var(--bg-off); }
+        .p-card { 
+            background: #fff; padding: 85px 55px; border-radius: 50px; flex: 1; min-width: 360px; max-width: 460px;
+            position: relative; transition: var(--transition-elite); box-shadow: 0 10px 40px rgba(0,0,0,0.01);
+        }
+        .p-card:hover { transform: translateY(-20px) scale(1.02); box-shadow: 0 60px 120px rgba(0,0,0,0.06); }
+        .p-card.elite { 
+            border: 4px solid var(--primary-glow); transform: scale(1.05); z-index: 10;
+            box-shadow: 0 40px 80px rgba(106,55,183,0.15);
+        }
+        .p-card.elite:hover { transform: scale(1.08) translateY(-25px); }
+        .badge-elite { position: absolute; top: -20px; right: 50px; background: var(--primary); color: #fff; padding: 12px 35px; border-radius: 50px; font-size: 13px; font-weight: 900; letter-spacing: 2px; }
         
-        .price { font-size: 4.5rem; font-weight: 900; letter-spacing: -3px; display: flex; align-items: baseline; justify-content: center; margin: 30px 0; color: var(--primary); }
-        .price-sub { font-size: 1.3rem; opacity: 0.4; margin-left: 8px; color: var(--text-dark); }
-        .p-features { list-style: none; margin-bottom: 50px; text-align: left; }
-        .p-features li { margin-bottom: 20px; font-size: 16px; color: var(--text-light); display: flex; align-items: center; }
-        .p-features li i { color: var(--primary); margin-right: 15px; font-size: 20px; }
-        .btn-plan { background: var(--primary-soft); color: var(--primary); text-decoration: none; padding: 25px; display: block; border-radius: 25px; text-align: center; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; }
-        .btn-plan:hover { transform: translateY(-5px); background: var(--primary); color: #fff; box-shadow: 0 20px 40px rgba(106,55,183,0.3); }
+        .price-tag { font-size: 5rem; font-weight: 900; letter-spacing: -4px; color: var(--primary); margin: 35px 0; }
+        .p-features li { list-style: none; margin-bottom: 22px; font-size: 1.1rem; color: var(--text-light); display: flex; align-items: center; }
+        .p-features li i { color: var(--primary); margin-right: 18px; font-size: 20px; }
+        .btn-cta { background: var(--primary-soft); color: var(--primary); text-decoration: none; padding: 25px; display: block; border-radius: 25px; text-align: center; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; }
+        .btn-cta:hover { background: var(--primary); color: #fff; box-shadow: 0 20px 40px rgba(106,55,183,0.3); }
 
-        /* FAQ MODERN */
-        .faq-section { padding: 120px 8%; background: #fff; }
-        .faq-container { max-width: 900px; margin: 0 auto; }
-        .faq-item { margin-bottom: 20px; border-radius: 25px; background: var(--bg-off); overflow: hidden; transition: 0.3s; }
-        .faq-header { padding: 30px 40px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .faq-header h4 { font-size: 1.3rem; font-weight: 700; }
-        .faq-body { padding: 0 40px; max-height: 0; transition: 0.5s ease; opacity: 0; }
-        .faq-item.active .faq-body { padding: 10px 40px 40px; max-height: 200px; opacity: 1; }
-        .faq-item.active { box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        /* FAQ */
+        .section-faq { padding: 120px 10%; background: #fff; }
+        .faq-item { margin-bottom: 25px; border-radius: 30px; background: var(--bg-off); transition: 0.4s; cursor: pointer; }
+        .faq-q { padding: 35px 45px; display: flex; justify-content: space-between; align-items: center; font-size: 1.4rem; font-weight: 800; }
+        .faq-a { padding: 0 45px; max-height: 0; overflow: hidden; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; color: var(--text-light); line-height: 1.8; }
+        .faq-item.active .faq-a { padding-bottom: 45px; max-height: 300px; opacity: 1; }
+        .faq-item.active { box-shadow: 0 30px 60px rgba(0,0,0,0.04); background: #fff; transform: scale(1.02); }
 
-        /* FOOTER MORADO MODERN */
+        /* FOOTER LUXURY (NON-UNIFORM) */
         footer { 
-            padding: 150px 8% 60px; 
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            padding: 180px 10% 80px; 
+            background: linear-gradient(145deg, var(--primary-dark) 0%, var(--primary) 50%, #7e4dcc 100%);
             color: #fff; position: relative; overflow: hidden;
         }
-        .footer-wave { position: absolute; top: -1px; left: 0; width: 100%; line-height: 0; transform: rotate(180deg); }
-        .footer-wave svg { display: block; width: calc(160% + 1.3px); height: 100px; fill: #fff; }
+        footer::after { content: ''; position: absolute; inset: 0; background: url('https://www.transparenttextures.com/patterns/p6.png'); opacity: 0.05; pointer-events: none; }
         
-        .f-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; position: relative; z-index: 5; }
-        .f-col img { height: 40px; margin-bottom: 30px; filter: brightness(0) invert(1); }
-        .f-col h5 { font-size: 14px; opacity: 0.5; margin-bottom: 30px; letter-spacing: 4px; text-transform: uppercase; }
-        .f-col a { color: #fff; text-decoration: none; display: block; margin-bottom: 18px; opacity: 0.7; transition: 0.3s; }
-        .f-col a:hover { opacity: 1; transform: translateX(10px); color: var(--primary-glow); }
+        .f-wave { position: absolute; top: -1px; left: 0; width: 100%; transform: rotate(180deg); }
+        .f-wave svg { display: block; width: calc(150% + 1.3px); height: 110px; fill: #fff; }
+        
+        .f-grid { display: grid; grid-template-columns: 2.5fr 1fr 1fr 1.2fr; gap: 80px; position: relative; z-index: 10; }
+        .f-col h5 { font-size: 15px; opacity: 0.4; margin-bottom: 35px; letter-spacing: 5px; text-transform: uppercase; font-weight: 900; }
+        .f-col a { color: #fff; text-decoration: none; display: block; margin-bottom: 20px; opacity: 0.6; transition: 0.3s; font-size: 16px; }
+        .f-col a:hover { opacity: 1; transform: translateX(12px); color: var(--primary-glow); }
 
+        @media (max-width: 1024px) { .grid-poder { grid-template-columns: 1fr; } .f-grid { grid-template-columns: 1fr; text-align: center; } .f-col { align-items: center; } }
         @media (max-width: 768px) {
-            .slide { padding: 100px 5% 50px; justify-content: center; }
+            .slide { justify-content: center; padding: 0 5%; }
             .hero-content { text-align: center; }
-            .hero-content p { border-left: none; border-top: 5px solid var(--primary); padding: 25px 0 0; text-align: center; }
-            .hero-btns { display: flex; flex-direction: column; gap: 15px; }
-            .desc-grid { grid-template-columns: 1fr; }
-            .p-card.featured { transform: scale(1); margin: 20px 0; }
-            .f-grid { grid-template-columns: 1fr; text-align: center; }
-            .f-col { align-items: center; }
+            .hero-content h1 { font-size: 3.5rem; letter-spacing: -2px; }
+            .hero-content p { border-left: none; border-top: 8px solid var(--primary); padding: 30px 0 0; text-align: center; }
         }
-        .reveal { opacity: 0; transform: translateY(40px); transition: 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal { opacity: 0; transform: translateY(50px); transition: 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
-    <div id="preloader"><img src="assets/img/logo.png" class="pre-logo" alt="CajaYa"></div>
+    <div id="preloader"><img src="assets/img/logo.png" class="pre-logo"></div>
 
     <nav id="navbar">
-        <a href="#" class="nav-logo"><img src="assets/img/logo.png" alt="CajaYa"></a>
+        <a href="#" class="nav-logo"><img src="assets/img/logo.png"></a>
         <div class="nav-links">
+            <a href="#poder">Poder</a>
             <a href="#planes">Planes</a>
-            <a href="https://wa.me/56900000000" target="_blank" class="btn-wa">Soporte WhatsApp</a>
+            <a href="https://wa.me/56900000000" target="_blank" class="btn-wa">WhatsApp VIP</a>
         </div>
     </nav>
 
     <section class="hero">
         <div class="hero-carousel">
             <div class="carousel-track" id="heroTrack">
-                <!-- Slide 1: Welcome -->
                 <div class="slide">
                     <img src="assets/img/banner_super.png" class="slide-bg">
                     <div class="slide-overlay"></div>
                     <div class="hero-content">
                         <h1 class="reveal">El Software para tu <span>Supermercado.</span></h1>
                         <p class="reveal">La plataforma Élite diseñada para minimizar tus tiempos de espera y maximizar tus ganancias en Minimarkets y Pymes.</p>
-                        <div class="hero-btns reveal">
-                            <a href="#planes" class="btn-primary" style="margin-right: 15px;">Ver Planes</a>
-                            <button onclick="moveCarousel(1)" style="background: var(--primary-soft); color: var(--primary); border: none; padding: 22px 45px; border-radius: 20px; font-weight: 800; cursor: pointer; transition: 0.3s; text-transform: uppercase;">¡Infórmame más!</button>
+                        <div class="reveal">
+                            <a href="#planes" class="btn-luxury" style="padding: 24px 60px;">Explorar Planes</a>
+                            <button onclick="moveCarousel(1)" style="margin-left: 15px; background: none; border: 2px solid var(--primary); color: var(--primary); padding: 22px 45px; border-radius: 20px; font-weight: 900; cursor: pointer; transition: 0.3s;">MÁS INFO</button>
                         </div>
                     </div>
                 </div>
-                <!-- Slide 2: Solid Form -->
                 <div class="slide">
-                    <img src="assets/img/banner_super.png" class="slide-bg" style="filter: blur(5px); opacity: 0.5;">
-                    <div class="pearl-container reveal">
+                    <img src="assets/img/banner_super.png" class="slide-bg" style="filter: blur(8px) brightness(0.6);">
+                    <div class="pearl-form reveal">
                         <h2>Únete a la <span>Élite</span></h2>
-                        <p>Déjanos tus datos y obtén una consultoría estratégica gratuita.</p>
-                        <form onsubmit="handleLead(event, this)" class="lead-form">
-                            <div class="input-group">
+                        <p>Gestión inteligente para negocios que no aceptan límites.</p>
+                        <form onsubmit="handleLead(event, this)" class="form-grid">
+                            <div class="input-wrap">
                                 <i class="fa-solid fa-user"></i>
-                                <input type="text" name="nombre" class="lead-input" placeholder="Nombre completo" required>
+                                <input type="text" name="nombre" class="form-input" placeholder="Nombre completo" required>
                             </div>
-                            <div class="input-group">
+                            <div class="input-wrap">
                                 <i class="fa-solid fa-envelope"></i>
-                                <input type="email" name="email" class="lead-input" placeholder="Correo electrónico" required>
+                                <input type="email" name="email" class="form-input" placeholder="Correo electrónico" required>
                             </div>
-                            <div class="input-group">
+                            <div class="input-wrap">
                                 <i class="fa-solid fa-whatsapp"></i>
-                                <input type="text" name="whatsapp" class="lead-input" placeholder="WhatsApp de contacto" required>
+                                <input type="text" name="whatsapp" class="form-input" placeholder="WhatsApp" required>
                             </div>
-                            <button type="submit" class="btn-submit">¡Quiero el Poder de CajaYa!</button>
+                            <button type="submit" class="btn-luxury">Solicitar Acceso Élite</button>
                         </form>
                     </div>
                 </div>
@@ -225,155 +231,144 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         </div>
     </section>
 
-    <!-- PRODUCT DESCRIPTION -->
-    <section class="product-desc" id="desc">
-        <div class="section-header">
+    <!-- PODER CAJAYA - HIGH CONTRAST -->
+    <section class="section-poder" id="poder">
+        <div class="header-elite">
             <h2 class="reveal">El Poder de <span>CajaYa.</span></h2>
-            <p class="reveal" style="font-size: 1.4rem; color: var(--text-light); max-width: 800px; margin: 25px auto;">Llevamos tu negocio al siguiente nivel con tecnología de clase mundial diseñada para Chile.</p>
+            <p class="reveal" style="font-size: 1.5rem; color: var(--text-light); margin-top: 25px; max-width: 900px; margin-inline: auto;">Tecnología disruptiva para el comercio minorista chileno.</p>
         </div>
-        <div class="desc-grid">
-            <div class="desc-item reveal">
-                <i class="fa-solid fa-bolt"></i>
+        <div class="grid-poder">
+            <div class="card-poder reveal">
+                <i class="fa-solid fa-bolt-lightning"></i>
                 <h3>Velocidad Extrema</h3>
-                <p>Ventas en menos de 2 segundos. Olvídate de las filas.</p>
+                <p>Procesa transacciones en milisegundos. Elimina las colas y mantén a tus clientes felices.</p>
             </div>
-            <div class="desc-item reveal">
-                <i class="fa-solid fa-cloud"></i>
-                <h3>Nube Híbrida</h3>
-                <p>¿Sin internet? No hay problema. Sigue vendiendo.</p>
+            <div class="card-poder reveal">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <h3>Nube Resiliente</h3>
+                <p>Sincronización inteligente. Tu negocio nunca se detiene, incluso sin conexión a internet.</p>
             </div>
-            <div class="desc-item reveal">
-                <i class="fa-solid fa-chart-line"></i>
-                <h3>Control Total</h3>
-                <p>Reportes en tiempo real desde cualquier lugar.</p>
+            <div class="card-poder reveal">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>Control Absoluto</h3>
+                <p>Auditoría de inventario y reportes financieros con precisión quirúrgica desde tu smartphone.</p>
             </div>
         </div>
     </section>
 
-    <!-- PLAN CARDS -->
-    <section class="section-padding" id="planes">
-        <div class="section-header" style="text-align: center; margin-bottom: 80px;">
-            <h2 class="reveal">Inversión <span>Inteligente.</span></h2>
+    <!-- PLANES - ANIMATED -->
+    <section class="section-planes" id="planes">
+        <div class="header-elite" style="text-align: center; margin-bottom: 100px;">
+            <h2 class="reveal">Inversión <span>Estratégica.</span></h2>
         </div>
-
-        <div class="p-grid" id="plan-cards">
+        <div class="p-grid">
             <div class="p-card reveal">
                 <h3>PLAN EMPRENDE</h3>
-                <div class="price">$<?php echo $pMensual; ?><span class="price-sub">/mes</span></div>
+                <div class="price-tag">$<?php echo $pMensual; ?><span style="font-size: 1.5rem; opacity: 0.3;">/mes</span></div>
                 <ul class="p-features">
-                    <li><i class="fa-solid fa-circle-check"></i> Catálogo Maestro (+20k SKU)</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Boletas SII Ilimitadas</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Control de Stock en Vivo</li>
+                    <li><i class="fa-solid fa-check"></i> Catálogo Maestro (+20k SKU)</li>
+                    <li><i class="fa-solid fa-check"></i> Boletas SII Ilimitadas</li>
+                    <li><i class="fa-solid fa-check"></i> Control de Stock en Vivo</li>
                 </ul>
-                <a href="auth/google_redirect.php?plan=mensual" class="btn-plan">Activar Ahora</a>
+                <a href="auth/google_redirect.php?plan=mensual" class="btn-cta">Comenzar Ahora</a>
             </div>
-
-            <div class="p-card featured reveal">
-                <div class="badge-sugerido">Sugerido por CajaYa</div>
-                <h3>LICENCIA ÉLITE</h3>
-                <div class="price">$<?php echo $pLifetime; ?></div>
-                <p style="margin-top:-30px; margin-bottom:40px; font-weight:800; font-size:13px; letter-spacing:3px; opacity:0.4; text-align: center;">PAGO ÚNICO • PROPIEDAD TOTAL</p>
+            <div class="p-card elite reveal">
+                <div class="badge-elite">OFERTA ÉLITE</div>
+                <h3>LICENCIA VITALICIA</h3>
+                <div class="price-tag">$<?php echo $pLifetime; ?></div>
+                <p style="margin-top:-40px; margin-bottom:40px; font-weight:900; opacity:0.4; letter-spacing:4px; text-align:center;">PAGO ÚNICO • PARA SIEMPRE</p>
                 <ul class="p-features">
-                    <li><i class="fa-solid fa-crown"></i> <b>Todo el Plan Emprende</b></li>
                     <li><i class="fa-solid fa-crown"></i> 3 Cajas Simultáneas</li>
+                    <li><i class="fa-solid fa-crown"></i> Soporte VIP 24/7</li>
                     <li><i class="fa-solid fa-crown"></i> Cero Mensualidades</li>
                 </ul>
-                <a href="auth/google_redirect.php?plan=lifetime" class="btn-plan">Comprar Para Siempre</a>
+                <a href="auth/google_redirect.php?plan=lifetime" class="btn-cta" style="background: var(--primary); color: #fff;">Obtener Propiedad Total</a>
             </div>
-
             <div class="p-card reveal">
-                <h3>RED EMPRESA</h3>
-                <div class="price">$<?php echo $pEmpresa; ?><span class="price-sub">/mes</span></div>
+                <h3>PLAN EMPRESA</h3>
+                <div class="price-tag">$<?php echo $pEmpresa; ?><span style="font-size: 1.5rem; opacity: 0.3;">/mes</span></div>
                 <ul class="p-features">
                     <li><i class="fa-solid fa-building"></i> Multi-sucursal Centralizado</li>
                     <li><i class="fa-solid fa-building"></i> Facturación y Guías</li>
-                    <li><i class="fa-solid fa-building"></i> Auditoría de Inventarios</li>
+                    <li><i class="fa-solid fa-building"></i> API de Integración</li>
                 </ul>
-                <a href="auth/google_redirect.php?plan=empresa" class="btn-plan">Hablar con Ventas</a>
+                <a href="auth/google_redirect.php?plan=empresa" class="btn-cta">Hablar con Ventas</a>
             </div>
         </div>
     </section>
 
-    <!-- FAQ SECTION -->
-    <section class="faq-section">
-        <div class="section-header">
-            <h2 class="reveal">Dudas <span>Frecuentes.</span></h2>
+    <!-- FAQ -->
+    <section class="section-faq">
+        <div class="header-elite">
+            <h2 class="reveal">Preguntas <span>Frecuentes.</span></h2>
         </div>
-        <div class="faq-container reveal">
+        <div class="faq-container reveal" style="margin-top: 80px;">
             <div class="faq-item">
-                <div class="faq-header"><h4>¿Cómo instalo el catálogo de productos?</h4><i class="fa-solid fa-plus"></i></div>
-                <div class="faq-body"><p>No requiere instalación. CajaYa incluye una base de datos con más de 20,000 productos precargados. Solo escaneas y vendes.</p></div>
+                <div class="faq-q"><span>¿El catálogo ya viene cargado?</span><i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-a">Sí. CajaYa incluye más de 20,000 productos de consumo masivo con sus códigos de barra y precios sugeridos para que empieces a vender hoy mismo.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-header"><h4>¿Qué pasa si pierdo el Internet?</h4><i class="fa-solid fa-plus"></i></div>
-                <div class="faq-body"><p>Es Offline-First. Puedes seguir vendiendo y el sistema sincronizará todo automáticamente al detectar conexión.</p></div>
+                <div class="faq-q"><span>¿Funciona sin Internet?</span><i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-a">Correcto. Nuestra arquitectura híbrida permite realizar ventas offline y sincronizar los datos automáticamente cuando la conexión se restablece.</div>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-wave">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
-            </svg>
+        <div class="f-wave">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path></svg>
         </div>
         <div class="f-grid">
             <div class="f-col">
                 <img src="assets/img/logo.png">
-                <p>Potenciando el crecimiento de los minimarkets y pymes en todo Chile.</p>
+                <p>Revolucionando la gestión del retail independiente con tecnología de clase mundial.</p>
             </div>
             <div class="f-col">
-                <h5>PLATAFORMA</h5>
+                <h5>PRODUCTO</h5>
                 <a href="#">Panel Maestro</a>
-                <a href="#">Descargar App</a>
+                <a href="#">ServiRec App</a>
             </div>
             <div class="f-col">
-                <h5>LEGAL</h5>
-                <a href="#">Privacidad</a>
-                <a href="#">Términos</a>
+                <h5>SOPORTE</h5>
+                <a href="#">Centro de Ayuda</a>
+                <a href="#">WhatsApp VIP</a>
             </div>
             <div class="f-col">
-                <h5>CONTACTO</h5>
-                <a href="mailto:ventas@cajaya.cl">ventas@cajaya.cl</a>
-                <p style="margin-top:20px; font-size:13px; opacity:0.4;">RM, CHILE</p>
+                <h5>ESTADO</h5>
+                <p style="font-weight: 800; font-size: 14px; margin-bottom: 10px;"><i class="fa-solid fa-circle" style="color: #22C55E; font-size: 10px; margin-right: 8px;"></i> Sistemas Online</p>
+                <p style="opacity: 0.4; font-size: 12px;">RM, SANTIAGO DE CHILE</p>
             </div>
         </div>
-        <div style="text-align:center; margin-top:80px; opacity:0.2; font-size:11px; letter-spacing:4px;">
-            &copy; 2026 CAJAYA — EL FUTURO DEL RETAIL.
-        </div>
+        <div style="text-align:center; margin-top:100px; opacity:0.2; font-size:12px; letter-spacing:5px;">&copy; 2026 CAJAYA ELITE. TODOS LOS DERECHOS RESERVADOS.</div>
     </footer>
 
     <script>
-        // PRELOADER
         window.addEventListener('load', () => {
-            document.getElementById('preloader').style.opacity = '0';
-            setTimeout(() => document.getElementById('preloader').style.display = 'none', 1200);
+            const pre = document.getElementById('preloader');
+            pre.style.opacity = '0';
+            setTimeout(() => pre.style.display = 'none', 800);
         });
 
-        // NAVBAR
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) nav.classList.add('scrolled');
+            if (window.scrollY > 60) nav.classList.add('scrolled');
             else nav.classList.remove('scrolled');
         });
 
-        // FAQ
-        document.querySelectorAll('.faq-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const item = header.parentElement;
-                item.classList.toggle('active');
-            });
-        });
-
-        // REVEAL
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // CAROUSEL
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+                const icon = item.querySelector('i');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+
         let currentSlide = 0;
         function moveCarousel(index) {
             currentSlide = index;
@@ -382,16 +377,16 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         setInterval(() => {
             currentSlide = (currentSlide + 1) % 2;
             moveCarousel(currentSlide);
-        }, 8000);
+        }, 9000);
 
         async function handleLead(e, form) {
             e.preventDefault();
-            const btn = form.querySelector('.btn-submit');
-            btn.innerHTML = 'PROCESANDO...';
+            const btn = form.querySelector('button');
+            btn.innerHTML = 'PROCESANDO ACCESO...'; btn.disabled = true;
             try {
                 const resp = await fetch('save_lead.php', { method: 'POST', body: new FormData(form) });
-                if (resp.ok) form.innerHTML = '<h3 style="color:var(--primary); padding:40px;">¡Datos Recibidos!</h3>';
-            } catch (err) { btn.innerHTML = 'REINTENTAR'; }
+                if (resp.ok) form.innerHTML = '<h3 style="color:var(--primary); padding:40px;">¡Acceso Solicitado! Pronto te contactaremos.</h3>';
+            } catch (err) { btn.innerHTML = 'REINTENTAR'; btn.disabled = false; }
         }
     </script>
 </body>
