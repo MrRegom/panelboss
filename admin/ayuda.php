@@ -29,30 +29,66 @@ AuthService::check();
         <main class="app-main">
             <div class="app-content-header py-4">
                 <div class="container-fluid px-4">
-                    <h3 class="fw-bold mb-0">📘 Documentación de Integración</h3>
-                    <p class="text-muted small">Guía técnica para el uso del catálogo de productos vía API</p>
+                    <h3 class="fw-bold mb-0 text-primary">📘 Centro de Integración para Partners</h3>
+                    <p class="text-muted small">Guía técnica completa para el despliegue del catálogo CajaYa</p>
                 </div>
             </div>
 
             <div class="app-content">
                 <div class="container-fluid px-4">
-                    <div class="card p-5 border-0 shadow-sm" style="background: #111827;">
-                        <h4 class="text-primary mb-4">1. Autenticación</h4>
-                        <p>Todas las peticiones deben incluir el parámetro <code>license_key</code>.</p>
-                        
-                        <h4 class="text-primary mb-4 mt-5">2. Obtener Catálogo</h4>
-                        <div class="bg-black p-3 rounded mb-3">
-                            <span class="badge bg-success">GET</span> <code>https://panel.cajaya.cl/api/catalog/list.php?license_key=TU_CLAVE</code>
-                        </div>
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <!-- SECCIÓN: LICENCIA DE PRUEBAS -->
+                            <div class="card p-4 border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #1e293b 0%, #111827 100%);">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-primary bg-opacity-10 p-3 rounded-3 me-3 text-primary">
+                                        <i class="fa-solid fa-vial-circle-check fs-4"></i>
+                                    </div>
+                                    <h4 class="mb-0 fw-bold">Entorno de Desarrollo (Sandbox)</h4>
+                                </div>
+                                <p>El partner debe utilizar la siguiente licencia para todas las pruebas de integración iniciales:</p>
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-borderless align-middle mb-0">
+                                        <thead>
+                                            <tr class="text-muted small">
+                                                <th>PARÁMETRO</th>
+                                                <th>VALOR REQUERIDO</th>
+                                                <th>ESTADO</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><code>license_key</code></td>
+                                                <td><span class="badge bg-primary fs-6 p-2">DEVELOPER-TEST</span></td>
+                                                <td><span class="text-success"><i class="fa-solid fa-circle-check me-1"></i> ACTIVA</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
-                        <h4 class="text-primary mb-4 mt-5">3. Obtener Imágenes</h4>
-                        <div class="bg-black p-3 rounded">
-                            <span class="badge bg-success">GET</span> <code>https://panel.cajaya.cl/api/catalog/image.php?barcode=780...&license_key=TU_CLAVE</code>
-                        </div>
+                            <!-- SECCIÓN: ENDPOINTS -->
+                            <div class="card p-4 border-0 shadow-sm" style="background: #1a1a1a;">
+                                <h4 class="fw-bold mb-4">Endpoints de Sincronización</h4>
+                                
+                                <div class="mb-5">
+                                    <h5 class="text-info"><i class="fa-solid fa-list-check me-2"></i> 1. Catálogo Completo</h5>
+                                    <p class="text-muted small">Retorna el maestro de productos actualizado (+7,000 items).</p>
+                                    <div class="bg-black p-3 rounded-3 border border-secondary d-flex align-items-center">
+                                        <span class="badge bg-success me-3">GET</span>
+                                        <code>https://panel.cajaya.cl/api/catalog/list.php?license_key=DEVELOPER-TEST</code>
+                                    </div>
+                                </div>
 
-                        <div class="alert alert-info mt-5 bg-info bg-opacity-10 border-info text-info">
-                            <i class="fa-solid fa-lightbulb me-2"></i>
-                            <strong>Tip:</strong> Puedes usar la licencia <code>DEVELOPER-TEST</code> para pruebas de integración.
+                                <div class="mb-4">
+                                    <h5 class="text-info"><i class="fa-solid fa-image me-2"></i> 2. Servidor de Imágenes</h5>
+                                    <p class="text-muted small">Proxy de alto rendimiento para visualización de productos.</p>
+                                    <div class="bg-black p-3 rounded-3 border border-secondary d-flex align-items-center">
+                                        <span class="badge bg-success me-3">GET</span>
+                                        <code>https://panel.cajaya.cl/api/catalog/image.php?barcode={843...}&license_key=DEVELOPER-TEST</code>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
