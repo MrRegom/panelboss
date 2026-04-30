@@ -35,7 +35,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $headers .= "Reply-To: $email" . "\r\n";
         $headers .= "X-Mailer: PHP/" . phpversion();
 
-        mail($to, $subject, $message, $headers);
+        $result = mail($to, $subject, $message, $headers);
+        
+        // Log de depuración para el Senior (V36)
+        file_put_contents(__DIR__ . '/mail_debug.log', date("[Y-m-d H:i:s] ") . "Mail sent to $to. Result: " . ($result ? "OK" : "FAIL") . "\n", FILE_APPEND);
 
         // 2. Respaldo Local (JSON) - Seguridad ante fallos de mail
         $leadData = [

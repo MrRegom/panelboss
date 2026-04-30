@@ -444,29 +444,34 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             if(e) e.preventDefault();
             const b = f.querySelector('button'); 
             const originalText = b ? b.innerHTML : '';
-            if(b) b.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ENVIANDO...';
+            if(b) b.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> PROCESANDO...';
             
             try {
                 const r = await fetch('save_lead.php', { method: 'POST', body: new FormData(f) });
                 if(r.ok) {
-                    // SUPERNOVA BURST (V35)
-                    const count = 200;
-                    const defaults = { origin: { y: 0.7 }, zIndex: 10001, colors: ['#6A37B7', '#9D6CFF', '#ffffff', '#25D366'] };
-                    function fire(particleRatio, opts) { confetti(Object.assign({}, defaults, opts, { particleCount: Math.floor(count * particleRatio) })); }
-                    
-                    fire(0.25, { spread: 26, startVelocity: 55 });
-                    fire(0.2, { spread: 60 });
-                    fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-                    fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-                    fire(0.1, { spread: 120, startVelocity: 45 });
+                    // GRAND FINALE ANIMATION (V36) - 3 SEGUNDOS DE FUEGOS
+                    const duration = 3 * 1000;
+                    const animationEnd = Date.now() + duration;
+                    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 10001 };
+
+                    const randomInRange = (min, max) => Math.random() * (max - min) + min;
+
+                    const interval = setInterval(function() {
+                        const timeLeft = animationEnd - Date.now();
+                        if (timeLeft <= 0) return clearInterval(interval);
+
+                        const particleCount = 50 * (timeLeft / duration);
+                        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+                    }, 250);
 
                     const container = isModal ? document.querySelector('.modal-glass') : f.parentElement;
-                    container.innerHTML = `<div style="text-align:center; padding:40px;">
-                        <div class="reveal visible"><i class="fa-solid fa-rocket" style="font-size:5rem; color:var(--primary); margin-bottom:30px; animation: bounce 2s infinite;"></i></div>
-                        <h3 style="color:var(--primary); font-size:2.5rem; margin-bottom:15px; font-family:'Outfit';">¡Bienvenido a la Élite!</h3>
-                        <p style="color:var(--text-light); font-size:1.2rem;">Tu acceso a CajaYa está siendo procesado.<br>Un consultor experto te contactará en breve.</p>
+                    container.innerHTML = `<div style="text-align:center; padding:60px; animation: modalUp 0.8s ease;">
+                        <div class="reveal visible"><i class="fa-solid fa-crown" style="font-size:6rem; color:#FFD700; margin-bottom:30px; filter: drop-shadow(0 0 20px rgba(255,215,0,0.5));"></i></div>
+                        <h3 style="color:var(--primary); font-size:3rem; margin-bottom:15px; font-family:'Outfit';">¡Bienvenido al Futuro!</h3>
+                        <p style="color:var(--text-light); font-size:1.4rem;">Tu acceso prioritario a CajaYa está listo.<br>Te contactaremos por WhatsApp de inmediato.</p>
                     </div>`;
-                    if(isModal) setTimeout(closeModal, 5000);
+                    if(isModal) setTimeout(closeModal, 6000);
                 }
             } catch(e) { 
                 if(b) b.innerHTML = 'REINTENTAR'; 
