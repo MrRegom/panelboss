@@ -58,9 +58,9 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         }
         nav.scrolled { background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); height: 70px; box-shadow: 0 4px 30px rgba(0,0,0,0.03); }
         .nav-logo img { height: 35px; }
-        .nav-links a { color: var(--text-dark); text-decoration: none; font-weight: 700; font-size: 14px; margin-left: 20px; transition: 0.3s; }
-        .btn-nav-purple { background: var(--primary); color: #fff !important; padding: 10px 22px; border-radius: 50px; font-weight: 800; box-shadow: 0 10px 20px rgba(106,55,183,0.15); }
-        .btn-wa { background: #25D366; color: #fff !important; padding: 10px 22px; border-radius: 50px; font-weight: 800; box-shadow: 0 10px 20px rgba(37,211,102,0.15); }
+        .nav-links a { color: var(--text-dark); text-decoration: none; font-weight: 700; font-size: 14px; margin-left: 15px; transition: 0.3s; white-space: nowrap; }
+        .btn-nav-purple { background: var(--primary); color: #fff !important; padding: 8px 18px; border-radius: 50px; font-weight: 800; font-size: 12px; box-shadow: 0 10px 20px rgba(106,55,183,0.15); text-transform: uppercase; }
+        .btn-wa { background: #25D366; color: #fff !important; padding: 8px 18px; border-radius: 50px; font-weight: 800; font-size: 12px; box-shadow: 0 10px 20px rgba(37,211,102,0.15); text-transform: uppercase; }
         .btn-nav-purple:hover, .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
 
         /* HERO CAROUSEL */
@@ -151,15 +151,16 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .btn-cta { width: 100%; background: var(--primary-soft); color: var(--primary); text-decoration: none; padding: 22px; border-radius: 20px; font-weight: 900; text-transform: uppercase; transition: 0.3s; }
         .p-card.featured .btn-cta { background: var(--primary); color: #fff; }
 
-        /* FAQ ELITE MINIMALIST (V31) */
-        .section-faq { padding: 120px 10%; background: #fff; text-align: center; }
-        .faq-container { max-width: 850px; margin: 60px auto 0; text-align: left; }
-        .faq-item { border-bottom: 1px solid #eee; transition: 0.3s; }
-        .faq-item h4 { padding: 35px 0; font-size: 1.25rem; font-weight: 600; display: flex; justify-content: space-between; align-items: center; color: var(--text-dark); cursor: pointer; }
-        .faq-item i { font-size: 0.9rem; opacity: 0.3; transition: 0.4s; }
-        .faq-body { max-height: 0; opacity: 0; overflow: hidden; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text-light); line-height: 1.8; }
-        .faq-item.active .faq-body { padding-bottom: 35px; max-height: 200px; opacity: 1; }
-        .faq-item.active i { transform: rotate(45deg); opacity: 1; color: var(--primary); }
+        /* FAQ ULTRA MODERN (V32) */
+        .section-faq { padding: 120px 10%; background: var(--bg-off); text-align: center; }
+        .faq-container { max-width: 900px; margin: 60px auto 0; text-align: left; }
+        .faq-item { margin-bottom: 25px; border-radius: 35px; background: #fff; border: 1px solid rgba(0,0,0,0.02); box-shadow: 0 15px 40px rgba(0,0,0,0.03); transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden; }
+        .faq-item h4 { padding: 40px 50px; font-size: 1.4rem; font-weight: 800; display: flex; justify-content: space-between; align-items: center; color: var(--text-dark); cursor: pointer; letter-spacing: -0.5px; }
+        .faq-item i { width: 45px; height: 45px; background: var(--primary-soft); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: 0.5s; }
+        .faq-body { padding: 0 50px 0; max-height: 0; opacity: 0; overflow: hidden; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text-light); font-size: 1.15rem; line-height: 1.9; }
+        .faq-item.active { box-shadow: 0 40px 80px rgba(106,55,183,0.1); border-color: var(--primary-soft); }
+        .faq-item.active .faq-body { padding-bottom: 45px; max-height: 350px; opacity: 1; }
+        .faq-item.active i { transform: rotate(135deg); background: var(--primary); color: #fff; }
 
         /* RIBBON CTA (V31) */
         .ribbon-cta { 
@@ -204,6 +205,13 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .f-bottom { margin-top: 100px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; opacity: 0.3; font-size: 12px; letter-spacing: 2px; }
 
         @media (max-width: 1024px) {
+            nav { padding: 0 5%; height: 70px; }
+            .nav-logo img { height: 28px; }
+            .nav-links { display: flex; gap: 8px; }
+            .nav-links a { margin-left: 0; padding: 6px 12px; font-size: 10px; }
+            .hero-content h1 { font-size: 3.5rem; letter-spacing: -2px; }
+            .ribbon-cta { flex-direction: column; text-align: center; gap: 40px; padding: 80px 8%; border-radius: 0; }
+            .ribbon-text h3 { font-size: 1.8rem; }
             .grid-poder, .grid-planes { grid-template-columns: 1fr; }
             .f-grid { grid-template-columns: 1fr; text-align: center; }
             .f-col { align-items: center; display: flex; flex-direction: column; }
@@ -211,6 +219,12 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             .slide { justify-content: center; padding: 0 5%; }
             .hero-content { text-align: center; }
             .hero-content p { border-left: none; border-top: 5px solid var(--primary); padding-top: 25px; }
+            .c-arrow { width: 45px; height: 45px; font-size: 14px; }
+            .c-prev { left: 15px; }
+            .c-next { right: 15px; }
+            .faq-item h4 { padding: 30px 25px; font-size: 1.1rem; }
+            .faq-body { padding: 0 25px 0; font-size: 1rem; }
+            .faq-item.active .faq-body { padding-bottom: 30px; }
         }
     </style>
 </head>
