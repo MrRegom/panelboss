@@ -73,6 +73,7 @@ $leads = $repo->getAll();
                                             <th>Email</th>
                                             <th>Proveedor</th>
                                             <th>Licencia Demo</th>
+                                            <th>WhatsApp</th>
                                             <th>Fecha Registro</th>
                                             <th class="text-end pe-4">Acciones</th>
                                         </tr>
@@ -95,11 +96,22 @@ $leads = $repo->getAll();
                                                 <?php endif; ?>
                                             </td>
                                             <td><code class="text-primary"><?= $lead['demo_license_key'] ?></code></td>
+                                            <td>
+                                                <?php if($lead['whatsapp']): ?>
+                                                    <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $lead['whatsapp']) ?>" target="_blank" class="btn btn-sm btn-success bg-opacity-10 text-success border-0">
+                                                        <i class="fab fa-whatsapp me-1"></i> <?= htmlspecialchars($lead['whatsapp']) ?>
+                                                    </a>
+                                                <?php else: ?>
+                                                    <span class="text-muted small">Sin número</span>
+                                                <?php endif; ?>
+                                            </td>
                                             <td class="text-muted small"><?= date('d/m/Y H:i', strtotime($lead['created_at'])) ?></td>
                                             <td class="text-end pe-4">
-                                                <a href="mailto:<?= $lead['email'] ?>" class="btn btn-sm btn-primary bg-opacity-10 text-primary border-0">
-                                                    <i class="fa-solid fa-envelope"></i>
-                                                </a>
+                                                <div class="btn-group">
+                                                    <a href="mailto:<?= $lead['email'] ?>" class="btn btn-sm btn-primary bg-opacity-10 text-primary border-0" title="Enviar Email">
+                                                        <i class="fa-solid fa-envelope"></i>
+                                                    </a>
+                                                </div>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
