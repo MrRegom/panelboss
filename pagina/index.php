@@ -145,30 +145,28 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .faq-item.active .faq-body { padding-bottom: 35px; max-height: 200px; opacity: 1; }
         .faq-item.active { background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
 
-        /* FOOTER ULTRA MODERN (V26) */
+        /* FOOTER MIDNIGHT ELITE (V27) */
         footer { 
-            padding: 160px 10% 60px; 
-            background: linear-gradient(145deg, #1A0B2E 0%, #321958 45%, #6A37B7 100%);
+            padding: 180px 10% 80px; 
+            background: #0D0B14;
             color: #fff; position: relative; overflow: hidden;
         }
         footer::before {
             content: ''; position: absolute; inset: 0;
-            background: radial-gradient(circle at 20% 30%, rgba(157, 108, 255, 0.05) 0%, transparent 50%);
+            background: linear-gradient(135deg, rgba(106, 55, 183, 0.1) 0%, transparent 100%);
             pointer-events: none;
         }
         .f-wave { position: absolute; top: -1px; left: 0; width: 100%; transform: rotate(180deg); z-index: 5; }
-        .f-wave svg { display: block; width: calc(160% + 1.3px); height: 90px; fill: #fff; }
+        .f-wave svg { display: block; width: 100%; height: 100px; fill: #fff; }
         
-        .f-grid { display: grid; grid-template-columns: 2.5fr 1fr 1fr 1.2fr; gap: 80px; position: relative; z-index: 10; }
-        .f-col img { height: 45px; margin-bottom: 30px; filter: brightness(0) invert(1); }
-        .f-col p { color: rgba(255,255,255,0.7); line-height: 1.8; font-size: 15px; max-width: 320px; }
-        .f-col h5 { font-size: 13px; color: var(--primary-glow); margin-bottom: 35px; letter-spacing: 4px; text-transform: uppercase; font-weight: 900; }
-        .f-col a { color: #fff; text-decoration: none; display: block; margin-bottom: 18px; opacity: 0.6; transition: 0.3s; font-size: 15px; position: relative; width: fit-content; }
-        .f-col a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -3px; left: 0; background: var(--primary-glow); transition: 0.3s; }
-        .f-col a:hover { opacity: 1; color: var(--primary-glow); }
-        .f-col a:hover::after { width: 100%; }
+        .f-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; position: relative; z-index: 10; }
+        .f-col img { height: 40px; margin-bottom: 30px; filter: brightness(0) invert(1); }
+        .f-col p { color: rgba(255,255,255,0.5); line-height: 1.8; font-size: 15px; }
+        .f-col h5 { font-size: 14px; color: var(--primary-glow); margin-bottom: 30px; letter-spacing: 3px; text-transform: uppercase; font-weight: 900; }
+        .f-col a { color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 15px; transition: 0.3s; font-size: 15px; }
+        .f-col a:hover { color: #fff; transform: translateX(5px); }
 
-        .f-bottom { margin-top: 100px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; opacity: 0.4; font-size: 12px; letter-spacing: 2px; }
+        .f-bottom { margin-top: 100px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; opacity: 0.3; font-size: 12px; letter-spacing: 2px; }
 
         @media (max-width: 1024px) {
             .grid-poder, .grid-planes { grid-template-columns: 1fr; }
