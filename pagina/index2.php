@@ -453,9 +453,10 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         /* ESTRELLAS ÉPICAS V93 */
         .star-epic {
             color: #FFC107 !important;
-            text-shadow: 0 0 12px rgba(255, 193, 7, 0.9);
+            text-shadow: 0 0 8px rgba(255, 193, 7, 0.8);
             animation: starPulse 2.5s infinite ease-in-out;
             display: inline-block;
+            font-size: 12px !important;
         }
 
         @keyframes starPulse {
@@ -617,18 +618,32 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         </div>
     </section>
 
-    <!-- SECCIÓN LIBERTAD ÉLITE V90 -->
+    <!-- SECCIÓN CONTROL TOTAL V94 (ADAPTADA A DESKTOP) -->
     <section class="mockup-section reveal-section" style="background: #fff; padding-top: 50px;">
         <div class="mockup-text reveal">
-            <h2 style="font-size: 3.5rem; font-weight: 900; line-height: 1; margin-bottom: 30px;">Tu Negocio en tu <span>Bolsillo.</span></h2>
-            <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 40px;">Disfruta de la libertad que siempre soñaste. Monitorea ventas, stock y caja desde cualquier lugar del mundo. CajaYa te da el control para que tú solo te preocupes de crecer.</p>
+            <h2 style="font-size: 3.5rem; font-weight: 900; line-height: 1; margin-bottom: 30px;">Potencia Desktop en tu <span>Mostrador.</span></h2>
+            <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 40px;">CajaYa está diseñado para ser el cerebro de tu negocio. Una aplicación de escritorio robusta, rápida y capaz de manejar miles de productos sin pestañear. Control total de inventario y ventas donde realmente importa: en el punto de venta.</p>
             <div style="background: var(--primary-soft); padding: 30px; border-radius: 24px; border-left: 5px solid var(--primary);">
-                <p style="font-weight: 700; color: var(--primary); font-size: 1.1rem; margin-bottom: 5px;">"CajaYa cambió mi vida"</p>
+                <p style="font-weight: 700; color: var(--primary); font-size: 1.1rem; margin-bottom: 5px;">"La rapidez en el mostrador es clave"</p>
                 <p style="font-size: 0.95rem; color: var(--text-light);">— Ricardo M., Dueño de Minimarket El Trébol.</p>
             </div>
         </div>
         <div class="mockup-img reveal">
-            <img src="assets/img/dueno_exitoso.png" alt="Control total CajaYa" style="border-radius: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.15);">
+            <!-- Mockup SVG que representa la APP Desktop en un local -->
+            <div style="background: #eee; padding: 20px; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.1);">
+                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="400" height="250" rx="10" fill="#1a1a2e"/>
+                    <rect x="10" y="10" width="380" height="200" rx="5" fill="#fff"/>
+                    <rect x="10" y="10" width="380" height="30" fill="#6A37B7" rx="5"/>
+                    <text x="25" y="30" fill="white" font-family="Arial" font-size="12" font-weight="bold">CajaYa POS — Terminal de Venta 01</text>
+                    <!-- Grilla de productos simulada -->
+                    <rect x="25" y="50" width="100" height="40" rx="5" fill="#f8f4ff" stroke="#6A37B7" stroke-width="1"/>
+                    <rect x="140" y="50" width="100" height="40" rx="5" fill="#f8f4ff"/>
+                    <rect x="255" y="50" width="100" height="40" rx="5" fill="#f8f4ff"/>
+                    <text x="25" y="110" font-family="Arial" font-size="10" fill="#333">Últimas Ventas:</text>
+                    <rect x="25" y="120" width="350" height="80" rx="5" fill="#fafafa"/>
+                </svg>
+            </div>
         </div>
     </section>
 
@@ -797,7 +812,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         <button onclick="openModal()" class="btn-white">Obtener Demo Gratis</button>
     </div>
 
-    <!-- TESTIMONIOS ÉLITE V90 -->
+    <!-- TESTIMONIOS ÉLITE V94 -->
     <section class="reveal-section" style="padding: 100px 10%; background: var(--bg-off); text-align: center;">
         <div class="header-elite">
             <h2>Negocios que ya son <span>Élite.</span></h2>
@@ -829,12 +844,12 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 <small style="color:var(--primary); font-weight:700;">Almacén El Sol</small>
             </div>
             <div class="card-poder reveal">
-                <div style="display:flex; color:#FFD700; margin-bottom:15px; justify-content:center; gap:8px;">
-                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
-                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
-                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
-                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
-                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                <div style="display:flex; margin-bottom:15px; justify-content:center; gap:8px;">
+                    <i class="fa-solid fa-star star-epic"></i>
+                    <i class="fa-solid fa-star star-epic"></i>
+                    <i class="fa-solid fa-star star-epic"></i>
+                    <i class="fa-solid fa-star star-epic"></i>
+                    <i class="fa-solid fa-star star-epic"></i>
                 </div>
                 <p style="font-style:italic; margin-bottom:20px; line-height:1.4;">"El soporte por WhatsApp es increíble. Siempre responden en minutos."</p>
                 <h4 style="font-weight:900;">Carlos R.</h4>
