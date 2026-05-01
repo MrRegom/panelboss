@@ -1,59 +1,54 @@
 /* 
- * CAJAYA REACT-SHADCN THEME (V105)
- * Estética: Hybrid (Dark Nav / White Content) - Shadcn UI / Tailwind CSS Style
+ * CAJAYA MICA GOLD - ULTIMATE ENTERPRISE (V106)
+ * Estética: Microsoft Mica / Acrylic / High-Density Premium
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --sidebar-bg: #09090b;
-    --header-bg: #09090b;
-    --content-bg: #f8fafc; /* Fondo claro para los módulos */
-    --card-bg: #ffffff;
-    --border-color: #e2e8f0;
-    --primary-color: #0f172a; /* Slate 900 para botones tipo React */
-    --primary-hover: #1e293b;
-    --accent-color: #6366f1;
-    --text-main: #0f172a;
-    --text-muted: #64748b;
+    --mica-bg: #09090b;
+    --mica-accent: #6366f1;
+    --mica-gold: #f59e0b;
+    --content-bg: #ffffff;
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --border-premium: rgba(0, 0, 0, 0.05);
+    --text-main: #1a1f36;
+    --text-muted: #697386;
+    --radius-ms: 12px;
 }
 
 body {
-    background-color: var(--content-bg) !important;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
+    font-size: 0.88rem;
 }
 
-h1, h2, h3, h4, h5, h6, .fw-bold {
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Outfit', sans-serif;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
+    font-weight: 700;
 }
 
-/* --- Header (Dark Refined) --- */
-.app-header {
-    background: var(--header-bg) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-    height: 60px;
-}
-
-.app-header .nav-link {
-    color: rgba(255, 255, 255, 0.7) !important;
-}
-
-/* --- Sidebar (Shadcn Style) --- */
+/* --- Microsoft Acrylic Sidebar --- */
 .app-sidebar {
-    background: var(--sidebar-bg) !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: rgba(9, 9, 11, 0.95) !important;
+    backdrop-filter: blur(30px) saturate(150%);
+    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.sidebar-brand {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 
 .nav-sidebar .nav-link {
-    border-radius: 8px !important;
-    margin: 4px 12px !important;
-    padding: 10px 14px !important;
-    color: rgba(255, 255, 255, 0.5) !important;
-    font-size: 0.85rem;
+    border-radius: 10px !important;
+    margin: 4px 14px !important;
+    padding: 10px 16px !important;
     font-weight: 500;
+    color: rgba(255, 255, 255, 0.6) !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-sidebar .nav-link:hover {
@@ -64,114 +59,94 @@ h1, h2, h3, h4, h5, h6, .fw-bold {
 .nav-sidebar .nav-link.active {
     background: #fff !important;
     color: #000 !important;
-    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
-/* --- Content Area (React Style) --- */
-.app-main {
-    background-color: var(--content-bg);
-}
-
+/* --- Premium Microsoft Cards --- */
 .card {
     background: var(--card-bg) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: 12px !important;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
-    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-premium) !important;
+    border-radius: var(--radius-ms) !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -2px rgba(0, 0, 0, 0.02) !important;
+    transition: all 0.3s ease;
 }
 
-/* --- Shadcn Tables --- */
-.table {
-    background-color: #fff;
+.card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02) !important;
+    transform: translateY(-2px);
+    border-color: rgba(99, 102, 241, 0.2) !important;
 }
 
-.table thead th {
-    background: #fff !important;
+/* --- Content Header (Elevated) --- */
+.app-content-header-premium {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-premium);
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+/* --- DataTables Microsoft Style --- */
+table.dataTable {
+    border-collapse: separate !important;
+    border-spacing: 0 8px !important;
+    background: transparent !important;
+}
+
+table.dataTable thead th {
+    background: transparent !important;
+    border: none !important;
     color: var(--text-muted) !important;
     font-size: 0.75rem !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 16px 20px !important;
-    border-bottom: 1px solid var(--border-color) !important;
-}
-
-.table tbody td {
-    padding: 16px 20px !important;
-    border-bottom: 1px solid #f1f5f9 !important;
-    font-size: 0.9rem;
-    color: var(--text-main);
-}
-
-/* --- Buttons (React Component Style) --- */
-.btn-primary {
-    background-color: var(--primary-color) !important;
-    border: none !important;
-    border-radius: 8px !important;
-    font-weight: 600;
-    font-size: 0.85rem;
     padding: 10px 20px !important;
-    transition: all 0.2s;
 }
 
-.btn-primary:hover {
-    background-color: var(--primary-hover) !important;
-    transform: translateY(-1px);
-}
-
-.btn-outline {
+table.dataTable tbody tr {
     background: #fff !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: 8px !important;
-    color: var(--text-main) !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border-radius: 8px;
+}
+
+table.dataTable tbody td {
+    padding: 16px 20px !important;
+    border: none !important;
+}
+
+table.dataTable tbody tr td:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+table.dataTable tbody tr td:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+
+/* --- Buttons (Azure/MS 365) --- */
+.btn-ms {
+    background: var(--mica-accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
     font-weight: 600;
     font-size: 0.85rem;
-    padding: 10px 20px !important;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
 }
 
-.btn-outline:hover {
-    background: #f8fafc !important;
+.btn-ms:hover {
+    background: #4f46e5;
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
 }
 
-/* --- Badges (Pill Style) --- */
-.badge {
-    padding: 4px 10px !important;
-    border-radius: 100px !important;
-    font-weight: 600 !important;
-    font-size: 0.75rem !important;
-}
-
-/* --- Specific Components --- */
-.status-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 12px;
+/* --- Badges & Indicators --- */
+.badge-ms {
+    background: rgba(0,0,0,0.05);
+    color: var(--text-main);
     border-radius: 100px;
-    font-size: 0.75rem;
+    padding: 4px 12px;
     font-weight: 600;
+    font-size: 0.7rem;
 }
 
-.status-pill.active { background: #dcfce7; color: #166534; }
-.status-pill.pending { background: #fef9c3; color: #854d0e; }
-
-/* Bento Cards for Dashboard (Light) */
-.bento-card-light {
-    background: #fff;
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 24px;
-    transition: all 0.2s;
-}
-
-.bento-card-light:hover {
-    border-color: var(--accent-color);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
-
-/* Modals Refined */
-.modal-content {
-    border-radius: 12px !important;
-    border: 1px solid var(--border-color) !important;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1) !important;
+/* Responsividad */
+@media (max-width: 991px) {
+    .app-content-header-premium { padding: 2rem 0; }
 }
