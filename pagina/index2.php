@@ -241,20 +241,32 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             .nav-logo img { height: 28px; }
             .nav-links { display: flex; gap: 8px; }
             .nav-links a { margin-left: 0; padding: 6px 12px; font-size: 10px; }
-            .hero-content h1 { font-size: 2.2rem; letter-spacing: -1px; margin-bottom: 20px; text-align: center; }
+            .hero-content h1 { font-size: 2.3rem; letter-spacing: -1.5px; margin-bottom: 20px; text-align: center; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
             .hero-content p { 
-                font-size: 1rem; 
-                padding: 15px; 
-                background: rgba(0,0,0,0.4); /* Caja de contraste móvil (V67) */
-                backdrop-filter: blur(5px);
-                border-radius: 15px;
+                font-size: 1.1rem; 
+                padding: 0 10px;
+                background: none;
+                backdrop-filter: none;
                 text-align: center; 
-                margin-bottom: 30px; 
-                text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+                margin-bottom: 40px; 
+                line-height: 1.5;
+                text-shadow: 0 2px 15px rgba(0,0,0,0.9); /* Contraste por sombra, no por caja (V68) */
             }
-            .hero-content .reveal div { display: flex; flex-direction: column; gap: 20px; align-items: center; } /* Mayor separación (V67) */
-            .btn-primary { padding: 18px 40px; width: 100%; max-width: 320px; font-size: 14px; margin-bottom: 5px; }
-            button[onclick="moveCarousel(1)"] { margin-left: 0 !important; width: 100%; max-width: 320px; margin-top: 10px; }
+            .slide-overlay {
+                background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%) !important; /* Gradiente oscuro inferior (V68) */
+            }
+            .hero-content .reveal div { display: flex; flex-direction: column; gap: 25px; align-items: center; width: 100%; }
+            .btn-primary { padding: 20px; width: 100%; max-width: 300px; font-size: 15px; border-radius: 22px; }
+            button[onclick="moveCarousel(1)"] { 
+                margin: 0 !important; 
+                width: 100%; 
+                max-width: 300px; 
+                padding: 18px !important;
+                background: rgba(255,255,255,0.1) !important;
+                border: 1px solid rgba(255,255,255,0.3) !important;
+                color: #fff !important;
+                backdrop-filter: blur(10px);
+            }
             
             .section-planes { padding: 60px 6%; }
             .grid-planes { display: flex; flex-direction: column; gap: 30px; margin-top: 40px; }
