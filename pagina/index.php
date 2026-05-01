@@ -41,8 +41,8 @@ session_start();
         }
         @keyframes pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; } 50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.8; } }
 
-        .container { position: relative; z-index: 10; text-align: center; padding: 20px; width: 100%; max-width: 600px; margin: 0 auto; }
-        .logo { height: 60px; animation: modalUp 0.8s ease; }
+        .container { position: relative; z-index: 10; text-align: center; padding: 20px; width: 100%; max-width: 600px; }
+        .logo { height: 60px; margin-bottom: 40px; animation: modalUp 0.8s ease; }
         
         h1 { font-family: 'Outfit', sans-serif; font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 0.9; margin-bottom: 20px; letter-spacing: -3px; }
         h1 span { color: var(--primary-glow); }
@@ -113,9 +113,17 @@ session_start();
     <div class="container">
         <img src="assets/img/logo.png" class="logo" style="display: block; margin: 0 auto 40px;">
         
-        <div class="coming-soon-badge" style="display: inline-block; margin: 0 auto 25px;">Estreno Muy Pronto</div>
+        <div style="text-align: center; width: 100%;">
+            <div class="coming-soon-badge">Estreno Muy Pronto</div>
+        </div>
+        
         <h1>El Futuro del <span>Retail</span> está llegando.</h1>
         
+        <div style="margin-bottom: 40px;">
+            <p style="color: var(--primary-glow); font-weight: 800; font-family: 'Outfit'; margin-bottom: 10px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px;">Software Élite para Supermercados</p>
+            <p>El sistema de ventas inteligente que optimiza tu negocio y funciona con o sin internet.</p>
+        </div>
+
         <div class="countdown-container">
             <div class="countdown-item"><span class="countdown-value" id="days">10</span><span class="countdown-label">Días</span></div>
             <div class="countdown-item"><span class="countdown-value" id="hours">00</span><span class="countdown-label">Horas</span></div>
@@ -123,7 +131,7 @@ session_start();
             <div class="countdown-item"><span class="countdown-value" id="seconds">00</span><span class="countdown-label">Seg</span></div>
         </div>
 
-        <p>Estamos afinando los últimos detalles para el lanzamiento más importante del año. Inscríbete para ser el primero en recibir acceso exclusivo.</p>
+        <p style="margin-bottom: 40px; opacity: 0.8;">Inscríbete para ser el primero en recibir acceso exclusivo al lanzamiento.</p>
 
         <div class="glass-card" id="formContainer">
             <form onsubmit="handleLead(event, this)" class="form-grid">
