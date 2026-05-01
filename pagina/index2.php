@@ -258,6 +258,10 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             .faq-body { padding: 0 20px 0; font-size: 1rem; }
             .faq-item.active .faq-body { padding-bottom: 25px; }
         }
+
+        /* REVEAL ON SCROLL ANIMATIONS (V59) */
+        .reveal-section { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
+        .reveal-section.revealed { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
@@ -281,8 +285,8 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                     <img src="assets/img/banner_super.png" class="slide-bg">
                     <div class="slide-overlay"></div>
                     <div class="hero-content">
-                        <h1 class="reveal">Software para tu <span>Supermercado.</span></h1>
-                        <p class="reveal">Optimiza tus ventas y controla tu stock con la plataforma Élite líder en Minimarkets de Chile.</p>
+                        <h1 class="reveal">Transforma tu Minimarket en un <span>Gigante</span> del Retail.</h1>
+                        <p class="reveal">La tecnología Élite que las grandes cadenas no quieren que tengas. Gestión inteligente y ventas ultra-rápidas para tu Pyme.</p>
                         <div class="reveal">
                             <a href="#planes" class="btn-primary">Ver Planes</a>
                             <button onclick="moveCarousel(1)" style="background: none; border: 2px solid var(--primary); color: var(--primary); padding: 18px 35px; border-radius: 18px; font-weight: 800; cursor: pointer; margin-left: 10px;">¡Infórmame más!</button>
@@ -307,10 +311,10 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         </div>
     </section>
 
-    <section class="section-poder" id="poder" style="background: var(--bg-off);">
+    <section class="section-poder reveal-section" id="poder" style="background: var(--bg-off);">
         <div class="header-elite">
-            <h2 class="reveal">El Poder de <span>CajaYa.</span></h2>
-            <p class="reveal" style="color: var(--text-light); margin-top: 20px; font-size: 1.3rem;">La tecnología que tu negocio merece.</p>
+            <h2>El Poder de <span>CajaYa.</span></h2>
+            <p style="color: var(--text-light); margin-top: 20px; font-size: 1.3rem;">La tecnología que tu negocio merece.</p>
         </div>
         <div class="grid-poder">
             <div class="card-poder reveal"><i class="fa-solid fa-bolt"></i><h3>Velocidad</h3><p>Ventas ultra-rápidas para evitar colas en tu local.</p></div>
@@ -327,9 +331,9 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         <button onclick="openModal()" class="btn-white">Obtener Demo Gratis</button>
     </div>
 
-    <section class="section-planes" id="planes">
+    <section class="section-planes reveal-section" id="planes">
         <div class="header-elite" style="text-align: center;">
-            <h2 class="reveal">Planes a tu <span>Medida.</span></h2>
+            <h2>Planes a tu <span>Medida.</span></h2>
         </div>
         <div class="grid-planes">
             <div class="p-card reveal">
@@ -355,9 +359,9 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         </div>
     </section>
 
-    <section class="section-faq">
-        <h2 class="reveal">Dudas <span>Frecuentes.</span></h2>
-        <div class="faq-container reveal">
+    <section class="section-faq reveal-section">
+        <h2>Dudas <span>Frecuentes.</span></h2>
+        <div class="faq-container">
             <div class="faq-item"><h4><span>¿Cómo instalo el catálogo?</span><i class="fa-solid fa-plus"></i></h4><div class="faq-body"><p>Ya viene integrado con más de 20,000 productos precargados.</p></div></div>
             <div class="faq-item"><h4><span>¿Funciona sin Internet?</span><i class="fa-solid fa-plus"></i></h4><div class="faq-body"><p>Sí, el sistema funciona offline y sincroniza al detectar conexión.</p></div></div>
         </div>
@@ -524,6 +528,20 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 setTimeout(() => { if(b) b.innerHTML = originalText; }, 2000);
             }
         }
+
+        // REVEAL ENGINE (V59)
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-section').forEach(section => {
+            observer.observe(section);
+        });
 
         function handleGoogleLead(response) {
             const data = jwt_decode(response.credential);
