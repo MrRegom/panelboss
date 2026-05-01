@@ -1,74 +1,47 @@
 /* 
- * CAJAYA PREMIUM NIGHT (V111)
- * Estética: Night Indigo High-Contrast (Diseño de Alto Rendimiento)
+ * CAJAYA SILK ENTERPRISE (V112)
+ * Estética: Modern Pro - Alto Contraste y Legibilidad
  */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-    --night-dark: #0f172a; /* Slate 900 */
-    --night-sidebar: #1e1b4b; /* Indigo 950 - Color con Vida y Contraste */
-    --night-primary: #6366f1; /* Indigo 500 */
-    --night-bg: #f3f4f6;
-    --night-border: #e5e7eb;
-    --night-text: #111827;
-    --night-text-muted: #6b7280;
+    --silk-dark: #0f172a; /* Slate 900 */
+    --silk-sidebar: #111827; /* Gray 950 - Máxima Profundidad */
+    --silk-primary: #3b82f6; /* Azure Blue */
+    --silk-bg: #f8fafc;
+    --silk-border: #e2e8f0;
+    --silk-text: #1e293b;
+    --silk-text-muted: #64748b;
+    --silk-white: #ffffff;
 }
 
 body {
-    background-color: var(--night-bg) !important;
+    background-color: var(--silk-bg) !important;
     font-family: 'Inter', sans-serif;
-    color: var(--night-text);
+    color: var(--silk-text);
 }
 
-/* --- Clean Professional Header --- */
+/* --- Clean Modern Header --- */
 .app-header {
-    background: #ffffff !important;
-    border-bottom: 1px solid var(--night-border) !important;
+    background: var(--silk-white) !important;
+    border-bottom: 1px solid var(--silk-border) !important;
     height: 64px;
-    display: flex;
-    align-items: center;
 }
 
 .app-header .nav-link {
-    color: var(--night-text) !important;
+    color: var(--silk-text) !important;
 }
 
-.user-profile-nav {
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    cursor: pointer;
-}
-
-.user-profile-name {
-    font-weight: 600;
-    font-size: 0.85rem;
-    margin-right: 10px;
-    color: var(--night-text);
-}
-
-.user-avatar-circle {
-    width: 36px;
-    height: 36px;
-    background: var(--night-primary);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-}
-
-/* --- Night Indigo Sidebar --- */
+/* --- High Contrast Sidebar (V112) --- */
 .app-sidebar {
-    background: var(--night-sidebar) !important;
+    background: var(--silk-sidebar) !important;
     border-right: none !important;
 }
 
 .sidebar-brand {
-    background: rgba(0,0,0,0.2) !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+    background: #000000 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
     height: 64px;
     display: flex;
     align-items: center;
@@ -79,90 +52,99 @@ body {
     border-radius: 8px !important;
     margin: 4px 16px !important;
     padding: 12px 16px !important;
-    color: rgba(255, 255, 255, 0.7) !important;
+    color: #94a3b8 !important; /* Gris claro para lectura perfecta */
     font-size: 0.875rem;
     font-weight: 500;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
+}
+
+.nav-sidebar .nav-link i {
+    color: #64748b !important;
 }
 
 .nav-sidebar .nav-link:hover {
-    background: rgba(255, 255, 255, 0.1) !important;
-    color: #fff !important;
-    transform: translateX(4px);
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #ffffff !important; /* Blanco puro en hover */
+}
+
+.nav-sidebar .nav-link:hover i {
+    color: #ffffff !important;
 }
 
 .nav-sidebar .nav-link.active {
-    background: var(--night-primary) !important;
+    background: var(--silk-primary) !important;
+    color: #ffffff !important; /* Blanco puro en activo */
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.nav-sidebar .nav-link.active i {
     color: #ffffff !important;
-    font-weight: 700;
-    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);
 }
 
 .nav-header {
-    color: rgba(255, 255, 255, 0.3) !important;
+    color: #475569 !important; /* Texto visible para encabezados */
     text-transform: uppercase;
     font-size: 0.7rem !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.05em;
-    padding: 24px 24px 10px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.1em;
+    padding: 24px 32px 8px !important;
 }
 
-/* --- High Contrast Professional Tables --- */
-.card-premium {
+/* --- Professional Clean Tables --- */
+.card-silk {
     background: #ffffff;
-    border: 1px solid var(--night-border);
-    border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--silk-border);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
     overflow: hidden;
 }
 
-table.premium-data-table thead th {
-    background: #f9fafb !important;
-    border-bottom: 2px solid #f3f4f6 !important;
-    color: var(--night-dark) !important;
+table.silk-table thead th {
+    background: #fcfcfd !important;
+    border-bottom: 2px solid #f1f5f9 !important;
+    color: var(--silk-text) !important;
     font-weight: 700 !important;
     font-size: 0.75rem !important;
     text-transform: uppercase;
     padding: 16px 24px !important;
 }
 
-table.premium-data-table tbody td {
-    padding: 16px 24px !important;
-    border-bottom: 1px solid #f3f4f6 !important;
-    font-size: 0.9rem;
+table.silk-table tbody td {
+    padding: 14px 24px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    font-size: 0.85rem;
     vertical-align: middle;
 }
 
-table.premium-data-table tbody tr:hover {
-    background-color: #fcfcfd !important;
+table.silk-table tbody tr:hover {
+    background-color: #f8fafc !important;
 }
 
-/* --- Buttons (Premium Style) --- */
-.btn-premium {
-    background: var(--night-primary);
+/* --- Buttons --- */
+.btn-silk {
+    background: var(--silk-primary);
     color: #fff;
     border: none;
-    border-radius: 8px;
-    padding: 10px 24px;
+    border-radius: 6px;
+    padding: 10px 20px;
     font-weight: 600;
-    font-size: 0.875rem;
-    box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
+    font-size: 0.85rem;
 }
 
-.btn-premium:hover {
+.btn-silk:hover {
     filter: brightness(1.1);
     color: #fff;
-    transform: translateY(-1px);
 }
 
 /* Page Header */
-.premium-page-header {
+.page-header-silk {
     padding: 32px 48px;
 }
 
-.premium-page-title {
-    font-size: 1.875rem;
+.page-title-silk {
+    font-size: 1.75rem;
     font-weight: 800;
-    color: var(--night-dark);
-    letter-spacing: -0.025em;
+    color: var(--silk-dark);
+    letter-spacing: -0.02em;
 }

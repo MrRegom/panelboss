@@ -9,9 +9,9 @@ AuthService::check();
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Prospectos | CajaYa Enterprise</title>
+    <title>Prospectos | CajaYa Silk</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
@@ -23,23 +23,23 @@ AuthService::check();
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
         <main class="app-main">
-            <div class="premium-page-header">
-                <h1 class="premium-page-title">Directorio de Prospectos</h1>
-                <p class="text-muted small mb-0">Gestión centralizada de registros y leads comerciales.</p>
+            <div class="page-header-silk">
+                <h1 class="page-title-silk">Prospectos Cloud</h1>
+                <p class="text-muted small mb-0">Gestión estratégica de clientes potenciales y registros entrantes.</p>
             </div>
 
             <div class="app-content px-5">
                 <div class="container-fluid">
-                    <div class="card card-premium border-0">
+                    <div class="card card-silk border-0 shadow-sm">
                         <div class="table-responsive">
-                            <table id="leadsTable" class="table premium-data-table w-100">
+                            <table id="leadsTable" class="table silk-table w-100">
                                 <thead>
                                     <tr>
                                         <th>IDENTIDAD</th>
                                         <th>EMAIL</th>
                                         <th>PROVEEDOR</th>
-                                        <th>LICENCIA</th>
-                                        <th>REGISTRO</th>
+                                        <th>LICENCIA DEMO</th>
+                                        <th>FECHA REGISTRO</th>
                                         <th class="text-end">ACCIONES</th>
                                     </tr>
                                 </thead>
@@ -64,21 +64,21 @@ AuthService::check();
             columns: [
                 { 
                     data: 'full_name',
-                    render: (d) => `<div class="fw-bold small text-dark">${d || 'Sin nombre'}</div>`
+                    render: (d) => `<div class="fw-bold small text-dark">${d || 'N/A'}</div>`
                 },
                 { data: 'email', render: d => `<span class="text-muted small">${d}</span>` },
                 { 
                     data: 'provider',
-                    render: (d) => `<span class="badge bg-light text-muted border-0 px-3 py-2 text-uppercase small">${d || 'Directo'}</span>`
+                    render: (d) => `<span class="badge bg-light text-muted border-0 px-3 py-1 rounded-pill small">${d || 'Directo'}</span>`
                 },
-                { data: 'demo_license', render: d => d ? `<code class="text-indigo fw-bold">${d}</code>` : '-' },
+                { data: 'demo_license', render: d => d ? `<code class="text-primary fw-bold">${d}</code>` : '<span class="text-muted opacity-50">-</span>' },
                 { data: 'created_at', render: d => `<span class="text-muted small">${new Date(d).toLocaleDateString()}</span>` },
                 { 
                     data: null, 
                     className: 'text-end',
                     render: () => `
-                        <button class="btn btn-link text-primary p-1"><i class="fa-solid fa-message"></i></button>
-                        <button class="btn btn-link text-danger p-1"><i class="fa-solid fa-trash-can"></i></button>`
+                        <button class="btn btn-link text-primary p-2"><i class="fa-solid fa-paper-plane"></i></button>
+                        <button class="btn btn-link text-danger p-2"><i class="fa-solid fa-trash-can"></i></button>`
                 }
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },

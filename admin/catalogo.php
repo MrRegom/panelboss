@@ -7,6 +7,7 @@ AuthService::check();
 
 try {
     $db = Database::getConnection();
+    // La tabla correcta es master_products
     $categories = $db->query("SELECT DISTINCT category_id FROM master_products ORDER BY category_id")->fetchAll(PDO::FETCH_COLUMN);
 } catch (Exception $e) {
     $categories = [];
@@ -16,9 +17,9 @@ try {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Catálogo Maestro | CajaYa Enterprise</title>
+    <title>Catálogo Maestro | CajaYa Silk</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
@@ -30,26 +31,26 @@ try {
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
         <main class="app-main">
-            <div class="premium-page-header d-flex justify-content-between align-items-center">
+            <div class="page-header-silk d-flex justify-content-between align-items-center">
                 <div>
-                    <h1 class="premium-page-title">Catálogo Maestro</h1>
-                    <p class="text-muted small mb-0">Gestión de inventario global y bases de datos de productos.</p>
+                    <h1 class="page-title-silk">Catálogo Maestro</h1>
+                    <p class="text-muted small mb-0">Gestión de productos globales para el ecosistema CajaYa.</p>
                 </div>
-                <button class="btn btn-premium" data-bs-toggle="modal" data-bs-target="#modalAddProduct">
+                <button class="btn btn-silk shadow-sm px-4" data-bs-toggle="modal" data-bs-target="#modalAddProduct">
                     <i class="fa-solid fa-plus me-2"></i> Nuevo Artículo
                 </button>
             </div>
 
             <div class="app-content px-5">
                 <div class="container-fluid">
-                    <div class="card card-premium mb-4 border-0">
+                    <div class="card card-silk border-0 shadow-sm">
                         <div class="table-responsive">
-                            <table id="catalogTable" class="table premium-data-table w-100">
+                            <table id="catalogTable" class="table silk-table w-100">
                                 <thead>
                                     <tr>
-                                        <th>FOTO</th>
+                                        <th>VISTA PREVIA</th>
                                         <th>CÓDIGO BARRA</th>
-                                        <th>PRODUCTO</th>
+                                        <th>ARTÍCULO / PRODUCTO</th>
                                         <th>MARCA</th>
                                         <th>ESTADO</th>
                                         <th class="text-end">ACCIONES</th>
@@ -71,33 +72,31 @@ try {
 
     <script>
     $(document).ready(function() {
-        // Determinamos la ruta base de las imágenes
-        const storageBase = window.location.origin + '/storage/';
-        
         const table = $('#catalogTable').DataTable({
             ajax: 'api/get_master_catalog.php',
             columns: [
                 { 
                     data: 'image_path', 
                     render: (d) => {
-                        // Intentamos con ruta absoluta desde el root
-                        let path = d ? '/' + d : '/img/no-image.png';
-                        return `<img src="${path}" class="rounded border shadow-sm" style="width:48px; height:48px; object-fit:cover;" onerror="this.src='/img/no-image.png'">`;
+                        // Intentamos ruta relativa desde /admin/
+                        // Si d ya incluye 'storage/', el resultado es '../storage/...'
+                        let path = d ? '../' + d : 'https://placehold.co/100x100?text=Sin+Imagen';
+                        return `<img src="${path}" class="rounded border shadow-sm bg-white" style="width:52px; height:52px; object-fit:contain; padding:2px;" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=No+Encontrada'">`;
                     }
                 },
-                { data: 'barcode', className: 'fw-bold text-indigo small' },
-                { data: 'name', className: 'fw-semibold' },
+                { data: 'barcode', className: 'fw-bold text-primary small' },
+                { data: 'name', className: 'fw-semibold text-dark' },
                 { data: 'brand', className: 'small text-muted' },
                 { 
                     data: 'is_active', 
-                    render: d => d == 1 ? '<span class="badge bg-success bg-opacity-10 text-success px-3 border-0">ACTIVO</span>' : '<span class="badge bg-danger bg-opacity-10 text-danger px-3">INACTIVO</span>' 
+                    render: d => d == 1 ? '<span class="badge bg-success bg-opacity-10 text-success px-3 py-2 border-0 rounded-pill small">ACTIVO</span>' : '<span class="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill small">INACTIVO</span>' 
                 },
                 { 
                     data: null, 
                     className: 'text-end',
                     render: () => `
-                        <button class="btn btn-link text-primary p-1"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button class="btn btn-link text-danger p-1"><i class="fa-solid fa-trash"></i></button>`
+                        <button class="btn btn-link text-primary p-2"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="btn btn-link text-danger p-2"><i class="fa-solid fa-trash"></i></button>`
                 }
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
