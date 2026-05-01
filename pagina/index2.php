@@ -357,16 +357,19 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .mockup-img { position: relative; }
         .mockup-img img { width: 100%; border-radius: 30px; box-shadow: 0 50px 100px rgba(106,55,183,0.15); transform: perspective(1000px) rotateY(-10deg); transition: 0.5s; }
         .mockup-img:hover img { transform: perspective(1000px) rotateY(0deg); }
-        .mockup-badge { position: absolute; top: -20px; left: -20px; background: var(--primary); color: #fff; padding: 15px 25px; border-radius: 20px; font-weight: 900; box-shadow: 0 10px 30px rgba(106,55,183,0.4); }
+        .mockup-badge { position: absolute; top: -20px; left: -20px; background: var(--primary); color: #fff; padding: 15px 25px; border-radius: 20px; font-weight: 900; box-shadow: 0 10px 30px rgba(106,55,183,0.4); z-index: 10; }
 
         .section-steps { padding: 120px 10%; text-align: center; background: var(--bg-off); }
         .grid-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
-        .step-card { padding: 60px 40px; background: #fff; border-radius: 40px; position: relative; transition: 0.4s; }
-        .step-num { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); width: 70px; height: 70px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 900; box-shadow: 0 10px 20px rgba(106,55,183,0.3); }
-        .step-card h3 { margin-top: 20px; margin-bottom: 15px; font-size: 1.6rem; font-weight: 800; }
+        .step-card { padding: 40px; background: #fff; border-radius: 40px; position: relative; transition: 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .step-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(106,55,183,0.1); }
+        .step-img { width: 100%; height: 150px; margin-bottom: 20px; overflow: hidden; border-radius: 20px; background: #fdfbff; }
+        .step-img img { width: 300%; height: 100%; object-fit: contain; } /* Técnica de ventana para usar el sprite 3D */
+        .step-num { width: 40px; height: 40px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; margin: 0 auto 15px; }
+        .step-card h3 { margin-bottom: 15px; font-size: 1.6rem; font-weight: 800; }
 
-        .comparison-wrap { margin-top: 60px; background: #fff; border-radius: 40px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.05); }
-        .comp-table { width: 100%; border-collapse: collapse; }
+        .comparison-wrap { margin-top: 60px; background: #fff; border-radius: 40px; overflow-x: auto; box-shadow: 0 30px 60px rgba(0,0,0,0.05); }
+        .comp-table { width: 100%; border-collapse: collapse; min-width: 700px; }
         .comp-table th { padding: 30px; background: var(--primary); color: #fff; font-size: 1.2rem; }
         .comp-table td { padding: 25px 30px; border-bottom: 1px solid #f0f0f0; text-align: center; font-size: 1.1rem; }
         .comp-row-title { text-align: left !important; font-weight: 700; color: var(--text-dark); background: #fafafa; width: 40%; }
@@ -449,7 +452,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             <ul class="p-features" style="column-count: 2; gap: 40px;">
                 <li><i class="fa-solid fa-check"></i> Interfaz Touch</li>
                 <li><i class="fa-solid fa-check"></i> Modo Oscuro Pro</li>
-                <li><i class="fa-solid fa-check"></i> Ticket WhatsApp</li>
+                <li><i class="fa-solid fa-check"></i> Integración SII</li>
                 <li><i class="fa-solid fa-check"></i> Inventario Real</li>
             </ul>
         </div>
@@ -475,16 +478,19 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         </div>
         <div class="grid-steps">
             <div class="step-card reveal">
+                <div class="step-img"><img src="assets/img/steps_3d.png" style="object-position: 0% center;"></div>
                 <div class="step-num">1</div>
                 <h3>Regístrate</h3>
                 <p>Crea tu cuenta Élite en segundos con tu correo o Google.</p>
             </div>
             <div class="step-card reveal">
+                <div class="step-img"><img src="assets/img/steps_3d.png" style="object-position: 50% center;"></div>
                 <div class="step-num">2</div>
                 <h3>Carga Stock</h3>
                 <p>Usa nuestra base de 20,000 productos o sube los tuyos con Excel.</p>
             </div>
             <div class="step-card reveal">
+                <div class="step-img"><img src="assets/img/steps_3d.png" style="object-position: 100% center;"></div>
                 <div class="step-num">3</div>
                 <h3>¡A Vender!</h3>
                 <p>Abre tu caja y empieza a facturar con la velocidad de un grande.</p>
@@ -504,7 +510,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             <table class="comp-table">
                 <thead>
                     <tr>
-                        <th class="comp-row-title" style="background: #fff;">Característica</th>
+                        <th class="comp-row-title" style="background: #f8f9fa; color: var(--text-dark); border-bottom: 2px solid var(--primary);">Característica</th>
                         <th>Sistemas Viejos</th>
                         <th style="background: var(--primary-glow); color: var(--primary);">CajaYa Élite</th>
                     </tr>
