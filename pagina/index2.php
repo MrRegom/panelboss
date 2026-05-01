@@ -618,31 +618,32 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         </div>
     </section>
 
-    <!-- SECCIÓN CONTROL TOTAL V94 (ADAPTADA A DESKTOP) -->
-    <section class="mockup-section reveal-section" style="background: #fff; padding-top: 50px;">
+    <!-- SECCIÓN POTENCIA ÉLITE V95 -->
+    <section class="mockup-section reveal-section" style="background: #fff; padding: 100px 10%;">
         <div class="mockup-text reveal">
-            <h2 style="font-size: 3.5rem; font-weight: 900; line-height: 1; margin-bottom: 30px;">Potencia Desktop en tu <span>Mostrador.</span></h2>
-            <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 40px;">CajaYa está diseñado para ser el cerebro de tu negocio. Una aplicación de escritorio robusta, rápida y capaz de manejar miles de productos sin pestañear. Control total de inventario y ventas donde realmente importa: en el punto de venta.</p>
+            <h2 style="font-size: 3.5rem; font-weight: 900; line-height: 1; margin-bottom: 30px;">El Corazón de tu <span>Mostrador.</span></h2>
+            <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 40px;">CajaYa no es solo un software; es el socio que nunca descansa. Convierte tu computadora en una terminal de venta de clase mundial. Velocidad de respuesta instantánea, control de inventario en tiempo real y la robustez que tu negocio merece.</p>
             <div style="background: var(--primary-soft); padding: 30px; border-radius: 24px; border-left: 5px solid var(--primary);">
                 <p style="font-weight: 700; color: var(--primary); font-size: 1.1rem; margin-bottom: 5px;">"La rapidez en el mostrador es clave"</p>
                 <p style="font-size: 0.95rem; color: var(--text-light);">— Ricardo M., Dueño de Minimarket El Trébol.</p>
             </div>
         </div>
-        <div class="mockup-img reveal">
-            <!-- Mockup SVG que representa la APP Desktop en un local -->
-            <div style="background: #eee; padding: 20px; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.1);">
-                <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="400" height="250" rx="10" fill="#1a1a2e"/>
-                    <rect x="10" y="10" width="380" height="200" rx="5" fill="#fff"/>
-                    <rect x="10" y="10" width="380" height="30" fill="#6A37B7" rx="5"/>
-                    <text x="25" y="30" fill="white" font-family="Arial" font-size="12" font-weight="bold">CajaYa POS — Terminal de Venta 01</text>
-                    <!-- Grilla de productos simulada -->
-                    <rect x="25" y="50" width="100" height="40" rx="5" fill="#f8f4ff" stroke="#6A37B7" stroke-width="1"/>
-                    <rect x="140" y="50" width="100" height="40" rx="5" fill="#f8f4ff"/>
-                    <rect x="255" y="50" width="100" height="40" rx="5" fill="#f8f4ff"/>
-                    <text x="25" y="110" font-family="Arial" font-size="10" fill="#333">Últimas Ventas:</text>
-                    <rect x="25" y="120" width="350" height="80" rx="5" fill="#fafafa"/>
-                </svg>
+        <div class="mockup-img reveal" style="position: relative;">
+            <!-- Imagen de local real con overlay de App -->
+            <img src="https://images.unsplash.com/photo-1556740734-7f96267b118a?auto=format&fit=crop&q=80&w=1000" alt="Local Real CajaYa" style="border-radius: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.2); width: 100%; filter: brightness(0.9);">
+            
+            <!-- Floating UI Overlay -->
+            <div style="position: absolute; top: 10%; right: -5%; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); padding: 20px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid rgba(106, 55, 183, 0.2); max-width: 250px;">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                    <div style="width:10px; height:10px; background:#4CAF50; border-radius:50%;"></div>
+                    <span style="font-size:0.8rem; font-weight:900; color:var(--primary);">SISTEMA ACTIVO</span>
+                </div>
+                <p style="font-size:0.9rem; font-weight:700; margin-bottom:5px;">Venta Total Hoy</p>
+                <p style="font-size:1.5rem; font-weight:900; color:var(--primary);">$415.790</p>
+                <div style="margin-top:15px; height:4px; background:#eee; border-radius:2px; overflow:hidden;">
+                    <div style="width:75%; height:100%; background:var(--primary);"></div>
+                </div>
+                <p style="font-size:0.7rem; color:var(--text-light); margin-top:5px;">Meta diaria: 75% alcanzado</p>
             </div>
         </div>
     </section>
