@@ -250,19 +250,23 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             .nav-logo img { height: 28px; }
             .nav-links { display: flex; gap: 8px; }
             .nav-links a { margin-left: 0; padding: 6px 12px; font-size: 10px; }
-            .hero-content h1 { font-size: 2.3rem; letter-spacing: -1.5px; margin-bottom: 20px; text-align: center; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+            .hero-content h1 { 
+                font-size: 2.3rem; letter-spacing: -1.5px; margin-bottom: 20px; text-align: center; 
+                color: #ffffff !important;
+                text-shadow: 0 4px 20px rgba(0,0,0,0.8); 
+            }
+            .hero-content h1 span { color: var(--primary-glow) !important; }
             .hero-content p { 
                 font-size: 1.1rem; 
                 padding: 0 10px;
-                background: none;
-                backdrop-filter: none;
                 text-align: center; 
                 margin-bottom: 40px; 
                 line-height: 1.5;
-                text-shadow: 0 2px 15px rgba(0,0,0,0.9); /* Contraste por sombra, no por caja (V68) */
+                color: rgba(255,255,255,0.95) !important;
+                text-shadow: 0 2px 15px rgba(0,0,0,0.9);
             }
             .slide-overlay {
-                background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%) !important; /* Gradiente oscuro inferior (V68) */
+                background: rgba(0,0,0,0.6) !important; /* Capa oscura sólida y elegante (V70) */
             }
             .hero-actions { display: flex; flex-direction: column; gap: 20px; align-items: center; width: 100%; }
             .btn-primary { width: 100%; max-width: 300px; padding: 20px; }
