@@ -1,192 +1,205 @@
 /* 
- * CAJAYA PRO - GOLD ENTERPRISE THEME (V103)
- * Estética: Microsoft Fluent / Azure Portal / High-End SaaS
+ * CAJAYA QUANTUM - 2026 ENTERPRISE (V104)
+ * Estética: Bento Grid / Glassmorphism / Neon Accent / High Performance
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
 :root {
-    --primary-color: #6366f1; /* Indigo Moderno */
-    --primary-glow: rgba(99, 102, 241, 0.15);
-    --sidebar-bg: #09090b;
-    --header-bg: rgba(255, 255, 255, 0.8);
-    --content-bg: #f8fafc;
-    --card-bg: #ffffff;
-    --border-color: rgba(0, 0, 0, 0.05);
-    --text-main: #1e293b;
-    --text-muted: #64748b;
-    --radius-premium: 20px;
+    --primary-quantum: #6366f1;
+    --secondary-quantum: #a855f7;
+    --bg-quantum: #09090b;
+    --surface-quantum: #111114;
+    --card-quantum: rgba(255, 255, 255, 0.03);
+    --border-quantum: rgba(255, 255, 255, 0.06);
+    --text-quantum: #f8fafc;
+    --text-muted: #94a3b8;
+    --gold-accent: #f59e0b;
 }
 
 body {
-    background-color: var(--content-bg);
-    color: var(--text-main);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    letter-spacing: -0.01em;
+    background-color: #0c0c0e !important;
+    color: var(--text-quantum);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 0.85rem; /* Achicamos la letra general */
 }
 
-/* --- Microsoft Fluent Header --- */
+h1, h2, h3, h4, h5, h6, .fw-bold {
+    font-family: 'Outfit', sans-serif;
+}
+
+/* --- Layout 2026 --- */
 .app-header {
-    background: var(--header-bg) !important;
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-color) !important;
-    height: 70px;
-    display: flex;
-    align-items: center;
+    background: rgba(12, 12, 14, 0.7) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--border-quantum) !important;
+    height: 65px;
 }
 
-.app-header .nav-link {
-    color: var(--text-main) !important;
-    font-weight: 500;
-}
-
-/* --- Azure Style Sidebar --- */
 .app-sidebar {
-    background: var(--sidebar-bg) !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
-    box-shadow: 20px 0 50px rgba(0,0,0,0.05);
+    background: var(--bg-quantum) !important;
+    border-right: 1px solid var(--border-quantum) !important;
 }
 
-.sidebar-brand {
-    padding: 2.5rem 1.5rem !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
-}
-
-.nav-sidebar .nav-link {
-    border-radius: 12px !important;
-    margin: 4px 12px !important;
-    padding: 12px 16px !important;
-    color: rgba(255, 255, 255, 0.5) !important;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nav-sidebar .nav-link:hover {
-    background: rgba(255, 255, 255, 0.05) !important;
-    color: #fff !important;
-    transform: translateX(4px);
-}
-
-.nav-sidebar .nav-link.active {
-    background: var(--primary-color) !important;
-    color: #fff !important;
-    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
-}
-
-.nav-sidebar .nav-icon {
-    font-size: 1.1rem;
-    margin-right: 12px !important;
-    opacity: 0.8;
-}
-
-/* --- Premium Cards (Microsoft Style) --- */
-.card-premium {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-premium);
-    padding: 2rem;
-    transition: all 0.3s ease;
+/* --- Bento Cards --- */
+.bento-card {
+    background: var(--card-quantum);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-quantum);
+    border-radius: 24px;
+    padding: 1.5rem;
     height: 100%;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -2px rgba(0, 0, 0, 0.02);
 }
 
-.card-premium:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+.bento-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(99, 102, 241, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
-.card-premium .card-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 14px;
+.bento-card .icon-box {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
-    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+    font-size: 1.1rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
-.card-premium .label {
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    font-weight: 600;
+.bento-card .label {
+    font-size: 0.7rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
     margin-bottom: 0.5rem;
 }
 
-.card-premium .value {
-    color: var(--text-main);
-    font-size: 2.25rem;
+.bento-card .value {
+    font-size: 2rem;
     font-weight: 800;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.05em;
     margin-bottom: 0;
 }
 
-/* --- Indicators & Details --- */
-.status-indicator {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 12px;
-    border-radius: 100px;
-    font-size: 0.75rem;
-    font-weight: 700;
-}
-
-.status-online { background: #ecfdf5; color: #059669; }
-.status-offline { background: #fef2f2; color: #dc2626; }
-
-/* --- Tables Premium --- */
-.premium-table {
-    width: 100%;
-}
-
-.premium-table thead th {
-    background: #fcfcfd;
-    color: var(--text-muted);
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 0.7rem;
-    padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.premium-table tbody td {
-    padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid rgba(0,0,0,0.03);
-    font-size: 0.95rem;
-}
-
-/* --- Layout Enhancements --- */
-.app-main {
-    padding-top: 0;
-}
-
-.page-header {
-    padding: 3rem 0 2rem 0;
-}
-
-.page-title {
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    color: var(--text-main);
-}
-
-.btn-premium {
-    background: var(--primary-color);
-    color: #fff;
+/* --- Action Buttons --- */
+.btn-quantum {
+    background: linear-gradient(135deg, var(--primary-quantum) 0%, var(--secondary-quantum) 100%);
     border: none;
-    border-radius: 12px;
-    padding: 12px 24px;
+    border-radius: 14px;
+    padding: 10px 24px;
     font-weight: 700;
-    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
-    transition: all 0.2s;
+    font-size: 0.8rem;
+    color: #fff;
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+    transition: all 0.3s;
 }
 
-.btn-premium:hover {
-    background: #4f46e5;
-    transform: scale(1.02);
+.btn-quantum:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
     color: #fff;
+}
+
+.btn-quantum-outline {
+    background: transparent;
+    border: 1px solid var(--border-quantum);
+    border-radius: 14px;
+    padding: 10px 24px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--text-quantum);
+    transition: all 0.3s;
+}
+
+.btn-quantum-outline:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.2);
+}
+
+/* --- Tables 2026 --- */
+.quantum-table {
+    background: transparent;
+}
+
+.quantum-table thead th {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid var(--border-quantum);
+}
+
+.quantum-table tbody td {
+    padding: 1.25rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.02);
+    font-size: 0.85rem;
+    color: var(--text-quantum);
+}
+
+/* --- Sidebar Refinement --- */
+.nav-sidebar .nav-link {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin: 2px 10px !important;
+}
+
+/* --- Modals 2026 --- */
+.modal-content {
+    background: #111114 !important;
+    border: 1px solid var(--border-quantum) !important;
+    border-radius: 28px !important;
+    box-shadow: 0 50px 100px rgba(0,0,0,0.8) !important;
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border-quantum) !important;
+    padding: 2rem !important;
+}
+
+.form-control, .form-select {
+    background: rgba(255,255,255,0.03) !important;
+    border: 1px solid var(--border-quantum) !important;
+    color: #fff !important;
+    border-radius: 12px !important;
+}
+
+/* --- Special Components --- */
+.glow-text {
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+}
+
+.neon-border {
+    position: relative;
+}
+
+.neon-border::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 4px;
+    background: var(--primary-quantum);
+    border-radius: 2px;
+    box-shadow: 0 0 10px var(--primary-quantum);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .bento-card { padding: 1.25rem; }
+    .page-title { font-size: 1.5rem !important; }
 }
