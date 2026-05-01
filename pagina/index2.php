@@ -441,6 +441,13 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             .res-val { font-size: 1.8rem !important; }
             #resAnnual { font-size: 2.2rem !important; }
             .roi-results { padding: 30px 20px; }
+
+            /* Fix V91: Testimonios y Libertad Mobile */
+            .mockup-section h2 { font-size: 2.5rem !important; text-align: center; }
+            .mockup-text { text-align: center !important; }
+            .mockup-img img { max-width: 90% !important; margin: 0 auto; display: block; }
+            .grid-poder .card-poder i.fa-star { font-size: 12px !important; }
+            .grid-poder .card-poder p { font-size: 0.95rem; text-align: center; }
         }
     </style>
 </head>
@@ -784,22 +791,40 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         </div>
         <div class="grid-poder" style="margin-top: 60px;">
             <div class="card-poder reveal">
-                <div style="display:flex; color:#FFD700; margin-bottom:15px; justify-content:center; gap:5px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p style="font-style:italic; margin-bottom:20px;">"Antes pasaba 3 horas cuadrando caja. Hoy lo hago en 1 minuto desde mi celular."</p>
+                <div style="display:flex; color:#FFD700; margin-bottom:15px; justify-content:center; gap:8px;">
+                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                </div>
+                <p style="font-style:italic; margin-bottom:20px; line-height:1.4;">"Antes pasaba 3 horas cuadrando caja. Hoy lo hago en 1 minuto desde mi celular."</p>
                 <h4 style="font-weight:900;">Juan P.</h4>
-                <small style="color:var(--primary);">Botillería Santa Elena</small>
+                <small style="color:var(--primary); font-weight:700;">Botillería Santa Elena</small>
             </div>
             <div class="card-poder reveal">
-                <div style="display:flex; color:#FFD700; margin-bottom:15px; justify-content:center; gap:5px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p style="font-style:italic; margin-bottom:20px;">"El SII ya no es un dolor de cabeza. Todo automático y sin multas."</p>
+                <div style="display:flex; color:#FFD700; margin-bottom:15px; justify-content:center; gap:8px;">
+                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                </div>
+                <p style="font-style:italic; margin-bottom:20px; line-height:1.4;">"El SII ya no es un dolor de cabeza. Todo automático y sin multas."</p>
                 <h4 style="font-weight:900;">María L.</h4>
-                <small style="color:var(--primary);">Almacén El Sol</small>
+                <small style="color:var(--primary); font-weight:700;">Almacén El Sol</small>
             </div>
             <div class="card-poder reveal">
-                <div style="display:flex; color:#FFD700; margin-bottom:15px; justify-content:center; gap:5px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p style="font-style:italic; margin-bottom:20px;">"El soporte por WhatsApp es increíble. Siempre responden en minutos."</p>
+                <div style="display:flex; color:#FFD700; margin-bottom:15px; justify-content:center; gap:8px;">
+                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                </div>
+                <p style="font-style:italic; margin-bottom:20px; line-height:1.4;">"El soporte por WhatsApp es increíble. Siempre responden en minutos."</p>
                 <h4 style="font-weight:900;">Carlos R.</h4>
-                <small style="color:var(--primary);">Ferretería Central</small>
+                <small style="color:var(--primary); font-weight:700;">Ferretería Central</small>
             </div>
         </div>
     </section>
