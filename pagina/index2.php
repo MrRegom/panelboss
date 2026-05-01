@@ -255,7 +255,10 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 color: #ffffff !important;
                 text-shadow: 0 4px 20px rgba(0,0,0,0.8); 
             }
-            .hero-content h1 span { color: var(--primary-glow) !important; }
+            .hero-content h1 span { 
+                color: #B28DFF !important; 
+                text-shadow: 0 0 15px rgba(178,141,255,0.6); /* Efecto Neón (V71) */
+            }
             .hero-content p { 
                 font-size: 1.1rem; 
                 padding: 0 10px;
@@ -264,13 +267,18 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 line-height: 1.5;
                 color: rgba(255,255,255,0.95) !important;
                 text-shadow: 0 2px 15px rgba(0,0,0,0.9);
+                border-left: none !important; /* Elimina la línea lateral (V71) */
             }
             .slide-overlay {
-                background: rgba(0,0,0,0.6) !important; /* Capa oscura sólida y elegante (V70) */
+                background: rgba(0,0,0,0.6) !important;
             }
             .hero-actions { display: flex; flex-direction: column; gap: 20px; align-items: center; width: 100%; }
-            .btn-primary { width: 100%; max-width: 300px; padding: 20px; }
-            .btn-outline-hero { width: 100%; max-width: 300px; padding: 20px; }
+            .btn-primary { width: 100%; max-width: 300px; padding: 20px; font-size: 16px; }
+            .btn-outline-hero { 
+                width: 100%; max-width: 300px; padding: 20px; font-size: 16px;
+                background: rgba(255,255,255,0.15) !important; /* Cristal más limpio (V71) */
+                border: 1px solid rgba(255,255,255,0.5) !important;
+            }
             
             .section-planes { padding: 60px 6%; }
             .grid-planes { display: flex; flex-direction: column; gap: 30px; margin-top: 40px; }
