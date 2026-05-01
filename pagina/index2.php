@@ -252,12 +252,12 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             .nav-links a { margin-left: 0; padding: 6px 12px; font-size: 10px; }
             .hero-content h1 { 
                 font-size: 2.3rem; letter-spacing: -1.5px; margin-bottom: 20px; text-align: center; 
-                color: #ffffff !important;
-                text-shadow: 0 4px 20px rgba(0,0,0,0.8); 
+                color: var(--text-dark) !important;
+                text-shadow: none; 
             }
             .hero-content h1 span { 
-                color: #B28DFF !important; 
-                text-shadow: 0 0 15px rgba(178,141,255,0.6); /* Efecto Neón (V71) */
+                color: var(--primary) !important; 
+                text-shadow: none;
             }
             .hero-content p { 
                 font-size: 1.1rem; 
@@ -265,19 +265,21 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 text-align: center; 
                 margin-bottom: 40px; 
                 line-height: 1.5;
-                color: rgba(255,255,255,0.95) !important;
-                text-shadow: 0 2px 15px rgba(0,0,0,0.9);
-                border-left: none !important; /* Elimina la línea lateral (V71) */
+                color: var(--text-light) !important;
+                text-shadow: none;
+                border-left: none !important;
             }
             .slide-overlay {
-                background: rgba(0,0,0,0.6) !important;
+                background: rgba(255,255,255,0.85) !important; /* Limpieza absoluta: fondo claro (V72) */
             }
-            .hero-actions { display: flex; flex-direction: column; gap: 20px; align-items: center; width: 100%; }
-            .btn-primary { width: 100%; max-width: 300px; padding: 20px; font-size: 16px; }
+            .hero-actions { display: flex; flex-direction: column; gap: 15px; align-items: center; width: 100%; }
+            .btn-primary { width: 100%; max-width: 300px; padding: 20px; font-size: 15px; border-radius: 20px; }
             .btn-outline-hero { 
-                width: 100%; max-width: 300px; padding: 20px; font-size: 16px;
-                background: rgba(255,255,255,0.15) !important; /* Cristal más limpio (V71) */
-                border: 1px solid rgba(255,255,255,0.5) !important;
+                width: 100%; max-width: 300px; padding: 18px; font-size: 15px;
+                background: transparent !important;
+                border: 2px solid var(--primary) !important;
+                color: var(--primary) !important;
+                backdrop-filter: none;
             }
             
             .section-planes { padding: 60px 6%; }
