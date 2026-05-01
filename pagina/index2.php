@@ -359,31 +359,39 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .mockup-img:hover img { transform: perspective(1000px) rotateY(0deg); }
         .mockup-badge { position: absolute; top: -20px; left: -20px; background: var(--primary); color: #fff; padding: 15px 25px; border-radius: 20px; font-weight: 900; box-shadow: 0 10px 30px rgba(106,55,183,0.4); z-index: 10; }
 
+        /* STEPS V80 - SVG UI Mockups */
         .section-steps { padding: 120px 10%; text-align: center; background: var(--bg-off); }
         .grid-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
         .step-card { padding: 40px; background: #fff; border-radius: 40px; position: relative; transition: 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
         .step-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(106,55,183,0.1); }
-        .step-img { width: 100%; height: 180px; margin-bottom: 25px; overflow: hidden; border-radius: 24px; background: linear-gradient(135deg, #fdfbff 0%, #f3eeff 100%); display: flex; align-items: center; justify-content: center; }
-        .step-img img { width: 100%; height: 100%; object-fit: contain; padding: 15px; transition: transform 0.4s ease; }
-        .step-card:hover .step-img img { transform: scale(1.08) translateY(-4px); }
-        .step-num { width: 40px; height: 40px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; margin: 0 auto 15px; }
-        .step-card h3 { margin-bottom: 15px; font-size: 1.6rem; font-weight: 800; }
+        .step-ui { width: 100%; height: 190px; margin-bottom: 25px; border-radius: 20px; background: linear-gradient(135deg, #fdfbff 0%, #f0eaff 100%); border: 1.5px solid #ede5ff; overflow: hidden; position: relative; }
+        .step-num { width: 36px; height: 36px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900; margin: 0 auto 15px; }
+        .step-card h3 { margin-bottom: 12px; font-size: 1.5rem; font-weight: 800; }
 
-        .comparison-wrap { margin-top: 60px; background: #fff; border-radius: 40px; overflow-x: auto; box-shadow: 0 30px 60px rgba(0,0,0,0.05); }
-        .comp-table { width: 100%; border-collapse: collapse; min-width: 700px; }
-        .comp-table th { padding: 30px; background: var(--primary); color: #fff; font-size: 1.2rem; }
-        .comp-table td { padding: 25px 30px; border-bottom: 1px solid #f0f0f0; text-align: center; font-size: 1.1rem; }
-        .comp-row-title { text-align: left !important; font-weight: 700; color: var(--text-dark); background: #fafafa; width: 40%; }
-        .comp-check { color: #25D366; font-size: 1.5rem; }
-        .comp-x { color: #ff4d4d; font-size: 1.5rem; }
+        /* COMPARATIVA V80 - Feature Cards Mobile-First (sin scroll horizontal) */
+        .comp-grid { margin-top: 60px; display: flex; flex-direction: column; gap: 16px; }
+        .comp-row { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; background: #fff; border-radius: 20px; padding: 22px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1.5px solid #f0f0f0; transition: 0.3s; }
+        .comp-row:hover { border-color: var(--primary-soft); box-shadow: 0 8px 30px rgba(106,55,183,0.08); }
+        .comp-row.header-row { background: var(--primary); border-color: var(--primary); border-radius: 20px; padding: 18px 30px; }
+        .comp-row.header-row span { color: #fff; font-weight: 800; font-size: 1rem; text-align: center; }
+        .comp-row.header-row .comp-feature { color: rgba(255,255,255,0.7); font-size: 0.85rem; }
+        .comp-feature { font-weight: 700; color: var(--text-dark); font-size: 1rem; }
+        .comp-old { text-align: center; }
+        .comp-new { text-align: center; }
+        .comp-check { color: #22c55e; font-size: 1.4rem; }
+        .comp-x { color: #ef4444; font-size: 1.4rem; }
+        .badge-no { display: inline-block; background: #fff5f5; color: #ef4444; border-radius: 8px; padding: 6px 14px; font-weight: 700; font-size: 0.85rem; }
+        .badge-yes { display: inline-block; background: #f0fdf4; color: #16a34a; border-radius: 8px; padding: 6px 14px; font-weight: 700; font-size: 0.85rem; }
 
         @media (max-width: 1024px) {
             .trust-bar { gap: 30px; padding: 30px 5%; }
             .mockup-section { grid-template-columns: 1fr; text-align: center; padding: 80px 8%; gap: 40px; }
             .mockup-img img { transform: none; }
-            .grid-steps { grid-template-columns: 1fr; gap: 60px; }
-            .comp-row-title { width: 50%; font-size: 0.9rem; padding: 15px; }
-            .comp-table td { padding: 15px; font-size: 0.9rem; }
+            .grid-steps { grid-template-columns: 1fr; gap: 40px; }
+            .comp-row { grid-template-columns: 1fr 80px 80px; padding: 16px 20px; border-radius: 16px; }
+            .comp-feature { font-size: 0.9rem; }
+            .badge-no, .badge-yes { padding: 5px 10px; font-size: 0.78rem; }
+            .comp-row.header-row { padding: 14px 20px; }
         }
     </style>
 </head>
@@ -478,32 +486,93 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             <p style="color: var(--text-light); margin-top: 20px;">Del registro a tu primera venta en tiempo récord.</p>
         </div>
         <div class="grid-steps">
-            <!-- Paso 1: Registro -->
+            <!-- Paso 1: SVG simula pantalla de registro CajaYa -->
             <div class="step-card reveal">
-                <div class="step-img">
-                    <img src="assets/img/step1_registro.png" alt="Regístrate en CajaYa">
+                <div class="step-ui">
+                    <svg viewBox="0 0 280 190" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                        <rect width="280" height="190" fill="#f8f4ff"/>
+                        <!-- Barra superior tipo app -->
+                        <rect x="0" y="0" width="280" height="32" fill="#6A37B7" rx="0"/>
+                        <circle cx="16" cy="16" r="6" fill="white" opacity="0.5"/>
+                        <text x="30" y="21" font-size="11" fill="white" font-family="Arial" font-weight="bold">CajaYa — Crear cuenta</text>
+                        <!-- Logo central -->
+                        <circle cx="140" cy="72" r="22" fill="white" stroke="#6A37B7" stroke-width="2"/>
+                        <text x="140" y="77" font-size="14" fill="#6A37B7" text-anchor="middle" font-family="Arial" font-weight="bold">CY</text>
+                        <!-- Campo nombre -->
+                        <rect x="30" y="102" width="220" height="18" rx="5" fill="white" stroke="#ddd" stroke-width="1"/>
+                        <text x="40" y="115" font-size="9" fill="#aaa" font-family="Arial">Nombre completo</text>
+                        <!-- Campo email -->
+                        <rect x="30" y="126" width="220" height="18" rx="5" fill="white" stroke="#ddd" stroke-width="1"/>
+                        <text x="40" y="139" font-size="9" fill="#aaa" font-family="Arial">Correo electrónico</text>
+                        <!-- Botón -->
+                        <rect x="30" y="152" width="220" height="22" rx="8" fill="#6A37B7"/>
+                        <text x="140" y="167" font-size="10" fill="white" text-anchor="middle" font-family="Arial" font-weight="bold">Crear mi cuenta gratis</text>
+                    </svg>
                 </div>
                 <div class="step-num">1</div>
                 <h3>Regístrate</h3>
-                <p>Crea tu cuenta Élite en segundos con tu correo o Google. Sin tarjeta, sin burocracia.</p>
+                <p>Crea tu cuenta en segundos con tu correo o Google. Sin tarjeta, sin burocracia.</p>
             </div>
-            <!-- Paso 2: Stock -->
+            <!-- Paso 2: SVG simula grilla de productos CajaYa -->
             <div class="step-card reveal">
-                <div class="step-img">
-                    <img src="assets/img/step2_stock.png" alt="Carga tu inventario en CajaYa">
+                <div class="step-ui">
+                    <svg viewBox="0 0 280 190" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                        <rect width="280" height="190" fill="#f8f4ff"/>
+                        <rect x="0" y="0" width="280" height="32" fill="#6A37B7"/>
+                        <text x="14" y="21" font-size="11" fill="white" font-family="Arial" font-weight="bold">CajaYa — Inventario</text>
+                        <text x="200" y="21" font-size="9" fill="white" font-family="Arial">20.000+ items</text>
+                        <!-- Grilla 3x2 de productos -->
+                        <rect x="14" y="40" width="74" height="60" rx="8" fill="white" stroke="#ede5ff" stroke-width="1.5"/>
+                        <rect x="96" y="40" width="74" height="60" rx="8" fill="white" stroke="#ede5ff" stroke-width="1.5"/>
+                        <rect x="178" y="40" width="74" height="60" rx="8" fill="white" stroke="#ede5ff" stroke-width="1.5"/>
+                        <rect x="14" y="108" width="74" height="60" rx="8" fill="white" stroke="#ede5ff" stroke-width="1.5"/>
+                        <rect x="96" y="108" width="74" height="60" rx="8" fill="white" stroke="#ede5ff" stroke-width="1.5"/>
+                        <rect x="178" y="108" width="74" height="60" rx="8" fill="#6A37B7"/>
+                        <!-- Texto productos -->
+                        <text x="51" y="67" font-size="18" text-anchor="middle" font-family="Arial">🥛</text>
+                        <text x="133" y="67" font-size="18" text-anchor="middle" font-family="Arial">🍞</text>
+                        <text x="215" y="67" font-size="18" text-anchor="middle" font-family="Arial">🥩</text>
+                        <text x="51" y="135" font-size="18" text-anchor="middle" font-family="Arial">🥤</text>
+                        <text x="133" y="135" font-size="18" text-anchor="middle" font-family="Arial">🍫</text>
+                        <text x="215" y="135" font-size="12" fill="white" text-anchor="middle" font-family="Arial" font-weight="bold">+</text>
+                        <text x="51" y="82" font-size="7" fill="#6A37B7" text-anchor="middle" font-family="Arial" font-weight="bold">$890</text>
+                        <text x="133" y="82" font-size="7" fill="#6A37B7" text-anchor="middle" font-family="Arial" font-weight="bold">$1.200</text>
+                        <text x="215" y="82" font-size="7" fill="#6A37B7" text-anchor="middle" font-family="Arial" font-weight="bold">$4.500</text>
+                    </svg>
                 </div>
                 <div class="step-num">2</div>
                 <h3>Carga Stock</h3>
-                <p>Usa nuestra base de 20,000 productos o importa los tuyos desde Excel en minutos.</p>
+                <p>Usa nuestra base de 20.000 productos o importa los tuyos desde Excel en minutos.</p>
             </div>
-            <!-- Paso 3: Vender -->
+            <!-- Paso 3: SVG simula pantalla de venta/boleta CajaYa -->
             <div class="step-card reveal">
-                <div class="step-img">
-                    <img src="assets/img/step3_vender.png" alt="Empieza a vender con CajaYa">
+                <div class="step-ui">
+                    <svg viewBox="0 0 280 190" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                        <rect width="280" height="190" fill="#f8f4ff"/>
+                        <rect x="0" y="0" width="280" height="32" fill="#6A37B7"/>
+                        <text x="14" y="21" font-size="11" fill="white" font-family="Arial" font-weight="bold">CajaYa — Boleta #00842</text>
+                        <!-- Ticket de venta -->
+                        <rect x="14" y="40" width="252" height="105" rx="10" fill="white" stroke="#ede5ff" stroke-width="1.5"/>
+                        <line x1="14" y1="60" x2="266" y2="60" stroke="#f0f0f0" stroke-width="1"/>
+                        <text x="22" y="55" font-size="8" fill="#999" font-family="Arial">Producto</text>
+                        <text x="200" y="55" font-size="8" fill="#999" font-family="Arial">Total</text>
+                        <text x="22" y="75" font-size="9" fill="#333" font-family="Arial">Leche Loncoleche 1L</text>
+                        <text x="220" y="75" font-size="9" fill="#333" font-family="Arial">$890</text>
+                        <text x="22" y="91" font-size="9" fill="#333" font-family="Arial">Pan Marraqueta x2</text>
+                        <text x="220" y="91" font-size="9" fill="#333" font-family="Arial">$600</text>
+                        <text x="22" y="107" font-size="9" fill="#333" font-family="Arial">Coca-Cola 1.5L</text>
+                        <text x="220" y="107" font-size="9" fill="#333" font-family="Arial">$1.490</text>
+                        <line x1="14" y1="118" x2="266" y2="118" stroke="#ede5ff" stroke-width="1.5"/>
+                        <text x="22" y="133" font-size="10" fill="#6A37B7" font-family="Arial" font-weight="bold">TOTAL</text>
+                        <text x="195" y="133" font-size="11" fill="#6A37B7" font-family="Arial" font-weight="bold">$2.980</text>
+                        <!-- Botón cobrar -->
+                        <rect x="14" y="153" width="252" height="26" rx="8" fill="#22c55e"/>
+                        <text x="140" y="170" font-size="11" fill="white" text-anchor="middle" font-family="Arial" font-weight="bold">✓ Cobrar $2.980</text>
+                    </svg>
                 </div>
                 <div class="step-num">3</div>
                 <h3>¡A Vender!</h3>
-                <p>Abre tu caja y empieza a facturar con la velocidad y seguridad de un grande del retail.</p>
+                <p>Cobra en un clic. Boleta electrónica SII integrada. Rápido como los grandes.</p>
             </div>
         </div>
     </section>
@@ -516,38 +585,39 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             <h2>Por qué elegir <span>CajaYa.</span></h2>
             <p style="color: var(--text-light); margin-top: 20px;">La diferencia entre sobrevivir y dominar el mercado.</p>
         </div>
-        <div class="comparison-wrap reveal">
-            <table class="comp-table">
-                <thead>
-                    <tr>
-                        <th class="comp-row-title" style="background: #f8f9fa; color: var(--text-dark); border-bottom: 2px solid var(--primary);">Característica</th>
-                        <th>Sistemas Viejos</th>
-                        <th style="background: var(--primary-glow); color: var(--primary);">CajaYa Élite</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="comp-row-title">Modo Offline Real</td>
-                        <td><i class="fa-solid fa-xmark comp-x"></i></td>
-                        <td><i class="fa-solid fa-check comp-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td class="comp-row-title">Catálogo 20k Productos</td>
-                        <td><i class="fa-solid fa-xmark comp-x"></i></td>
-                        <td><i class="fa-solid fa-check comp-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td class="comp-row-title">Soporte WhatsApp VIP</td>
-                        <td><i class="fa-solid fa-xmark comp-x"></i></td>
-                        <td><i class="fa-solid fa-check comp-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td class="comp-row-title">Actualizaciones Gratis</td>
-                        <td><i class="fa-solid fa-xmark comp-x"></i></td>
-                        <td><i class="fa-solid fa-check comp-check"></i></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="comp-grid reveal">
+            <!-- Header -->
+            <div class="comp-row header-row">
+                <span class="comp-feature">Característica</span>
+                <span style="text-align:center;">Sistemas Viejos</span>
+                <span style="text-align:center;">CajaYa Élite</span>
+            </div>
+            <!-- Filas -->
+            <div class="comp-row">
+                <span class="comp-feature"><i class="fa-solid fa-wifi-slash" style="color:var(--primary);margin-right:8px;"></i>Modo Offline Real</span>
+                <div class="comp-old"><span class="badge-no">✗ No tiene</span></div>
+                <div class="comp-new"><span class="badge-yes">✓ Incluido</span></div>
+            </div>
+            <div class="comp-row">
+                <span class="comp-feature"><i class="fa-solid fa-boxes-stacked" style="color:var(--primary);margin-right:8px;"></i>Catálogo 20k Productos</span>
+                <div class="comp-old"><span class="badge-no">✗ No tiene</span></div>
+                <div class="comp-new"><span class="badge-yes">✓ Incluido</span></div>
+            </div>
+            <div class="comp-row">
+                <span class="comp-feature"><i class="fa-solid fa-headset" style="color:var(--primary);margin-right:8px;"></i>Soporte WhatsApp VIP</span>
+                <div class="comp-old"><span class="badge-no">✗ No tiene</span></div>
+                <div class="comp-new"><span class="badge-yes">✓ Incluido</span></div>
+            </div>
+            <div class="comp-row">
+                <span class="comp-feature"><i class="fa-solid fa-file-invoice" style="color:var(--primary);margin-right:8px;"></i>Integración SII</span>
+                <div class="comp-old"><span class="badge-no">✗ No tiene</span></div>
+                <div class="comp-new"><span class="badge-yes">✓ Incluido</span></div>
+            </div>
+            <div class="comp-row">
+                <span class="comp-feature"><i class="fa-solid fa-rotate" style="color:var(--primary);margin-right:8px;"></i>Actualizaciones Gratis</span>
+                <div class="comp-old"><span class="badge-no">✗ No tiene</span></div>
+                <div class="comp-new"><span class="badge-yes">✓ Incluido</span></div>
+            </div>
         </div>
     </section>
     
