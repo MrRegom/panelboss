@@ -12,7 +12,15 @@ use App\Repositories\PlanRepository;
 $plans = [];
 try {
     $planRepo = new PlanRepository();
-    $plansRaw = $planRepo->getAll();
+    // Filtramos solo los 3 planes oficiales (V63)
+    $plansRaw = array_filter($planRepo->getAll(), function($p) {
+        return in_array(trim(strtolower($p['slug'])), ['mensual', 'lifetime', 'empresa']);
+    });
+    // Ordenamos manualmente para asegurar el diseño (V63)
+    usort($plansRaw, function($a, $b) {
+        $order = ['mensual' => 1, 'lifetime' => 2, 'empresa' => 3];
+        return $order[trim(strtolower($a['slug']))] <=> $order[trim(strtolower($b['slug']))];
+    });
     foreach ($plansRaw as $p) { $plans[trim(strtolower($p['slug']))] = $p; }
 } catch (\Exception $e) {
     error_log("CAJAYA: DB Fail, using static defaults. " . $e->getMessage());
