@@ -1,17 +1,17 @@
 /* 
- * SILK ENTERPRISE V115 - CAJAYA CLEAN EDITION
- * Ajuste de títulos, márgenes y alineación según settings.php
- * Fix definitivo de serialización de onerror para imágenes.
+ * SILK ENTERPRISE V114 - CAJAYA PURPLE EDITION
+ * Ajuste de iconos a color Morado CajaYa y fix de contraste.
  */
 
 :root {
     --silk-navy: #001f3f;
     --silk-navy-light: #002d5c;
     --silk-active: #007bff;
-    --silk-purple: #6f42c1; /* Púrpura CajaYa más estándar */
+    --silk-gold: #ffc107;
+    --silk-purple: #7c3aed; /* Moradito CajaYa */
     --silk-bg: #f4f6f9;
     --silk-card-bg: #ffffff;
-    --silk-text-main: #1a202c;
+    --silk-text-main: #2d3748;
     --silk-text-muted: #718096;
     --silk-sidebar-w: 260px;
 }
@@ -23,17 +23,41 @@ body {
     letter-spacing: -0.01em;
 }
 
-/* Sidebar Estilo Navy */
+/* Sidebar Estilo Navy Professional */
 .app-sidebar {
     background-color: var(--silk-navy) !important;
     width: var(--silk-sidebar-w);
+    border-right: none;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+}
+
+.sidebar-brand {
+    background-color: rgba(0,0,0,0.2);
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.nav-link {
+    color: rgba(255,255,255,0.7) !important;
+    padding: 0.8rem 1.5rem !important;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    border-radius: 0 !important;
+    margin: 0 !important;
 }
 
 .nav-link i {
-    color: var(--silk-purple) !important;
+    color: var(--silk-purple) !important; /* Iconos morados como solicitó el usuario */
     margin-right: 12px;
     width: 20px;
     text-align: center;
+    filter: drop-shadow(0 0 5px rgba(124, 58, 237, 0.3));
+}
+
+.nav-link:hover {
+    background-color: var(--silk-navy-light) !important;
+    color: #fff !important;
 }
 
 .nav-link.active {
@@ -42,55 +66,59 @@ body {
     border-left: 4px solid var(--silk-purple);
 }
 
-.nav-link.active i { color: #fff !important; }
+.nav-link.active i {
+    color: #fff !important; /* En activo el icono se vuelve blanco para mejor contraste */
+}
 
-/* Header Principal Estilo Settings.php */
+.nav-header {
+    color: rgba(255,255,255,0.3) !important;
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 1.5rem 1.5rem 0.5rem !important;
+}
+
+/* Header Principal */
 .app-header {
     background-color: var(--silk-navy) !important;
     border-bottom: 2px solid var(--silk-purple) !important;
+    height: 60px;
 }
 
-/* Títulos Compactos y Ordenados */
-.page-header-silk {
-    padding: 1.5rem 2.5rem;
-    background: #fff;
-    border-bottom: 1px solid #e2e8f0;
-    margin-bottom: 1.5rem;
+.app-header .nav-link {
+    color: #fff !important;
 }
 
-.page-title-silk {
-    font-weight: 700;
+/* Cabeceras de Contenido Estilo Settings */
+.app-content-header h3 {
+    font-size: 1.25rem !important;
     color: var(--silk-navy);
-    font-size: 1.5rem; /* Más chico como solicitó */
-    margin-bottom: 0.25rem;
     letter-spacing: -0.02em;
 }
 
-/* Tablas Ultra-Clean */
-.card-silk {
-    border-radius: 8px;
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+.app-content-header p {
+    font-size: 0.875rem !important;
 }
 
+/* Tablas Estilo Premium */
 .silk-table thead th {
     background-color: var(--silk-navy);
     color: #fff;
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.7rem;
-    padding: 12px 15px;
-    letter-spacing: 0.05em;
+    padding: 12px 20px;
+    border: none;
 }
 
 /* Fix para visualización de fotos */
 .img-catalog-silk {
-    width: 48px; 
-    height: 48px; 
+    width: 52px; 
+    height: 52px; 
     object-fit: contain; 
     padding: 2px;
     background: #fff;
-    border-radius: 4px;
-    border: 1px solid #edf2f7;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
 }

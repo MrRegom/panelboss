@@ -23,12 +23,18 @@ AuthService::check();
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
         <main class="app-main">
-            <div class="page-header-silk">
-                <h1 class="page-title-silk">Prospectos Cloud</h1>
-                <p class="text-muted small mb-0">Gestión estratégica de clientes potenciales y registros entrantes.</p>
+            <div class="app-content-header py-4">
+                <div class="container-fluid px-4">
+                    <div class="row align-items-center">
+                        <div class="col-sm-12">
+                            <h3 class="fw-bold mb-0">Prospectos Cloud</h3>
+                            <p class="text-muted small mb-0">Gestión estratégica de clientes potenciales y registros entrantes.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="app-content px-5">
+            <div class="app-content px-4">
                 <div class="container-fluid">
                     <div class="card card-silk border-0 shadow-sm">
                         <div class="table-responsive">

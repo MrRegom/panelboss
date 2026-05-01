@@ -26,14 +26,20 @@ $companies = $db->query("SELECT id, name FROM companies ORDER BY name")->fetchAl
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
         <main class="app-main">
-            <div class="page-header-silk d-flex justify-content-between align-items-center">
-                <div>
-                    <h1 class="page-title-silk">Gestión de Licencias</h1>
-                    <p class="text-muted small mb-0">Control de activación y vigencia de planes.</p>
+            <div class="app-content-header py-4">
+                <div class="container-fluid px-4">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <h3 class="fw-bold mb-0">Gestión de Licencias</h3>
+                            <p class="text-muted small mb-0">Control de activación y vigencia de planes.</p>
+                        </div>
+                        <div class="col-sm-6 text-end">
+                            <button class="btn btn-silk shadow-sm px-4" data-bs-toggle="modal" data-bs-target="#modalGenerateLicense">
+                                <i class="fa-solid fa-plus me-2"></i> Generar Licencia
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <button class="btn btn-silk shadow-sm px-4" data-bs-toggle="modal" data-bs-target="#modalGenerateLicense">
-                    <i class="fa-solid fa-plus me-2"></i> Generar Licencia
-                </button>
             </div>
 
             <div class="app-content px-4">
