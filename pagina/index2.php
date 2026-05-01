@@ -219,32 +219,29 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             .nav-logo img { height: 28px; }
             .nav-links { display: flex; gap: 8px; }
             .nav-links a { margin-left: 0; padding: 6px 12px; font-size: 10px; }
-            .hero-content h1 { font-size: 2.8rem; letter-spacing: -1px; margin-bottom: 20px; text-align: center; }
-            .hero-content p { font-size: 1.1rem; padding-top: 15px; border-top: 3px solid var(--primary); text-align: center; margin-bottom: 30px; }
+            .hero-content h1 { font-size: 2.6rem; letter-spacing: -1px; margin-bottom: 20px; text-align: center; }
+            .hero-content p { font-size: 1.1rem; padding-top: 15px; border-top: 3px solid var(--primary); text-align: center; margin-bottom: 30px; border-left: none; }
             .hero-content .reveal div { display: flex; flex-direction: column; gap: 15px; align-items: center; }
-            .btn-primary { padding: 18px 40px; width: 100%; max-width: 300px; font-size: 14px; }
-            button[onclick="moveCarousel(1)"] { margin-left: 0 !important; width: 100%; max-width: 300px; }
+            .btn-primary { padding: 18px 40px; width: 100%; max-width: 320px; font-size: 14px; }
+            button[onclick="moveCarousel(1)"] { margin-left: 0 !important; width: 100%; max-width: 320px; }
             
-            .ribbon-cta { flex-direction: column; text-align: center; gap: 40px; padding: 80px 8%; border-radius: 0; }
-            .ribbon-text h3 { font-size: 1.8rem; }
-            
-            .section-planes { padding: 80px 5%; }
-            .grid-planes { gap: 30px; margin-top: 40px; }
-            .p-card { padding: 50px 25px; border-radius: 30px; width: 100%; overflow: hidden; }
-            .price-box { font-size: 3.2rem; flex-wrap: wrap; justify-content: center; }
-            .price-sub { font-size: 1rem; width: 100%; margin-top: -10px; }
-            
+            .section-planes { padding: 60px 6%; }
+            .grid-planes { display: flex; flex-direction: column; gap: 30px; margin-top: 40px; }
+            .p-card { padding: 50px 30px; border-radius: 35px; width: 100% !important; max-width: 100%; }
+            .price-box { font-size: 3.5rem; flex-wrap: wrap; justify-content: center; }
+            .price-sub { font-size: 1.1rem; width: 100%; margin-top: -10px; }
+
             .grid-poder { grid-template-columns: 1fr; gap: 20px; }
             .f-grid { grid-template-columns: 1fr; text-align: center; }
             .f-col { align-items: center; display: flex; flex-direction: column; }
             .f-bottom { flex-direction: column; gap: 20px; text-align: center; }
             .slide { justify-content: center; padding: 0 5%; }
-            .hero-content { text-align: center; width: 100%; }
-            .c-arrow { width: 40px; height: 40px; font-size: 12px; background: rgba(255,255,255,0.8); }
+            .hero-content { text-align: center; width: 100%; max-width: 100%; }
+            .c-arrow { width: 42px; height: 42px; font-size: 12px; background: rgba(255,255,255,0.9); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
             .c-prev { left: 10px; }
             .c-next { right: 10px; }
-            .faq-item h4 { padding: 25px 20px; font-size: 1rem; }
-            .faq-body { padding: 0 20px 0; font-size: 0.95rem; }
+            .faq-item h4 { padding: 25px 20px; font-size: 1.1rem; }
+            .faq-body { padding: 0 20px 0; font-size: 1rem; }
             .faq-item.active .faq-body { padding-bottom: 25px; }
         }
     </style>
