@@ -344,28 +344,49 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
     <section class="section-planes reveal-section" id="planes">
         <div class="header-elite" style="text-align: center;">
             <h2>Planes a tu <span>Medida.</span></h2>
+            <p style="color: var(--text-light); margin-top: 20px;">Elige el nivel de potencia que tu negocio necesita hoy.</p>
         </div>
         <div class="grid-planes">
-            <div class="p-card reveal">
-                <h3>PLAN EMPRENDE</h3>
-                <div class="price-box">$<?php echo $pMensual; ?><span class="price-sub">/mes</span></div>
-                <ul class="p-features"><li><i class="fa-solid fa-check"></i> Catálogo Maestro</li><li><i class="fa-solid fa-check"></i> Boletas SII</li></ul>
-                <a href="#" class="btn-cta">Elegir Plan</a>
+            <?php foreach ($plansRaw as $p): 
+                $slug = trim(strtolower($p['slug']));
+                $isFeatured = ($slug === 'lifetime');
+                $price = number_format($p['price'], 0, ',', '.');
+                $isEnterprise = ($slug === 'empresa');
+            ?>
+            <div class="p-card <?php echo $isFeatured ? 'featured' : ''; ?> reveal">
+                <?php if ($isFeatured): ?><div class="badge-elite">Sugerido</div><?php endif; ?>
+                
+                <h3><?php echo htmlspecialchars($p['name']); ?></h3>
+                
+                <div class="price-box">$<?php echo $price; ?><?php if (!$isFeatured && !$isEnterprise): ?><span class="price-sub">/mes</span><?php endif; ?></div>
+                
+                <?php if ($isFeatured): ?>
+                    <p style="margin-top:-20px; margin-bottom:20px; font-weight:800; opacity:0.4; text-transform:uppercase;">PAGO ÚNICO</p>
+                <?php endif; ?>
+
+                <ul class="p-features">
+                    <li><i class="fa-solid fa-check"></i> Integración Boleta SII</li>
+                    <li><i class="fa-solid fa-check"></i> Catálogo Maestro (+20k Prod)</li>
+                    <?php if ($slug === 'mensual'): ?>
+                        <li><i class="fa-solid fa-check"></i> 1 Caja de Venta</li>
+                        <li><i class="fa-solid fa-check"></i> Soporte Estándar</li>
+                    <?php elseif ($isFeatured): ?>
+                        <li><i class="fa-solid fa-crown"></i> 3 Cajas Simultáneas</li>
+                        <li><i class="fa-solid fa-crown"></i> Cero Mensualidades</li>
+                        <li><i class="fa-solid fa-crown"></i> Soporte VIP WhatsApp</li>
+                    <?php else: ?>
+                        <li><i class="fa-solid fa-building"></i> Multi-sucursal Élite</li>
+                        <li><i class="fa-solid fa-building"></i> API Pro Acceso Total</li>
+                        <li><i class="fa-solid fa-building"></i> Consultoría Técnica</li>
+                    <?php endif; ?>
+                    <li><i class="fa-solid fa-check"></i> Funcionamiento Offline</li>
+                </ul>
+
+                <button onclick="startPurchase('<?php echo $slug; ?>', '<?php echo htmlspecialchars($p['name']); ?>', <?php echo $p['price']; ?>)" class="btn-cta" style="border:none; cursor:pointer;">
+                    <?php echo $isEnterprise ? 'Consultar Ventas' : ($isFeatured ? 'Comprar Vitalicia' : 'Elegir Plan'); ?>
+                </button>
             </div>
-            <div class="p-card featured reveal">
-                <div class="badge-elite">Sugerido</div>
-                <h3>LICENCIA ÉLITE</h3>
-                <div class="price-box">$<?php echo $pLifetime; ?></div>
-                <p style="margin-top:-20px; margin-bottom:20px; font-weight:800; opacity:0.4;">PAGO ÚNICO</p>
-                <ul class="p-features"><li><i class="fa-solid fa-crown"></i> 3 Cajas Simultáneas</li><li><i class="fa-solid fa-crown"></i> Cero Mensualidades</li></ul>
-                <a href="#" class="btn-cta">Comprar Vitalicía</a>
-            </div>
-            <div class="p-card reveal">
-                <h3>PLAN EMPRESA</h3>
-                <div class="price-box">$<?php echo $pEmpresa; ?><span class="price-sub">/mes</span></div>
-                <ul class="p-features"><li><i class="fa-solid fa-building"></i> Multi-sucursal</li><li><i class="fa-solid fa-building"></i> API Pro</li></ul>
-                <a href="#" class="btn-cta">Consultar Ventas</a>
-            </div>
+            <?php endforeach; ?>
         </div>
     </section>
 
@@ -588,21 +609,40 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             handleLead(e, f.parentElement, true, formData);
         }
 
-        // Modificamos handleLead para aceptar formData externo (V48)
+        // PURCHASE FLOW (V61)
+        let selectedPlan = null;
+
+        function startPurchase(slug, name, price) {
+            selectedPlan = { slug, name, price };
+            
+            // Reutilizamos el modal de captura
+            const m = document.getElementById('leadModal');
+            m.querySelector('h2').innerText = '¡Casi es tuyo!';
+            m.querySelector('p').innerText = `Estás adquiriendo el ${name}. Por favor, regístrate para generar tu licencia.`;
+            m.querySelector('button').innerText = 'Proceder al Pago';
+            
+            openModal();
+        }
+
+        // Modificamos handleLead para soportar redirección a pago (V61)
         async function handleLead(e, container_el, isModal, externalData = null) {
             if(e) e.preventDefault();
             const form = externalData ? null : container_el.querySelector('form');
             const btn = container_el.querySelector('button');
             const originalText = btn.innerHTML;
             
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> ACTIVANDO...';
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> PROCESANDO...';
             
             const dataToSend = externalData || new FormData(form);
+
+            // Si es una compra, marcamos el provider
+            if (selectedPlan) {
+                dataToSend.append('provider', 'purchase_' + selectedPlan.slug);
+            }
 
             try {
                 const r = await fetch('save_lead.php', { method: 'POST', body: dataToSend });
                 if(r.ok) {
-                    // Guardar en memoria
                     localStorage.setItem('cajaya_lead', JSON.stringify({
                         nombre: dataToSend.get('nombre'),
                         email: dataToSend.get('email'),
@@ -611,13 +651,36 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
 
                     confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
 
-                    const target = isModal ? document.querySelector('.modal-glass') : container_el;
-                    target.innerHTML = `<div style="text-align:center; padding:60px; animation: modalUp 0.8s ease;">
-                        <i class="fa-solid fa-crown" style="font-size:6rem; color:#FFD700; margin-bottom:30px;"></i>
-                        <h2 style="color:var(--primary); font-size:3.5rem; margin-bottom:15px; font-family:'Outfit';">¡Nivel Élite!</h2>
-                        <p style="color:var(--text-light); font-size:1.5rem;">Bienvenido, ${dataToSend.get('nombre')}.<br>Tu Demo está siendo preparada.</p>
-                    </div>`;
-                    setTimeout(closeModal, 6000);
+                    if (selectedPlan) {
+                        // REDIRECCIÓN A MERCADO PAGO (V61)
+                        const target = isModal ? document.querySelector('.modal-glass') : container_el;
+                        target.innerHTML = `<div style="text-align:center; padding:60px; animation: modalUp 0.8s ease;">
+                            <i class="fa-solid fa-cart-shopping" style="font-size:5rem; color:var(--primary); margin-bottom:30px;"></i>
+                            <h2 style="color:var(--primary); font-size:2.8rem; margin-bottom:15px; font-family:'Outfit';">¡Datos validados!</h2>
+                            <p style="color:var(--text-light); font-size:1.2rem; margin-bottom:30px;">Te estamos redirigiendo a la pasarela segura de Mercado Pago...</p>
+                        </div>`;
+                        
+                        // Simulación de link de MP (Aquí pondrías tus links reales por plan)
+                        const mpLinks = {
+                            'mensual': 'https://mpago.li/vuestro-link-plan-mensual',
+                            'lifetime': 'https://mpago.li/vuestro-link-plan-elite',
+                            'empresa': 'https://wa.me/56900000000?text=Hola, quiero consultar por el Plan Empresa'
+                        };
+                        
+                        setTimeout(() => {
+                            window.location.href = mpLinks[selectedPlan.slug] || mpLinks['mensual'];
+                        }, 3000);
+
+                    } else {
+                        // Flujo normal de Demo
+                        const target = isModal ? document.querySelector('.modal-glass') : container_el;
+                        target.innerHTML = `<div style="text-align:center; padding:60px; animation: modalUp 0.8s ease;">
+                            <i class="fa-solid fa-crown" style="font-size:6rem; color:#FFD700; margin-bottom:30px;"></i>
+                            <h2 style="color:var(--primary); font-size:3.5rem; margin-bottom:15px; font-family:'Outfit';">¡Nivel Élite!</h2>
+                            <p style="color:var(--text-light); font-size:1.5rem;">Bienvenido, ${dataToSend.get('nombre')}.<br>Tu Demo está siendo preparada.</p>
+                        </div>`;
+                        setTimeout(closeModal, 6000);
+                    }
                 }
             } catch(err) {
                 btn.innerHTML = 'REINTENTAR';
