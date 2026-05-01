@@ -9,21 +9,20 @@ AuthService::check();
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Prospectos | Azure Dashboard</title>
+    <title>Prospectos | CajaYa Pro</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="css/admin-custom.css">
 </head>
-<body class="layout-fixed sidebar-expand-lg bg-light">
+<body class="layout-fixed sidebar-expand-lg">
     <div class="app-wrapper">
         <nav class="app-header navbar navbar-expand">
             <div class="container-fluid px-3">
                 <ul class="navbar-nav align-items-center">
                     <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i class="fa-solid fa-bars"></i> </a> </li>
-                    <li class="nav-item ms-3"> <span class="text-white fw-semibold small">CajaYa | Directorio de Prospectos</span> </li>
                 </ul>
             </div>
         </nav>
@@ -31,14 +30,14 @@ AuthService::check();
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
         <main class="app-main">
-            <div class="ms-page-header">
-                <h1 class="ms-page-title">Prospectos</h1>
-                <p class="text-muted small mb-0">Listado unificado de clientes potenciales y registros Cloud.</p>
+            <div class="page-header-pro">
+                <h1 class="page-title-pro">Directorio de Prospectos</h1>
+                <p class="text-muted small mb-0">Gestión de leads y registros del sistema Cloud.</p>
             </div>
 
             <div class="app-content px-4">
                 <div class="container-fluid">
-                    <div class="card card-ms">
+                    <div class="card card-pro border-0 shadow-sm">
                         <div class="table-responsive">
                             <table id="leadsTable" class="table ms-table w-100">
                                 <thead>
@@ -72,23 +71,25 @@ AuthService::check();
             columns: [
                 { 
                     data: 'full_name',
-                    render: (d) => `<div class="fw-semibold small text-dark">${d || 'Sin nombre'}</div>`
+                    render: (d) => `<div class="fw-bold small text-dark">${d || 'Sin nombre'}</div>`
                 },
                 { data: 'email', render: d => `<span class="text-muted small">${d}</span>` },
                 { 
                     data: 'provider',
-                    render: (d) => `<span class="badge bg-light text-dark border x-small text-uppercase">${d || 'Directo'}</span>`
+                    render: (d) => `<span class="badge bg-light text-muted border x-small text-uppercase px-2">${d || 'Directo'}</span>`
                 },
-                { data: 'demo_license', render: d => d ? `<code class="small text-primary">${d}</code>` : '-' },
+                { data: 'demo_license', render: d => d ? `<code class="small text-primary fw-bold">${d}</code>` : '-' },
                 { data: 'created_at', render: d => `<span class="text-muted small">${new Date(d).toLocaleDateString()}</span>` },
                 { 
                     data: null, 
                     className: 'text-end',
-                    render: () => `<button class="btn btn-link btn-sm p-0 text-primary"><i class="fa-solid fa-message"></i></button>`
+                    render: () => `
+                        <button class="btn btn-link text-primary p-1"><i class="fa-solid fa-envelope"></i></button>
+                        <button class="btn btn-link text-danger p-1"><i class="fa-solid fa-trash"></i></button>`
                 }
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
-            dom: '<"p-3 d-flex justify-content-between align-items-center"lf>rt<"p-3 d-flex justify-content-between align-items-center"ip>'
+            dom: '<"p-4 d-flex justify-content-between align-items-center"lf>rt<"p-4 d-flex justify-content-between align-items-center"ip>'
         });
     });
     </script>

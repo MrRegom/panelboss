@@ -1,55 +1,56 @@
 /* 
- * CAJAYA LEGACY GOLD (V109)
- * Estética: Microsoft Order + CajaYa Purple Identity
+ * CAJAYA STANDARD PRO (V110)
+ * Estética: Control Panel Clásico Premium (Dark Sidebar + White Content)
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-    --cajaya-purple: #6b21a8; /* Morado CajaYa */
-    --cajaya-light: #f3e8ff; /* Morado suave para el header */
-    --ms-bg: #f8fafc;
-    --ms-border: #e2e8f0;
-    --ms-text: #1e293b;
-    --ms-text-muted: #64748b;
-    --ms-card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    --panel-dark: #0f172a; /* Slate 900 */
+    --panel-sidebar: #1e293b; /* Slate 800 */
+    --panel-primary: #2563eb; /* Blue 600 */
+    --panel-bg: #f1f5f9; /* Slate 100 */
+    --panel-border: #e2e8f0; /* Slate 200 */
+    --panel-text: #334155; /* Slate 700 */
+    --panel-text-muted: #64748b; /* Slate 500 */
 }
 
 body {
-    background-color: var(--ms-bg) !important;
+    background-color: var(--panel-bg) !important;
     font-family: 'Inter', sans-serif;
-    color: var(--ms-text);
+    color: var(--panel-text);
 }
 
-/* --- CajaYa Soft Header --- */
+/* --- Professional White Header --- */
 .app-header {
-    background: var(--cajaya-light) !important;
-    border-bottom: 1px solid rgba(107, 33, 168, 0.1) !important;
-    height: 52px;
+    background: #ffffff !important;
+    border-bottom: 1px solid var(--panel-border) !important;
+    height: 60px;
 }
 
 .app-header .nav-link {
-    color: var(--cajaya-purple) !important;
+    color: var(--panel-text) !important;
 }
 
-/* --- CajaYa Corporate Sidebar --- */
+/* --- Classic Dark Sidebar --- */
 .app-sidebar {
-    background: var(--cajaya-purple) !important;
+    background: var(--panel-sidebar) !important;
     border-right: none !important;
-    box-shadow: 10px 0 30px rgba(0,0,0,0.05) !important;
 }
 
 .sidebar-brand {
-    background: rgba(0,0,0,0.1) !important;
+    background: var(--panel-dark) !important;
     border-bottom: 1px solid rgba(255,255,255,0.05) !important;
-    height: 52px;
+    height: 60px;
+    padding: 0 !important;
 }
 
 .nav-sidebar .nav-link {
-    border-radius: 8px !important;
+    border-radius: 6px !important;
     margin: 4px 12px !important;
     padding: 10px 16px !important;
-    color: rgba(255, 255, 255, 0.7) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-size: 0.85rem;
     font-weight: 500;
 }
 
@@ -59,37 +60,36 @@ body {
 }
 
 .nav-sidebar .nav-link.active {
-    background: #fff !important;
-    color: var(--cajaya-purple) !important;
-    font-weight: 700;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    background: var(--panel-primary) !important;
+    color: #ffffff !important;
+    font-weight: 600;
 }
 
 .nav-header {
-    color: rgba(255, 255, 255, 0.3) !important;
+    color: rgba(255, 255, 255, 0.2) !important;
     text-transform: uppercase;
     font-size: 0.65rem !important;
-    letter-spacing: 0.1em;
-    padding: 24px 24px 8px !important;
+    letter-spacing: 0.05em;
+    padding: 20px 24px 10px !important;
 }
 
-/* --- Unified Modern Tables (Azure Order) --- */
-.card-ms {
+/* --- Clean Professional Tables --- */
+.card-pro {
     background: #ffffff;
-    border: 1px solid var(--ms-border);
-    box-shadow: var(--ms-card-shadow);
+    border: 1px solid var(--panel-border);
     border-radius: 8px;
-    overflow: hidden;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
 table.ms-table thead th {
-    background: #fcfcfd !important;
-    border-bottom: 1px solid var(--ms-border) !important;
-    color: var(--ms-text-muted) !important;
+    background: #f8fafc !important;
+    border-bottom: 1px solid var(--panel-border) !important;
+    color: var(--panel-text) !important;
     font-weight: 700 !important;
-    font-size: 0.75rem !important;
+    font-size: 0.7rem !important;
     text-transform: uppercase;
-    padding: 16px 20px !important;
+    letter-spacing: 0.025em;
+    padding: 12px 20px !important;
 }
 
 table.ms-table tbody td {
@@ -103,30 +103,29 @@ table.ms-table tbody tr:hover {
 }
 
 /* --- Buttons --- */
-.btn-cajaya {
-    background: var(--cajaya-purple);
+.btn-pro {
+    background: var(--panel-primary);
     color: #fff;
     border: none;
-    border-radius: 8px;
-    padding: 8px 20px;
+    border-radius: 6px;
+    padding: 8px 16px;
     font-weight: 600;
-    transition: all 0.2s;
+    font-size: 0.85rem;
 }
 
-.btn-cajaya:hover {
-    filter: brightness(1.2);
+.btn-pro:hover {
+    filter: brightness(1.1);
     color: #fff;
-    transform: translateY(-1px);
 }
 
 /* Page Header */
-.ms-page-header {
-    padding: 32px 48px;
-    margin-bottom: 0;
+.page-header-pro {
+    padding: 24px 40px;
 }
 
-.ms-page-title {
-    color: var(--cajaya-purple);
+.page-title-pro {
+    font-size: 1.5rem;
     font-weight: 800;
-    letter-spacing: -0.04em;
+    color: var(--panel-dark);
+    letter-spacing: -0.02em;
 }
