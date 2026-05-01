@@ -535,6 +535,82 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         </div>
     </section>
 
+    <!-- CALCULADORA ROI V90 (MOVIDA PARA IMPACTO TEMPRANO) -->
+    <section class="section-roi reveal-section">
+        <div class="header-elite">
+            <h2>Simulador de <span>Ganancias.</span></h2>
+            <p style="color: var(--text-light); margin-top: 20px;">Sigue estos 2 simples pasos para ver cuánto estás perdiendo hoy:</p>
+        </div>
+        
+        <div class="roi-card reveal">
+            <div class="roi-inputs">
+                <div class="roi-control">
+                    <label style="font-size:1.2rem;">
+                        <span style="background:var(--primary); color:#fff; width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; margin-right:10px; font-size:14px;">1</span>
+                        ¿Cuánto vendes al mes?
+                        <span id="valSales" style="font-size:1.4rem;">$10.000.000</span>
+                    </label>
+                    <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:10px;">Desliza para ajustar tu nivel de ventas actual.</p>
+                    <input type="range" class="roi-slider" id="inputSales" min="100000" max="50000000" step="100000" value="10000000">
+                </div>
+
+                <div class="roi-control" style="margin-top:20px;">
+                    <label style="font-size:1.2rem;">
+                        <span style="background:var(--primary); color:#fff; width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; margin-right:10px; font-size:14px;">2</span>
+                        ¿Horas perdidas al día?
+                        <span id="valTime" style="font-size:1.4rem;">4 Horas</span>
+                    </label>
+                    <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:10px;">Tiempo que gastas hoy contando stock o haciendo cuentas a mano.</p>
+                    <input type="range" class="roi-slider" id="inputTime" min="1" max="12" step="1" value="4">
+                </div>
+
+                <div style="margin-top:30px; background:#fff; padding:25px; border-radius:24px; border:1px solid #f0f0f0; box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
+                    <h4 style="color:var(--primary); margin-bottom:15px; font-size:1.1rem;"><i class="fa-solid fa-triangle-exclamation"></i> El Costo del Desorden</h4>
+                    <ul style="list-style:none; font-size:0.85rem; color:var(--text-light); line-height:1.6; display:flex; flex-direction:column; gap:10px;">
+                        <li><i class="fa-solid fa-check" style="color:var(--primary); margin-right:8px;"></i> <strong>Fugas de Caja:</strong> Errores en vueltos y redondeos.</li>
+                        <li><i class="fa-solid fa-check" style="color:var(--primary); margin-right:8px;"></i> <strong>Mermas Ciegas:</strong> Productos que vencen sin control.</li>
+                        <li><i class="fa-solid fa-check" style="color:var(--primary); margin-right:8px;"></i> <strong>Tranquilidad SII:</strong> Emisión automática, cero multas.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="roi-results">
+                <div style="text-align:center; margin-bottom:20px;">
+                    <i class="fa-solid fa-chart-line" style="font-size:3rem; margin-bottom:15px; opacity:0.8;"></i>
+                    <h3 style="font-family:'Outfit';">Tu Resultado Élite</h3>
+                </div>
+                <div class="res-item">
+                    <span class="res-lab">Dinero recuperado (Mensual)</span>
+                    <span class="res-val" id="resMonthly">$300.000</span>
+                </div>
+                <div class="res-item">
+                    <span class="res-lab">Tiempo de vida recuperado</span>
+                    <span class="res-val" id="resTime">96 Horas</span>
+                </div>
+                <div class="res-total">
+                    <span class="res-lab">GANANCIA TOTAL AL AÑO</span>
+                    <span class="res-val" id="resAnnual" style="color:#FFD700; font-size:2.8rem;">$3.600.000</span>
+                </div>
+                <a href="#planes" class="btn-white" style="width:100%; text-align:center; text-decoration:none; margin-top:10px;">Quiero Ganar Esto con CajaYa</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN LIBERTAD ÉLITE V90 -->
+    <section class="mockup-section reveal-section" style="background: #fff; padding-top: 50px;">
+        <div class="mockup-text reveal">
+            <h2 style="font-size: 3.5rem; font-weight: 900; line-height: 1; margin-bottom: 30px;">Tu Negocio en tu <span>Bolsillo.</span></h2>
+            <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 40px;">Disfruta de la libertad que siempre soñaste. Monitorea ventas, stock y caja desde cualquier lugar del mundo. CajaYa te da el control para que tú solo te preocupes de crecer.</p>
+            <div style="background: var(--primary-soft); padding: 30px; border-radius: 24px; border-left: 5px solid var(--primary);">
+                <p style="font-weight: 700; color: var(--primary); font-size: 1.1rem; margin-bottom: 5px;">"CajaYa cambió mi vida"</p>
+                <p style="font-size: 0.95rem; color: var(--text-light);">— Ricardo M., Dueño de Minimarket El Trébol.</p>
+            </div>
+        </div>
+        <div class="mockup-img reveal">
+            <img src="dueno_exitoso_cajaya_1777670997517.png" alt="Control total CajaYa" style="border-radius: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.15);">
+        </div>
+    </section>
+
     <!-- PROCESS STEPS V77 -->
     <section class="section-steps reveal-section">
         <div class="header-elite">
@@ -700,67 +776,30 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         <button onclick="openModal()" class="btn-white">Obtener Demo Gratis</button>
     </div>
 
-    <!-- CALCULADORA ROI V86 (AMIGABLE) -->
-    <section class="section-roi reveal-section">
+    <!-- TESTIMONIOS ÉLITE V90 -->
+    <section class="reveal-section" style="padding: 100px 10%; background: var(--bg-off); text-align: center;">
         <div class="header-elite">
-            <h2>Simulador de <span>Ganancias.</span></h2>
-            <p style="color: var(--text-light); margin-top: 20px;">Sigue estos 2 simples pasos para ver cuánto estás perdiendo hoy:</p>
+            <h2>Negocios que ya son <span>Élite.</span></h2>
+            <p style="color: var(--text-light); margin-top: 20px;">Únete a cientos de dueños que recuperaron el control.</p>
         </div>
-        
-        <div class="roi-card reveal">
-            <div class="roi-inputs">
-                <!-- PASO 1 -->
-                <div class="roi-control">
-                    <label style="font-size:1.2rem;">
-                        <span style="background:var(--primary); color:#fff; width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; margin-right:10px; font-size:14px;">1</span>
-                        ¿Cuánto vendes al mes?
-                        <span id="valSales" style="font-size:1.4rem;">$10.000.000</span>
-                    </label>
-                    <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:10px;">Desliza para ajustar tu nivel de ventas actual.</p>
-                    <input type="range" class="roi-slider" id="inputSales" min="100000" max="50000000" step="100000" value="10000000">
-                </div>
-
-                <!-- PASO 2 -->
-                <div class="roi-control" style="margin-top:20px;">
-                    <label style="font-size:1.2rem;">
-                        <span style="background:var(--primary); color:#fff; width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; margin-right:10px; font-size:14px;">2</span>
-                        ¿Horas perdidas al día?
-                        <span id="valTime" style="font-size:1.4rem;">4 Horas</span>
-                    </label>
-                    <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:10px;">Tiempo que gastas hoy contando stock o haciendo cuentas a mano.</p>
-                    <input type="range" class="roi-slider" id="inputTime" min="1" max="12" step="1" value="4">
-                </div>
-
-                <div style="margin-top:30px; background:#fff; padding:25px; border-radius:24px; border:1px solid #f0f0f0; box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
-                    <h4 style="color:var(--primary); margin-bottom:15px; font-size:1.1rem;"><i class="fa-solid fa-triangle-exclamation"></i> El Costo del Desorden</h4>
-                    <ul style="list-style:none; font-size:0.85rem; color:var(--text-light); line-height:1.6; display:flex; flex-direction:column; gap:10px;">
-                        <li><i class="fa-solid fa-check" style="color:var(--primary); margin-right:8px;"></i> <strong>Fugas de Caja:</strong> Errores en vueltos y redondeos que "desaparecen".</li>
-                        <li><i class="fa-solid fa-check" style="color:var(--primary); margin-right:8px;"></i> <strong>Mermas Ciegas:</strong> Productos que vencen o se pierden por falta de control.</li>
-                        <li><i class="fa-solid fa-check" style="color:var(--primary); margin-right:8px;"></i> <strong>Tiempo Muerto:</strong> 2-3 horas diarias que podrías usar para vender más o descansar.</li>
-                    </ul>
-                    <p style="margin-top:15px; font-size:0.85rem; font-weight:700; color:var(--text-dark);">CajaYa tapa estos agujeros desde el día 1.</p>
-                </div>
+        <div class="grid-poder" style="margin-top: 60px;">
+            <div class="card-poder reveal">
+                <div style="display:flex; color:#FFD700; margin-bottom:15px; justify-content:center; gap:5px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p style="font-style:italic; margin-bottom:20px;">"Antes pasaba 3 horas cuadrando caja. Hoy lo hago en 1 minuto desde mi celular."</p>
+                <h4 style="font-weight:900;">Juan P.</h4>
+                <small style="color:var(--primary);">Botillería Santa Elena</small>
             </div>
-            
-            <div class="roi-results">
-                <div style="text-align:center; margin-bottom:20px;">
-                    <i class="fa-solid fa-chart-line" style="font-size:3rem; margin-bottom:15px; opacity:0.8;"></i>
-                    <h3 style="font-family:'Outfit';">Tu Resultado Élite</h3>
-                </div>
-                <div class="res-item">
-                    <span class="res-lab">Dinero recuperado (Mensual)</span>
-                    <span class="res-val" id="resMonthly">$300.000</span>
-                </div>
-                <div class="res-item">
-                    <span class="res-lab">Tiempo de vida recuperado</span>
-                    <span class="res-val" id="resTime">96 Horas</span>
-                </div>
-                <div class="res-total">
-                    <span class="res-lab">GANANCIA TOTAL AL AÑO</span>
-                    <span class="res-val" id="resAnnual" style="color:#FFD700; font-size:2.8rem;">$3.600.000</span>
-                    <p style="font-size:0.75rem; margin-top:10px; opacity:0.7;">*Estimado basado en promedios de la industria retail.</p>
-                </div>
-                <a href="#planes" class="btn-white" style="width:100%; text-align:center; text-decoration:none; margin-top:10px;">Quiero Ganar Esto con CajaYa</a>
+            <div class="card-poder reveal">
+                <div style="display:flex; color:#FFD700; margin-bottom:15px; justify-content:center; gap:5px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p style="font-style:italic; margin-bottom:20px;">"El SII ya no es un dolor de cabeza. Todo automático y sin multas."</p>
+                <h4 style="font-weight:900;">María L.</h4>
+                <small style="color:var(--primary);">Almacén El Sol</small>
+            </div>
+            <div class="card-poder reveal">
+                <div style="display:flex; color:#FFD700; margin-bottom:15px; justify-content:center; gap:5px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p style="font-style:italic; margin-bottom:20px;">"El soporte por WhatsApp es increíble. Siempre responden en minutos."</p>
+                <h4 style="font-weight:900;">Carlos R.</h4>
+                <small style="color:var(--primary);">Ferretería Central</small>
             </div>
         </div>
     </section>
