@@ -78,9 +78,30 @@ session_start();
 
         @keyframes modalUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
+        /* COUNTDOWN STYLE (V53) */
+        .countdown-container {
+            display: flex; justify-content: center; gap: 20px; margin-bottom: 50px; animation: modalUp 1s ease;
+        }
+        .countdown-item {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px); padding: 20px; border-radius: 20px; min-width: 90px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .countdown-value {
+            display: block; font-family: 'Outfit', sans-serif; font-size: 2.5rem; font-weight: 900;
+            color: var(--primary-glow); line-height: 1; text-shadow: 0 0 20px rgba(157, 108, 255, 0.4);
+        }
+        .countdown-label {
+            display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;
+            color: #94a3b8; margin-top: 5px; font-weight: 700;
+        }
+
         @media (max-width: 480px) {
             h1 { font-size: 2.8rem; }
             .glass-card { padding: 30px 20px; }
+            .countdown-container { gap: 10px; }
+            .countdown-item { min-width: 70px; padding: 15px 10px; }
+            .countdown-value { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -92,6 +113,14 @@ session_start();
         
         <div class="coming-soon-badge">Estreno Muy Pronto</div>
         <h1>El Futuro del <span>Retail</span> está llegando.</h1>
+        
+        <div class="countdown-container">
+            <div class="countdown-item"><span class="countdown-value" id="days">10</span><span class="countdown-label">Días</span></div>
+            <div class="countdown-item"><span class="countdown-value" id="hours">00</span><span class="countdown-label">Horas</span></div>
+            <div class="countdown-item"><span class="countdown-value" id="minutes">00</span><span class="countdown-label">Min</span></div>
+            <div class="countdown-item"><span class="countdown-value" id="seconds">00</span><span class="countdown-label">Seg</span></div>
+        </div>
+
         <p>Estamos afinando los últimos detalles para el lanzamiento más importante del año. Inscríbete para ser el primero en recibir acceso exclusivo.</p>
 
         <div class="glass-card" id="formContainer">
@@ -115,6 +144,35 @@ session_start();
     </div>
 
     <script>
+        // CONFIGURACIÓN DEL LANZAMIENTO (V53)
+        // Definimos la fecha objetivo: 10 días a partir de hoy
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 10);
+        targetDate.setHours(0,0,0,0);
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = d.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(interval);
+                document.querySelector('.countdown-container').innerHTML = "<h2>¡EL DÍA HA LLEGADO!</h2>";
+            }
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+
         async function handleLead(e, f) {
             e.preventDefault();
             const b = f.querySelector('button'); 
