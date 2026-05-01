@@ -1007,8 +1007,9 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 btn.innerHTML = 'REINTENTAR';
             }
         }
+    </script>
 
-    <!-- BOTÓN FLOTANTE WHATSAPP V81 -->
+    <!-- BOTÓN FLOTANTE WHATSAPP V82 -->
     <a href="https://wa.me/56900000000?text=Hola%2C%20quiero%20info%20sobre%20CajaYa" 
        target="_blank" 
        id="wa-float"
@@ -1046,6 +1047,5 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         }
     </style>
 
-    </script>
 </body>
 </html>
