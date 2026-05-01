@@ -1,68 +1,68 @@
-<!-- CajaYa Standard Pro Sidebar (V110) -->
-<aside class="app-sidebar shadow">
+<!-- CajaYa Premium Night Sidebar (V111) -->
+<aside class="app-sidebar shadow-lg">
     <div class="sidebar-brand">
         <a href="./index.php" class="brand-link border-0 d-flex align-items-center justify-content-center w-100 py-3">
-            <!-- Logo original CajaYa (Color) -->
-            <img src="img/logo.png?v=110" alt="CajaYa" style="height: 34px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">
+            <!-- Logo original CajaYa (Color) con filtro para fondo oscuro -->
+            <img src="img/logo.png?v=111" alt="CajaYa" style="height: 38px; width: auto; filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));">
         </a>
     </div>
 
     <div class="sidebar-wrapper">
-        <nav class="mt-3">
+        <nav class="mt-4">
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
                 
-                <li class="nav-header">DASHBOARD</li>
+                <li class="nav-header">INTELIGENCIA</li>
                 <li class="nav-item">
                     <a href="./index.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : '' ?>">
-                        <i class="nav-icon fa-solid fa-chart-pie"></i>
-                        <p>Vista General</p>
+                        <i class="nav-icon fa-solid fa-chart-line"></i>
+                        <p>Dashboard Real-Time</p>
                     </a>
                 </li>
 
-                <li class="nav-header">GESTIÓN COMERCIAL</li>
+                <li class="nav-header">GESTIÓN CORE</li>
                 <li class="nav-item">
                     <a href="./leads.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'leads.php' ? 'active' : '' ?>">
-                        <i class="nav-icon fa-solid fa-user-group"></i>
-                        <p>Prospectos</p>
+                        <i class="nav-icon fa-solid fa-users-viewfinder"></i>
+                        <p>Prospectos Cloud</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="./companies.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'companies.php' ? 'active' : '' ?>">
-                        <i class="nav-icon fa-solid fa-building"></i>
-                        <p>Empresas</p>
+                        <i class="nav-icon fa-solid fa-building-circle-check"></i>
+                        <p>Directorio Empresas</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="./licenses.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'licenses.php' ? 'active' : '' ?>">
-                        <i class="nav-icon fa-solid fa-file-contract"></i>
-                        <p>Licencias</p>
+                        <i class="nav-icon fa-solid fa-key"></i>
+                        <p>Gestión Licencias</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="./catalogo.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'catalogo.php' ? 'active' : '' ?>">
-                        <i class="nav-icon fa-solid fa-cubes"></i>
+                        <i class="nav-icon fa-solid fa-boxes-packing"></i>
                         <p>Catálogo Maestro</p>
                     </a>
                 </li>
 
-                <li class="nav-header">ADMINISTRACIÓN</li>
+                <li class="nav-header">SISTEMA & SEGURIDAD</li>
                 <li class="nav-item">
                     <a href="./users.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'users.php' ? 'active' : '' ?>">
-                        <i class="nav-icon fa-solid fa-users-gear"></i>
-                        <p>Usuarios</p>
+                        <i class="nav-icon fa-solid fa-user-shield"></i>
+                        <p>Control de Accesos</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="./settings.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'settings.php' ? 'active' : '' ?>">
-                        <i class="nav-icon fa-solid fa-sliders"></i>
-                        <p>Ajustes</p>
+                        <i class="nav-icon fa-solid fa-gears"></i>
+                        <p>Configuración Global</p>
                     </a>
                 </li>
             </ul>
         </nav>
     </div>
 
-    <div class="p-3 mt-auto border-top border-white border-opacity-5 text-center">
-        <div class="x-small fw-semibold text-white opacity-25">CajaYa Enterprise v2.6</div>
+    <div class="p-4 mt-auto border-top border-white border-opacity-5 text-center">
+        <div class="x-small fw-bold text-white opacity-25">CAJAYA ENTERPRISE CLOUD</div>
     </div>
 </aside>

@@ -9,7 +9,7 @@ AuthService::check();
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Prospectos | CajaYa Pro</title>
+    <title>Prospectos | CajaYa Enterprise</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/css/adminlte.min.css">
@@ -19,27 +19,20 @@ AuthService::check();
 </head>
 <body class="layout-fixed sidebar-expand-lg">
     <div class="app-wrapper">
-        <nav class="app-header navbar navbar-expand">
-            <div class="container-fluid px-3">
-                <ul class="navbar-nav align-items-center">
-                    <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i class="fa-solid fa-bars"></i> </a> </li>
-                </ul>
-            </div>
-        </nav>
-
+        <?php include __DIR__ . '/includes/header.php'; ?>
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
         <main class="app-main">
-            <div class="page-header-pro">
-                <h1 class="page-title-pro">Directorio de Prospectos</h1>
-                <p class="text-muted small mb-0">Gestión de leads y registros del sistema Cloud.</p>
+            <div class="premium-page-header">
+                <h1 class="premium-page-title">Directorio de Prospectos</h1>
+                <p class="text-muted small mb-0">Gestión centralizada de registros y leads comerciales.</p>
             </div>
 
-            <div class="app-content px-4">
+            <div class="app-content px-5">
                 <div class="container-fluid">
-                    <div class="card card-pro border-0 shadow-sm">
+                    <div class="card card-premium border-0">
                         <div class="table-responsive">
-                            <table id="leadsTable" class="table ms-table w-100">
+                            <table id="leadsTable" class="table premium-data-table w-100">
                                 <thead>
                                     <tr>
                                         <th>IDENTIDAD</th>
@@ -76,16 +69,16 @@ AuthService::check();
                 { data: 'email', render: d => `<span class="text-muted small">${d}</span>` },
                 { 
                     data: 'provider',
-                    render: (d) => `<span class="badge bg-light text-muted border x-small text-uppercase px-2">${d || 'Directo'}</span>`
+                    render: (d) => `<span class="badge bg-light text-muted border-0 px-3 py-2 text-uppercase small">${d || 'Directo'}</span>`
                 },
-                { data: 'demo_license', render: d => d ? `<code class="small text-primary fw-bold">${d}</code>` : '-' },
+                { data: 'demo_license', render: d => d ? `<code class="text-indigo fw-bold">${d}</code>` : '-' },
                 { data: 'created_at', render: d => `<span class="text-muted small">${new Date(d).toLocaleDateString()}</span>` },
                 { 
                     data: null, 
                     className: 'text-end',
                     render: () => `
-                        <button class="btn btn-link text-primary p-1"><i class="fa-solid fa-envelope"></i></button>
-                        <button class="btn btn-link text-danger p-1"><i class="fa-solid fa-trash"></i></button>`
+                        <button class="btn btn-link text-primary p-1"><i class="fa-solid fa-message"></i></button>
+                        <button class="btn btn-link text-danger p-1"><i class="fa-solid fa-trash-can"></i></button>`
                 }
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
