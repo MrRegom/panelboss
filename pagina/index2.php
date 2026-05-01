@@ -348,6 +348,39 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             filter: brightness(1.1);
         }
         .btn-elite i { font-size: 20px; }
+
+        /* NUEVOS ESTILOS V77 - CONVERSIÓN PRO */
+        .trust-bar { padding: 40px 10%; background: #fff; display: flex; justify-content: center; align-items: center; gap: 60px; opacity: 0.5; filter: grayscale(1); flex-wrap: wrap; border-bottom: 1px solid #f0f0f0; }
+        .trust-bar img { height: 35px; }
+
+        .mockup-section { padding: 120px 10%; display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center; background: #fff; overflow: hidden; }
+        .mockup-img { position: relative; }
+        .mockup-img img { width: 100%; border-radius: 30px; box-shadow: 0 50px 100px rgba(106,55,183,0.15); transform: perspective(1000px) rotateY(-10deg); transition: 0.5s; }
+        .mockup-img:hover img { transform: perspective(1000px) rotateY(0deg); }
+        .mockup-badge { position: absolute; top: -20px; left: -20px; background: var(--primary); color: #fff; padding: 15px 25px; border-radius: 20px; font-weight: 900; box-shadow: 0 10px 30px rgba(106,55,183,0.4); }
+
+        .section-steps { padding: 120px 10%; text-align: center; background: var(--bg-off); }
+        .grid-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
+        .step-card { padding: 60px 40px; background: #fff; border-radius: 40px; position: relative; transition: 0.4s; }
+        .step-num { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); width: 70px; height: 70px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 900; box-shadow: 0 10px 20px rgba(106,55,183,0.3); }
+        .step-card h3 { margin-top: 20px; margin-bottom: 15px; font-size: 1.6rem; font-weight: 800; }
+
+        .comparison-wrap { margin-top: 60px; background: #fff; border-radius: 40px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.05); }
+        .comp-table { width: 100%; border-collapse: collapse; }
+        .comp-table th { padding: 30px; background: var(--primary); color: #fff; font-size: 1.2rem; }
+        .comp-table td { padding: 25px 30px; border-bottom: 1px solid #f0f0f0; text-align: center; font-size: 1.1rem; }
+        .comp-row-title { text-align: left !important; font-weight: 700; color: var(--text-dark); background: #fafafa; width: 40%; }
+        .comp-check { color: #25D366; font-size: 1.5rem; }
+        .comp-x { color: #ff4d4d; font-size: 1.5rem; }
+
+        @media (max-width: 1024px) {
+            .trust-bar { gap: 30px; padding: 30px 5%; }
+            .mockup-section { grid-template-columns: 1fr; text-align: center; padding: 80px 8%; gap: 40px; }
+            .mockup-img img { transform: none; }
+            .grid-steps { grid-template-columns: 1fr; gap: 60px; }
+            .comp-row-title { width: 50%; font-size: 0.9rem; padding: 15px; }
+            .comp-table td { padding: 15px; font-size: 0.9rem; }
+        }
     </style>
 </head>
 <body>
@@ -397,6 +430,31 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         </div>
     </section>
 
+    <!-- TRUST BAR V77 -->
+    <div class="trust-bar reveal-section">
+        <img src="assets/img/logo.png" alt="Trusted" style="opacity: 0.8; filter: none;">
+        <span style="font-weight: 800; color: var(--text-light); letter-spacing: 2px;">TECNOLOGÍA RESPALDADA POR EXPERTOS</span>
+        <img src="assets/img/logo.png" alt="Trusted" style="opacity: 0.8; filter: none; transform: scale(0.8);">
+    </div>
+
+    <!-- MOCKUP PRODUCT VISUALIZATION V77 -->
+    <section class="mockup-section reveal-section">
+        <div class="mockup-img reveal">
+            <div class="mockup-badge">APP ÉLITE</div>
+            <img src="assets/img/mockup_elite.png" alt="CajaYa POS Interface">
+        </div>
+        <div class="mockup-text reveal">
+            <h2 style="font-size: 3.5rem; font-weight: 900; line-height: 1; margin-bottom: 30px;">Una Interfaz diseñada para la <span>Velocidad.</span></h2>
+            <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 40px;">No pierdas tiempo con sistemas complicados. CajaYa es tan intuitivo que tu personal estará vendiendo en menos de 5 minutos. Grillas inteligentes, búsqueda instantánea y ticket digital.</p>
+            <ul class="p-features" style="column-count: 2; gap: 40px;">
+                <li><i class="fa-solid fa-check"></i> Interfaz Touch</li>
+                <li><i class="fa-solid fa-check"></i> Modo Oscuro Pro</li>
+                <li><i class="fa-solid fa-check"></i> Ticket WhatsApp</li>
+                <li><i class="fa-solid fa-check"></i> Inventario Real</li>
+            </ul>
+        </div>
+    </section>
+
     <section class="section-poder reveal-section" id="poder" style="background: var(--bg-off);">
         <div class="header-elite">
             <h2>El Poder de <span>CajaYa.</span></h2>
@@ -409,6 +467,75 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         </div>
     </section>
 
+    <!-- PROCESS STEPS V77 -->
+    <section class="section-steps reveal-section">
+        <div class="header-elite">
+            <h2>Empieza en <span>3 Pasos.</span></h2>
+            <p style="color: var(--text-light); margin-top: 20px;">Del registro a tu primera venta en tiempo récord.</p>
+        </div>
+        <div class="grid-steps">
+            <div class="step-card reveal">
+                <div class="step-num">1</div>
+                <h3>Regístrate</h3>
+                <p>Crea tu cuenta Élite en segundos con tu correo o Google.</p>
+            </div>
+            <div class="step-card reveal">
+                <div class="step-num">2</div>
+                <h3>Carga Stock</h3>
+                <p>Usa nuestra base de 20,000 productos o sube los tuyos con Excel.</p>
+            </div>
+            <div class="step-card reveal">
+                <div class="step-num">3</div>
+                <h3>¡A Vender!</h3>
+                <p>Abre tu caja y empieza a facturar con la velocidad de un grande.</p>
+            </div>
+        </div>
+    </section>
+
+    </div>
+
+    <!-- COMPARISON TABLE V77 -->
+    <section class="reveal-section" style="padding: 100px 10%; text-align: center; background: #fff;">
+        <div class="header-elite">
+            <h2>Por qué elegir <span>CajaYa.</span></h2>
+            <p style="color: var(--text-light); margin-top: 20px;">La diferencia entre sobrevivir y dominar el mercado.</p>
+        </div>
+        <div class="comparison-wrap reveal">
+            <table class="comp-table">
+                <thead>
+                    <tr>
+                        <th class="comp-row-title" style="background: #fff;">Característica</th>
+                        <th>Sistemas Viejos</th>
+                        <th style="background: var(--primary-glow); color: var(--primary);">CajaYa Élite</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="comp-row-title">Modo Offline Real</td>
+                        <td><i class="fa-solid fa-xmark comp-x"></i></td>
+                        <td><i class="fa-solid fa-check comp-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="comp-row-title">Catálogo 20k Productos</td>
+                        <td><i class="fa-solid fa-xmark comp-x"></i></td>
+                        <td><i class="fa-solid fa-check comp-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="comp-row-title">Soporte WhatsApp VIP</td>
+                        <td><i class="fa-solid fa-xmark comp-x"></i></td>
+                        <td><i class="fa-solid fa-check comp-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="comp-row-title">Actualizaciones Gratis</td>
+                        <td><i class="fa-solid fa-xmark comp-x"></i></td>
+                        <td><i class="fa-solid fa-check comp-check"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <!-- CTA RAPIDO V77 -->
     <div class="ribbon-cta reveal">
         <div class="ribbon-text">
             <h3>Prueba la potencia de CajaYa hoy mismo.</h3>
