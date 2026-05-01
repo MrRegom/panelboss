@@ -486,27 +486,41 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             <p style="color: var(--text-light); margin-top: 20px;">Del registro a tu primera venta en tiempo récord.</p>
         </div>
         <div class="grid-steps">
-            <!-- Paso 1: SVG simula pantalla de registro CajaYa -->
+            <!-- Paso 1: SVG replica el modal REAL de CajaYa -->
             <div class="step-card reveal">
-                <div class="step-ui">
+                <div class="step-ui" style="background:#1a1a2e;">
                     <svg viewBox="0 0 280 190" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                        <rect width="280" height="190" fill="#f8f4ff"/>
-                        <!-- Barra superior tipo app -->
-                        <rect x="0" y="0" width="280" height="32" fill="#6A37B7" rx="0"/>
-                        <circle cx="16" cy="16" r="6" fill="white" opacity="0.5"/>
-                        <text x="30" y="21" font-size="11" fill="white" font-family="Arial" font-weight="bold">CajaYa — Crear cuenta</text>
-                        <!-- Logo central -->
-                        <circle cx="140" cy="72" r="22" fill="white" stroke="#6A37B7" stroke-width="2"/>
-                        <text x="140" y="77" font-size="14" fill="#6A37B7" text-anchor="middle" font-family="Arial" font-weight="bold">CY</text>
+                        <!-- Fondo oscuro tipo overlay -->
+                        <rect width="280" height="190" fill="#1a1a2e" opacity="0.95"/>
+                        <!-- Card blanca principal -->
+                        <rect x="20" y="14" width="240" height="162" rx="14" fill="white" filter="url(#shadow)"/>
+                        <defs><filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.25"/></filter></defs>
+                        <!-- X cerrar -->
+                        <text x="248" y="30" font-size="10" fill="#999" font-family="Arial">×</text>
+                        <!-- Título -->
+                        <text x="140" y="44" font-size="12" fill="#6A37B7" text-anchor="middle" font-family="Arial" font-weight="bold">¡Casi es tuyo!</text>
+                        <text x="140" y="56" font-size="7" fill="#888" text-anchor="middle" font-family="Arial">Estás adquiriendo el Plan Lifetime.</text>
+                        <!-- Botón Google pill -->
+                        <rect x="50" y="62" width="180" height="22" rx="11" fill="#4285F4"/>
+                        <circle cx="64" cy="73" r="8" fill="white"/>
+                        <text x="64" y="77" font-size="9" fill="#4285F4" text-anchor="middle" font-family="Arial" font-weight="bold">R</text>
+                        <text x="155" y="77" font-size="8" fill="white" text-anchor="middle" font-family="Arial" font-weight="bold">Continue as Reinaldo ✓</text>
+                        <!-- Divider -->
+                        <line x1="30" y1="92" x2="120" y2="92" stroke="#eee" stroke-width="1"/>
+                        <text x="140" y="96" font-size="7" fill="#bbb" text-anchor="middle" font-family="Arial">O USA TU CORREO</text>
+                        <line x1="160" y1="92" x2="250" y2="92" stroke="#eee" stroke-width="1"/>
                         <!-- Campo nombre -->
-                        <rect x="30" y="102" width="220" height="18" rx="5" fill="white" stroke="#ddd" stroke-width="1"/>
-                        <text x="40" y="115" font-size="9" fill="#aaa" font-family="Arial">Nombre completo</text>
+                        <rect x="30" y="100" width="220" height="17" rx="6" fill="white" stroke="#6A37B7" stroke-width="1.2"/>
+                        <text x="42" y="112" font-size="8" fill="#555" font-family="Arial">👤 Nombre completo</text>
                         <!-- Campo email -->
-                        <rect x="30" y="126" width="220" height="18" rx="5" fill="white" stroke="#ddd" stroke-width="1"/>
-                        <text x="40" y="139" font-size="9" fill="#aaa" font-family="Arial">Correo electrónico</text>
-                        <!-- Botón -->
-                        <rect x="30" y="152" width="220" height="22" rx="8" fill="#6A37B7"/>
-                        <text x="140" y="167" font-size="10" fill="white" text-anchor="middle" font-family="Arial" font-weight="bold">Crear mi cuenta gratis</text>
+                        <rect x="30" y="121" width="220" height="17" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
+                        <text x="42" y="133" font-size="8" fill="#aaa" font-family="Arial">✉️ correo@gmail.com</text>
+                        <!-- Campo whatsapp -->
+                        <rect x="30" y="142" width="220" height="17" rx="6" fill="white" stroke="#ddd" stroke-width="1"/>
+                        <text x="42" y="154" font-size="8" fill="#aaa" font-family="Arial">📱 +569...</text>
+                        <!-- Botón Proceder -->
+                        <rect x="30" y="163" width="220" height="8" rx="4" fill="#6A37B7"/>
+                        <text x="140" y="170" font-size="6" fill="white" text-anchor="middle" font-family="Arial" font-weight="bold">PROCEDER AL PAGO</text>
                     </svg>
                 </div>
                 <div class="step-num">1</div>
@@ -993,6 +1007,45 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 btn.innerHTML = 'REINTENTAR';
             }
         }
+
+    <!-- BOTÓN FLOTANTE WHATSAPP V81 -->
+    <a href="https://wa.me/56900000000?text=Hola%2C%20quiero%20info%20sobre%20CajaYa" 
+       target="_blank" 
+       id="wa-float"
+       aria-label="Contactar por WhatsApp"
+       title="Chatea con nosotros">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="wa-tooltip">Escríbenos ahora</span>
+    </a>
+    <style>
+        #wa-float {
+            position: fixed; bottom: 30px; right: 30px; z-index: 9999;
+            width: 62px; height: 62px; background: #25D366;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 30px; color: white; text-decoration: none;
+            box-shadow: 0 6px 24px rgba(37,211,102,0.45);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: waPulse 2.5s infinite;
+        }
+        #wa-float:hover { transform: scale(1.12); box-shadow: 0 10px 35px rgba(37,211,102,0.55); animation: none; }
+        .wa-tooltip {
+            position: absolute; right: 74px; background: #1a1a1a; color: #fff;
+            padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 600;
+            white-space: nowrap; opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease; font-family: 'Inter', sans-serif;
+        }
+        #wa-float:hover .wa-tooltip { opacity: 1; }
+        @keyframes waPulse {
+            0%   { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+            70%  { box-shadow: 0 0 0 14px rgba(37,211,102,0); }
+            100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+        }
+        @media (max-width: 768px) {
+            #wa-float { bottom: 20px; right: 20px; width: 54px; height: 54px; font-size: 26px; }
+            .wa-tooltip { display: none; }
+        }
+    </style>
+
     </script>
 </body>
 </html>
