@@ -65,15 +65,48 @@ $companies = $db->query("SELECT id, name FROM companies ORDER BY name")->fetchAl
         </main>
     </div>
 
+    <!-- Modal Generar Licencia -->
+    <div class="modal fade" id="modalGenerateLicense" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">Generar Nueva Licencia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="formGenerateLicense">
+                    <div class="modal-body p-4 text-start">
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">PLAN</label>
+                            <select class="form-select" name="plan" required>
+                                <option value="BASIC">BASIC</option>
+                                <option value="PRO">PRO</option>
+                                <option value="ENTERPRISE">ENTERPRISE</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">FECHA DE EXPIRACIÓN (OPCIONAL)</label>
+                            <input type="date" class="form-control" name="expires_at">
+                            <div class="form-text text-muted">Dejar vacío para licencia perpetua.</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="submit" class="btn btn-primary px-4 fw-bold w-100 py-2">GENERAR LICENCIA</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
     $(document).ready(function() {
-        $('#licensesTable').DataTable({
+        const table = $('#licensesTable').DataTable({
             ajax: 'api/get_licenses.php',
             columns: [
                 { data: 'license_key', render: d => `<code class="text-primary fw-bold small">${d}</code>` },
@@ -94,6 +127,38 @@ $companies = $db->query("SELECT id, name FROM companies ORDER BY name")->fetchAl
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
             dom: '<"p-4 d-flex justify-content-between align-items-center"lf>rt<"p-4 d-flex justify-content-between align-items-center"ip>'
+        });
+
+        $('#formGenerateLicense').on('submit', function(e) {
+            e.preventDefault();
+            const $btn = $(this).find('button[type="submit"]');
+            const originalText = $btn.html();
+
+            $btn.prop('disabled', true).html('<i class="fas fa-magic fa-spin me-2"></i> Forjando llave...');
+            Swal.fire({ 
+                title: 'Generando Nueva Licencia...', 
+                html: 'Creando accesos criptográficos seguros',
+                allowOutsideClick: false, 
+                didOpen: () => { Swal.showLoading() } 
+            });
+
+            $.post('api/save_license.php', $(this).serialize(), function(response) {
+                setTimeout(() => {
+                    if(response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Licencia Forjada!',
+                            text: 'La nueva llave ha sido creada con éxito.',
+                            confirmButtonText: 'Genial'
+                        });
+                        $('#modalGenerateLicense').modal('hide');
+                        table.ajax.reload();
+                    } else {
+                        Swal.fire('Error', response.message, 'error');
+                    }
+                    $btn.prop('disabled', false).html(originalText);
+                }, 2500);
+            }, 'json');
         });
     });
     </script>

@@ -70,6 +70,25 @@ try {
         </main>
     </div>
 
+    <!-- Modal View (Foto y Datos) -->
+    <div class="modal fade" id="modalView" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4 text-center">
+                    <img src="" id="view_img" class="img-fluid rounded shadow-sm mb-3" style="max-height: 250px; object-fit: contain;">
+                    <h5 id="view_name" class="fw-bold text-dark mb-1">Nombre del Producto</h5>
+                    <div id="view_barcode" class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 mt-2" style="font-family: monospace; font-size: 1rem;">000000000000</div>
+                    <div class="mt-4">
+                        <button class="btn btn-secondary px-4" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
@@ -77,6 +96,14 @@ try {
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/js/adminlte.min.js"></script>
 
     <script>
+    function openViewModal(barcode, name) {
+        $('#view_name').text(name);
+        $('#view_barcode').text(barcode);
+        let src = barcode ? `img-proxy.php?b=${barcode}` : 'https://placehold.co/300x300?text=S/I';
+        $('#view_img').attr('src', src);
+        $('#modalView').modal('show');
+    }
+
     $(document).ready(function() {
         const table = $('#catalogTable').DataTable({
             ajax: 'api/get_master_catalog.php',
@@ -84,12 +111,10 @@ try {
                 { 
                     data: 'image_path', 
                     render: (d, type, row) => {
-                        // Las carpetas storage/ e imagenes_productos/ están fuera del
-                        // web root de panel.cajaya.cl (nginx apunta a /admin/).
-                        // Usamos el proxy PHP para servir las imágenes desde el filesystem.
                         let barcode = row.barcode;
+                        let name = row.name ? row.name.replace(/'/g, "\\'") : '';
                         let src = barcode ? `img-proxy.php?b=${barcode}` : '';
-                        return `<img src="${src}" class="img-catalog-silk" onerror="this.src='https://placehold.co/100x100?text=S/I'">`;
+                        return `<img src="${src}" class="img-catalog-silk" style="cursor: pointer;" onclick="openViewModal('${barcode}', '${name}')" onerror="this.src='https://placehold.co/100x100?text=S/I'">`;
                     }
                 },
                 { data: 'barcode', className: 'fw-bold text-primary small' },
@@ -102,9 +127,15 @@ try {
                 { 
                     data: null, 
                     className: 'text-end',
-                    render: () => `
-                        <button class="btn btn-link text-primary p-2"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button class="btn btn-link text-danger p-2"><i class="fa-solid fa-trash"></i></button>`
+                    render: (d, type, row) => {
+                        let barcode = row.barcode;
+                        let name = row.name ? row.name.replace(/'/g, "\\'") : '';
+                        return `
+                        <button class="btn btn-link text-primary p-2" onclick="openViewModal('${barcode}', '${name}')"><i class="fa-solid fa-eye"></i></button>
+                        <button class="btn btn-link text-secondary p-2"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="btn btn-link text-danger p-2"><i class="fa-solid fa-trash"></i></button>
+                        `;
+                    }
                 }
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
