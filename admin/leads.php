@@ -59,7 +59,7 @@ $db = Database::getConnection();
             <div class="app-content">
                 <div class="container-fluid px-5 pb-5">
                     <div class="table-responsive">
-                        <table id="leadsTable" class="table align-middle mb-0" style="width:100%">
+                        <table id="leadsTable" class="table premium-table w-100">
                             <thead>
                                 <tr>
                                     <th>USUARIO</th>
