@@ -432,7 +432,15 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             .comp-feature { font-size: 0.9rem; }
             .badge-no, .badge-yes { padding: 5px 10px; font-size: 0.78rem; }
             .comp-row.header-row { padding: 14px 20px; }
-            .roi-card { grid-template-columns: 1fr; padding: 30px; gap: 40px; }
+            
+            /* ROI Mobile Fix V88 */
+            .section-roi { padding: 80px 5%; }
+            .roi-card { grid-template-columns: 1fr; padding: 30px 20px; gap: 30px; border-radius: 30px; }
+            .roi-control label { font-size: 1rem !important; flex-direction: column; align-items: flex-start; gap: 5px; }
+            .roi-control label span { font-size: 1.2rem !important; }
+            .res-val { font-size: 1.8rem !important; }
+            #resAnnual { font-size: 2.2rem !important; }
+            .roi-results { padding: 30px 20px; }
         }
     </style>
 </head>
