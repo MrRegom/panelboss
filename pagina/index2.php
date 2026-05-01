@@ -259,9 +259,19 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             .faq-item.active .faq-body { padding-bottom: 25px; }
         }
 
-        /* REVEAL ON SCROLL ANIMATIONS (V59) */
-        .reveal-section { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
-        .reveal-section.revealed { opacity: 1; transform: translateY(0); }
+        /* REVEAL ON SCROLL ANIMATIONS (V60) - ULTRA RICH iOS STYLE */
+        .reveal-section { 
+            opacity: 0; 
+            transform: translateY(120px) scale(0.94); 
+            filter: blur(15px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity, filter;
+        }
+        .reveal-section.revealed { 
+            opacity: 1; 
+            transform: translateY(0) scale(1); 
+            filter: blur(0);
+        }
     </style>
 </head>
 <body>
