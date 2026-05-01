@@ -172,6 +172,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .faq-item.active i { transform: rotate(135deg); background: var(--primary); color: #fff; }
 
         /* RIBBON CTA (V31) */
+        /* RIBBON CTA (V31) */
         .ribbon-cta { 
             background: linear-gradient(90deg, #2D1452, #6A37B7); 
             padding: 60px 10%; color: #fff; display: flex; align-items: center; justify-content: space-between; 
@@ -181,6 +182,19 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .ribbon-text p { opacity: 0.7; font-size: 1.1rem; }
         .btn-white { background: #fff; color: var(--primary); padding: 18px 40px; border-radius: 15px; font-weight: 800; text-decoration: none; transition: 0.3s; border: none; cursor: pointer; text-transform: uppercase; font-size: 14px; }
         .btn-white:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+
+        @media (max-width: 1024px) {
+            .ribbon-cta { 
+                flex-direction: column; 
+                text-align: center; 
+                gap: 30px; 
+                padding: 60px 8%; 
+                border-radius: 0; 
+            }
+            .ribbon-text h3 { font-size: 1.8rem; }
+            .ribbon-text p { font-size: 1rem; margin-bottom: 0; }
+            .btn-white { width: 100%; max-width: 300px; padding: 20px; }
+        }
 
         /* MODAL GLASS (V31) */
         .modal-overlay { position: fixed; inset: 0; background: rgba(13, 11, 20, 0.85); backdrop-filter: blur(15px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px; cursor: pointer; }
@@ -236,10 +250,10 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             .f-col { align-items: center; display: flex; flex-direction: column; }
             .f-bottom { flex-direction: column; gap: 20px; text-align: center; }
             .slide { justify-content: center; padding: 0 5%; }
-            .hero-content { text-align: center; width: 100%; max-width: 100%; }
-            .c-arrow { width: 42px; height: 42px; font-size: 12px; background: rgba(255,255,255,0.9); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-            .c-prev { left: 10px; }
-            .c-next { right: 10px; }
+            .hero-content { text-align: center; width: 100%; max-width: 100%; padding: 0 10px; }
+            .c-arrow { width: 38px; height: 38px; font-size: 10px; background: rgba(255,255,255,0.95); color: var(--primary); }
+            .c-prev { left: 5px; z-index: 200; }
+            .c-next { right: 5px; z-index: 200; }
             .faq-item h4 { padding: 25px 20px; font-size: 1.1rem; }
             .faq-body { padding: 0 20px 0; font-size: 1rem; }
             .faq-item.active .faq-body { padding-bottom: 25px; }
