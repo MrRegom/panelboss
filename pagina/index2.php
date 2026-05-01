@@ -449,6 +449,20 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             .grid-poder .card-poder i.fa-star { font-size: 12px !important; }
             .grid-poder .card-poder p { font-size: 0.95rem; text-align: center; }
         }
+
+        /* ESTRELLAS ÉPICAS V93 */
+        .star-epic {
+            color: #FFC107 !important;
+            text-shadow: 0 0 12px rgba(255, 193, 7, 0.9);
+            animation: starPulse 2.5s infinite ease-in-out;
+            display: inline-block;
+        }
+
+        @keyframes starPulse {
+            0% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.15); filter: brightness(1.4); text-shadow: 0 0 20px rgba(255, 193, 7, 1); }
+            100% { transform: scale(1); filter: brightness(1); }
+        }
     </style>
 </head>
 <body>
@@ -791,24 +805,24 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         </div>
         <div class="grid-poder" style="margin-top: 60px;">
             <div class="card-poder reveal">
-                <div style="display:flex; color:#FFC107; margin-bottom:15px; justify-content:center; gap:8px;">
-                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
-                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
-                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
-                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
-                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                <div style="display:flex; margin-bottom:15px; justify-content:center; gap:8px;">
+                    <i class="fa-solid fa-star star-epic"></i>
+                    <i class="fa-solid fa-star star-epic"></i>
+                    <i class="fa-solid fa-star star-epic"></i>
+                    <i class="fa-solid fa-star star-epic"></i>
+                    <i class="fa-solid fa-star star-epic"></i>
                 </div>
                 <p style="font-style:italic; margin-bottom:20px; line-height:1.4;">"Antes pasaba 3 horas cuadrando caja. Hoy lo hago en 1 minuto desde mi celular."</p>
                 <h4 style="font-weight:900;">Juan P.</h4>
                 <small style="color:var(--primary); font-weight:700;">Botillería Santa Elena</small>
             </div>
             <div class="card-poder reveal">
-                <div style="display:flex; color:#FFC107; margin-bottom:15px; justify-content:center; gap:8px;">
-                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
-                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
-                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
-                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
-                    <i class="fa-solid fa-star" style="font-size:14px;"></i>
+                <div style="display:flex; margin-bottom:15px; justify-content:center; gap:8px;">
+                    <i class="fa-solid fa-star star-epic"></i>
+                    <i class="fa-solid fa-star star-epic"></i>
+                    <i class="fa-solid fa-star star-epic"></i>
+                    <i class="fa-solid fa-star star-epic"></i>
+                    <i class="fa-solid fa-star star-epic"></i>
                 </div>
                 <p style="font-style:italic; margin-bottom:20px; line-height:1.4;">"El SII ya no es un dolor de cabeza. Todo automático y sin multas."</p>
                 <h4 style="font-weight:900;">María L.</h4>
