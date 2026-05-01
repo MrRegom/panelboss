@@ -1,146 +1,142 @@
 /* 
- * CAJAYA UNIFIED PREMIUM (V107)
- * Sistema Global de Diseño: Cápsulas Flotantes / Estándar Microsoft Azure
+ * CAJAYA AZURE EDITION (V108)
+ * Estética: Microsoft 365 / Azure Portal - Orden Absoluto
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --bg-main: #f3f4f6; /* Fondo gris muy suave para que las cápsulas resalten */
-    --accent-gold: #f59e0b;
-    --accent-indigo: #6366f1;
-    --text-dark: #0f172a;
-    --text-gray: #64748b;
-    --radius-premium: 16px;
+    --ms-bg: #f5f5f5;
+    --ms-sidebar: #ffffff;
+    --ms-border: #edebe9;
+    --ms-primary: #0078d4; /* Microsoft Azure Blue */
+    --ms-text: #323130;
+    --ms-text-muted: #605e5c;
+    --ms-card-shadow: 0 1.6px 3.6px 0 rgba(0,0,0,0.132), 0 0.3px 0.9px 0 rgba(0,0,0,0.108);
 }
 
 body {
-    background-color: var(--bg-main) !important;
+    background-color: var(--ms-bg) !important;
     font-family: 'Inter', sans-serif;
-    color: var(--text-dark);
+    color: var(--ms-text);
+    font-size: 0.9rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Outfit', sans-serif;
-    letter-spacing: -0.03em;
+/* --- Microsoft Header --- */
+.app-header {
+    background: var(--ms-primary) !important;
+    border-bottom: none !important;
+    height: 48px;
 }
 
-/* --- Unificación de Tablas (Look Cápsula Global) --- */
-.premium-table-container {
-    padding: 0 1rem;
+.app-header .nav-link {
+    color: #ffffff !important;
+    font-weight: 400;
 }
 
-table.dataTable.premium-table {
-    border-collapse: separate !important;
-    border-spacing: 0 12px !important; /* Espacio entre filas/cápsulas */
-    background: transparent !important;
-    border: none !important;
+/* --- Azure Sidebar --- */
+.app-sidebar {
+    background: var(--ms-sidebar) !important;
+    border-right: 1px solid var(--ms-border) !important;
+    box-shadow: none !important;
 }
 
-table.dataTable.premium-table thead th {
-    background: transparent !important;
-    color: var(--text-gray) !important;
-    font-size: 0.7rem !important;
-    font-weight: 800 !important;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: 10px 24px !important;
-    border: none !important;
-}
-
-table.dataTable.premium-table tbody tr {
+.sidebar-brand {
     background: #ffffff !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.02) !important;
-    border-radius: var(--radius-premium) !important;
-    transition: all 0.2s ease;
+    border-bottom: 1px solid var(--ms-border) !important;
+    height: 48px;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-table.dataTable.premium-table tbody tr:hover {
-    transform: translateY(-2px) scale(1.005);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
-    z-index: 10;
+.nav-sidebar .nav-link {
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 12px 20px !important;
+    color: var(--ms-text) !important;
+    border-left: 4px solid transparent;
+    font-weight: 400;
 }
 
-table.dataTable.premium-table tbody td {
-    padding: 20px 24px !important;
-    border: none !important;
+.nav-sidebar .nav-link:hover {
+    background: #f3f2f1 !important;
+}
+
+.nav-sidebar .nav-link.active {
+    background: #edebe9 !important;
+    border-left-color: var(--ms-primary);
+    font-weight: 600;
+}
+
+.nav-header {
+    color: var(--ms-text-muted) !important;
+    font-weight: 700 !important;
+    font-size: 0.7rem !important;
+    padding: 20px 20px 10px !important;
+}
+
+/* --- Clean Azure Tables --- */
+.card-ms {
+    background: #ffffff;
+    border: 1px solid var(--ms-border);
+    box-shadow: var(--ms-card-shadow);
+    border-radius: 2px;
+    padding: 0;
+}
+
+table.dataTable.ms-table {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+table.dataTable.ms-table thead th {
+    background: #ffffff !important;
+    color: var(--ms-text) !important;
+    font-weight: 600 !important;
+    font-size: 0.8rem !important;
+    padding: 12px 20px !important;
+    border-bottom: 1px solid var(--ms-border) !important;
+}
+
+table.dataTable.ms-table tbody td {
+    padding: 12px 20px !important;
+    border-bottom: 1px solid var(--ms-border) !important;
+    font-size: 0.85rem;
     vertical-align: middle;
 }
 
-/* Bordes redondeados para la cápsula (primera y última celda) */
-table.dataTable.premium-table tbody tr td:first-child { 
-    border-top-left-radius: var(--radius-premium) !important; 
-    border-bottom-left-radius: var(--radius-premium) !important; 
-}
-table.dataTable.premium-table tbody tr td:last-child { 
-    border-top-right-radius: var(--radius-premium) !important; 
-    border-bottom-right-radius: var(--radius-premium) !important; 
+table.dataTable.ms-table tbody tr:hover {
+    background-color: #f3f2f1 !important;
 }
 
-/* --- Badges Unificados --- */
-.badge-premium {
-    padding: 6px 12px;
-    border-radius: 100px;
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.badge-active { background: #dcfce7; color: #166534; }
-.badge-pending { background: #fef9c3; color: #854d0e; }
-.badge-demo { background: #f1f5f9; color: #475569; }
-
-/* --- Sidebar Refined (Acrylic) --- */
-.app-sidebar {
-    background: #09090b !important;
-    backdrop-filter: blur(20px);
-}
-
-.nav-link.active {
-    background: #fff !important;
-    color: #000 !important;
-    font-weight: 700;
-}
-
-/* --- Botones --- */
-.btn-premium-gold {
-    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-    color: #fff;
+/* --- Buttons (Microsoft Style) --- */
+.btn-ms-primary {
+    background-color: var(--ms-primary);
+    color: #ffffff;
     border: none;
-    border-radius: 12px;
-    padding: 12px 24px;
-    font-weight: 700;
-    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    border-radius: 2px;
+    padding: 6px 20px;
+    font-weight: 400;
+    font-size: 0.85rem;
 }
 
-.btn-premium-indigo {
-    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    padding: 12px 24px;
-    font-weight: 700;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+.btn-ms-primary:hover {
+    background-color: #005a9e;
+    color: #ffffff;
 }
 
-/* Inputs Refinados */
-.form-control, .form-select {
-    border-radius: 10px !important;
-    border: 1px solid #e2e8f0 !important;
-    padding: 12px 16px !important;
+/* Page Header */
+.ms-page-header {
+    background: #ffffff;
+    border-bottom: 1px solid var(--ms-border);
+    padding: 20px 40px;
+    margin-bottom: 30px;
 }
 
-.dataTables_filter input {
-    border-radius: 100px !important;
-    padding: 8px 20px !important;
-    border: 1px solid #e2e8f0 !important;
-    background: #fff !important;
-}
-
-/* --- Layout --- */
-.app-content-header {
-    background: #fff;
-    border-bottom: 1px solid #e2e8f0;
-    padding: 3rem 0;
+.ms-page-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
 }
