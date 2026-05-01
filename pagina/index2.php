@@ -671,11 +671,12 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 @media (max-width: 1024px) {
                     .mockup-img div[style*="position: absolute"] {
                         position: relative !important;
+                        left: 0 !important;
                         right: 0 !important;
                         bottom: 0 !important;
-                        margin: 20px auto 0 !important; /* Bajamos la ventana para no tapar la foto */
-                        width: 85% !important;
-                        max-width: 320px;
+                        margin: 30px auto 0 !important; 
+                        width: 95% !important;
+                        max-width: 380px;
                         z-index: 10;
                     }
                 }
