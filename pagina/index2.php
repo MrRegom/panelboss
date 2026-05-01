@@ -269,7 +269,8 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 text-align: center; 
                 margin-bottom: 40px; 
                 line-height: 1.5;
-                color: var(--text-light) !important;
+                color: var(--primary) !important; /* Color Morado Élite (V75) */
+                font-weight: 600;
                 text-shadow: 0 1px 5px rgba(255,255,255,0.5);
                 border-left: none !important;
             }
