@@ -56,10 +56,28 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
         body { background: var(--bg-white); color: var(--text-dark); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-        /* PRELOADER */
-        #preloader { position: fixed; inset: 0; background: #fff; display: flex; align-items: center; justify-content: center; z-index: 10000; transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .pre-logo { width: 140px; animation: pulse 1.5s infinite ease-in-out; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 20px rgba(106,55,183,0.2)); } }
+        /* PRELOADER CINEMATOGRÁFICO (V83) */
+        #preloader { position: fixed; inset: -50px; background: #fff; display: flex; align-items: center; justify-content: center; z-index: 10000; transition: opacity 0.8s ease-in-out; perspective: 1000px; }
+        .pre-logo { width: 160px; opacity: 0; transform: translateY(-100vh) scale(0.5) rotateX(45deg); animation: epicDrop 1s cubic-bezier(0.2, 1, 0.3, 1) forwards; }
+        @keyframes epicDrop {
+            0% { transform: translateY(-100vh) scale(0.5) rotateX(45deg); opacity: 0; }
+            50% { transform: translateY(20px) scale(1.2) rotateX(-10deg); opacity: 1; filter: drop-shadow(0 40px 20px rgba(106,55,183,0.1)); }
+            70% { transform: translateY(-15px) scale(0.9) rotateX(5deg); opacity: 1; filter: drop-shadow(0 20px 20px rgba(106,55,183,0.2)); }
+            100% { transform: translateY(0) scale(1) rotateX(0); opacity: 1; filter: drop-shadow(0 15px 30px rgba(106,55,183,0.4)); }
+        }
+        .shake-camera { animation: cameraShake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+        @keyframes cameraShake {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            10% { transform: translate(-15px, -15px) rotate(-1deg); }
+            20% { transform: translate(15px, 15px) rotate(1deg); }
+            30% { transform: translate(-10px, 10px) rotate(-1deg); }
+            40% { transform: translate(10px, -10px) rotate(1deg); }
+            50% { transform: translate(-5px, -5px) rotate(-0.5deg); }
+            60% { transform: translate(5px, 5px) rotate(0.5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        .pulse-after-drop { animation: pulse 1.5s infinite ease-in-out !important; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; filter: drop-shadow(0 15px 30px rgba(106,55,183,0.4)); } 50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 40px rgba(106,55,183,0.6)); } }
         
         /* Cursor de escritura (V74) */
         .typing-cursor::after { content: '|'; animation: blink 1s infinite; margin-left: 2px; color: var(--primary); font-weight: 900; }
@@ -760,16 +778,27 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
 
     <script>
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                const preloader = document.getElementById('preloader');
-                if(preloader) {
-                    preloader.style.opacity = '0';
-                    setTimeout(() => { 
-                        preloader.style.display = 'none'; 
-                        startTypewriter(); // Inicia la escritura al terminar (V74)
-                    }, 800);
-                }
-            }, 2000); // 2 segundos de pulso épico (V74)
+            const preloader = document.getElementById('preloader');
+            const logo = document.querySelector('.pre-logo');
+            if(preloader) {
+                // Temblor de cámara justo en el momento del impacto (500ms)
+                setTimeout(() => {
+                    preloader.classList.add('shake-camera');
+                }, 500);
+
+                // Después de caer (1s), pulsa y luego desaparece
+                setTimeout(() => {
+                    if (logo) logo.classList.add('pulse-after-drop');
+                    
+                    setTimeout(() => {
+                        preloader.style.opacity = '0';
+                        setTimeout(() => { 
+                            preloader.style.display = 'none'; 
+                            startTypewriter(); // Inicia la escritura al terminar (V74)
+                        }, 800);
+                    }, 1200); // Mantiene el pulso épico por 1.2s
+                }, 1000);
+            }
         });
 
         function startTypewriter() {
