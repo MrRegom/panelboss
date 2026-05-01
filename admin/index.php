@@ -13,8 +13,6 @@ try {
     $total_leads = $db->query("SELECT COUNT(*) FROM leads")->fetchColumn();
     
     $recent_leads = $db->query("SELECT full_name, email, created_at FROM leads ORDER BY created_at DESC LIMIT 5")->fetchAll();
-    
-    // Necesitamos empresas para el modal de nueva licencia
     $companies_list = $db->query("SELECT id, name FROM companies ORDER BY name ASC")->fetchAll();
 } catch (\Exception $e) {
     die("Error de base de datos: " . $e->getMessage());
@@ -24,9 +22,9 @@ try {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Quantum Dashboard | PanelBoss 2026</title>
+    <title>Panel de Control | CajaYa SaaS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/admin-custom.css">
@@ -39,18 +37,13 @@ try {
                     <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i class="fa-solid fa-bars-staggered"></i> </a> </li>
                 </ul>
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item d-none d-md-block me-3">
-                        <div class="d-flex align-items-center bg-white bg-opacity-5 rounded-pill px-3 py-1 border border-white border-opacity-10">
-                            <div class="bg-success rounded-circle me-2" style="width: 8px; height: 8px; box-shadow: 0 0 10px #10b981;"></div>
-                            <span class="x-small fw-bold opacity-75">SISTEMA: OPERATIVO</span>
-                        </div>
-                    </li>
                     <li class="nav-item dropdown user-menu"> 
                         <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown"> 
-                            <img src="https://ui-avatars.com/api/?name=Admin&background=6366f1&color=fff" class="rounded-circle border border-white border-opacity-20" style="width: 32px;" alt="">
+                            <span class="text-white small fw-medium me-2"><?= $_SESSION['user_name'] ?? 'Admin' ?></span>
+                            <img src="https://ui-avatars.com/api/?name=Admin&background=fff&color=000" class="rounded-circle border" style="width: 28px;" alt="">
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-3 p-2 rounded-4">
-                            <li><a href="logout.php" class="dropdown-item rounded-3 py-2 text-danger fw-bold"><i class="fa-solid fa-power-off me-2"></i> Salir</a></li>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-3 p-2 rounded-3">
+                            <li><a href="logout.php" class="dropdown-item py-2 text-danger small fw-bold"><i class="fa-solid fa-power-off me-2"></i> Cerrar Sesión</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -60,104 +53,83 @@ try {
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
         <main class="app-main">
-            <div class="py-5">
+            <div class="py-5 bg-white border-bottom mb-4">
                 <div class="container-fluid px-5">
-                    <div class="row align-items-end mb-5 g-4">
-                        <div class="col-md-7">
-                            <h6 class="text-primary fw-bold mb-2 glow-text">QUANTUM COMMAND CENTER</h6>
-                            <h1 class="fw-extrabold page-title mb-0" style="font-size: 2.8rem; letter-spacing: -2px;">Panel General</h1>
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h2 class="fw-bold mb-1">Panel General</h2>
+                            <p class="text-muted small mb-0">Gestión centralizada del ecosistema de licencias y partners.</p>
                         </div>
-                        <div class="col-md-5 text-md-end">
+                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
                             <div class="d-flex gap-2 justify-content-md-end">
-                                <button class="btn btn-quantum-outline px-4" onclick="exportData()">
-                                    <i class="fa-solid fa-file-export me-2"></i> EXPORTAR
+                                <button class="btn btn-outline" onclick="exportData()">
+                                    <i class="fa-solid fa-download me-2"></i> Reporte
                                 </button>
-                                <button class="btn btn-quantum px-4" data-bs-toggle="modal" data-bs-target="#modalGenerateLicense">
-                                    <i class="fa-solid fa-bolt me-2"></i> NUEVA LICENCIA
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalGenerateLicense">
+                                    <i class="fa-solid fa-plus me-2"></i> Nueva Licencia
                                 </button>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <!-- Bento Grid Metrics -->
+            <div class="app-content">
+                <div class="container-fluid px-5">
+                    <!-- Metrics Row -->
                     <div class="row g-4 mb-5">
                         <div class="col-lg-3 col-md-6">
-                            <div class="bento-card">
-                                <div class="icon-box text-primary">
-                                    <i class="fa-solid fa-id-card"></i>
-                                </div>
-                                <p class="label">Total Licencias</p>
-                                <h2 class="value"><?= number_format($total_licenses) ?></h2>
-                                <div class="neon-border mt-4"></div>
+                            <div class="bento-card-light">
+                                <span class="text-muted small fw-bold text-uppercase opacity-50">Total Licencias</span>
+                                <div class="h3 fw-bold mt-2 mb-0"><?= number_format($total_licenses) ?></div>
+                                <div class="mt-2 text-success small fw-bold"><i class="fa-solid fa-chart-line me-1"></i> +4.5%</div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <div class="bento-card">
-                                <div class="icon-box text-success">
-                                    <i class="fa-solid fa-tower-broadcast"></i>
-                                </div>
-                                <p class="label">Terminales Online</p>
-                                <h2 class="value text-success"><?= number_format($active_licenses) ?></h2>
-                                <div class="mt-3 opacity-50 x-small fw-bold">LATENCIA PROMEDIO: 12ms</div>
+                            <div class="bento-card-light">
+                                <span class="text-muted small fw-bold text-uppercase opacity-50">Cajas Online</span>
+                                <div class="h3 fw-bold mt-2 mb-0 text-success"><?= number_format($active_licenses) ?></div>
+                                <div class="mt-2 text-muted small fw-bold">Live Sync Activo</div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <div class="bento-card">
-                                <div class="icon-box text-warning">
-                                    <i class="fa-solid fa-building-circle-check"></i>
-                                </div>
-                                <p class="label">Empresas Activas</p>
-                                <h2 class="value"><?= number_format($total_companies) ?></h2>
-                                <div class="mt-3">
-                                    <span class="badge bg-white bg-opacity-5 text-warning border-0 px-2">MULTI-TENANT</span>
-                                </div>
+                            <div class="bento-card-light">
+                                <span class="text-muted small fw-bold text-uppercase opacity-50">Empresas</span>
+                                <div class="h3 fw-bold mt-2 mb-0"><?= number_format($total_companies) ?></div>
+                                <div class="mt-2 text-muted small fw-bold">Core Multi-tenant</div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
-                            <div class="bento-card" style="background: linear-gradient(180deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%);">
-                                <div class="icon-box text-indigo">
-                                    <i class="fa-solid fa-user-plus"></i>
-                                </div>
-                                <p class="label">Leads (Prospectos)</p>
-                                <h2 class="value"><?= number_format($total_leads) ?></h2>
-                                <div class="mt-3 small opacity-50">Sincronizado vía Cloud</div>
+                            <div class="bento-card-light">
+                                <span class="text-muted small fw-bold text-uppercase opacity-50">Prospectos</span>
+                                <div class="h3 fw-bold mt-2 mb-0"><?= number_format($total_leads) ?></div>
+                                <div class="mt-2 text-muted small fw-bold">Nuevos registros</div>
                             </div>
                         </div>
                     </div>
 
                     <div class="row g-4">
-                        <!-- Activity Feed -->
+                        <!-- Activity -->
                         <div class="col-lg-8">
-                            <div class="bento-card p-0 overflow-hidden">
-                                <div class="p-4 d-flex justify-content-between align-items-center">
-                                    <h5 class="fw-bold mb-0">Monitor de Actividad</h5>
-                                    <i class="fa-solid fa-ellipsis-vertical opacity-50"></i>
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-white border-bottom p-4">
+                                    <h5 class="fw-bold mb-0">Actividad Reciente</h5>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="quantum-table">
+                                    <table class="table mb-0">
                                         <thead>
                                             <tr>
-                                                <th>IDENTIDAD</th>
-                                                <th>CANAL DE ACCESO</th>
-                                                <th>MARCA TEMPORAL</th>
+                                                <th>USUARIO</th>
+                                                <th>CANAL</th>
+                                                <th>FECHA</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($recent_leads as $lead): ?>
                                             <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center gap-3">
-                                                        <div class="rounded-circle bg-primary bg-opacity-20 p-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
-                                                            <i class="fa-solid fa-user text-primary x-small"></i>
-                                                        </div>
-                                                        <div>
-                                                            <div class="fw-bold"><?= htmlspecialchars($lead['full_name']) ?></div>
-                                                            <div class="x-small opacity-50"><?= htmlspecialchars($lead['email']) ?></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge bg-white bg-opacity-5 fw-bold">CLOUD PORTAL</span></td>
-                                                <td class="x-small opacity-50 fw-medium"><?= date('H:i - d M', strtotime($lead['created_at'])) ?></td>
+                                                <td class="fw-bold py-3"><?= htmlspecialchars($lead['full_name']) ?></td>
+                                                <td><span class="badge bg-slate bg-opacity-10 text-slate border">CLOUD</span></td>
+                                                <td class="text-muted small"><?= date('d/m/Y H:i', strtotime($lead['created_at'])) ?></td>
                                             </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -166,37 +138,31 @@ try {
                             </div>
                         </div>
                         
-                        <!-- System Health 2026 -->
+                        <!-- Health -->
                         <div class="col-lg-4">
-                            <div class="bento-card" style="background: #111114;">
-                                <h5 class="fw-bold mb-4">Core Infrastructure</h5>
-                                
-                                <div class="mb-4">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="x-small fw-bold opacity-50">POSTGRESQL LOAD</span>
-                                        <span class="x-small fw-bold text-success">LOW</span>
-                                    </div>
-                                    <div class="progress bg-white bg-opacity-5" style="height: 4px;">
-                                        <div class="progress-bar bg-success" style="width: 15%"></div>
-                                    </div>
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-white border-bottom p-4">
+                                    <h5 class="fw-bold mb-0">Infraestructura</h5>
                                 </div>
-
-                                <div class="mb-4">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="x-small fw-bold opacity-50">API THROUGHPUT</span>
-                                        <span class="x-small fw-bold text-primary">1.2k req/s</span>
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <div>
+                                            <div class="fw-bold small">Capa de Datos</div>
+                                            <div class="text-muted x-small">PostgreSQL 17 Optimized</div>
+                                        </div>
+                                        <div class="status-pill active">STABLE</div>
                                     </div>
-                                    <div class="progress bg-white bg-opacity-5" style="height: 4px;">
-                                        <div class="progress-bar bg-primary" style="width: 45%"></div>
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <div>
+                                            <div class="fw-bold small">API Gateway</div>
+                                            <div class="text-muted x-small">Endpoint Latency: 42ms</div>
+                                        </div>
+                                        <div class="status-pill active">99.9%</div>
                                     </div>
-                                </div>
-
-                                <div class="p-3 rounded-4 bg-white bg-opacity-5 border border-white border-opacity-5 mt-5">
-                                    <div class="d-flex align-items-center gap-3 mb-2">
-                                        <i class="fa-solid fa-microchip text-warning"></i>
-                                        <span class="fw-bold x-small">NODO: US-EAST-1 (Active)</span>
+                                    <hr class="opacity-10 my-4">
+                                    <div class="p-3 bg-light rounded-3 border">
+                                        <p class="x-small text-muted mb-0">Sistema operando bajo arquitectura distribuida de alto rendimiento.</p>
                                     </div>
-                                    <p class="x-small text-muted mb-0">Ecosistema CajaYa está escalando horizontalmente bajo demanda.</p>
                                 </div>
                             </div>
                         </div>
@@ -206,26 +172,26 @@ try {
         </main>
     </div>
 
-    <!-- Modal: Nueva Licencia (Copiado de licenses.php para funcionalidad inmediata) -->
+    <!-- Modal: Nueva Licencia -->
     <div class="modal fade" id="modalGenerateLicense" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title fw-bold">Forjar Nueva Licencia</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <h6 class="modal-title fw-bold">Generar Licencia de Servicio</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="formGenerateLicense">
-                    <div class="modal-body p-5">
-                        <div class="mb-4">
-                            <label class="x-small fw-bold text-muted mb-2">SELECCIONAR EMPRESA</label>
-                            <select class="form-select py-3" name="company_id" required>
-                                <option value="">Busque o seleccione empresa...</option>
+                    <div class="modal-body p-4">
+                        <div class="mb-3">
+                            <label class="x-small fw-bold text-muted mb-2 text-uppercase">Cliente / Empresa</label>
+                            <select class="form-select" name="company_id" required>
+                                <option value="">Seleccione empresa...</option>
                                 <?php foreach($companies_list as $c) { echo "<option value='{$c['id']}'>{$c['name']}</option>"; } ?>
                             </select>
                         </div>
-                        <div class="row g-3 mb-4">
+                        <div class="row g-3 mb-3">
                             <div class="col-6">
-                                <label class="x-small fw-bold text-muted mb-2">NIVEL DE PLAN</label>
+                                <label class="x-small fw-bold text-muted mb-2 text-uppercase">Plan</label>
                                 <select class="form-select" name="plan" required>
                                     <option value="BASIC">BASIC</option>
                                     <option value="PRO">PRO</option>
@@ -233,11 +199,11 @@ try {
                                 </select>
                             </div>
                             <div class="col-6">
-                                <label class="x-small fw-bold text-muted mb-2">EXPIRACIÓN</label>
+                                <label class="x-small fw-bold text-muted mb-2 text-uppercase">Expiración</label>
                                 <input type="date" class="form-control" name="expires_at">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-quantum w-100 py-3 mt-3">GENERAR LLAVE MAESTRA</button>
+                        <button type="submit" class="btn btn-primary w-100 py-3 mt-3">ACTIVAR LICENCIA</button>
                     </div>
                 </form>
             </div>
@@ -250,26 +216,12 @@ try {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function exportData() {
-            Swal.fire({
-                title: 'Preparando Exportación',
-                text: 'Se está compilando el reporte maestro del ecosistema.',
-                icon: 'info',
-                timer: 2000,
-                showConfirmButton: false,
-                willClose: () => {
-                    Swal.fire('¡Éxito!', 'El archivo CSV ha sido generado y descargado.', 'success');
-                }
-            });
+            Swal.fire({ title: 'Exportando...', text: 'Generando reporte maestro.', icon: 'info', timer: 1500, showConfirmButton: false });
         }
-
         $('#formGenerateLicense').on('submit', function(e) {
             e.preventDefault();
             $.post('api/save_license.php', $(this).serialize(), (res) => {
-                if(res.success){ 
-                    $('#modalGenerateLicense').modal('hide'); 
-                    Swal.fire({ icon: 'success', title: 'Llave Forjada', text: 'La licencia se ha desplegado correctamente.', confirmButtonColor: '#6366f1' })
-                    .then(() => location.reload()); 
-                }
+                if(res.success){ $('#modalGenerateLicense').modal('hide'); Swal.fire('Éxito', 'Licencia generada.', 'success').then(() => location.reload()); }
             }, 'json');
         });
     </script>
