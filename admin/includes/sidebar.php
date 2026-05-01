@@ -3,7 +3,7 @@
     <div class="sidebar-brand">
         <a href="./index.php" class="brand-link border-0 d-flex align-items-center justify-content-center w-100 py-3">
             <!-- Logo original CajaYa (Color) con filtro para fondo oscuro -->
-            <img src="img/logo.png?v=111" alt="CajaYa" style="height: 38px; width: auto; filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));">
+            <img src="img/logo.png?v=114" alt="CajaYa" style="height: 38px; width: auto;">
         </a>
     </div>
 

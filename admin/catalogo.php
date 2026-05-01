@@ -78,23 +78,36 @@ try {
                 { 
                     data: 'image_path', 
                     render: (d, type, row) => {
-                        // Extraemos el nombre del archivo sin extensión si es posible
-                        let filename = d ? d.split('/').pop().split('.')[0] : null;
                         let barcode = row.barcode;
+                        if (!barcode) return '<img src="https://placehold.co/50x50?text=S/B" class="img-catalog-silk">';
                         
-                        // Lista de posibles rutas para probar
-                        // 1. Ruta de DB (../storage/...)
-                        // 2. Carpeta imagenes_productos con el nombre de la DB
-                        // 3. Carpeta imagenes_productos con el barcode (común en estos sistemas)
-                        let primaryPath = d ? '../' + d : null;
-                        let fallbackJpg = barcode ? '../imagenes_productos/' + barcode + '.jpg' : null;
-                        let fallbackPng = barcode ? '../imagenes_productos/' + barcode + '.png' : null;
+                        // Generamos URLs candidatas
+                        // Probamos rutas relativas a admin (donde está el archivo)
+                        // Probamos rutas relativas a raíz (si el server reescribe)
+                        let candidates = [
+                            `../imagenes_productos/${barcode}.jpg`,
+                            `imagenes_productos/${barcode}.jpg`,
+                            d ? '../' + d : null,
+                            d ? d : null
+                        ].filter(c => c !== null);
+
+                        let img = document.createElement('img');
+                        img.className = 'img-catalog-silk shadow-sm';
+                        img.src = candidates[0];
                         
-                        let imgHtml = `<img src="${primaryPath || 'https://placehold.co/100x100?text=Sin+Imagen'}" 
-                             class="rounded border shadow-sm bg-white" 
-                             style="width:52px; height:52px; object-fit:contain; padding:2px;" 
-                             onerror="if(this.src.includes('storage')) { this.src='${fallbackJpg}'; } else if(this.src.includes('.jpg')) { this.src='${fallbackPng}'; } else { this.onerror=null; this.src='https://placehold.co/100x100?text=No+Encontrada'; }">`;
-                        return imgHtml;
+                        // Lógica de fallback en cadena
+                        let currentIdx = 0;
+                        img.onerror = function() {
+                            currentIdx++;
+                            if (currentIdx < candidates.length) {
+                                this.src = candidates[currentIdx];
+                            } else {
+                                this.onerror = null;
+                                this.src = 'https://placehold.co/100x100?text=No+Encontrada';
+                            }
+                        };
+                        
+                        return img.outerHTML;
                     }
                 },
                 { data: 'barcode', className: 'fw-bold text-primary small' },
