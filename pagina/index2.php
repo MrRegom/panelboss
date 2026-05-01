@@ -253,7 +253,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             .hero-content h1 { 
                 font-size: 2.3rem; letter-spacing: -1.5px; margin-bottom: 20px; text-align: center; 
                 color: var(--text-dark) !important;
-                text-shadow: none; 
+                text-shadow: 0 1px 10px rgba(255,255,255,0.8); /* Brillo sutil para despegar del fondo (V73) */
             }
             .hero-content h1 span { 
                 color: var(--primary) !important; 
@@ -266,20 +266,20 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 margin-bottom: 40px; 
                 line-height: 1.5;
                 color: var(--text-light) !important;
-                text-shadow: none;
+                text-shadow: 0 1px 5px rgba(255,255,255,0.5);
                 border-left: none !important;
             }
             .slide-overlay {
-                background: rgba(255,255,255,0.85) !important; /* Limpieza absoluta: fondo claro (V72) */
+                background: rgba(255,255,255,0.7) !important; /* Más transparencia = más contraste de imagen (V73) */
             }
             .hero-actions { display: flex; flex-direction: column; gap: 15px; align-items: center; width: 100%; }
             .btn-primary { width: 100%; max-width: 300px; padding: 20px; font-size: 15px; border-radius: 20px; }
             .btn-outline-hero { 
                 width: 100%; max-width: 300px; padding: 18px; font-size: 15px;
-                background: transparent !important;
+                background: rgba(255,255,255,0.3) !important;
                 border: 2px solid var(--primary) !important;
                 color: var(--primary) !important;
-                backdrop-filter: none;
+                backdrop-filter: blur(5px);
             }
             
             .section-planes { padding: 60px 6%; }
