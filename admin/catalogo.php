@@ -84,10 +84,12 @@ try {
                 { 
                     data: 'image_path', 
                     render: (d, type, row) => {
-                        // Ruta absoluta desde la raíz del servidor — igual que en V111 que funcionaba
-                        // La DB guarda: storage/products/webp/BARCODE.jpg
-                        let path = d ? '/' + d : '/img/no-image.png';
-                        return `<img src="${path}" class="img-catalog-silk" onerror="this.src='https://placehold.co/100x100?text=S/I'">`;
+                        // Las carpetas storage/ e imagenes_productos/ están fuera del
+                        // web root de panel.cajaya.cl (nginx apunta a /admin/).
+                        // Usamos el proxy PHP para servir las imágenes desde el filesystem.
+                        let barcode = row.barcode;
+                        let src = barcode ? `img-proxy.php?b=${barcode}` : '';
+                        return `<img src="${src}" class="img-catalog-silk" onerror="this.src='https://placehold.co/100x100?text=S/I'">`;
                     }
                 },
                 { data: 'barcode', className: 'fw-bold text-primary small' },
