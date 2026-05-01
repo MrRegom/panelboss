@@ -5,7 +5,7 @@ use App\Config\Database;
 try {
     $db = Database::getConnection();
     // Corregido: La tabla correcta es master_products
-    $products = $db->query("SELECT * FROM master_products ORDER BY description ASC")->fetchAll();
+    $products = $db->query("SELECT * FROM master_products ORDER BY name ASC")->fetchAll();
     
     header('Content-Type: application/json');
     echo json_encode(['data' => $products]);

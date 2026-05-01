@@ -1,142 +1,132 @@
 /* 
- * CAJAYA AZURE EDITION (V108)
- * Estética: Microsoft 365 / Azure Portal - Orden Absoluto
+ * CAJAYA LEGACY GOLD (V109)
+ * Estética: Microsoft Order + CajaYa Purple Identity
  */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --ms-bg: #f5f5f5;
-    --ms-sidebar: #ffffff;
-    --ms-border: #edebe9;
-    --ms-primary: #0078d4; /* Microsoft Azure Blue */
-    --ms-text: #323130;
-    --ms-text-muted: #605e5c;
-    --ms-card-shadow: 0 1.6px 3.6px 0 rgba(0,0,0,0.132), 0 0.3px 0.9px 0 rgba(0,0,0,0.108);
+    --cajaya-purple: #6b21a8; /* Morado CajaYa */
+    --cajaya-light: #f3e8ff; /* Morado suave para el header */
+    --ms-bg: #f8fafc;
+    --ms-border: #e2e8f0;
+    --ms-text: #1e293b;
+    --ms-text-muted: #64748b;
+    --ms-card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
 }
 
 body {
     background-color: var(--ms-bg) !important;
     font-family: 'Inter', sans-serif;
     color: var(--ms-text);
-    font-size: 0.9rem;
 }
 
-/* --- Microsoft Header --- */
+/* --- CajaYa Soft Header --- */
 .app-header {
-    background: var(--ms-primary) !important;
-    border-bottom: none !important;
-    height: 48px;
+    background: var(--cajaya-light) !important;
+    border-bottom: 1px solid rgba(107, 33, 168, 0.1) !important;
+    height: 52px;
 }
 
 .app-header .nav-link {
-    color: #ffffff !important;
-    font-weight: 400;
+    color: var(--cajaya-purple) !important;
 }
 
-/* --- Azure Sidebar --- */
+/* --- CajaYa Corporate Sidebar --- */
 .app-sidebar {
-    background: var(--ms-sidebar) !important;
-    border-right: 1px solid var(--ms-border) !important;
-    box-shadow: none !important;
+    background: var(--cajaya-purple) !important;
+    border-right: none !important;
+    box-shadow: 10px 0 30px rgba(0,0,0,0.05) !important;
 }
 
 .sidebar-brand {
-    background: #ffffff !important;
-    border-bottom: 1px solid var(--ms-border) !important;
-    height: 48px;
-    padding: 0 !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: rgba(0,0,0,0.1) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+    height: 52px;
 }
 
 .nav-sidebar .nav-link {
-    border-radius: 0 !important;
-    margin: 0 !important;
-    padding: 12px 20px !important;
-    color: var(--ms-text) !important;
-    border-left: 4px solid transparent;
-    font-weight: 400;
+    border-radius: 8px !important;
+    margin: 4px 12px !important;
+    padding: 10px 16px !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-weight: 500;
 }
 
 .nav-sidebar .nav-link:hover {
-    background: #f3f2f1 !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #fff !important;
 }
 
 .nav-sidebar .nav-link.active {
-    background: #edebe9 !important;
-    border-left-color: var(--ms-primary);
-    font-weight: 600;
+    background: #fff !important;
+    color: var(--cajaya-purple) !important;
+    font-weight: 700;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 .nav-header {
-    color: var(--ms-text-muted) !important;
-    font-weight: 700 !important;
-    font-size: 0.7rem !important;
-    padding: 20px 20px 10px !important;
+    color: rgba(255, 255, 255, 0.3) !important;
+    text-transform: uppercase;
+    font-size: 0.65rem !important;
+    letter-spacing: 0.1em;
+    padding: 24px 24px 8px !important;
 }
 
-/* --- Clean Azure Tables --- */
+/* --- Unified Modern Tables (Azure Order) --- */
 .card-ms {
     background: #ffffff;
     border: 1px solid var(--ms-border);
     box-shadow: var(--ms-card-shadow);
-    border-radius: 2px;
-    padding: 0;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-table.dataTable.ms-table {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-}
-
-table.dataTable.ms-table thead th {
-    background: #ffffff !important;
-    color: var(--ms-text) !important;
-    font-weight: 600 !important;
-    font-size: 0.8rem !important;
-    padding: 12px 20px !important;
+table.ms-table thead th {
+    background: #fcfcfd !important;
     border-bottom: 1px solid var(--ms-border) !important;
+    color: var(--ms-text-muted) !important;
+    font-weight: 700 !important;
+    font-size: 0.75rem !important;
+    text-transform: uppercase;
+    padding: 16px 20px !important;
 }
 
-table.dataTable.ms-table tbody td {
-    padding: 12px 20px !important;
-    border-bottom: 1px solid var(--ms-border) !important;
+table.ms-table tbody td {
+    padding: 14px 20px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
     font-size: 0.85rem;
-    vertical-align: middle;
 }
 
-table.dataTable.ms-table tbody tr:hover {
-    background-color: #f3f2f1 !important;
+table.ms-table tbody tr:hover {
+    background-color: #f8fafc !important;
 }
 
-/* --- Buttons (Microsoft Style) --- */
-.btn-ms-primary {
-    background-color: var(--ms-primary);
-    color: #ffffff;
+/* --- Buttons --- */
+.btn-cajaya {
+    background: var(--cajaya-purple);
+    color: #fff;
     border: none;
-    border-radius: 2px;
-    padding: 6px 20px;
-    font-weight: 400;
-    font-size: 0.85rem;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-weight: 600;
+    transition: all 0.2s;
 }
 
-.btn-ms-primary:hover {
-    background-color: #005a9e;
-    color: #ffffff;
+.btn-cajaya:hover {
+    filter: brightness(1.2);
+    color: #fff;
+    transform: translateY(-1px);
 }
 
 /* Page Header */
 .ms-page-header {
-    background: #ffffff;
-    border-bottom: 1px solid var(--ms-border);
-    padding: 20px 40px;
-    margin-bottom: 30px;
+    padding: 32px 48px;
+    margin-bottom: 0;
 }
 
 .ms-page-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0;
+    color: var(--cajaya-purple);
+    font-weight: 800;
+    letter-spacing: -0.04em;
 }
