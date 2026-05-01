@@ -4,15 +4,81 @@ use App\Services\AuthService;
 AuthService::check();
 ?>
 <!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Documentación API | PanelBoss</title>
+    <title>Documentación API | PanelBoss PRO</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/admin-custom.css">
+    <style>
+        :root {
+            --ios-bg: #f5f5f7;
+            --code-bg: #1e1e1e;
+        }
+        .api-card {
+            border-radius: 24px;
+            border: 1px solid rgba(0,0,0,0.05) !important;
+            overflow: hidden;
+        }
+        .method-badge {
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+            font-family: 'Fira Code', monospace;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .code-block code {
+            color: #d4d4d4;
+            font-size: 0.9rem;
+        }
+        .code-block .url-param { color: #ce9178; }
+        .code-block .url-base { color: #9cdcfe; }
+        
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .copy-btn:hover { background: rgba(255,255,255,0.2); }
+
+        .section-nav {
+            position: sticky;
+            top: 20px;
+        }
+        .nav-doc-link {
+            display: block;
+            padding: 10px 15px;
+            color: #636e72;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav-doc-link:hover, .nav-doc-link.active {
+            background: var(--primary-soft);
+            color: var(--primary-color);
+        }
+    </style>
 </head>
 <body class="layout-fixed sidebar-expand-lg">
     <div class="app-wrapper">
@@ -21,87 +87,152 @@ AuthService::check();
                 <ul class="navbar-nav">
                     <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i class="fa-solid fa-bars-staggered"></i> </a> </li>
                 </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 border-0">API STATUS: ONLINE</span>
+                    </li>
+                </ul>
             </div>
         </nav>
 
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
         <main class="app-main">
-            <div class="app-content-header py-4">
-                <div class="container-fluid px-4">
-                    <h3 class="fw-bold mb-0 text-primary">📘 Centro de Integración para Partners</h3>
-                    <p class="text-muted small">Guía técnica completa para el despliegue del catálogo CajaYa</p>
+            <div class="app-content-header py-5">
+                <div class="container-fluid px-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h1 class="fw-bold mb-2" style="letter-spacing: -1px;">Developer Hub</h1>
+                            <p class="text-muted lead">Documentación técnica para integración de catálogo y sincronización de datos.</p>
+                        </div>
+                        <div class="col-md-4 text-end d-none d-md-block">
+                            <img src="img/api-icon.png" alt="" style="height: 100px; opacity: 0.8; filter: drop-shadow(0 10px 20px rgba(106, 55, 183, 0.2));">
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="app-content">
-                <div class="container-fluid px-4">
-                    <div class="row g-4">
-                        <div class="col-12">
-                            <!-- SECCIÓN: LICENCIA DE PRUEBAS -->
-                            <div class="card p-4 border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #1e293b 0%, #111827 100%);">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="bg-primary bg-opacity-10 p-3 rounded-3 me-3 text-primary">
-                                        <i class="fa-solid fa-vial-circle-check fs-4"></i>
-                                    </div>
-                                    <h4 class="mb-0 fw-bold">Entorno de Desarrollo (Sandbox)</h4>
-                                </div>
-                                <p>El partner debe utilizar la siguiente licencia para todas las pruebas de integración iniciales:</p>
-                                <div class="table-responsive">
-                                    <table class="table table-dark table-borderless align-middle mb-0">
-                                        <thead>
-                                            <tr class="text-muted small">
-                                                <th>PARÁMETRO</th>
-                                                <th>VALOR REQUERIDO</th>
-                                                <th>ESTADO</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><code>license_key</code></td>
-                                                <td><span class="badge bg-primary fs-6 p-2">DEVELOPER-TEST</span></td>
-                                                <td><span class="text-success"><i class="fa-solid fa-circle-check me-1"></i> ACTIVA</span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                <div class="container-fluid px-5 pb-5">
+                    <div class="row g-5">
+                        <!-- Navegación Lateral Interna -->
+                        <div class="col-md-3 d-none d-md-block">
+                            <div class="section-nav">
+                                <h6 class="fw-bold small text-muted mb-3 px-3">CONTENIDO</h6>
+                                <a href="#sandbox" class="nav-doc-link active">Entorno Sandbox</a>
+                                <a href="#catalog" class="nav-doc-link">Catálogo Maestro</a>
+                                <a href="#images" class="nav-doc-link">Servidor de Imágenes</a>
+                                <a href="#auth" class="nav-doc-link">Autenticación</a>
                             </div>
+                        </div>
 
-                            <!-- SECCIÓN: ENDPOINTS -->
-                            <div class="card p-4 border-0 shadow-sm" style="background: #1a1a1a;">
-                                <h4 class="fw-bold mb-4">Endpoints de Sincronización</h4>
-                                
-                                <div class="mb-5">
-                                    <h5 class="text-info"><i class="fa-solid fa-list-check me-2"></i> 1. Catálogo Completo</h5>
-                                    <p class="text-muted small">Retorna el maestro de productos actualizado (+7,000 items).</p>
-                                    <div class="bg-black p-3 rounded-3 border border-secondary mb-3">
-                                        <div class="d-flex align-items-center mb-2">
-                                            <span class="badge bg-success me-3">GET</span>
-                                            <code>https://panel.cajaya.cl/api/catalog/list.php?license_key=DEVELOPER-TEST</code>
+                        <!-- Contenido Principal -->
+                        <div class="col-md-9">
+                            <!-- Sandbox Section -->
+                            <section id="sandbox" class="mb-5">
+                                <div class="card api-card shadow-sm border-0 bg-white">
+                                    <div class="card-body p-5">
+                                        <div class="d-flex align-items-center mb-4">
+                                            <div class="bg-primary rounded-4 d-flex align-items-center justify-content-center me-3" style="width: 54px; height: 54px;">
+                                                <i class="fa-solid fa-flask text-white fs-4"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="fw-bold mb-0">Entorno de Pruebas</h4>
+                                                <span class="text-muted small">Configuración inicial para Partners</span>
+                                            </div>
+                                        </div>
+                                        <p class="text-muted">Utilice la siguiente licencia global para validar sus peticiones durante la fase de desarrollo. No tiene límites de tasa (rate limiting) para facilitar el debug.</p>
+                                        
+                                        <div class="bg-light rounded-4 p-4 d-flex align-items-center justify-content-between border">
+                                            <div>
+                                                <span class="d-block small fw-bold text-muted mb-1">GLOBAL LICENSE KEY</span>
+                                                <code class="fs-5 fw-bold text-primary">DEVELOPER-TEST</code>
+                                            </div>
+                                            <span class="badge bg-success bg-opacity-10 text-success px-4 py-2 border-0">ACTIVE SANDBOX</span>
                                         </div>
                                     </div>
-                                    <p class="text-muted x-small">Prueba rápida desde terminal (CMD/Bash):</p>
-                                    <div class="bg-dark p-2 rounded border border-warning border-opacity-25">
-                                        <code class="text-warning small">curl -X GET "https://panel.cajaya.cl/api/catalog/list.php?license_key=DEVELOPER-TEST"</code>
-                                    </div>
                                 </div>
+                            </section>
 
-                                <div class="mb-4">
-                                    <h5 class="text-info"><i class="fa-solid fa-image me-2"></i> 2. Servidor de Imágenes</h5>
-                                    <p class="text-muted small">Proxy de alto rendimiento para visualización de productos.</p>
-                                    <div class="bg-black p-3 rounded-3 border border-secondary d-flex align-items-center">
-                                        <span class="badge bg-success me-3">GET</span>
-                                        <code>https://panel.cajaya.cl/api/catalog/image.php?barcode={843...}&license_key=DEVELOPER-TEST</code>
+                            <!-- Endpoints Section -->
+                            <section id="catalog" class="mb-5">
+                                <h3 class="fw-bold mb-4">Endpoints de Productos</h3>
+                                
+                                <div class="card api-card shadow-sm border-0 mb-4">
+                                    <div class="card-body p-5">
+                                        <div class="d-flex align-items-start justify-content-between mb-4">
+                                            <div>
+                                                <span class="method-badge bg-success text-white mb-2 d-inline-block">GET</span>
+                                                <h5 class="fw-bold">Obtener Catálogo Maestro</h5>
+                                                <p class="text-muted small">Retorna el listado completo de productos (+7,000 items) en formato JSON.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="code-block mb-4">
+                                            <button class="copy-btn"><i class="fa-regular fa-copy me-1"></i> Copiar</button>
+                                            <code>
+                                                <span class="url-base">https://panel.cajaya.cl/api/catalog/</span>list.php?<span class="url-param">license_key</span>=DEVELOPER-TEST
+                                            </code>
+                                        </div>
+
+                                        <h6 class="fw-bold small text-muted mb-3">EJEMPLO CURL</h6>
+                                        <div class="bg-dark p-3 rounded-4">
+                                            <code class="text-warning small">curl -X GET "https://panel.cajaya.cl/api/catalog/list.php?license_key=DEVELOPER-TEST"</code>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </section>
+
+                            <section id="images" class="mb-5">
+                                <div class="card api-card shadow-sm border-0">
+                                    <div class="card-body p-5">
+                                        <div class="d-flex align-items-start justify-content-between mb-4">
+                                            <div>
+                                                <span class="method-badge bg-success text-white mb-2 d-inline-block">GET</span>
+                                                <h5 class="fw-bold">Servidor de Imágenes</h5>
+                                                <p class="text-muted small">Endpoint optimizado para servir imágenes de productos vía Barcode.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="code-block mb-4">
+                                            <button class="copy-btn"><i class="fa-regular fa-copy me-1"></i> Copiar</button>
+                                            <code>
+                                                <span class="url-base">https://panel.cajaya.cl/api/catalog/</span>image.php?<span class="url-param">barcode</span>={EAN13}&<span class="url-param">license_key</span>=DEVELOPER-TEST
+                                            </code>
+                                        </div>
+
+                                        <div class="alert bg-primary bg-opacity-5 border-0 rounded-4 p-4 mb-0">
+                                            <div class="d-flex gap-3">
+                                                <i class="fa-solid fa-circle-info text-primary fs-4"></i>
+                                                <div class="small text-muted">
+                                                    <strong class="text-primary d-block mb-1">Nota de Rendimiento:</strong>
+                                                    Este endpoint utiliza una capa de caché de alto rendimiento. Las imágenes se sirven en formato WebP para minimizar el consumo de ancho de banda en dispositivos móviles.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/js/adminlte.min.js"></script>
+    <script>
+        // Simple Copy to Clipboard
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const code = this.nextElementSibling.innerText;
+                navigator.clipboard.writeText(code);
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="fa-solid fa-check me-1"></i> Copiado';
+                setTimeout(() => this.innerHTML = originalText, 2000);
+            });
+        });
+    </script>
 </body>
 </html>
