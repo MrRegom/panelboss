@@ -25,11 +25,12 @@ session_start();
             background: var(--bg-dark); 
             color: var(--text-light); 
             font-family: 'Inter', sans-serif; 
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            overflow-x: hidden;
+            padding: 40px 20px;
         }
 
         /* BACKGROUND ANIMATION */
@@ -71,8 +72,9 @@ session_start();
 
         .btn-primary { 
             background: var(--primary); color: #fff; padding: 20px; border-radius: 18px; border: none;
-            font-weight: 800; text-transform: uppercase; cursor: pointer; transition: 0.3s;
+            font-weight: 900; text-transform: uppercase; cursor: pointer; transition: 0.3s;
             box-shadow: 0 15px 30px rgba(106,55,183,0.3); width: 100%; margin-top: 10px;
+            font-family: 'Outfit', sans-serif; letter-spacing: 1px;
         }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(106,55,183,0.4); background: var(--primary-glow); }
 
@@ -109,7 +111,7 @@ session_start();
     <div class="bg-glow"></div>
 
     <div class="container">
-        <img src="assets/img/logo.png" class="logo" style="filter: brightness(0) invert(1);">
+        <img src="assets/img/logo.png" class="logo">
         
         <div class="coming-soon-badge">Estreno Muy Pronto</div>
         <h1>El Futuro del <span>Retail</span> está llegando.</h1>
