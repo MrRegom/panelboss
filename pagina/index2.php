@@ -629,22 +629,46 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             </div>
         </div>
         <div class="mockup-img reveal" style="position: relative;">
-            <!-- Imagen de local real con overlay de App -->
-            <img src="https://images.unsplash.com/photo-1556740734-7f96267b118a?auto=format&fit=crop&q=80&w=1000" alt="Local Real CajaYa" style="border-radius: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.2); width: 100%; filter: brightness(0.9);">
+            <!-- Fotografía Profesional de Dueño en Local Real (V97) -->
+            <img src="https://images.unsplash.com/photo-1604719312563-8912e9223c6a?auto=format&fit=crop&q=80&w=1200" alt="CajaYa en Local Real" style="border-radius: 40px; box-shadow: 0 40px 100px rgba(0,0,0,0.3); width: 100%; filter: brightness(0.95); transition: 0.5s;">
             
-            <!-- Floating UI Overlay -->
-            <div style="position: absolute; top: 10%; right: -5%; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); padding: 20px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid rgba(106, 55, 183, 0.2); max-width: 250px;">
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
-                    <div style="width:10px; height:10px; background:#4CAF50; border-radius:50%;"></div>
-                    <span style="font-size:0.8rem; font-weight:900; color:var(--primary);">SISTEMA ACTIVO</span>
+            <!-- Window Mockup Overlay (Simulando la App Desktop) -->
+            <div style="position: absolute; bottom: 10%; right: -10%; background: #fff; padding: 0; border-radius: 24px; box-shadow: 0 30px 60px rgba(0,0,0,0.25); border: 1px solid rgba(106, 55, 183, 0.1); width: 320px; overflow: hidden; animation: floatAnim 4s infinite ease-in-out;">
+                <div style="background: var(--primary); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: #fff; font-size: 0.75rem; font-weight: 800; letter-spacing: 1px;">CAJAYA DESKTOP V2.4</span>
+                    <div style="display: flex; gap: 6px;">
+                        <div style="width: 8px; height: 8px; background: rgba(255,255,255,0.3); border-radius: 50%;"></div>
+                        <div style="width: 8px; height: 8px; background: rgba(255,255,255,0.3); border-radius: 50%;"></div>
+                    </div>
                 </div>
-                <p style="font-size:0.9rem; font-weight:700; margin-bottom:5px;">Venta Total Hoy</p>
-                <p style="font-size:1.5rem; font-weight:900; color:var(--primary);">$415.790</p>
-                <div style="margin-top:15px; height:4px; background:#eee; border-radius:2px; overflow:hidden;">
-                    <div style="width:75%; height:100%; background:var(--primary);"></div>
+                <div style="padding: 25px;">
+                    <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px; font-weight: 700;">VENTAS DEL TURNO</p>
+                    <h4 style="font-size: 2rem; font-weight: 900; color: var(--primary); margin: 0;">$842.500</h4>
+                    <div style="margin-top: 20px; display: flex; align-items: center; gap: 10px;">
+                        <div style="flex: 1; height: 8px; background: #f0f0f0; border-radius: 10px; overflow: hidden;">
+                            <div style="width: 85%; height: 100%; background: #22c55e;"></div>
+                        </div>
+                        <span style="font-size: 0.75rem; font-weight: 900; color: #22c55e;">85%</span>
+                    </div>
+                    <p style="font-size: 0.7rem; color: var(--text-light); margin-top: 10px;"><i class="fa-solid fa-cloud-check"></i> Sincronizado con SII</p>
                 </div>
-                <p style="font-size:0.7rem; color:var(--text-light); margin-top:5px;">Meta diaria: 75% alcanzado</p>
             </div>
+            <style>
+                @keyframes floatAnim {
+                    0%, 100% { transform: translateY(0) translateX(0); }
+                    50% { transform: translateY(-20px) translateX(5px); }
+                }
+                @media (max-width: 1024px) {
+                    .mockup-img div[style*="position: absolute"] {
+                        position: relative !important;
+                        right: 0 !important;
+                        bottom: 0 !important;
+                        margin: -40px auto 0 !important;
+                        width: 90% !important;
+                        z-index: 10;
+                    }
+                }
+            </style>
         </div>
     </section>
 
