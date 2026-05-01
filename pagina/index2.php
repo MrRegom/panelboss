@@ -363,8 +363,9 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .grid-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
         .step-card { padding: 40px; background: #fff; border-radius: 40px; position: relative; transition: 0.4s; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
         .step-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(106,55,183,0.1); }
-        .step-img { width: 100%; height: 150px; margin-bottom: 20px; overflow: hidden; border-radius: 20px; background: #fdfbff; }
-        .step-img img { width: 300%; height: 100%; object-fit: contain; } /* Técnica de ventana para usar el sprite 3D */
+        .step-img { width: 100%; height: 180px; margin-bottom: 25px; overflow: hidden; border-radius: 24px; background: linear-gradient(135deg, #fdfbff 0%, #f3eeff 100%); display: flex; align-items: center; justify-content: center; }
+        .step-img img { width: 100%; height: 100%; object-fit: contain; padding: 15px; transition: transform 0.4s ease; }
+        .step-card:hover .step-img img { transform: scale(1.08) translateY(-4px); }
         .step-num { width: 40px; height: 40px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; margin: 0 auto 15px; }
         .step-card h3 { margin-bottom: 15px; font-size: 1.6rem; font-weight: 800; }
 
@@ -477,23 +478,32 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             <p style="color: var(--text-light); margin-top: 20px;">Del registro a tu primera venta en tiempo récord.</p>
         </div>
         <div class="grid-steps">
+            <!-- Paso 1: Registro -->
             <div class="step-card reveal">
-                <div class="step-img"><img src="assets/img/steps_3d.png" style="object-position: 0% center;"></div>
+                <div class="step-img">
+                    <img src="assets/img/step1_registro.png" alt="Regístrate en CajaYa">
+                </div>
                 <div class="step-num">1</div>
                 <h3>Regístrate</h3>
-                <p>Crea tu cuenta Élite en segundos con tu correo o Google.</p>
+                <p>Crea tu cuenta Élite en segundos con tu correo o Google. Sin tarjeta, sin burocracia.</p>
             </div>
+            <!-- Paso 2: Stock -->
             <div class="step-card reveal">
-                <div class="step-img"><img src="assets/img/steps_3d.png" style="object-position: 50% center;"></div>
+                <div class="step-img">
+                    <img src="assets/img/step2_stock.png" alt="Carga tu inventario en CajaYa">
+                </div>
                 <div class="step-num">2</div>
                 <h3>Carga Stock</h3>
-                <p>Usa nuestra base de 20,000 productos o sube los tuyos con Excel.</p>
+                <p>Usa nuestra base de 20,000 productos o importa los tuyos desde Excel en minutos.</p>
             </div>
+            <!-- Paso 3: Vender -->
             <div class="step-card reveal">
-                <div class="step-img"><img src="assets/img/steps_3d.png" style="object-position: 100% center;"></div>
+                <div class="step-img">
+                    <img src="assets/img/step3_vender.png" alt="Empieza a vender con CajaYa">
+                </div>
                 <div class="step-num">3</div>
                 <h3>¡A Vender!</h3>
-                <p>Abre tu caja y empieza a facturar con la velocidad de un grande.</p>
+                <p>Abre tu caja y empieza a facturar con la velocidad y seguridad de un grande del retail.</p>
             </div>
         </div>
     </section>
