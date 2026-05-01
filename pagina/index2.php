@@ -673,8 +673,9 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                         position: relative !important;
                         right: 0 !important;
                         bottom: 0 !important;
-                        margin: -60px auto 0 !important;
-                        width: 95% !important;
+                        margin: 20px auto 0 !important; /* Bajamos la ventana para no tapar la foto */
+                        width: 85% !important;
+                        max-width: 320px;
                         z-index: 10;
                     }
                 }
