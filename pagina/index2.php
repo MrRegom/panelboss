@@ -62,7 +62,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 20px rgba(106,55,183,0.2)); } }
         
         /* Cursor de escritura (V74) */
-        .typing-cursor::after { content: '|'; animation: blink 1s infinite; margin-left: 2px; color: var(--primary); font-weight: bold; }
+        .typing-cursor::after { content: '|'; animation: blink 1s infinite; margin-left: 2px; color: var(--primary); font-weight: 900; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
         /* NAVBAR */
@@ -89,7 +89,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .hero-content { position: relative; z-index: 10; max-width: 800px; text-align: left; }
         .hero-content h1 { font-family: 'Outfit', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.9; font-weight: 900; margin-bottom: 30px; letter-spacing: -4px; color: var(--text-dark); }
         .hero-content h1 span { color: var(--primary); }
-        .hero-content p { font-size: 1.5rem; color: var(--text-light); margin-bottom: 50px; border-left: 5px solid var(--primary); padding-left: 30px; max-width: 600px; }
+        .hero-content p { font-size: 1.5rem; color: var(--text-dark); margin-bottom: 50px; border-left: 5px solid var(--primary); padding-left: 30px; max-width: 600px; font-weight: 500; }
         .btn-primary { background: var(--primary); color: #fff; padding: 22px 50px; border-radius: 18px; text-decoration: none; font-weight: 800; display: inline-block; transition: 0.3s; box-shadow: 0 15px 30px rgba(106,55,183,0.3); border: none; cursor: pointer; text-transform: uppercase; }
         .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(106,55,183,0.4); }
         
@@ -269,9 +269,9 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 text-align: center; 
                 margin-bottom: 40px; 
                 line-height: 1.5;
-                color: var(--primary) !important; /* Color Morado Élite (V75) */
-                font-weight: 600;
-                text-shadow: 0 1px 5px rgba(255,255,255,0.5);
+                color: var(--text-dark) !important; /* Letra Negra (V76) */
+                font-weight: 500;
+                text-shadow: none;
                 border-left: none !important;
             }
             .slide-overlay {
