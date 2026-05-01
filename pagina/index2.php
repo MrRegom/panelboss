@@ -629,42 +629,52 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             </div>
         </div>
         <div class="mockup-img reveal" style="position: relative;">
-            <!-- Fotografía Profesional de Dueño en Local Real (V97) -->
-            <img src="https://images.unsplash.com/photo-1604719312563-8912e9223c6a?auto=format&fit=crop&q=80&w=1200" alt="CajaYa en Local Real" style="border-radius: 40px; box-shadow: 0 40px 100px rgba(0,0,0,0.3); width: 100%; filter: brightness(0.95); transition: 0.5s;">
+            <!-- Imagen Real Espectacular: Persona en Local con App (V99) -->
+            <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=1200" alt="CajaYa en Operación Real" style="border-radius: 40px; box-shadow: 0 40px 100px rgba(106, 55, 183, 0.2); width: 100%; filter: brightness(0.95); border: 1px solid rgba(106, 55, 183, 0.1);">
             
-            <!-- Window Mockup Overlay (Simulando la App Desktop) -->
-            <div style="position: absolute; bottom: 10%; right: -10%; background: #fff; padding: 0; border-radius: 24px; box-shadow: 0 30px 60px rgba(0,0,0,0.25); border: 1px solid rgba(106, 55, 183, 0.1); width: 320px; overflow: hidden; animation: floatAnim 4s infinite ease-in-out;">
-                <div style="background: var(--primary); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center;">
-                    <span style="color: #fff; font-size: 0.75rem; font-weight: 800; letter-spacing: 1px;">CAJAYA DESKTOP V2.4</span>
-                    <div style="display: flex; gap: 6px;">
-                        <div style="width: 8px; height: 8px; background: rgba(255,255,255,0.3); border-radius: 50%;"></div>
-                        <div style="width: 8px; height: 8px; background: rgba(255,255,255,0.3); border-radius: 50%;"></div>
+            <!-- App Desktop Window Mockup (Inmersiva) -->
+            <div style="position: absolute; bottom: -20px; right: -5%; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); padding: 0; border-radius: 28px; box-shadow: 0 40px 80px rgba(0,0,0,0.3); border: 1px solid rgba(106, 55, 183, 0.2); width: 340px; overflow: hidden; animation: floatAnim 5s infinite ease-in-out;">
+                <div style="background: linear-gradient(90deg, #6A37B7, #9D6CFF); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: #fff; font-size: 0.8rem; font-weight: 900; letter-spacing: 1.5px;">CAJAYA DESKTOP V2.4</span>
+                    <div style="display: flex; gap: 8px;">
+                        <div style="width: 10px; height: 10px; background: rgba(255,255,255,0.3); border-radius: 50%;"></div>
+                        <div style="width: 10px; height: 10px; background: rgba(255,255,255,0.3); border-radius: 50%;"></div>
                     </div>
                 </div>
-                <div style="padding: 25px;">
-                    <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 5px; font-weight: 700;">VENTAS DEL TURNO</p>
-                    <h4 style="font-size: 2rem; font-weight: 900; color: var(--primary); margin: 0;">$842.500</h4>
-                    <div style="margin-top: 20px; display: flex; align-items: center; gap: 10px;">
-                        <div style="flex: 1; height: 8px; background: #f0f0f0; border-radius: 10px; overflow: hidden;">
-                            <div style="width: 85%; height: 100%; background: #22c55e;"></div>
+                <div style="padding: 30px;">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:20px;">
+                        <div>
+                            <p style="font-size: 0.75rem; color: var(--text-light); font-weight: 800; margin-bottom:5px; text-transform:uppercase;">Ventas Netas</p>
+                            <h4 style="font-size: 2.2rem; font-weight: 900; color: var(--primary); margin: 0;">$1.240.500</h4>
                         </div>
-                        <span style="font-size: 0.75rem; font-weight: 900; color: #22c55e;">85%</span>
+                        <div style="background:var(--primary-soft); color:var(--primary); padding:8px 12px; border-radius:12px; font-weight:900; font-size:0.8rem;">TURNO A</div>
                     </div>
-                    <p style="font-size: 0.7rem; color: var(--text-light); margin-top: 10px;"><i class="fa-solid fa-cloud-check"></i> Sincronizado con SII</p>
+                    <div style="margin-top: 10px; display: flex; flex-direction:column; gap: 8px;">
+                        <div style="display:flex; justify-content:space-between; font-size:0.75rem; font-weight:900;">
+                            <span>META MENSUAL</span>
+                            <span style="color:var(--primary);">92%</span>
+                        </div>
+                        <div style="width:100%; height:10px; background: #f0f0f0; border-radius: 10px; overflow: hidden;">
+                            <div style="width: 92%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--primary-glow));"></div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 25px; padding-top:15px; border-top:1px solid #eee; display:flex; align-items:center; gap:12px; font-size:0.8rem; font-weight:700; color:#22c55e;">
+                        <i class="fa-solid fa-shield-check"></i> SI-CONECTADO AL SII
+                    </div>
                 </div>
             </div>
             <style>
                 @keyframes floatAnim {
-                    0%, 100% { transform: translateY(0) translateX(0); }
-                    50% { transform: translateY(-20px) translateX(5px); }
+                    0%, 100% { transform: translateY(0) scale(1); }
+                    50% { transform: translateY(-15px) scale(1.02); }
                 }
                 @media (max-width: 1024px) {
                     .mockup-img div[style*="position: absolute"] {
                         position: relative !important;
                         right: 0 !important;
                         bottom: 0 !important;
-                        margin: -40px auto 0 !important;
-                        width: 90% !important;
+                        margin: -60px auto 0 !important;
+                        width: 95% !important;
                         z-index: 10;
                     }
                 }
@@ -936,9 +946,26 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
     <section class="section-faq reveal-section">
         <h2>Dudas <span>Frecuentes.</span></h2>
         <div class="faq-container">
-            <div class="faq-item"><h4><span>¿Cómo instalo el catálogo?</span><i class="fa-solid fa-plus"></i></h4><div class="faq-body"><p>CajaYa viene con una base maestra de 7.000 productos. Solo debes activar los que vendes en tu local y ajustar sus precios para empezar a cobrar en minutos.</p></div></div>
-            <div class="faq-item"><h4><span>¿Funciona sin Internet?</span><i class="fa-solid fa-plus"></i></h4><div class="faq-body"><p>Sí, el sistema funciona offline para ventas e inventario. Solo necesitas internet para sincronizar datos y emitir documentos al SII.</p></div></div>
-            <div class="faq-item"><h4><span>¿La integración al SII requiere internet?</span><i class="fa-solid fa-plus"></i></h4><div class="faq-body"><p>Efectivamente. Para que tus boletas lleguen al SII en tiempo real, el equipo debe estar conectado a internet. El resto de las funciones operan sin conexión.</p></div></div>
+            <div class="faq-item">
+                <h4><span>¿Cómo instalo el catálogo?</span><i class="fa-solid fa-plus"></i></h4>
+                <div class="faq-body"><p>CajaYa cuenta con una robusta base de productos maestra que usted puede ir integrando y personalizando según sus necesidades específicas de inventario.</p></div>
+            </div>
+            <div class="faq-item">
+                <h4><span>¿Funciona Offline?</span><i class="fa-solid fa-plus"></i></h4>
+                <div class="faq-body"><p>Sí, el sistema es totalmente flexible y trabaja en la modalidad que su negocio necesite, permitiéndole vender sin interrupciones incluso sin conexión.</p></div>
+            </div>
+            <div class="faq-item">
+                <h4><span>¿Puedo integrar mi facturación al SII?</span><i class="fa-solid fa-plus"></i></h4>
+                <div class="faq-body"><p>Sí, totalmente. Contamos con comunicación directa al SII para el registro de sus boletas, facturas y notas de crédito de forma inmediata y sin intermediarios.</p></div>
+            </div>
+            <div class="faq-item">
+                <h4><span>¿Mi información se va a internet?</span><i class="fa-solid fa-plus"></i></h4>
+                <div class="faq-body"><p>No. Usted es completamente dueño de su información. A diferencia de otros sistemas que manejan y explotan sus datos, con CajaYa la propiedad es 100% suya.</p></div>
+            </div>
+            <div class="faq-item">
+                <h4><span>¿Qué sucede si tengo un problema en el sistema?</span><i class="fa-solid fa-plus"></i></h4>
+                <div class="faq-body"><p>No se preocupe. Puede contactarnos en cualquier horario, ya que contamos con soporte REAL y humano las 24 horas del día para asegurar la continuidad de su venta.</p></div>
+            </div>
         </div>
     </section>
 
