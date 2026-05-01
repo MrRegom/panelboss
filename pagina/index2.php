@@ -709,7 +709,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                         <span id="valSales" style="font-size:1.4rem;">$10.000.000</span>
                     </label>
                     <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:10px;">Desliza para ajustar tu nivel de ventas actual.</p>
-                    <input type="range" class="roi-slider" id="inputSales" min="1000000" max="50000000" step="500000" value="10000000">
+                    <input type="range" class="roi-slider" id="inputSales" min="100000" max="50000000" step="100000" value="10000000">
                 </div>
 
                 <!-- PASO 2 -->
@@ -723,11 +723,14 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                     <input type="range" class="roi-slider" id="inputTime" min="1" max="12" step="1" value="4">
                 </div>
 
-                <div style="margin-top:30px; background:#fff; padding:20px; border-radius:20px; border:1px dashed #ddd;">
-                    <h4 style="color:var(--primary); margin-bottom:10px;"><i class="fa-solid fa-lightbulb"></i> ¿Cómo funciona esto?</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-light); line-height: 1.4;">
-                        Los negocios sin sistema pierden en promedio un <strong>3% de sus ventas</strong> en errores humanos y mermas. Además, el <strong>80% del tiempo</strong> de gestión manual se recupera al automatizar con CajaYa.
-                    </p>
+                <div style="margin-top:30px; background:#fff; padding:25px; border-radius:24px; border:1px solid #f0f0f0; box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
+                    <h4 style="color:var(--primary); margin-bottom:15px; font-size:1.1rem;"><i class="fa-solid fa-triangle-exclamation"></i> El Costo del Desorden</h4>
+                    <ul style="list-style:none; font-size:0.85rem; color:var(--text-light); line-height:1.6; display:flex; flex-direction:column; gap:10px;">
+                        <li><i class="fa-solid fa-check" style="color:var(--primary); margin-right:8px;"></i> <strong>Fugas de Caja:</strong> Errores en vueltos y redondeos que "desaparecen".</li>
+                        <li><i class="fa-solid fa-check" style="color:var(--primary); margin-right:8px;"></i> <strong>Mermas Ciegas:</strong> Productos que vencen o se pierden por falta de control.</li>
+                        <li><i class="fa-solid fa-check" style="color:var(--primary); margin-right:8px;"></i> <strong>Tiempo Muerto:</strong> 2-3 horas diarias que podrías usar para vender más o descansar.</li>
+                    </ul>
+                    <p style="margin-top:15px; font-size:0.85rem; font-weight:700; color:var(--text-dark);">CajaYa tapa estos agujeros desde el día 1.</p>
                 </div>
             </div>
             
