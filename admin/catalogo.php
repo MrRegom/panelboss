@@ -84,9 +84,9 @@ try {
                 { 
                     data: 'image_path', 
                     render: (d, type, row) => {
-                        let barcode = row.barcode;
-                        // Ruta directa validada en el servidor
-                        let path = `../imagenes_productos/${barcode}.jpg`;
+                        // Ruta absoluta desde la raíz del servidor — igual que en V111 que funcionaba
+                        // La DB guarda: storage/products/webp/BARCODE.jpg
+                        let path = d ? '/' + d : '/img/no-image.png';
                         return `<img src="${path}" class="img-catalog-silk" onerror="this.src='https://placehold.co/100x100?text=S/I'">`;
                     }
                 },
