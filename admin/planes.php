@@ -113,8 +113,8 @@ $plans = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
 
                                 <div class="mb-4">
-                                    <label class="form-label text-muted small fw-bold">BENEFICIOS (Uno por línea)</label>
-                                    <textarea name="description" class="form-control bg-dark border-0 text-white" rows="5" style="border-radius: 12px; font-size: 0.9rem;" placeholder="Ej: Integración SII&#10;Soporte 24/7&#10;Respaldo de datos"><?= htmlspecialchars($plan['description']) ?></textarea>
+                                    <label class="form-label text-muted small fw-bold">BENEFICIOS (Uno por línea) <span class="text-primary ms-2">Usa **texto** para negritas</span></label>
+                                    <textarea name="description" class="form-control bg-dark border-0 text-white" rows="5" style="border-radius: 12px; font-size: 0.9rem;" placeholder="Ej: Integración SII&#10;Soporte 24/7&#10;**Pago Único**"><?= htmlspecialchars($plan['description']) ?></textarea>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary w-100 btn-update">

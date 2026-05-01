@@ -887,8 +887,11 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                         $rawDesc = trim($p['description'] ?? '');
                         $points = !empty($rawDesc) ? explode("\n", $rawDesc) : ["Consultar beneficios"];
                         foreach ($points as $point): if(trim($point) === "") continue;
+                            $pText = htmlspecialchars(trim($point));
+                            // Soporte para Negritas Élite (V96)
+                            $pText = preg_replace('/\*\*(.*?)\*\*/', '<strong style="color:var(--text-dark);">$1</strong>', $pText);
                     ?>
-                        <li><i class="fa-solid fa-check"></i> <?php echo htmlspecialchars(trim($point)); ?></li>
+                        <li><i class="fa-solid fa-check"></i> <?php echo $pText; ?></li>
                     <?php endforeach; ?>
                 </ul>
 
@@ -897,6 +900,12 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 </button>
             </div>
             <?php endforeach; ?>
+        </div>
+
+        <!-- ALERTA SII ÉLITE V96 -->
+        <div class="reveal-section" style="max-width: 800px; margin: 60px auto 0; padding: 25px 40px; background: rgba(106, 55, 183, 0.05); border: 2px dashed var(--primary); border-radius: 25px; display: flex; align-items: center; gap: 20px; justify-content: center;">
+            <i class="fa-solid fa-circle-info" style="font-size: 2rem; color: var(--primary);"></i>
+            <p style="font-weight: 700; color: var(--text-dark); margin: 0;">Contamos con integración a SII, se requiere contar con internet.</p>
         </div>
     </section>
 
