@@ -516,7 +516,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 40px;">No pierdas tiempo con sistemas complicados. CajaYa es tan intuitivo que tu personal estará vendiendo en menos de 5 minutos. Grillas inteligentes, búsqueda instantánea y ticket digital.</p>
             <ul class="p-features" style="column-count: 2; gap: 40px;">
                 <li><i class="fa-solid fa-check"></i> Interfaz Touch</li>
-                <li><i class="fa-solid fa-check"></i> Modo Oscuro Pro</li>
+                <li><i class="fa-solid fa-check"></i> Venta en 1-Clic</li>
                 <li><i class="fa-solid fa-check"></i> Integración SII</li>
                 <li><i class="fa-solid fa-check"></i> Inventario Real</li>
             </ul>
@@ -590,7 +590,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                         <rect width="280" height="190" fill="#f8f4ff"/>
                         <rect x="0" y="0" width="280" height="32" fill="#6A37B7"/>
                         <text x="14" y="21" font-size="11" fill="white" font-family="Arial" font-weight="bold">CajaYa — Inventario</text>
-                        <text x="200" y="21" font-size="9" fill="white" font-family="Arial">20.000+ items</text>
+                        <text x="200" y="21" font-size="9" fill="white" font-family="Arial">7.000+ items</text>
                         <!-- Grilla 3x2 de productos -->
                         <rect x="14" y="40" width="74" height="60" rx="8" fill="white" stroke="#ede5ff" stroke-width="1.5"/>
                         <rect x="96" y="40" width="74" height="60" rx="8" fill="white" stroke="#ede5ff" stroke-width="1.5"/>
@@ -612,7 +612,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 </div>
                 <div class="step-num">2</div>
                 <h3>Carga Stock</h3>
-                <p>Usa nuestra base de 20.000 productos o importa los tuyos desde Excel en minutos.</p>
+                <p>Usa nuestra base de 7.000 productos o importa los tuyos desde Excel en minutos.</p>
             </div>
             <!-- Paso 3: SVG simula pantalla de venta/boleta CajaYa -->
             <div class="step-card reveal">
@@ -669,7 +669,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 <div class="comp-new"><span class="badge-yes">✓ Incluido</span></div>
             </div>
             <div class="comp-row">
-                <span class="comp-feature"><i class="fa-solid fa-boxes-stacked" style="color:var(--primary);margin-right:8px;"></i>Catálogo 20k Productos</span>
+                <span class="comp-feature"><i class="fa-solid fa-boxes-stacked" style="color:var(--primary);margin-right:8px;"></i>Catálogo 7k Productos</span>
                 <div class="comp-old"><span class="badge-no">✗ No tiene</span></div>
                 <div class="comp-new"><span class="badge-yes">✓ Incluido</span></div>
             </div>
@@ -809,7 +809,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
     <section class="section-faq reveal-section">
         <h2>Dudas <span>Frecuentes.</span></h2>
         <div class="faq-container">
-            <div class="faq-item"><h4><span>¿Cómo instalo el catálogo?</span><i class="fa-solid fa-plus"></i></h4><div class="faq-body"><p>Ya viene integrado con más de 20,000 productos precargados.</p></div></div>
+            <div class="faq-item"><h4><span>¿Cómo instalo el catálogo?</span><i class="fa-solid fa-plus"></i></h4><div class="faq-body"><p>Ya viene integrado con más de 7.000 productos precargados.</p></div></div>
             <div class="faq-item"><h4><span>¿Funciona sin Internet?</span><i class="fa-solid fa-plus"></i></h4><div class="faq-body"><p>Sí, el sistema funciona offline y sincroniza al detectar conexión.</p></div></div>
         </div>
     </section>
