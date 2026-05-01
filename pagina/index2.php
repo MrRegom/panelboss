@@ -160,6 +160,15 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .p-features li { margin-bottom: 15px; font-size: 15px; display: flex; align-items: center; color: var(--text-light); }
         .p-features li i { color: var(--primary); margin-right: 12px; font-size: 18px; }
         .btn-cta { width: 100%; background: var(--primary-soft); color: var(--primary); text-decoration: none; padding: 22px; border-radius: 20px; font-weight: 900; text-transform: uppercase; transition: 0.3s; }
+        
+        /* ESTILOS BOTONES HERO (V69) */
+        .hero-actions { display: flex; gap: 15px; justify-content: flex-start; align-items: center; }
+        .btn-outline-hero {
+            background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.4); color: #fff;
+            padding: 18px 35px; border-radius: 18px; font-weight: 800; cursor: pointer; transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        .btn-outline-hero:hover { background: #fff; color: var(--primary); border-color: #fff; transform: translateY(-3px); }
         .btn-google-elite { 
             background: #fff; color: #444; border: 1px solid #e0e0e0; width: 100%; padding: 15px; border-radius: 50px; 
             font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 12px; 
@@ -255,18 +264,9 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             .slide-overlay {
                 background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%) !important; /* Gradiente oscuro inferior (V68) */
             }
-            .hero-content .reveal div { display: flex; flex-direction: column; gap: 25px; align-items: center; width: 100%; }
-            .btn-primary { padding: 20px; width: 100%; max-width: 300px; font-size: 15px; border-radius: 22px; }
-            button[onclick="moveCarousel(1)"] { 
-                margin: 0 !important; 
-                width: 100%; 
-                max-width: 300px; 
-                padding: 18px !important;
-                background: rgba(255,255,255,0.1) !important;
-                border: 1px solid rgba(255,255,255,0.3) !important;
-                color: #fff !important;
-                backdrop-filter: blur(10px);
-            }
+            .hero-actions { display: flex; flex-direction: column; gap: 20px; align-items: center; width: 100%; }
+            .btn-primary { width: 100%; max-width: 300px; padding: 20px; }
+            .btn-outline-hero { width: 100%; max-width: 300px; padding: 20px; }
             
             .section-planes { padding: 60px 6%; }
             .grid-planes { display: flex; flex-direction: column; gap: 30px; margin-top: 40px; }
@@ -354,9 +354,9 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                     <div class="hero-content">
                         <h1 class="reveal">Transforma tu Minimarket en un <span>Gigante</span> del Retail.</h1>
                         <p class="reveal">La tecnología Élite que las grandes cadenas no quieren que tengas. Gestión inteligente y ventas ultra-rápidas para tu Pyme.</p>
-                        <div class="reveal">
-                            <a href="#planes" class="btn-primary">Ver Planes</a>
-                            <button onclick="moveCarousel(1)" style="background: none; border: 2px solid var(--primary); color: var(--primary); padding: 18px 35px; border-radius: 18px; font-weight: 800; cursor: pointer; margin-left: 10px;">¡Infórmame más!</button>
+                        <div class="hero-actions reveal">
+                            <a href="#planes" class="btn-primary" style="text-align: center;">Ver Planes</a>
+                            <button onclick="moveCarousel(1)" class="btn-outline-hero">¡Infórmame más!</button>
                         </div>
                     </div>
                 </div>
