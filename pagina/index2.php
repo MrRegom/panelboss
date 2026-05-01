@@ -614,7 +614,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             </div>
         </div>
         <div class="mockup-img reveal">
-            <img src="dueno_exitoso_cajaya_1777670997517.png" alt="Control total CajaYa" style="border-radius: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.15);">
+            <img src="assets/img/dueno_exitoso.png" alt="Control total CajaYa" style="border-radius: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.15);">
         </div>
     </section>
 
@@ -791,7 +791,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         </div>
         <div class="grid-poder" style="margin-top: 60px;">
             <div class="card-poder reveal">
-                <div style="display:flex; color:#FFD700; margin-bottom:15px; justify-content:center; gap:8px;">
+                <div style="display:flex; color:#FFC107; margin-bottom:15px; justify-content:center; gap:8px;">
                     <i class="fa-solid fa-star" style="font-size:14px;"></i>
                     <i class="fa-solid fa-star" style="font-size:14px;"></i>
                     <i class="fa-solid fa-star" style="font-size:14px;"></i>
@@ -803,7 +803,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 <small style="color:var(--primary); font-weight:700;">Botillería Santa Elena</small>
             </div>
             <div class="card-poder reveal">
-                <div style="display:flex; color:#FFD700; margin-bottom:15px; justify-content:center; gap:8px;">
+                <div style="display:flex; color:#FFC107; margin-bottom:15px; justify-content:center; gap:8px;">
                     <i class="fa-solid fa-star" style="font-size:14px;"></i>
                     <i class="fa-solid fa-star" style="font-size:14px;"></i>
                     <i class="fa-solid fa-star" style="font-size:14px;"></i>
