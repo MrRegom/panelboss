@@ -26,13 +26,15 @@ foreach ($slugsNeeded as $sn) {
     }
 }
 
-// Procesar actualización de precio
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['slug'], $_POST['price'])) {
+// Procesar actualización de plan (V62)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['slug'], $_POST['price'], $_POST['name'])) {
     $slug = $_POST['slug'];
     $price = (float)$_POST['price'];
-    $stmt = $db->prepare("UPDATE subscription_plans SET price = ?, updated_at = NOW() WHERE slug = ?");
-    if ($stmt->execute([$price, $slug])) {
-        $message = "Precio de " . strtoupper($slug) . " actualizado a $" . number_format($price, 0, ',', '.');
+    $name = $_POST['name'];
+    
+    $stmt = $db->prepare("UPDATE subscription_plans SET name = ?, price = ?, updated_at = NOW() WHERE slug = ?");
+    if ($stmt->execute([$name, $price, $slug])) {
+        $message = "Plan " . strtoupper($slug) . " actualizado correctamente: $name ($" . number_format($price, 0, ',', '.') . ")";
     }
 }
 
@@ -93,18 +95,24 @@ $plans = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <span class="badge bg-primary bg-opacity-25 text-primary border border-primary border-opacity-50 px-3 py-2"><?= strtoupper($plan['slug']) ?></span>
                             </div>
-                            <h4 class="fw-bold mb-4"><?= htmlspecialchars($plan['name']) ?></h4>
                             <form method="POST">
                                 <input type="hidden" name="slug" value="<?= $plan['slug'] ?>">
+                                
+                                <div class="mb-3">
+                                    <label class="form-label text-muted small fw-bold">NOMBRE DEL PLAN</label>
+                                    <input type="text" name="name" class="form-control bg-dark border-0 text-white fw-bold mb-3" value="<?= htmlspecialchars($plan['name']) ?>" required style="border-radius: 12px; padding: 12px;">
+                                </div>
+
                                 <div class="mb-4">
                                     <label class="form-label text-muted small fw-bold">VALOR (CLP)</label>
                                     <div class="input-group">
-                                        <span class="input-group-text bg-dark border-0 text-muted">$</span>
-                                        <input type="number" name="price" class="form-control bg-dark border-0 text-white fw-bold" value="<?= (int)$plan['price'] ?>" required>
+                                        <span class="input-group-text bg-dark border-0 text-muted" style="border-radius: 12px 0 0 12px;">$</span>
+                                        <input type="number" name="price" class="form-control bg-dark border-0 text-white fw-bold" value="<?= (int)$plan['price'] ?>" required style="border-radius: 0 12px 12px 0;">
                                     </div>
                                 </div>
+
                                 <button type="submit" class="btn btn-primary w-100 btn-update">
-                                    <i class="fa-solid fa-rotate me-2"></i> Actualizar Precio
+                                    <i class="fa-solid fa-save me-2"></i> Guardar Cambios
                                 </button>
                             </form>
                         </div>
