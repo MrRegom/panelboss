@@ -57,9 +57,13 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         body { background: var(--bg-white); color: var(--text-dark); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
         /* PRELOADER */
-        #preloader { position: fixed; inset: 0; background: #fff; display: flex; align-items: center; justify-content: center; z-index: 10000; transition: opacity 0.6s ease; }
-        .pre-logo { width: 120px; animation: pulse 2s infinite ease-in-out; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } }
+        #preloader { position: fixed; inset: 0; background: #fff; display: flex; align-items: center; justify-content: center; z-index: 10000; transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .pre-logo { width: 140px; animation: pulse 1.5s infinite ease-in-out; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 20px rgba(106,55,183,0.2)); } }
+        
+        /* Cursor de escritura (V74) */
+        .typing-cursor::after { content: '|'; animation: blink 1s infinite; margin-left: 2px; color: var(--primary); font-weight: bold; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
         /* NAVBAR */
         nav { 
@@ -367,7 +371,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                     <div class="slide-overlay"></div>
                     <div class="hero-content">
                         <h1 class="reveal">Transforma tu Minimarket en un <span>Gigante</span> del Retail.</h1>
-                        <p class="reveal">La tecnología Élite que las grandes cadenas no quieren que tengas. Gestión inteligente y ventas ultra-rápidas para tu Pyme.</p>
+                        <p id="heroSubtitle" class="typing-cursor" data-text="La tecnología Élite que las grandes cadenas no quieren que tengas. Gestión inteligente y ventas ultra-rápidas para tu Pyme."></p>
                         <div class="hero-actions reveal">
                             <a href="#planes" class="btn-primary" style="text-align: center;">Ver Planes</a>
                             <button onclick="moveCarousel(1)" class="btn-outline-hero">¡Infórmame más!</button>
@@ -528,10 +532,35 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
 
     <script>
         window.addEventListener('load', () => {
-            const pre = document.getElementById('preloader');
-            pre.style.opacity = '0';
-            setTimeout(() => pre.style.display = 'none', 600);
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                if(preloader) {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => { 
+                        preloader.style.display = 'none'; 
+                        startTypewriter(); // Inicia la escritura al terminar (V74)
+                    }, 800);
+                }
+            }, 2000); // 2 segundos de pulso épico (V74)
         });
+
+        function startTypewriter() {
+            const el = document.getElementById('heroSubtitle');
+            if(!el) return;
+            const text = el.getAttribute('data-text');
+            if(!text) return;
+            let i = 0;
+            el.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    el.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, 35); // Velocidad Élite
+                }
+            }
+            type();
+        }
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 50) nav.classList.add('scrolled');
