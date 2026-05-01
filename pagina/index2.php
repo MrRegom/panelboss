@@ -280,6 +280,34 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             transform: translateY(0) scale(1); 
             filter: blur(0);
         }
+
+        /* BOTÓN ÉLITE PREMIUM (V65) */
+        .btn-elite {
+            background: linear-gradient(135deg, #6A37B7 0%, #9D6CFF 100%);
+            color: #fff;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 20px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 10px 25px rgba(106, 55, 183, 0.3);
+            width: 100%;
+        }
+        .btn-elite:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(157, 108, 255, 0.4);
+            filter: brightness(1.1);
+        }
+        .btn-elite i { font-size: 20px; }
     </style>
 </head>
 <body>
@@ -660,24 +688,25 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                     confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
 
                     if (selectedPlan) {
-                        // REDIRECCIÓN A MERCADO PAGO (V61)
+                        // REDIRECCIÓN A MERCADO PAGO REAL (V65)
                         const target = isModal ? document.querySelector('.modal-glass') : container_el;
                         target.innerHTML = `<div style="text-align:center; padding:60px; animation: modalUp 0.8s ease;">
-                            <i class="fa-solid fa-cart-shopping" style="font-size:5rem; color:var(--primary); margin-bottom:30px;"></i>
-                            <h2 style="color:var(--primary); font-size:2.8rem; margin-bottom:15px; font-family:'Outfit';">¡Datos validados!</h2>
-                            <p style="color:var(--text-light); font-size:1.2rem; margin-bottom:30px;">Te estamos redirigiendo a la pasarela segura de Mercado Pago...</p>
+                            <i class="fa-solid fa-circle-notch fa-spin" style="font-size:5rem; color:var(--primary); margin-bottom:30px;"></i>
+                            <h2 style="color:var(--primary); font-size:2.8rem; margin-bottom:15px; font-family:'Outfit';">¡Validando Pago!</h2>
+                            <p style="color:var(--text-light); font-size:1.2rem; margin-bottom:30px;">Conectando con la pasarela segura de Mercado Pago...</p>
                         </div>`;
                         
-                        // Simulación de link de MP (Aquí pondrías tus links reales por plan)
+                        // Usamos tu sistema dinámico de checkout (V65)
+                        const checkoutBase = 'mercadopago/checkout.php?plan=';
                         const mpLinks = {
-                            'mensual': 'https://mpago.li/vuestro-link-plan-mensual',
-                            'lifetime': 'https://mpago.li/vuestro-link-plan-elite',
+                            'mensual': checkoutBase + 'mensual',
+                            'lifetime': checkoutBase + 'lifetime',
                             'empresa': 'https://wa.me/56900000000?text=Hola, quiero consultar por el Plan Empresa'
                         };
                         
                         setTimeout(() => {
-                            window.location.href = mpLinks[selectedPlan.slug] || mpLinks['mensual'];
-                        }, 3000);
+                            window.location.href = mpLinks[selectedPlan.slug] || (checkoutBase + selectedPlan.slug);
+                        }, 2500);
 
                     } else {
                         // Flujo normal de Demo
