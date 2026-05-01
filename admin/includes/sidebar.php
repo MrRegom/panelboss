@@ -2,7 +2,7 @@
 <aside class="app-sidebar shadow-sm" data-bs-theme="dark" style="width: 260px; background: #09090b; border-right: 1px solid rgba(255,255,255,0.05);">
     <div class="sidebar-brand py-4 px-4">
         <a href="./index.php" class="brand-link border-0 d-flex align-items-center">
-            <img src="img/logo.png" alt="CajaYa" style="height: 28px; width: auto; filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.3));">
+            <img src="img/logo.png?v=98" alt="CajaYa" style="height: 28px; width: auto; filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.3));">
         </a>
     </div>
 

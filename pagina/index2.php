@@ -936,8 +936,9 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
     <section class="section-faq reveal-section">
         <h2>Dudas <span>Frecuentes.</span></h2>
         <div class="faq-container">
-            <div class="faq-item"><h4><span>¿Cómo instalo el catálogo?</span><i class="fa-solid fa-plus"></i></h4><div class="faq-body"><p>Ya viene integrado con más de 7.000 productos precargados.</p></div></div>
-            <div class="faq-item"><h4><span>¿Funciona sin Internet?</span><i class="fa-solid fa-plus"></i></h4><div class="faq-body"><p>Sí, el sistema funciona offline y sincroniza al detectar conexión.</p></div></div>
+            <div class="faq-item"><h4><span>¿Cómo instalo el catálogo?</span><i class="fa-solid fa-plus"></i></h4><div class="faq-body"><p>CajaYa viene con una base maestra de 7.000 productos. Solo debes activar los que vendes en tu local y ajustar sus precios para empezar a cobrar en minutos.</p></div></div>
+            <div class="faq-item"><h4><span>¿Funciona sin Internet?</span><i class="fa-solid fa-plus"></i></h4><div class="faq-body"><p>Sí, el sistema funciona offline para ventas e inventario. Solo necesitas internet para sincronizar datos y emitir documentos al SII.</p></div></div>
+            <div class="faq-item"><h4><span>¿La integración al SII requiere internet?</span><i class="fa-solid fa-plus"></i></h4><div class="faq-body"><p>Efectivamente. Para que tus boletas lleguen al SII en tiempo real, el equipo debe estar conectado a internet. El resto de las funciones operan sin conexión.</p></div></div>
         </div>
     </section>
 
