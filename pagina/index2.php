@@ -692,44 +692,64 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         <button onclick="openModal()" class="btn-white">Obtener Demo Gratis</button>
     </div>
 
-    <!-- CALCULADORA ROI V85 -->
+    <!-- CALCULADORA ROI V86 (AMIGABLE) -->
     <section class="section-roi reveal-section">
         <div class="header-elite">
-            <h2>Calcula tu <span>Potencial.</span></h2>
-            <p style="color: var(--text-light); margin-top: 20px;">Descubre cuánto dinero y tiempo recuperas con CajaYa.</p>
+            <h2>Simulador de <span>Ganancias.</span></h2>
+            <p style="color: var(--text-light); margin-top: 20px;">Sigue estos 2 simples pasos para ver cuánto estás perdiendo hoy:</p>
         </div>
         
         <div class="roi-card reveal">
             <div class="roi-inputs">
+                <!-- PASO 1 -->
                 <div class="roi-control">
-                    <label>Venta Mensual Aproximada <span id="valSales">$10.000.000</span></label>
+                    <label style="font-size:1.2rem;">
+                        <span style="background:var(--primary); color:#fff; width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; margin-right:10px; font-size:14px;">1</span>
+                        ¿Cuánto vendes al mes?
+                        <span id="valSales" style="font-size:1.4rem;">$10.000.000</span>
+                    </label>
+                    <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:10px;">Desliza para ajustar tu nivel de ventas actual.</p>
                     <input type="range" class="roi-slider" id="inputSales" min="1000000" max="50000000" step="500000" value="10000000">
                 </div>
-                <div class="roi-control">
-                    <label>Gestión Manual Diaria <span id="valTime">4 Horas</span></label>
+
+                <!-- PASO 2 -->
+                <div class="roi-control" style="margin-top:20px;">
+                    <label style="font-size:1.2rem;">
+                        <span style="background:var(--primary); color:#fff; width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; margin-right:10px; font-size:14px;">2</span>
+                        ¿Horas perdidas al día?
+                        <span id="valTime" style="font-size:1.4rem;">4 Horas</span>
+                    </label>
+                    <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:10px;">Tiempo que gastas hoy contando stock o haciendo cuentas a mano.</p>
                     <input type="range" class="roi-slider" id="inputTime" min="1" max="12" step="1" value="4">
                 </div>
-                <div style="margin-top:20px;">
-                    <p style="font-size: 0.9rem; color: var(--text-light); line-height: 1.4;">
-                        <i class="fa-solid fa-circle-info" style="color:var(--primary);"></i> 
-                        Basado en un ahorro estimado del 3% por reducción de fugas/errores y 80% de eficiencia en gestión de inventarios.
+
+                <div style="margin-top:30px; background:#fff; padding:20px; border-radius:20px; border:1px dashed #ddd;">
+                    <h4 style="color:var(--primary); margin-bottom:10px;"><i class="fa-solid fa-lightbulb"></i> ¿Cómo funciona esto?</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-light); line-height: 1.4;">
+                        Los negocios sin sistema pierden en promedio un <strong>3% de sus ventas</strong> en errores humanos y mermas. Además, el <strong>80% del tiempo</strong> de gestión manual se recupera al automatizar con CajaYa.
                     </p>
                 </div>
             </div>
             
             <div class="roi-results">
+                <div style="text-align:center; margin-bottom:20px;">
+                    <i class="fa-solid fa-chart-line" style="font-size:3rem; margin-bottom:15px; opacity:0.8;"></i>
+                    <h3 style="font-family:'Outfit';">Tu Resultado Élite</h3>
+                </div>
                 <div class="res-item">
-                    <span class="res-lab">Ahorro Mensual Estimado</span>
+                    <span class="res-lab">Dinero recuperado (Mensual)</span>
                     <span class="res-val" id="resMonthly">$300.000</span>
                 </div>
                 <div class="res-item">
-                    <span class="res-lab">Tiempo Recuperado</span>
+                    <span class="res-lab">Tiempo de vida recuperado</span>
                     <span class="res-val" id="resTime">96 Horas</span>
                 </div>
                 <div class="res-total">
-                    <span class="res-lab">Ganancia Potencial Anual</span>
-                    <span class="res-val" id="resAnnual" style="color:#FFD700;">$3.600.000</span>
+                    <span class="res-lab">GANANCIA TOTAL AL AÑO</span>
+                    <span class="res-val" id="resAnnual" style="color:#FFD700; font-size:2.8rem;">$3.600.000</span>
+                    <p style="font-size:0.75rem; margin-top:10px; opacity:0.7;">*Estimado basado en promedios de la industria retail.</p>
                 </div>
+                <a href="#planes" class="btn-white" style="width:100%; text-align:center; text-decoration:none; margin-top:10px;">Quiero Ganar Esto con CajaYa</a>
             </div>
         </div>
     </section>
