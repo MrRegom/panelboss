@@ -1,6 +1,6 @@
 <?php
 /**
- * admin/catalogo.php — Gestión Avanzada con Carga de Imágenes (Versión Corregida)
+ * admin/catalogo.php — Gestión Avanzada con Carga de Imágenes (Versión PRO V102)
  */
 
 require_once __DIR__ . '/includes/bootstrap.php';
@@ -19,7 +19,7 @@ $stmtLic = $db->query("SELECT license_key FROM licenses WHERE status = 'active' 
 $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
 ?>
 <!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Catálogo | CajaYa</title>
@@ -28,90 +28,94 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="css/admin-custom.css">
     
     <style>
-        :root { --accent: #0071E3; --bg: #0d1117; --border: rgba(255,255,255,0.1); }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: #c9d1d9; font-size: 13px; }
-        
-        /* Table Compact */
-        .table { border: 1px solid var(--border); }
-        .table thead th { background: #161b22; color: #8b949e; font-size: 11px; padding: 10px 15px; border-bottom: 1px solid var(--border); }
-        .table tbody td { padding: 6px 15px !important; border-bottom: 1px solid var(--border); vertical-align: middle; }
-        
-        .img-mini { width: 32px; height: 32px; object-fit: contain; background: #fff; border-radius: 4px; padding: 2px; cursor: pointer; }
-        .ean-tech { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #58a6ff; cursor: pointer; background: rgba(88,166,255,0.05); padding: 2px 6px; border-radius: 4px; }
+        .img-mini { width: 40px; height: 40px; object-fit: contain; background: #fff; border: 1px solid var(--border-color); border-radius: 8px; padding: 4px; cursor: pointer; transition: 0.2s; }
+        .img-mini:hover { transform: scale(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .ean-tech { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--primary-purple); cursor: pointer; background: var(--primary-soft); padding: 4px 8px; border-radius: 6px; font-weight: 600; }
         
         .btn-action { 
-            padding: 4px 8px; font-size: 12px; border-radius: 4px; border: 1px solid var(--border);
-            background: transparent; color: #8b949e; cursor: pointer; margin-left: 4px;
+            padding: 6px; font-size: 14px; border-radius: 8px; border: 1px solid var(--border-color);
+            background: #fff; color: var(--text-muted); cursor: pointer; margin-left: 4px; transition: 0.2s;
         }
-        .btn-action:hover { color: #fff; border-color: #fff; }
-        .btn-action.view { color: #58a6ff; border-color: rgba(88,166,255,0.3); }
+        .btn-action:hover { color: var(--primary-purple); border-color: var(--primary-purple); background: var(--primary-soft); }
 
-        /* Modal Elite */
-        .modal-content { background: #161b22 !important; border: 1px solid var(--border); border-radius: 12px; }
-        .form-control, .form-select { background: #0d1117 !important; border: 1px solid var(--border) !important; border-radius: 6px; color: #fff !important; font-size: 13px; padding: 10px; }
-        
         /* Photo Area */
         .photo-upload-container {
-            width: 100%; height: 160px; border: 2px dashed var(--border); border-radius: 10px;
+            width: 100%; height: 180px; border: 2px dashed var(--border-color); border-radius: 12px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            cursor: pointer; position: relative; overflow: hidden; background: #0d1117;
+            cursor: pointer; position: relative; overflow: hidden; background: #f8fafc;
             transition: 0.2s;
         }
-        .photo-upload-container:hover { border-color: var(--accent); background: rgba(0, 113, 227, 0.05); }
+        .photo-upload-container:hover { border-color: var(--primary-purple); background: var(--primary-soft); }
         .photo-upload-container img { max-height: 100%; object-fit: contain; z-index: 1; }
-        .photo-upload-container .upload-hint { position: absolute; bottom: 10px; font-size: 10px; color: #555; z-index: 2; }
-        .photo-upload-container .camera-icon { color: #555; font-size: 24px; position: absolute; z-index: 0; }
+        .photo-upload-container .upload-hint { position: absolute; bottom: 15px; font-size: 0.7rem; color: var(--text-muted); z-index: 2; font-weight: 600; }
+        .photo-upload-container .camera-icon { color: var(--border-color); font-size: 32px; position: absolute; z-index: 0; }
 
-        .epic-photo-view { max-width: 100%; max-height: 350px; object-fit: contain; background: #fff; border-radius: 12px; padding: 10px; margin-bottom: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        .epic-photo-view { max-width: 100%; max-height: 400px; object-fit: contain; background: #fff; border-radius: 16px; padding: 15px; margin-bottom: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
     </style>
 </head>
 <body class="layout-fixed sidebar-expand-lg">
     <div class="app-wrapper">
-        <nav class="app-header navbar navbar-expand border-bottom border-white border-opacity-10">
-            <div class="container-fluid">
+        <nav class="app-header navbar navbar-expand">
+            <div class="container-fluid px-4">
                 <ul class="navbar-nav">
-                    <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#"> <i class="fa-solid fa-bars text-white"></i> </a> </li>
+                    <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#"> <i class="fa-solid fa-bars-staggered"></i> </a> </li>
                 </ul>
             </div>
         </nav>
 
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
-        <main class="app-main p-3">
-            <div class="container-fluid">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="fw-bold m-0 text-white">Catálogo Maestro</h5>
-                    <button class="btn btn-primary btn-sm px-4" onclick="openEditModal()" style="border-radius: 4px;">
-                        <i class="fa-solid fa-plus me-1"></i> NUEVO PRODUCTO
-                    </button>
-                </div>
-
-                <div class="row mb-3 align-items-end g-2">
-                    <div class="col-md-3">
-                        <label class="small text-muted mb-1">Filtrar por Categoría:</label>
-                        <select id="filterCategory" class="form-select form-select-sm">
-                            <option value="">Todas</option>
-                            <?php foreach($categories as $cat): ?>
-                                <option value="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['name']) ?></option>
-                            <?php endforeach; ?>
-                        </select>
+        <main class="app-main">
+            <div class="app-content-header py-4">
+                <div class="container-fluid px-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="fw-bold mb-0">Catálogo Maestro</h3>
+                            <p class="text-muted small">Gestión global de productos para el ecosistema CajaYa</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="openEditModal()">
+                            <i class="fa-solid fa-plus me-2"></i> NUEVO PRODUCTO
+                        </button>
                     </div>
                 </div>
+            </div>
 
-                <div class="table-responsive">
-                    <table id="catalogTable" class="table align-middle w-100">
-                        <thead>
-                            <tr>
-                                <th style="width: 40px">IMG</th>
-                                <th style="width: 140px">CÓDIGO (EAN)</th>
-                                <th>ARTÍCULO / DESCRIPCIÓN</th>
-                                <th>CATEGORÍA</th>
-                                <th class="text-end" style="width: 110px">ACCIONES</th>
-                            </tr>
-                        </thead>
-                    </table>
+            <div class="app-content">
+                <div class="container-fluid px-4">
+                    <div class="card p-4 mb-4">
+                        <div class="row align-items-end g-3">
+                            <div class="col-md-3">
+                                <label class="small fw-bold text-muted mb-2">FILTRAR POR CATEGORÍA</label>
+                                <select id="filterCategory" class="form-select">
+                                    <option value="">Todas las categorías</option>
+                                    <?php foreach($categories as $cat): ?>
+                                        <option value="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['name']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table id="catalogTable" class="table align-middle w-100">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 60px">IMG</th>
+                                            <th style="width: 150px">CÓDIGO EAN</th>
+                                            <th>ARTÍCULO / DESCRIPCIÓN</th>
+                                            <th>CATEGORÍA</th>
+                                            <th class="text-end" style="width: 120px">ACCIONES</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
@@ -122,35 +126,34 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title fw-bold" id="editModalTitle">Ficha de Producto</h6>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title" id="editModalTitle">Ficha de Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="formProduct" enctype="multipart/form-data">
                     <input type="hidden" name="id" id="prod_id">
-                    <div class="modal-body p-4">
-                        <div class="row g-3">
-                            <!-- Area de Foto -->
-                            <div class="col-12 mb-2">
-                                <div class="photo-upload-container" onclick="$('#prod_image').click()">
-                                    <i class="fa-solid fa-camera camera-icon"></i>
+                    <div class="modal-body">
+                        <div class="row g-4">
+                            <div class="col-12 text-center">
+                                <div class="photo-upload-container mx-auto" onclick="$('#prod_image').click()">
+                                    <i class="fa-solid fa-cloud-arrow-up camera-icon"></i>
                                     <img src="" id="preview_img" style="display:none">
-                                    <div class="upload-hint">Click para cargar foto del producto</div>
+                                    <div class="upload-hint">Sube una imagen profesional (PNG/JPG)</div>
                                 </div>
                                 <input type="file" name="image" id="prod_image" class="d-none" accept="image/*">
                             </div>
                             
                             <div class="col-12">
-                                <label class="small text-muted mb-1">CÓDIGO EAN</label>
-                                <input type="text" class="form-control" name="barcode" id="prod_barcode" required placeholder="Ej: 7800000000000">
+                                <label>CÓDIGO DE BARRAS (EAN)</label>
+                                <input type="text" class="form-control" name="barcode" id="prod_barcode" required placeholder="Escanee o escriba el código">
                             </div>
                             <div class="col-12">
-                                <label class="small text-muted mb-1">NOMBRE COMPLETO</label>
-                                <input type="text" class="form-control" name="name" id="prod_name" required placeholder="Nombre descriptivo">
+                                <label>DESCRIPCIÓN DEL PRODUCTO</label>
+                                <input type="text" class="form-control" name="name" id="prod_name" required placeholder="Ej: Coca Cola 2.5L">
                             </div>
                             <div class="col-12">
-                                <label class="small text-muted mb-1">CATEGORÍA</label>
+                                <label>CATEGORÍA DEL MAESTRO</label>
                                 <select class="form-select" name="category_id" id="prod_category">
-                                    <option value="">- Seleccionar -</option>
+                                    <option value="">- Seleccionar Categoría -</option>
                                     <?php foreach($categories as $cat): ?>
                                         <option value="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['name']) ?></option>
                                     <?php endforeach; ?>
@@ -159,7 +162,9 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">GUARDAR REGISTRO</button>
+                        <button type="submit" class="btn btn-primary w-100 py-3">
+                            <i class="fa-solid fa-save me-2"></i> GUARDAR EN EL CATÁLOGO
+                        </button>
                     </div>
                 </form>
             </div>
@@ -169,13 +174,13 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
     <!-- Modal View (Épico) -->
     <div class="modal fade" id="modalView" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body p-4 text-center">
-                    <h5 id="view_name" class="fw-bold text-white mb-3">Nombre</h5>
+            <div class="modal-content border-0">
+                <div class="modal-body p-5 text-center">
+                    <h4 id="view_name" class="fw-bold text-dark mb-4">Nombre</h4>
                     <img src="" id="view_img" class="epic-photo-view">
-                    <div id="view_barcode" class="ean-tech d-inline-block px-4 py-2 fs-6">000000000000</div>
-                    <div class="mt-4">
-                        <button class="btn btn-secondary btn-sm px-4" data-bs-dismiss="modal">Cerrar</button>
+                    <div id="view_barcode" class="ean-tech d-inline-block px-5 py-3 fs-5">000000000000</div>
+                    <div class="mt-5">
+                        <button class="btn btn-light px-5 py-2 fw-bold" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -206,27 +211,27 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
                 { 
                     data: 'image_path',
                     render: function(data, type, row) {
-                        const img = data ? `/api/catalog/image.php?barcode=${row.barcode}&license_key=${licenseKey}` : 'https://placehold.co/50x50?text=📦';
+                        const img = data ? `/api/catalog/image.php?barcode=${row.barcode}&license_key=${licenseKey}` : 'https://placehold.co/80x80?text=📦';
                         return `<img src="${img}" class="img-mini" onclick='openViewModal(${JSON.stringify(row).replace(/'/g, "&apos;")})'>`;
                     }
                 },
                 { data: 'barcode', render: (d) => `<span class="ean-tech" onclick="copyEan('${d}')">${d}</span>` },
-                { data: 'name', render: (d) => `<span class="text-white fw-medium">${d}</span>` },
-                { data: 'category_name', render: (d) => `<span class="small text-uppercase text-muted">${d || '-'}</span>` },
+                { data: 'name', render: (d) => `<span class="text-dark fw-bold">${d}</span>` },
+                { data: 'category_name', render: (d) => `<span class="badge bg-light text-muted border">${d || '-'}</span>` },
                 { 
                     data: null, 
                     className: 'text-end',
                     render: function(data, type, row) {
                         const rowData = JSON.stringify(row).replace(/'/g, "&apos;");
                         return `
-                            <button class="btn-action view" onclick='openViewModal(${rowData})' title="Ver Detalle"><i class="fa-solid fa-eye"></i></button>
+                            <button class="btn-action" onclick='openViewModal(${rowData})' title="Ver Detalle"><i class="fa-solid fa-eye text-primary"></i></button>
                             <button class="btn-action" onclick='openEditModal(${rowData})' title="Editar"><i class="fa-solid fa-pen"></i></button>
                         `;
                     }
                 }
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
-            dom: '<"p-2 d-flex justify-content-between align-items-center"lf>rt<"p-2 d-flex justify-content-between align-items-center"ip>'
+            dom: '<"p-3 d-flex justify-content-between align-items-center"lf>rt<"p-3 d-flex justify-content-between align-items-center"ip>'
         });
 
         $('#filterCategory').on('change', function() { table.ajax.reload(); });
@@ -292,7 +297,7 @@ $licenseKey = $stmtLic->fetchColumn() ?: 'MASTER-KEY';
     function openViewModal(data) {
         $('#view_name').text(data.name);
         $('#view_barcode').text(data.barcode);
-        const img = data.image_path ? `/api/catalog/image.php?barcode=${data.barcode}&license_key=${licenseKey}` : 'https://placehold.co/300x300?text=Sin+Imagen';
+        const img = data.image_path ? `/api/catalog/image.php?barcode=${data.barcode}&license_key=${licenseKey}` : 'https://placehold.co/400x400?text=Sin+Imagen';
         $('#view_img').attr('src', img);
         $('#modalView').modal('show');
     }

@@ -6,7 +6,7 @@ AuthService::check();
 $userName = $_SESSION['user_name'] ?? 'Administrador';
 ?>
 <!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Usuarios | PanelBoss PRO</title>
@@ -19,7 +19,6 @@ $userName = $_SESSION['user_name'] ?? 'Administrador';
 </head>
 <body class="layout-fixed sidebar-expand-lg">
     <div class="app-wrapper">
-        <!-- Header con Usuario y Logout -->
         <nav class="app-header navbar navbar-expand">
             <div class="container-fluid px-4">
                 <ul class="navbar-nav">
@@ -33,7 +32,7 @@ $userName = $_SESSION['user_name'] ?? 'Administrador';
                                 <i class="fa-solid fa-user-tie text-white small"></i>
                             </div>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2" style="background: var(--bg-card);">
+                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2">
                             <li><a href="logout.php" class="dropdown-item py-2 text-danger fw-medium"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
                         </ul>
                     </li>
@@ -41,7 +40,6 @@ $userName = $_SESSION['user_name'] ?? 'Administrador';
             </div>
         </nav>
 
-        <!-- Sidebar Centralizado -->
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
         <main class="app-main">
@@ -49,11 +47,11 @@ $userName = $_SESSION['user_name'] ?? 'Administrador';
                 <div class="container-fluid px-4">
                     <div class="row align-items-center">
                         <div class="col-sm-6">
-                            <h3 class="fw-semibold mb-0">Gestión de Usuarios</h3>
+                            <h3 class="fw-bold mb-0">Gestión de Usuarios</h3>
                             <p class="text-muted small">Administradores y personal de soporte</p>
                         </div>
                         <div class="col-sm-6 text-end">
-                            <button class="btn btn-primary shadow-sm" id="btnNewUser">
+                            <button class="btn btn-primary" id="btnNewUser">
                                 <i class="fa-solid fa-user-plus me-2"></i> NUEVO USUARIO
                             </button>
                         </div>
@@ -62,17 +60,17 @@ $userName = $_SESSION['user_name'] ?? 'Administrador';
             </div>
             
             <div class="app-content px-4">
-                <div class="card shadow-sm border-0">
-                    <div class="card-body p-4">
-                        <table id="usersTable" class="table table-hover dt-responsive nowrap" style="width:100%">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-0">
+                        <table id="usersTable" class="table table-hover align-middle mb-0" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
+                                    <th class="ps-4">Nombre</th>
                                     <th>Email</th>
                                     <th>Rol</th>
                                     <th>Estado</th>
                                     <th>Último Acceso</th>
-                                    <th class="text-end">Acciones</th>
+                                    <th class="text-end pe-4">Acciones</th>
                                 </tr>
                             </thead>
                         </table>
@@ -83,39 +81,38 @@ $userName = $_SESSION['user_name'] ?? 'Administrador';
     </div>
 
     <!-- Modal Usuario -->
-    <div class="modal fade" id="modalUser" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="modalUser" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg" style="background-color: var(--bg-card);">
-                <div class="modal-header border-bottom border-white border-opacity-10">
-                    <h5 class="modal-title fw-bold" id="modalTitle">Nuevo Usuario</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Ficha de Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="formUser">
                     <input type="hidden" name="id" id="user_id">
                     <div class="modal-body p-4">
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">NOMBRE COMPLETO</label>
-                            <input type="text" class="form-control bg-dark border-secondary" name="full_name" id="full_name" required>
+                        <div class="mb-4">
+                            <label class="small fw-bold text-muted mb-2">NOMBRE COMPLETO</label>
+                            <input type="text" class="form-control" name="full_name" id="full_name" required placeholder="Ej: Juan Pérez">
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">EMAIL / USUARIO</label>
-                            <input type="email" class="form-control bg-dark border-secondary" name="email" id="email" required>
+                        <div class="mb-4">
+                            <label class="small fw-bold text-muted mb-2">EMAIL / USUARIO</label>
+                            <input type="email" class="form-control" name="email" id="email" required placeholder="email@ejemplo.com">
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">CONTRASEÑA</label>
-                            <input type="password" class="form-control bg-dark border-secondary" name="password" id="password" placeholder="Dejar vacío para no cambiar">
+                        <div class="mb-4">
+                            <label class="small fw-bold text-muted mb-2">CONTRASEÑA</label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Mínimo 8 caracteres">
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">ROL</label>
-                            <select class="form-select bg-dark border-secondary" name="role" id="role">
-                                <option value="admin">Administrador</option>
-                                <option value="soporte">Soporte</option>
+                        <div class="mb-0">
+                            <label class="small fw-bold text-muted mb-2">ROL DE ACCESO</label>
+                            <select class="form-select" name="role" id="role">
+                                <option value="admin">Administrador (Control Total)</option>
+                                <option value="soporte">Soporte (Solo Lectura/Edición)</option>
                             </select>
                         </div>
                     </div>
-                    <div class="modal-footer border-top border-white border-opacity-10">
-                        <button type="button" class="btn btn-link text-muted text-decoration-none" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary px-4">Guardar Usuario</button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary w-100 py-3 fw-bold">GUARDAR USUARIO</button>
                     </div>
                 </form>
             </div>
@@ -134,25 +131,24 @@ $userName = $_SESSION['user_name'] ?? 'Administrador';
         const table = $('#usersTable').DataTable({
             ajax: 'api/get_users.php',
             columns: [
-                { data: 'full_name', render: function(data){ return '<span class="fw-medium">'+data+'</span>'; } },
-                { data: 'email' },
-                { data: 'role', render: function(data){ return '<span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25">'+data.toUpperCase()+'</span>'; } },
-                { data: 'status', render: function(data){
-                    const color = data === 'active' ? 'success' : 'danger';
-                    return '<span class="badge bg-'+color+' bg-opacity-10 text-'+color+' border border-'+color+' border-opacity-25 px-2 small">'+data.toUpperCase()+'</span>';
+                { data: 'full_name', className: 'ps-4', render: (d) => '<span class="fw-bold text-dark">'+d+'</span>' },
+                { data: 'email', render: (d) => '<span class="text-muted">'+d+'</span>' },
+                { data: 'role', render: function(d){ return '<span class="badge bg-primary bg-opacity-10 text-primary border-0">'+d.toUpperCase()+'</span>'; } },
+                { data: 'status', render: function(d){
+                    const color = d === 'active' ? 'success' : 'danger';
+                    return '<span class="badge bg-'+color+' bg-opacity-10 text-'+color+' border-0">'+d.toUpperCase()+'</span>';
                 }},
-                { data: 'last_login', render: function(data){ return data ? new Date(data).toLocaleString() : 'Nunca'; } },
-                { data: null, className: 'text-end', render: function(data){
-                    const icon = data.status === 'active' ? 'fa-user-slash' : 'fa-user-check';
-                    const btnClass = data.status === 'active' ? 'btn-outline-danger' : 'btn-outline-success';
-                    return '<button class="btn btn-sm btn-outline-primary border-0 me-1 btn-edit"><i class="fa-solid fa-pen-to-square"></i></button>' +
-                           '<button class="btn btn-sm '+btnClass+' border-0 btn-toggle" data-id="'+data.id+'" data-status="'+data.status+'"><i class="fa-solid '+icon+'"></i></button>';
+                { data: 'last_login', render: function(d){ return d ? '<span class="small text-muted">'+new Date(d).toLocaleString()+'</span>' : '<span class="small text-muted italic">Nunca</span>'; } },
+                { data: null, className: 'text-end pe-4', render: function(d){
+                    const icon = d.status === 'active' ? 'fa-user-slash text-danger' : 'fa-user-check text-success';
+                    return '<button class="btn btn-sm btn-light border me-1 btn-edit"><i class="fa-solid fa-pen text-primary"></i></button>' +
+                           '<button class="btn btn-sm btn-light border btn-toggle" data-id="'+d.id+'" data-status="'+d.status+'"><i class="fa-solid '+icon+'"></i></button>';
                 }}
             ],
-            language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' }
+            language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
+            dom: '<"p-3 d-flex justify-content-between align-items-center"lf>rt<"p-3 d-flex justify-content-between align-items-center"ip>'
         });
 
-        // NUEVO USUARIO
         $('#btnNewUser').on('click', function() {
             $('#formUser')[0].reset();
             $('#user_id').val('');
@@ -160,19 +156,17 @@ $userName = $_SESSION['user_name'] ?? 'Administrador';
             $('#modalUser').modal('show');
         });
 
-        // EDITAR USUARIO (CORRECCIÓN)
         $('#usersTable').on('click', '.btn-edit', function() {
             const data = table.row($(this).parents('tr')).data();
             $('#user_id').val(data.id);
             $('#full_name').val(data.full_name);
             $('#email').val(data.email);
             $('#role').val(data.role);
-            $('#password').val(''); // Contraseña siempre vacía por seguridad
+            $('#password').val('');
             $('#modalTitle').text('Editar Usuario');
             $('#modalUser').modal('show');
         });
 
-        // Toggle Status
         $(document).on('click', '.btn-toggle', function() {
             const id = $(this).data('id');
             const status = $(this).data('status');
@@ -181,14 +175,13 @@ $userName = $_SESSION['user_name'] ?? 'Administrador';
             }, 'json');
         });
 
-        // Save User
         $('#formUser').on('submit', function(e) {
             e.preventDefault();
             $.post('api/save_user.php', $(this).serialize(), function(res) {
                 if(res.success) {
                     $('#modalUser').modal('hide');
                     table.ajax.reload();
-                    Swal.fire('¡Listo!', res.message, 'success');
+                    Swal.fire({ icon: 'success', title: '¡Listo!', text: res.message, toast: true, position: 'top-end', showConfirmButton: false, timer: 1500 });
                 }
             }, 'json');
         });

@@ -8,7 +8,7 @@ AuthService::check();
 $db = Database::getConnection();
 ?>
 <!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Licencias | PanelBoss PRO</title>
@@ -34,7 +34,7 @@ $db = Database::getConnection();
                                 <i class="fa-solid fa-user-tie text-white small"></i>
                             </div>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2" style="background: var(--bg-card);">
+                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2">
                             <li><a href="logout.php" class="dropdown-item py-2 text-danger fw-medium"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
                         </ul>
                     </li>
@@ -49,11 +49,11 @@ $db = Database::getConnection();
                 <div class="container-fluid px-4">
                     <div class="row align-items-center">
                         <div class="col-sm-6">
-                            <h3 class="fw-semibold mb-0">Listado de Licencias</h3>
-                            <p class="text-muted small">Gestión de llaves y planes de servicio</p>
+                            <h3 class="fw-bold mb-0">Gestión de Licencias</h3>
+                            <p class="text-muted small">Control maestro de llaves y planes de servicio</p>
                         </div>
                         <div class="col-sm-6 text-end">
-                            <button class="btn btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#modalGenerateLicense">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalGenerateLicense">
                                 <i class="fa-solid fa-plus me-2"></i> NUEVA LICENCIA
                             </button>
                         </div>
@@ -63,20 +63,22 @@ $db = Database::getConnection();
             
             <div class="app-content">
                 <div class="container-fluid px-4">
-                    <div class="card shadow-sm border-0">
-                        <div class="card-body p-4">
-                            <table id="licensesTable" class="table table-hover dt-responsive nowrap" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>KEY</th>
-                                        <th>EMPRESA</th>
-                                        <th>PLAN</th>
-                                        <th>ESTADO</th>
-                                        <th>EXPIRACIÓN</th>
-                                        <th class="text-end">ACCIONES</th>
-                                    </tr>
-                                </thead>
-                            </table>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table id="licensesTable" class="table table-hover align-middle mb-0" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="ps-4">LLAVE (LICENSE KEY)</th>
+                                            <th>EMPRESA</th>
+                                            <th>PLAN</th>
+                                            <th>ESTADO</th>
+                                            <th>EXPIRACIÓN</th>
+                                            <th class="text-end pe-4">ACCIONES</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,49 +86,46 @@ $db = Database::getConnection();
         </main>
     </div>
 
-    <!-- Modal Restaurado -->
-    <div class="modal fade" id="modalGenerateLicense" tabindex="-1" aria-hidden="true">
+    <!-- Modal: Generar Licencia -->
+    <div class="modal fade" id="modalGenerateLicense" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg" style="background-color: var(--bg-card);">
-                <div class="modal-header border-bottom border-white border-opacity-10">
-                    <h5 class="modal-title fw-bold">Crear Nueva Licencia</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">Forjar Nueva Licencia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="formGenerateLicense">
                     <div class="modal-body p-4">
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">EMPRESA</label>
-                            <select class="form-select bg-dark border-secondary text-white" name="company_id" required>
-                                <option value="">Seleccione una empresa...</option>
+                        <div class="mb-4">
+                            <label class="small fw-bold text-muted mb-2">SELECCIONAR EMPRESA</label>
+                            <select class="form-select" name="company_id" required>
+                                <option value="">Busque o seleccione empresa...</option>
                                 <?php
                                 $companies = $db->query("SELECT id, name FROM companies ORDER BY name ASC")->fetchAll();
-                                foreach($companies as $c) {
-                                    echo "<option value='{$c['id']}'>{$c['name']}</option>";
-                                }
+                                foreach($companies as $c) { echo "<option value='{$c['id']}'>{$c['name']}</option>"; }
                                 ?>
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">LICENSE KEY (DEJAR VACÍO PARA AUTO-GENERAR)</label>
-                            <input type="text" class="form-control bg-dark border-secondary text-white" name="custom_key" placeholder="Ej: DEVELOPER-TEST">
+                        <div class="mb-4">
+                            <label class="small fw-bold text-muted mb-2">KEY PERSONALIZADA (OPCIONAL)</label>
+                            <input type="text" class="form-control" name="custom_key" placeholder="Ej: CAJAYA-PRO-2026">
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">PLAN</label>
-                            <select class="form-select bg-dark border-secondary text-white" name="plan" required>
+                        <div class="mb-4">
+                            <label class="small fw-bold text-muted mb-2">PLAN ASOCIADO</label>
+                            <select class="form-select" name="plan" required>
                                 <option value="BASIC">BASIC</option>
                                 <option value="PRO">PRO</option>
                                 <option value="ENTERPRISE">ENTERPRISE</option>
                                 <option value="DEMO">DEMO</option>
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">FECHA DE EXPIRACIÓN (OPCIONAL)</label>
-                            <input type="date" class="form-control bg-dark border-secondary text-white" name="expires_at">
+                        <div class="mb-0">
+                            <label class="small fw-bold text-muted mb-2">FECHA DE EXPIRACIÓN</label>
+                            <input type="date" class="form-control" name="expires_at">
                         </div>
                     </div>
-                    <div class="modal-footer border-top border-white border-opacity-10">
-                        <button type="button" class="btn btn-link text-muted text-decoration-none" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary px-4">Generar Licencia</button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary w-100 py-3 fw-bold">GENERAR LLAVE MAESTRA</button>
                     </div>
                 </form>
             </div>
@@ -136,24 +135,24 @@ $db = Database::getConnection();
     <!-- Modal: Detalles de Empresa -->
     <div class="modal fade" id="modalCompanyDetails" tabindex="-1">
         <div class="modal-dialog">
-            <div class="modal-content border-0 shadow-lg" style="background-color: var(--bg-card);">
-                <div class="modal-header border-bottom border-white border-opacity-10">
-                    <h5 class="modal-title fw-bold text-info"><i class="fa-solid fa-building me-2"></i>Ficha del Cliente</h5>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold text-primary"><i class="fa-solid fa-building me-2"></i>Ficha del Cliente</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body p-4" id="detailsContent">
-                    <!-- Se llena con JS -->
+                    <!-- Dinámico -->
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal: Editar Licencia Completo -->
+    <!-- Modal: Editar Licencia -->
     <div class="modal fade" id="modalEditLicense" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg" style="background-color: var(--bg-card);">
-                <div class="modal-header border-bottom border-white border-opacity-10">
-                    <h5 class="modal-title fw-bold text-warning"><i class="fa-solid fa-pen-to-square me-2"></i>Editar Licencia</h5>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-pen-to-square me-2"></i>Editar Licencia</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="formEditLicense">
@@ -161,19 +160,18 @@ $db = Database::getConnection();
                         <input type="hidden" name="id" id="edit_license_id">
                         <input type="hidden" name="action" value="update_full">
                         
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">EMPRESA</label>
-                            <select class="form-select bg-dark border-secondary text-white" name="company_id" id="edit_company_id" required>
-                                <option value="">Seleccione una empresa...</option>
+                        <div class="mb-4">
+                            <label class="small fw-bold text-muted mb-2">TRANSFERIR A EMPRESA</label>
+                            <select class="form-select" name="company_id" id="edit_company_id" required>
                                 <?php foreach($companies as $c): ?>
                                     <option value="<?= $c['id'] ?>"><?= $c['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">PLAN</label>
-                            <select class="form-select bg-dark border-secondary text-white" name="plan" id="edit_plan" required>
+                        <div class="mb-4">
+                            <label class="small fw-bold text-muted mb-2">NIVEL DE PLAN</label>
+                            <select class="form-select" name="plan" id="edit_plan" required>
                                 <option value="BASIC">BASIC</option>
                                 <option value="PRO">PRO</option>
                                 <option value="ENTERPRISE">ENTERPRISE</option>
@@ -181,14 +179,13 @@ $db = Database::getConnection();
                             </select>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">NUEVA FECHA DE EXPIRACIÓN</label>
-                            <input type="date" class="form-control bg-dark border-secondary text-white" name="expires_at" id="edit_expires_at">
+                        <div class="mb-0">
+                            <label class="small fw-bold text-muted mb-2">NUEVA FECHA DE EXPIRACIÓN</label>
+                            <input type="date" class="form-control" name="expires_at" id="edit_expires_at">
                         </div>
                     </div>
-                    <div class="modal-footer border-top border-white border-opacity-10">
-                        <button type="button" class="btn btn-link text-muted text-decoration-none" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary px-4">Guardar Cambios</button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary w-100 py-3 fw-bold">ACTUALIZAR LICENCIA</button>
                     </div>
                 </form>
             </div>
@@ -207,123 +204,76 @@ $db = Database::getConnection();
         const table = $('#licensesTable').DataTable({
             ajax: 'api/get_licenses.php',
             columns: [
-                { data: 'license_key', render: function(data){ return '<code class="text-primary fw-bold">'+data+'</code>'; } },
+                { data: 'license_key', className: 'ps-4', render: (d) => '<code>'+d+'</code>' },
                 { 
                     data: 'company_name', 
-                    render: function(data, type, row){ 
-                        return `<a href="javascript:void(0)" class="text-info text-decoration-none fw-medium company-link" data-id="${row.id}">${data || 'N/A'}</a>`; 
-                    } 
+                    render: (d, t, r) => `<a href="javascript:void(0)" class="text-primary text-decoration-none fw-bold company-link" data-id="${r.id}">${d || 'N/A'}</a>` 
                 },
-                { data: 'plan', render: function(data){ return '<span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25">'+(data || 'BASIC')+'</span>'; } },
-                { data: 'status', render: function(data){
-                    const color = data === 'active' ? 'success' : 'warning';
-                    return '<span class="badge bg-'+color+' bg-opacity-10 text-'+color+' border border-'+color+' border-opacity-25 px-3">'+data.toUpperCase()+'</span>';
+                { data: 'plan', render: (d) => '<span class="badge bg-light text-muted border">'+(d || 'BASIC')+'</span>' },
+                { data: 'status', render: (d) => {
+                    const color = d === 'active' ? 'success' : 'warning';
+                    return '<span class="badge bg-'+color+' bg-opacity-10 text-'+color+' border-0 px-3">'+d.toUpperCase()+'</span>';
                 }},
-                { data: 'expires_at', render: function(data){ return data ? new Date(data).toLocaleDateString() : 'Perpetua'; } },
-                { data: null, className: 'text-end', render: function(data, type, row){
-                    const statusIcon = row.status === 'active' ? 'fa-ban text-warning' : 'fa-check text-success';
-                    const statusTitle = row.status === 'active' ? 'Suspender' : 'Activar';
+                { data: 'expires_at', render: (d) => d ? '<span class="small text-muted">'+new Date(d).toLocaleDateString()+'</span>' : '<span class="badge bg-light text-muted border">Perpetua</span>' },
+                { data: null, className: 'text-end pe-4', render: (d, t, r) => {
+                    const statusIcon = r.status === 'active' ? 'fa-ban text-danger' : 'fa-check text-success';
                     return `
-                        <div class="btn-group shadow-sm">
-                            <button class="btn btn-sm btn-dark btn-edit" data-id="${row.id}" data-date="${row.expires_at}" title="Editar Fecha">
-                                <i class="fa-solid fa-calendar-day text-info"></i>
-                            </button>
-                            <button class="btn btn-sm btn-dark btn-toggle-status" data-id="${row.id}" data-status="${row.status}" title="${statusTitle}">
-                                <i class="fa-solid ${statusIcon}"></i>
-                            </button>
-                            <button class="btn btn-sm btn-dark btn-delete ${row.status === 'active' ? 'opacity-25' : ''}" data-id="${row.id}" title="${row.status === 'active' ? 'Bloqueado (Licencia Activa)' : 'Eliminar'}">
-                                <i class="fa-solid fa-trash-can text-danger"></i>
-                            </button>
-                        </div>
-                    `;
+                        <div class="btn-group">
+                            <button class="btn btn-sm btn-light border btn-edit" data-id="${r.id}" title="Editar"><i class="fa-solid fa-pen text-primary"></i></button>
+                            <button class="btn btn-sm btn-light border btn-toggle-status" data-id="${r.id}" data-status="${r.status}"><i class="fa-solid ${statusIcon}"></i></button>
+                            <button class="btn btn-sm btn-light border btn-delete" data-id="${r.id}"><i class="fa-solid fa-trash text-muted"></i></button>
+                        </div>`;
                 }}
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
-            dom: '<"row mb-3"<"col-sm-6"l><"col-sm-6"f>>rt<"row mt-3"<"col-sm-6"i><"col-sm-6"p>>'
+            dom: '<"p-3 d-flex justify-content-between align-items-center"lf>rt<"p-3 d-flex justify-content-between align-items-center"ip>'
         });
 
-        // Eliminar Licencia
         $('#licensesTable').on('click', '.btn-delete', function() {
             const id = $(this).data('id');
-            Swal.fire({
-                title: '¿Eliminar licencia?',
-                text: "Esta acción no se puede deshacer.",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
+            Swal.fire({ title: '¿Eliminar licencia?', text: "Esta acción no se puede deshacer.", icon: 'warning', showCancelButton: true, confirmButtonColor: '#d33', confirmButtonText: 'Sí, eliminar' }).then((result) => {
                 if (result.isConfirmed) {
-                    $.post('api/delete_license.php', { id: id }, function(res) {
-                        if(res.success) {
-                            Swal.fire('Eliminado', 'La licencia ha sido borrada.', 'success');
-                            table.ajax.reload();
-                        } else {
-                            Swal.fire('Protegido', res.message, 'error');
-                        }
-                    }, 'json');
+                    $.post('api/delete_license.php', { id: id }, (res) => { if(res.success){ table.ajax.reload(); Swal.fire('Eliminado', res.message, 'success'); } }, 'json');
                 }
             });
         });
 
-        // Alternar Estado (Activar/Suspender)
         $('#licensesTable').on('click', '.btn-toggle-status', function() {
             const id = $(this).data('id');
-            const currentStatus = $(this).data('status');
-            const newStatus = currentStatus === 'active' ? 'suspended' : 'active';
-            
-            $.post('api/update_license.php', { action: 'toggle_status', id: id, status: newStatus }, function(res) {
-                if(res.success) {
-                    Swal.fire('Estado Actualizado', 'La licencia ahora está ' + newStatus, 'success');
-                    table.ajax.reload();
-                }
-            }, 'json');
+            const newStatus = $(this).data('status') === 'active' ? 'suspended' : 'active';
+            $.post('api/update_license.php', { action: 'toggle_status', id: id, status: newStatus }, () => table.ajax.reload(), 'json');
         });
 
-        // Ver Detalles de Empresa
         $('#licensesTable').on('click', '.company-link', function() {
             const data = table.row($(this).closest('tr')).data();
-            const activationDate = data.activated_at ? new Date(data.activated_at).toLocaleDateString('es-CL', { day: '2-digit', month: 'long', year: 'numeric' }) : 'Pendiente de activación';
-            
+            const activationDate = data.activated_at ? new Date(data.activated_at).toLocaleDateString('es-CL') : 'Pendiente';
             const content = `
-                <div class="mb-4 text-center">
-                    <div class="h4 text-info fw-bold mb-1">${data.company_name}</div>
-                    <div class="text-white-50 small">RUT: ${data.rut || 'No registrado'}</div>
-                    <div class="mt-2"><span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3">Activado el: ${activationDate}</span></div>
+                <div class="text-center mb-4">
+                    <h5 class="fw-bold mb-1">${data.company_name}</h5>
+                    <span class="text-muted small">RUT: ${data.rut || 'No registrado'}</span>
+                </div>
+                <div class="p-3 bg-light rounded border mb-3">
+                    <label class="small fw-bold text-primary d-block mb-1 text-uppercase">Email de Contacto</label>
+                    <div class="fw-bold">${data.email || 'N/A'}</div>
                 </div>
                 <div class="row g-3">
-                    <div class="col-12">
-                        <div class="p-3 rounded bg-dark border border-secondary shadow-sm">
-                            <label class="text-info small d-block mb-1 fw-bold">EMAIL CORPORATIVO</label>
-                            <div class="text-white fs-5">${data.email || 'N/A'}</div>
+                    <div class="col-6">
+                        <div class="p-3 bg-light rounded border">
+                            <label class="small fw-bold text-primary d-block mb-1 text-uppercase">Teléfono</label>
+                            <div class="fw-bold">${data.phone || 'N/A'}</div>
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="p-3 rounded bg-dark border border-secondary shadow-sm h-100">
-                            <label class="text-info small d-block mb-1 fw-bold">TELÉFONO</label>
-                            <div class="text-white">${data.phone || 'N/A'}</div>
+                        <div class="p-3 bg-light rounded border">
+                            <label class="small fw-bold text-primary d-block mb-1 text-uppercase">Activación</label>
+                            <div class="fw-bold">${activationDate}</div>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="p-3 rounded bg-dark border border-secondary shadow-sm h-100">
-                            <label class="text-info small d-block mb-1 fw-bold">CIUDAD/REGIÓN</label>
-                            <div class="text-white">${data.address ? data.address.split(',')[0] : 'N/A'}</div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="p-3 rounded bg-dark border border-secondary shadow-sm">
-                            <label class="text-info small d-block mb-1 fw-bold">DIRECCIÓN COMPLETA</label>
-                            <div class="text-white small">${data.address || 'Sin dirección registrada'}</div>
-                        </div>
-                    </div>
-                </div>
-            `;
+                </div>`;
             $('#detailsContent').html(content);
             $('#modalCompanyDetails').modal('show');
         });
 
-        // Abrir Modal Editar Licencia Completo
         $('#licensesTable').on('click', '.btn-edit', function() {
             const data = table.row($(this).closest('tr')).data();
             $('#edit_license_id').val(data.id);
@@ -333,56 +283,17 @@ $db = Database::getConnection();
             $('#modalEditLicense').modal('show');
         });
 
-        // Guardar Cambios de Licencia (Edición Completa)
         $('#formEditLicense').on('submit', function(e) {
             e.preventDefault();
-            const $btn = $(this).find('button[type="submit"]');
-            const originalText = $btn.html();
-            
-            $btn.prop('disabled', true).html('<i class="fas fa-sync fa-spin me-2"></i> Actualizando registro...');
-            
-            $.post('api/update_license.php', $(this).serialize(), function(response) {
-                if(response.success) {
-                    Swal.fire({ icon: 'success', title: '¡Actualizado!', text: 'Los datos de la licencia han sido modificados.', timer: 1500, showConfirmButton: false });
-                    $('#modalEditLicense').modal('hide');
-                    table.ajax.reload();
-                } else {
-                    Swal.fire('Error', response.message, 'error');
-                }
-                $btn.prop('disabled', false).html(originalText);
+            $.post('api/update_license.php', $(this).serialize(), (res) => {
+                if(res.success){ $('#modalEditLicense').modal('hide'); table.ajax.reload(); Swal.fire({ icon: 'success', title: 'Actualizado', toast: true, position: 'top-end', showConfirmButton: false, timer: 1500 }); }
             }, 'json');
         });
 
         $('#formGenerateLicense').on('submit', function(e) {
             e.preventDefault();
-            const $btn = $(this).find('button[type="submit"]');
-            const originalText = $btn.html();
-
-            $btn.prop('disabled', true).html('<i class="fas fa-magic fa-spin me-2"></i> Forjando llave...');
-            Swal.fire({ 
-                title: 'Generando Nueva Licencia...', 
-                html: 'Creando accesos criptográficos seguros',
-                allowOutsideClick: false, 
-                didOpen: () => { Swal.showLoading() } 
-            });
-
-            $.post('api/save_license.php', $(this).serialize(), function(response) {
-                // Forzamos 2.5 segundos de "épica"
-                setTimeout(() => {
-                    if(response.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: '¡Licencia Forjada!',
-                            text: 'La nueva llave ha sido creada con éxito.',
-                            confirmButtonText: 'Genial'
-                        });
-                        $('#modalGenerateLicense').modal('hide');
-                        table.ajax.reload();
-                    } else {
-                        Swal.fire('Error', response.message, 'error');
-                    }
-                    $btn.prop('disabled', false).html(originalText);
-                }, 2500);
+            $.post('api/save_license.php', $(this).serialize(), (res) => {
+                if(res.success){ $('#modalGenerateLicense').modal('hide'); table.ajax.reload(); Swal.fire({ icon: 'success', title: 'Generada', text: 'Licencia creada con éxito', confirmButtonColor: '#6A37B7' }); }
             }, 'json');
         });
     });

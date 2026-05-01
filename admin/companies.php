@@ -4,7 +4,7 @@ use App\Services\AuthService;
 AuthService::check();
 ?>
 <!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Empresas | PanelBoss PRO</title>
@@ -30,7 +30,7 @@ AuthService::check();
                                 <i class="fa-solid fa-user-tie text-white small"></i>
                             </div>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2" style="background: var(--bg-card);">
+                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2">
                             <li><a href="logout.php" class="dropdown-item py-2 text-danger fw-medium"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
                         </ul>
                     </li>
@@ -41,16 +41,15 @@ AuthService::check();
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
         <main class="app-main">
-            <!-- Alineación igual al Dashboard y Licencias -->
             <div class="app-content-header py-4">
                 <div class="container-fluid px-4">
                     <div class="row align-items-center">
                         <div class="col-sm-6">
-                            <h3 class="fw-semibold mb-0">Gestión de Empresas</h3>
-                            <p class="text-muted small">Administración de clientes y tenants</p>
+                            <h3 class="fw-bold mb-0">Gestión de Empresas</h3>
+                            <p class="text-muted small">Administración de clientes corporativos y tenants</p>
                         </div>
                         <div class="col-sm-6 text-end">
-                            <button class="btn btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#modalAddCompany">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddCompany">
                                 <i class="fa-solid fa-plus me-2"></i> AGREGAR EMPRESA
                             </button>
                         </div>
@@ -60,19 +59,21 @@ AuthService::check();
             
             <div class="app-content">
                 <div class="container-fluid px-4">
-                    <div class="card shadow-sm border-0">
-                        <div class="card-body p-4">
-                            <table id="companiesTable" class="table table-hover dt-responsive nowrap" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Empresa</th>
-                                        <th>RUT</th>
-                                        <th>Registro</th>
-                                        <th class="text-end">Acciones</th>
-                                    </tr>
-                                </thead>
-                            </table>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table id="companiesTable" class="table table-hover align-middle mb-0" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="ps-4" style="width: 80px">ID</th>
+                                            <th>Empresa</th>
+                                            <th>RUT / ID FISCAL</th>
+                                            <th>Fecha Registro</th>
+                                            <th class="text-end pe-4">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -83,29 +84,28 @@ AuthService::check();
     <!-- Modal: Agregar Empresa -->
     <div class="modal fade" id="modalAddCompany" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg" style="background-color: var(--bg-card);">
-                <div class="modal-header border-bottom border-white border-opacity-10">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h5 class="modal-title fw-bold">Registrar Nueva Empresa</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="formAddCompany">
                     <div class="modal-body p-4">
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">NOMBRE DE LA EMPRESA</label>
-                            <input type="text" class="form-control bg-dark border-secondary text-white" name="name" required>
+                        <div class="mb-4">
+                            <label class="small fw-bold text-muted mb-2">NOMBRE COMERCIAL</label>
+                            <input type="text" class="form-control" name="name" required placeholder="Ej: Distribuidora Santiago">
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">RUT / ID FISCAL</label>
-                            <input type="text" class="form-control bg-dark border-secondary text-white" name="rut">
+                        <div class="mb-4">
+                            <label class="small fw-bold text-muted mb-2">RUT / IDENTIFICACIÓN FISCAL</label>
+                            <input type="text" class="form-control" name="rut" placeholder="Ej: 76.123.456-K">
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label text-muted small fw-bold">EMAIL DE CONTACTO</label>
-                            <input type="email" class="form-control bg-dark border-secondary text-white" name="email">
+                        <div class="mb-0">
+                            <label class="small fw-bold text-muted mb-2">EMAIL DE CONTACTO</label>
+                            <input type="email" class="form-control" name="email" placeholder="contacto@empresa.com">
                         </div>
                     </div>
-                    <div class="modal-footer border-top border-white border-opacity-10">
-                        <button type="button" class="btn btn-link text-muted text-decoration-none" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary px-4">Guardar Empresa</button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary w-100 py-3 fw-bold">GUARDAR EMPRESA</button>
                     </div>
                 </form>
             </div>
@@ -124,33 +124,33 @@ AuthService::check();
         const table = $('#companiesTable').DataTable({
             ajax: 'api/get_companies.php',
             columns: [
-                { data: 'id', render: function(data){ return '<span class="text-muted small">#'+data+'</span>'; } },
-                { data: 'name', render: function(data){ return '<span class="fw-medium text-info">'+data+'</span>'; } },
-                { data: 'rut' },
-                { data: 'created_at', render: function(data){ return data ? new Date(data).toLocaleDateString() : 'N/A'; } },
-                { data: null, className: 'text-end', render: function(data){
-                    return '<button class="btn btn-sm btn-dark"><i class="fa-solid fa-pencil text-primary"></i></button>';
+                { data: 'id', className: 'ps-4', render: (d) => '<span class="text-muted small">#'+d+'</span>' },
+                { data: 'name', render: (d) => '<span class="fw-bold text-dark">'+d+'</span>' },
+                { data: 'rut', render: (d) => d ? '<span class="text-muted">'+d+'</span>' : '<span class="text-muted small italic">Sin RUT</span>' },
+                { data: 'created_at', render: (d) => d ? '<span class="small text-muted">'+new Date(d).toLocaleDateString()+'</span>' : 'N/A' },
+                { data: null, className: 'text-end pe-4', render: (d) => {
+                    return '<button class="btn btn-sm btn-light border"><i class="fa-solid fa-pencil text-primary"></i></button>';
                 }}
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
-            dom: '<"row mb-3"<"col-sm-6"l><"col-sm-6"f>>rt<"row mt-3"<"col-sm-6"i><"col-sm-6"p>>'
+            dom: '<"p-3 d-flex justify-content-between align-items-center"lf>rt<"p-3 d-flex justify-content-between align-items-center"ip>'
         });
 
         $('#formAddCompany').on('submit', function(e) {
             e.preventDefault();
             const $btn = $(this).find('button[type="submit"]');
-            $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Guardando...');
+            $btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-2"></i> Guardando...');
             
             $.post('api/save_company.php', $(this).serialize(), function(res) {
                 if(res.success) {
-                    Swal.fire('Éxito', res.message, 'success');
+                    Swal.fire({ icon: 'success', title: 'Éxito', text: res.message, toast: true, position: 'top-end', showConfirmButton: false, timer: 1500 });
                     $('#modalAddCompany').modal('hide');
                     table.ajax.reload();
                     $('#formAddCompany')[0].reset();
                 } else {
                     Swal.fire('Error', res.message, 'error');
                 }
-                $btn.prop('disabled', false).html('Guardar Empresa');
+                $btn.prop('disabled', false).html('GUARDAR EMPRESA');
             }, 'json');
         });
     });

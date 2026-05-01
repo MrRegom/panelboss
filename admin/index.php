@@ -16,7 +16,7 @@ try {
 }
 ?>
 <!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard | PanelBoss Enterprise</title>

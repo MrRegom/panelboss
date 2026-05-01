@@ -11,7 +11,7 @@ $repo = new LeadRepository($db);
 $leads = $repo->getAll();
 ?>
 <!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Prospectos | PanelBoss PRO</title>
@@ -23,38 +23,22 @@ $leads = $repo->getAll();
 </head>
 <body class="layout-fixed sidebar-expand-lg">
     <div class="app-wrapper">
-        <!-- Header -->
         <nav class="app-header navbar navbar-expand">
             <div class="container-fluid px-4">
                 <ul class="navbar-nav">
                     <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i class="fa-solid fa-bars-staggered"></i> </a> </li>
                 </ul>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown user-menu"> 
-                        <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown"> 
-                            <span class="d-none d-md-inline fw-semibold me-2"><?= $_SESSION['user_name'] ?? 'Admin' ?></span>
-                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
-                                <i class="fa-solid fa-user-tie text-white small"></i>
-                            </div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2">
-                            <li><a href="logout.php" class="dropdown-item py-2 text-danger fw-medium"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
         </nav>
 
-        <!-- Sidebar -->
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
-        <!-- Main Content -->
         <main class="app-main">
             <div class="app-content-header py-4">
                 <div class="container-fluid px-4">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="fw-semibold mb-0">Gestión de Prospectos</h3>
+                            <h3 class="fw-bold mb-0">Gestión de Prospectos</h3>
                             <p class="text-muted small">Usuarios que han descargado la demo de CajaYa</p>
                         </div>
                     </div>
@@ -67,7 +51,7 @@ $leads = $repo->getAll();
                         <div class="card-body p-0">
                             <div class="table-responsive">
                                 <table class="table table-hover align-middle mb-0">
-                                    <thead class="bg-light bg-opacity-10">
+                                    <thead>
                                         <tr>
                                             <th class="ps-4">Usuario</th>
                                             <th>Email</th>
@@ -83,8 +67,8 @@ $leads = $repo->getAll();
                                         <tr>
                                             <td class="ps-4">
                                                 <div class="d-flex align-items-center">
-                                                    <img src="<?= $lead['avatar_url'] ?: 'https://ui-avatars.com/api/?name=' . urlencode($lead['full_name']) ?>" class="rounded-circle me-3" width="35">
-                                                    <span class="fw-medium"><?= htmlspecialchars($lead['full_name']) ?></span>
+                                                    <img src="<?= $lead['avatar_url'] ?: 'https://ui-avatars.com/api/?name=' . urlencode($lead['full_name']) ?>" class="rounded-circle me-3 border" width="35">
+                                                    <span class="fw-bold text-dark"><?= htmlspecialchars($lead['full_name']) ?></span>
                                                 </div>
                                             </td>
                                             <td class="text-muted"><?= htmlspecialchars($lead['email']) ?></td>
@@ -95,11 +79,11 @@ $leads = $repo->getAll();
                                                     <span class="badge bg-info bg-opacity-10 text-info border-0"><i class="fab fa-microsoft me-1"></i> Microsoft</span>
                                                 <?php endif; ?>
                                             </td>
-                                            <td><code class="text-primary"><?= $lead['demo_license_key'] ?></code></td>
+                                            <td><code><?= $lead['demo_license_key'] ?></code></td>
                                             <td>
                                                 <?php if($lead['whatsapp']): ?>
-                                                    <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $lead['whatsapp']) ?>" target="_blank" class="btn btn-sm btn-success bg-opacity-10 text-success border-0">
-                                                        <i class="fab fa-whatsapp me-1"></i> <?= htmlspecialchars($lead['whatsapp']) ?>
+                                                    <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $lead['whatsapp']) ?>" target="_blank" class="btn btn-sm btn-light border text-success fw-bold">
+                                                        <i class="fab fa-whatsapp me-1"></i> WhatsApp
                                                     </a>
                                                 <?php else: ?>
                                                     <span class="text-muted small">Sin número</span>
@@ -107,17 +91,15 @@ $leads = $repo->getAll();
                                             </td>
                                             <td class="text-muted small"><?= date('d/m/Y H:i', strtotime($lead['created_at'])) ?></td>
                                             <td class="text-end pe-4">
-                                                <div class="btn-group">
-                                                    <a href="mailto:<?= $lead['email'] ?>" class="btn btn-sm btn-primary bg-opacity-10 text-primary border-0" title="Enviar Email">
-                                                        <i class="fa-solid fa-envelope"></i>
-                                                    </a>
-                                                </div>
+                                                <a href="mailto:<?= $lead['email'] ?>" class="btn btn-sm btn-light border" title="Enviar Email">
+                                                    <i class="fa-solid fa-envelope text-primary"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
                                         <?php if (empty($leads)): ?>
                                         <tr>
-                                            <td colspan="6" class="text-center py-5 text-muted">No hay prospectos registrados aún.</td>
+                                            <td colspan="7" class="text-center py-5 text-muted">No hay prospectos registrados aún.</td>
                                         </tr>
                                         <?php endif; ?>
                                     </tbody>

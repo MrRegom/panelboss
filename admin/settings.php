@@ -20,7 +20,7 @@ try {
 }
 ?>
 <!DOCTYPE html>
-<html lang="es" data-bs-theme="dark">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Configuración | PanelBoss PRO</title>
@@ -60,7 +60,7 @@ try {
                 <div class="container-fluid px-4">
                     <div class="row align-items-center">
                         <div class="col-sm-12">
-                            <h3 class="fw-semibold mb-0">Configuración del Sistema</h3>
+                            <h3 class="fw-bold mb-0">Configuración del Sistema</h3>
                             <p class="text-muted small">Gestiona los enlaces de descarga y versiones de CajaYa</p>
                         </div>
                     </div>
@@ -68,66 +68,63 @@ try {
             </div>
             
             <div class="app-content px-4">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card shadow-sm border-0">
-                            <div class="card-header border-0 pb-0">
-                                <h5 class="card-title fw-bold">Software POS</h5>
+                <div class="row g-4">
+                    <div class="col-md-7">
+                        <div class="card border-0 shadow-sm mb-4">
+                            <div class="card-header bg-white py-3 border-bottom">
+                                <h5 class="card-title fw-bold mb-0">Software POS</h5>
                             </div>
                             <div class="card-body p-4">
                                 <form id="formUpload" enctype="multipart/form-data">
                                     <div class="mb-4">
-                                        <label class="form-label text-muted small fw-bold">SUBIR NUEVA VERSIÓN (.EXE)</label>
-                                        <div class="input-group">
-                                            <input type="file" class="form-control bg-dark border-secondary" name="installer" id="installerFile" accept=".exe" required>
-                                        </div>
-                                        <div class="form-text text-muted mt-2">Al subir un archivo, se actualizará automáticamente la URL de descarga.</div>
+                                        <label class="small fw-bold text-muted mb-2">SUBIR NUEVA VERSIÓN (.EXE)</label>
+                                        <input type="file" class="form-control" name="installer" id="installerFile" accept=".exe" required>
+                                        <div class="form-text text-muted">El archivo se alojará en el servidor y actualizará el link de descarga.</div>
                                     </div>
 
                                     <div class="mb-4">
-                                        <label class="form-label text-muted small fw-bold">VERSION DEL ARCHIVO</label>
-                                        <input type="text" class="form-control bg-dark border-secondary" name="version" placeholder="Ej: 1.0.1" required>
+                                        <label class="small fw-bold text-muted mb-2">ETIQUETA DE VERSIÓN</label>
+                                        <input type="text" class="form-control" name="version" placeholder="Ej: 2.4.0" required>
                                     </div>
 
-                                    <div class="progress mb-4 d-none" style="height: 10px;">
-                                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                                    <div class="progress mb-4 d-none" style="height: 8px;">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 0%"></div>
                                     </div>
 
-                                    <div class="text-end border-top pt-3 mt-4">
-                                        <button type="submit" class="btn btn-success px-5 fw-bold">
+                                    <div class="text-end border-top pt-4">
+                                        <button type="submit" class="btn btn-primary px-5 fw-bold">
                                             <i class="fa-solid fa-cloud-arrow-up me-2"></i> SUBIR Y ACTUALIZAR
                                         </button>
                                     </div>
                                 </form>
 
-                                <hr class="my-4 opacity-10">
+                                <hr class="my-5 opacity-10">
 
                                 <form id="formSettings">
-                                    <h6 class="fw-bold mb-3 small text-muted">LINK ACTUAL CONFIGURADO</h6>
+                                    <h6 class="fw-bold mb-4 text-primary">Configuración de Rutas</h6>
                                     <div class="mb-4">
-                                        <label class="form-label text-muted small fw-bold">URL DE DESCARGA DIRECTA</label>
+                                        <label class="small fw-bold text-muted mb-2">URL DE DESCARGA DIRECTA</label>
                                         <div class="input-group">
-                                            <span class="input-group-text bg-dark border-secondary text-primary">
-                                                <i class="fa-solid fa-download"></i>
+                                            <span class="input-group-text bg-light border-end-0">
+                                                <i class="fa-solid fa-link text-muted"></i>
                                             </span>
-                                            <input type="url" class="form-control bg-dark border-secondary" name="download_url" value="<?= htmlspecialchars($downloadUrl) ?>" required>
-                                        </div>
-                                        <div class="form-text text-muted">Este es el link que se envía por correo a los clientes.</div>
-                                    </div>
-
-                                    <div class="mb-4">
-                                        <label class="form-label text-muted small fw-bold">VERSIÓN ACTUAL</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text bg-dark border-secondary text-primary">
-                                                <i class="fa-solid fa-code-branch"></i>
-                                            </span>
-                                            <input type="text" class="form-control bg-dark border-secondary" name="current_version" value="<?= htmlspecialchars($currentVersion) ?>" required>
+                                            <input type="url" class="form-control" name="download_url" value="<?= htmlspecialchars($downloadUrl) ?>" required>
                                         </div>
                                     </div>
 
-                                    <div class="text-end border-top pt-3 mt-4">
-                                        <button type="submit" class="btn btn-primary px-5">
-                                            <i class="fa-solid fa-floppy-disk me-2"></i> GUARDAR CAMBIOS
+                                    <div class="mb-4">
+                                        <label class="small fw-bold text-muted mb-2">VERSIÓN ACTUAL EN PRODUCCIÓN</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light border-end-0">
+                                                <i class="fa-solid fa-code-branch text-muted"></i>
+                                            </span>
+                                            <input type="text" class="form-control" name="current_version" value="<?= htmlspecialchars($currentVersion) ?>" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-end border-top pt-4">
+                                        <button type="submit" class="btn btn-primary px-5 fw-bold">
+                                            <i class="fa-solid fa-floppy-disk me-2"></i> GUARDAR CONFIGURACIÓN
                                         </button>
                                     </div>
                                 </form>
@@ -135,16 +132,28 @@ try {
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="card shadow-sm border-0 bg-primary bg-opacity-10">
+                    <div class="col-md-5">
+                        <div class="card border-0 shadow-sm" style="background: var(--primary-soft);">
                             <div class="card-body p-4">
-                                <h5 class="fw-bold text-primary mb-3"><i class="fa-solid fa-circle-info me-2"></i> Instrucciones</h5>
-                                <p class="small text-muted mb-3">Aquí puedes actualizar el instalador que tus clientes descargan. Sigue estas recomendaciones:</p>
-                                <ul class="small text-muted mb-0">
-                                    <li class="mb-2">Asegúrate de que el archivo .exe esté subido al servidor o a un CDN.</li>
-                                    <li class="mb-2">Usa siempre rutas absolutas (empezando con https://).</li>
-                                    <li class="mb-2">Al cambiar la versión, asegúrate de que el archivo físico coincida.</li>
-                                </ul>
+                                <h5 class="fw-bold text-primary mb-4"><i class="fa-solid fa-lightbulb me-2"></i> Guía Rápida</h5>
+                                <div class="d-flex gap-3 mb-4">
+                                    <div class="icon-circle bg-white shadow-sm p-3 rounded-circle text-primary d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                        <i class="fa-solid fa-shield-check"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="fw-bold mb-1">Seguridad de Archivos</h6>
+                                        <p class="small text-muted mb-0">Solo se permiten archivos .exe para garantizar la integridad del instalador.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-3">
+                                    <div class="icon-circle bg-white shadow-sm p-3 rounded-circle text-primary d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                        <i class="fa-solid fa-envelope-circle-check"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="fw-bold mb-1">Notificación Automática</h6>
+                                        <p class="small text-muted mb-0">Al cambiar la versión aquí, los nuevos prospectos recibirán automáticamente el link actualizado.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -160,7 +169,6 @@ try {
 
     <script>
     $(document).ready(function() {
-        // MANEJO DE SUBIDA DE ARCHIVO
         $('#formUpload').on('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
@@ -168,9 +176,8 @@ try {
             const progress = $('.progress');
             const progressBar = $('.progress-bar');
 
-            btn.prop('disabled', true).html('<i class="fa-solid fa-spinner fa-spin me-2"></i> Subiendo...');
+            btn.prop('disabled', true).html('<i class="fa-solid fa-spinner fa-spin me-2"></i> Procesando...');
             progress.removeClass('d-none');
-            progressBar.css('width', '0%').text('0%');
 
             $.ajax({
                 url: 'api/upload_installer.php',
@@ -191,37 +198,24 @@ try {
                 success: function(res) {
                     btn.prop('disabled', false).html('<i class="fa-solid fa-cloud-arrow-up me-2"></i> SUBIR Y ACTUALIZAR');
                     if(res.success) {
-                        Swal.fire('¡Éxito!', res.message, 'success').then(() => location.reload());
+                        Swal.fire({ icon: 'success', title: '¡Éxito!', text: res.message }).then(() => location.reload());
                     } else {
                         Swal.fire('Error', res.message, 'error');
                         progress.addClass('d-none');
                     }
-                },
-                error: function() {
-                    btn.prop('disabled', false).html('<i class="fa-solid fa-cloud-arrow-up me-2"></i> SUBIR Y ACTUALIZAR');
-                    Swal.fire('Error', 'Error de red o tamaño de archivo excedido', 'error');
-                    progress.addClass('d-none');
                 }
             });
         });
 
-        // GUARDAR CAMBIOS MANUALES
         $('#formSettings').on('submit', function(e) {
             e.preventDefault();
             const btn = $(this).find('button[type="submit"]');
             btn.prop('disabled', true).html('<i class="fa-solid fa-spinner fa-spin me-2"></i> Guardando...');
 
             $.post('api/save_settings.php', $(this).serialize(), function(res) {
-                btn.prop('disabled', false).html('<i class="fa-solid fa-floppy-disk me-2"></i> GUARDAR CAMBIOS');
+                btn.prop('disabled', false).html('<i class="fa-solid fa-floppy-disk me-2"></i> GUARDAR CONFIGURACIÓN');
                 if(res.success) {
-                    Swal.fire({
-                        title: '¡Éxito!',
-                        text: res.message,
-                        icon: 'success',
-                        confirmButtonColor: '#2563eb'
-                    });
-                } else {
-                    Swal.fire('Error', res.message, 'error');
+                    Swal.fire({ icon: 'success', title: 'Configuración Guardada', text: res.message, confirmButtonColor: '#6A37B7' });
                 }
             }, 'json');
         });
