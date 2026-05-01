@@ -15,7 +15,7 @@ $userInitial = strtoupper(substr($userName, 0, 1));
                 </a> 
             </li>
             <li class="nav-item ms-2 d-none d-md-block">
-                <span class="text-muted small fw-medium">PANEL DE CONTROL CAJAYA ENTERPRISE</span>
+                <span class="text-white opacity-75 small fw-medium">PANEL DE CONTROL CAJAYA ENTERPRISE</span>
             </li>
         </ul>
         

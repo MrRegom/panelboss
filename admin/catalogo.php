@@ -77,11 +77,24 @@ try {
             columns: [
                 { 
                     data: 'image_path', 
-                    render: (d) => {
-                        // Intentamos ruta relativa desde /admin/
-                        // Si d ya incluye 'storage/', el resultado es '../storage/...'
-                        let path = d ? '../' + d : 'https://placehold.co/100x100?text=Sin+Imagen';
-                        return `<img src="${path}" class="rounded border shadow-sm bg-white" style="width:52px; height:52px; object-fit:contain; padding:2px;" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=No+Encontrada'">`;
+                    render: (d, type, row) => {
+                        // Extraemos el nombre del archivo sin extensión si es posible
+                        let filename = d ? d.split('/').pop().split('.')[0] : null;
+                        let barcode = row.barcode;
+                        
+                        // Lista de posibles rutas para probar
+                        // 1. Ruta de DB (../storage/...)
+                        // 2. Carpeta imagenes_productos con el nombre de la DB
+                        // 3. Carpeta imagenes_productos con el barcode (común en estos sistemas)
+                        let primaryPath = d ? '../' + d : null;
+                        let fallbackJpg = barcode ? '../imagenes_productos/' + barcode + '.jpg' : null;
+                        let fallbackPng = barcode ? '../imagenes_productos/' + barcode + '.png' : null;
+                        
+                        let imgHtml = `<img src="${primaryPath || 'https://placehold.co/100x100?text=Sin+Imagen'}" 
+                             class="rounded border shadow-sm bg-white" 
+                             style="width:52px; height:52px; object-fit:contain; padding:2px;" 
+                             onerror="if(this.src.includes('storage')) { this.src='${fallbackJpg}'; } else if(this.src.includes('.jpg')) { this.src='${fallbackPng}'; } else { this.onerror=null; this.src='https://placehold.co/100x100?text=No+Encontrada'; }">`;
+                        return imgHtml;
                     }
                 },
                 { data: 'barcode', className: 'fw-bold text-primary small' },

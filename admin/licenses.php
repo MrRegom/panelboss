@@ -22,32 +22,25 @@ $companies = $db->query("SELECT id, name FROM companies ORDER BY name")->fetchAl
 </head>
 <body class="layout-fixed sidebar-expand-lg">
     <div class="app-wrapper">
-        <nav class="app-header navbar navbar-expand">
-            <div class="container-fluid px-3">
-                <ul class="navbar-nav align-items-center">
-                    <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i class="fa-solid fa-bars"></i> </a> </li>
-                </ul>
-            </div>
-        </nav>
-
+        <?php include __DIR__ . '/includes/header.php'; ?>
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
         <main class="app-main">
-            <div class="page-header-pro d-flex justify-content-between align-items-center">
+            <div class="page-header-silk d-flex justify-content-between align-items-center">
                 <div>
-                    <h1 class="page-title-pro">Gestión de Licencias</h1>
+                    <h1 class="page-title-silk">Gestión de Licencias</h1>
                     <p class="text-muted small mb-0">Control de activación y vigencia de planes.</p>
                 </div>
-                <button class="btn btn-pro shadow-sm px-4" data-bs-toggle="modal" data-bs-target="#modalGenerateLicense">
+                <button class="btn btn-silk shadow-sm px-4" data-bs-toggle="modal" data-bs-target="#modalGenerateLicense">
                     <i class="fa-solid fa-plus me-2"></i> Generar Licencia
                 </button>
             </div>
 
             <div class="app-content px-4">
                 <div class="container-fluid">
-                    <div class="card card-pro border-0 shadow-sm">
+                    <div class="card card-silk border-0 shadow-sm">
                         <div class="table-responsive">
-                            <table id="licensesTable" class="table ms-table w-100">
+                            <table id="licensesTable" class="table silk-table w-100">
                                 <thead>
                                     <tr>
                                         <th>LLAVE</th>
