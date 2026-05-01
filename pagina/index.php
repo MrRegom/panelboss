@@ -41,8 +41,8 @@ session_start();
         }
         @keyframes pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; } 50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.8; } }
 
-        .container { position: relative; z-index: 10; text-align: center; padding: 20px; width: 100%; max-width: 600px; }
-        .logo { height: 60px; margin-bottom: 40px; animation: modalUp 0.8s ease; }
+        .container { position: relative; z-index: 10; text-align: center; padding: 20px; width: 100%; max-width: 600px; margin: 0 auto; }
+        .logo { height: 60px; animation: modalUp 0.8s ease; }
         
         h1 { font-family: 'Outfit', sans-serif; font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 0.9; margin-bottom: 20px; letter-spacing: -3px; }
         h1 span { color: var(--primary-glow); }
@@ -111,9 +111,9 @@ session_start();
     <div class="bg-glow"></div>
 
     <div class="container">
-        <img src="assets/img/logo.png" class="logo">
+        <img src="assets/img/logo.png" class="logo" style="display: block; margin: 0 auto 40px;">
         
-        <div class="coming-soon-badge">Estreno Muy Pronto</div>
+        <div class="coming-soon-badge" style="display: inline-block; margin: 0 auto 25px;">Estreno Muy Pronto</div>
         <h1>El Futuro del <span>Retail</span> está llegando.</h1>
         
         <div class="countdown-container">
