@@ -31,17 +31,23 @@ try {
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
         <main class="app-main">
-            <div class="page-header-silk d-flex justify-content-between align-items-center">
-                <div>
-                    <h1 class="page-title-silk">Catálogo Maestro</h1>
-                    <p class="text-muted small mb-0">Gestión de productos globales para el ecosistema CajaYa.</p>
+            <div class="page-header-silk">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h3 class="page-title-silk mb-0">Catálogo Maestro</h3>
+                            <p class="text-muted small mb-0">Gestión de productos globales para el ecosistema CajaYa.</p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <button class="btn btn-silk shadow-sm px-4" data-bs-toggle="modal" data-bs-target="#modalAddProduct">
+                                <i class="fa-solid fa-plus me-2"></i> Nuevo Artículo
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <button class="btn btn-silk shadow-sm px-4" data-bs-toggle="modal" data-bs-target="#modalAddProduct">
-                    <i class="fa-solid fa-plus me-2"></i> Nuevo Artículo
-                </button>
             </div>
 
-            <div class="app-content px-5">
+            <div class="app-content px-4">
                 <div class="container-fluid">
                     <div class="card card-silk border-0 shadow-sm">
                         <div class="table-responsive">
@@ -81,33 +87,18 @@ try {
                         let barcode = row.barcode;
                         if (!barcode) return '<img src="https://placehold.co/50x50?text=S/B" class="img-catalog-silk">';
                         
-                        // Generamos URLs candidatas
-                        // Probamos rutas relativas a admin (donde está el archivo)
-                        // Probamos rutas relativas a raíz (si el server reescribe)
-                        let candidates = [
-                            `../imagenes_productos/${barcode}.jpg`,
-                            `imagenes_productos/${barcode}.jpg`,
-                            d ? '../' + d : null,
-                            d ? d : null
-                        ].filter(c => c !== null);
-
-                        let img = document.createElement('img');
-                        img.className = 'img-catalog-silk shadow-sm';
-                        img.src = candidates[0];
+                        // Rutas candidatas
+                        let r1 = `imagenes_productos/${barcode}.jpg`;
+                        let r2 = `../imagenes_productos/${barcode}.jpg`;
+                        let r3 = d ? d : '';
+                        let r4 = d ? '../' + d : '';
                         
-                        // Lógica de fallback en cadena
-                        let currentIdx = 0;
-                        img.onerror = function() {
-                            currentIdx++;
-                            if (currentIdx < candidates.length) {
-                                this.src = candidates[currentIdx];
-                            } else {
-                                this.onerror = null;
-                                this.src = 'https://placehold.co/100x100?text=No+Encontrada';
-                            }
-                        };
-                        
-                        return img.outerHTML;
+                        // Sistema de fallback por atributo onerror (String safe)
+                        return `<img src="${r1}" class="img-catalog-silk shadow-sm" 
+                                onerror="if(this.src.includes('${r1}')) { this.src='${r2}'; } 
+                                         else if(this.src.includes('${r2}') && '${r3}') { this.src='${r3}'; } 
+                                         else if(this.src.includes('${r3}') && '${r4}') { this.src='${r4}'; } 
+                                         else { this.onerror=null; this.src='https://placehold.co/100x100?text=Sin+Foto'; }">`;
                     }
                 },
                 { data: 'barcode', className: 'fw-bold text-primary small' },
