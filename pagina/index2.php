@@ -242,7 +242,15 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             .nav-links { display: flex; gap: 8px; }
             .nav-links a { margin-left: 0; padding: 6px 12px; font-size: 10px; }
             .hero-content h1 { font-size: 2.6rem; letter-spacing: -1px; margin-bottom: 20px; text-align: center; }
-            .hero-content p { font-size: 1.1rem; padding-top: 15px; border-top: 3px solid var(--primary); text-align: center; margin-bottom: 30px; border-left: none; }
+            .hero-content p { 
+                font-size: 1.1rem; 
+                padding-top: 15px; 
+                border-top: 3px solid var(--primary); 
+                text-align: center; 
+                margin-bottom: 30px; 
+                border-left: none;
+                text-shadow: 0 2px 10px rgba(0,0,0,0.8); /* Mejora de contraste (V66) */
+            }
             .hero-content .reveal div { display: flex; flex-direction: column; gap: 15px; align-items: center; }
             .btn-primary { padding: 18px 40px; width: 100%; max-width: 320px; font-size: 14px; }
             button[onclick="moveCarousel(1)"] { margin-left: 0 !important; width: 100%; max-width: 320px; }
@@ -401,21 +409,13 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
                 <?php endif; ?>
 
                 <ul class="p-features">
-                    <li><i class="fa-solid fa-check"></i> Integración Boleta SII</li>
-                    <li><i class="fa-solid fa-check"></i> Catálogo Maestro (+20k Prod)</li>
-                    <?php if ($slug === 'mensual'): ?>
-                        <li><i class="fa-solid fa-check"></i> 1 Caja de Venta</li>
-                        <li><i class="fa-solid fa-check"></i> Soporte Estándar</li>
-                    <?php elseif ($isFeatured): ?>
-                        <li><i class="fa-solid fa-crown"></i> 3 Cajas Simultáneas</li>
-                        <li><i class="fa-solid fa-crown"></i> Cero Mensualidades</li>
-                        <li><i class="fa-solid fa-crown"></i> Soporte VIP WhatsApp</li>
-                    <?php else: ?>
-                        <li><i class="fa-solid fa-building"></i> Multi-sucursal Élite</li>
-                        <li><i class="fa-solid fa-building"></i> API Pro Acceso Total</li>
-                        <li><i class="fa-solid fa-building"></i> Consultoría Técnica</li>
-                    <?php endif; ?>
-                    <li><i class="fa-solid fa-check"></i> Funcionamiento Offline</li>
+                    <?php 
+                        $rawDesc = trim($p['description'] ?? '');
+                        $points = !empty($rawDesc) ? explode("\n", $rawDesc) : ["Consultar beneficios"];
+                        foreach ($points as $point): if(trim($point) === "") continue;
+                    ?>
+                        <li><i class="fa-solid fa-check"></i> <?php echo htmlspecialchars(trim($point)); ?></li>
+                    <?php endforeach; ?>
                 </ul>
 
                 <button onclick="startPurchase('<?php echo $slug; ?>', '<?php echo htmlspecialchars($p['name']); ?>', <?php echo $p['price']; ?>)" class="btn-cta" style="border:none; cursor:pointer;">

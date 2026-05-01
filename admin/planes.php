@@ -26,15 +26,16 @@ foreach ($slugsNeeded as $sn) {
     }
 }
 
-// Procesar actualización de plan (V62)
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['slug'], $_POST['price'], $_POST['name'])) {
+// Procesar actualización de plan (V66)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['slug'], $_POST['price'], $_POST['name'], $_POST['description'])) {
     $slug = $_POST['slug'];
     $price = (float)$_POST['price'];
     $name = $_POST['name'];
+    $description = $_POST['description'];
     
-    $stmt = $db->prepare("UPDATE subscription_plans SET name = ?, price = ?, updated_at = NOW() WHERE slug = ?");
-    if ($stmt->execute([$name, $price, $slug])) {
-        $message = "Plan " . strtoupper($slug) . " actualizado correctamente: $name ($" . number_format($price, 0, ',', '.') . ")";
+    $stmt = $db->prepare("UPDATE subscription_plans SET name = ?, price = ?, description = ?, updated_at = NOW() WHERE slug = ?");
+    if ($stmt->execute([$name, $price, $description, $slug])) {
+        $message = "Plan " . strtoupper($slug) . " actualizado correctamente con sus beneficios.";
     }
 }
 
@@ -109,6 +110,11 @@ $plans = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <span class="input-group-text bg-dark border-0 text-muted" style="border-radius: 12px 0 0 12px;">$</span>
                                         <input type="number" name="price" class="form-control bg-dark border-0 text-white fw-bold" value="<?= (int)$plan['price'] ?>" required style="border-radius: 0 12px 12px 0;">
                                     </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label text-muted small fw-bold">BENEFICIOS (Uno por línea)</label>
+                                    <textarea name="description" class="form-control bg-dark border-0 text-white" rows="5" style="border-radius: 12px; font-size: 0.9rem;" placeholder="Ej: Integración SII&#10;Soporte 24/7&#10;Respaldo de datos"><?= htmlspecialchars($plan['description']) ?></textarea>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary w-100 btn-update">
