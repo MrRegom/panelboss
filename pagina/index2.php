@@ -390,6 +390,39 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         .badge-no { display: inline-block; background: #fff5f5; color: #ef4444; border-radius: 8px; padding: 6px 14px; font-weight: 700; font-size: 0.85rem; }
         .badge-yes { display: inline-block; background: #f0fdf4; color: #16a34a; border-radius: 8px; padding: 6px 14px; font-weight: 700; font-size: 0.85rem; }
 
+        /* CALCULADORA ROI V85 */
+        .section-roi { padding: 100px 10%; background: #fff; text-align: center; }
+        .roi-card { 
+            max-width: 900px; margin: 60px auto; background: var(--bg-off); 
+            border-radius: 40px; padding: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+            text-align: left; border: 1px solid #eee; box-shadow: 0 40px 80px rgba(0,0,0,0.03);
+        }
+        .roi-inputs { display: flex; flex-direction: column; gap: 30px; }
+        .roi-control { display: flex; flex-direction: column; gap: 10px; }
+        .roi-control label { font-weight: 700; color: var(--text-dark); display: flex; justify-content: space-between; }
+        .roi-control label span { color: var(--primary); font-weight: 900; }
+        
+        .roi-slider { 
+            -webkit-appearance: none; width: 100%; height: 6px; border-radius: 5px; 
+            background: #e0e0e0; outline: none; transition: 0.3s; 
+        }
+        .roi-slider::-webkit-slider-thumb { 
+            -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; 
+            background: var(--primary); cursor: pointer; border: 4px solid #fff; 
+            box-shadow: 0 4px 10px rgba(106,55,183,0.3);
+        }
+
+        .roi-results { 
+            background: var(--primary); border-radius: 30px; padding: 40px; color: #fff; 
+            display: flex; flex-direction: column; justify-content: center; gap: 25px;
+            box-shadow: 0 20px 40px rgba(106,55,183,0.2);
+        }
+        .res-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+        .res-item:last-child { border: none; }
+        .res-val { font-size: 2.2rem; font-weight: 900; display: block; font-family: 'Outfit'; }
+        .res-lab { font-size: 0.9rem; opacity: 0.8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .res-total { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 20px; text-align: center; }
+
         @media (max-width: 1024px) {
             .trust-bar { gap: 30px; padding: 30px 5%; }
             .mockup-section { grid-template-columns: 1fr; text-align: center; padding: 80px 8%; gap: 40px; }
@@ -399,6 +432,7 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             .comp-feature { font-size: 0.9rem; }
             .badge-no, .badge-yes { padding: 5px 10px; font-size: 0.78rem; }
             .comp-row.header-row { padding: 14px 20px; }
+            .roi-card { grid-template-columns: 1fr; padding: 30px; gap: 40px; }
         }
     </style>
 </head>
@@ -658,6 +692,48 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
         <button onclick="openModal()" class="btn-white">Obtener Demo Gratis</button>
     </div>
 
+    <!-- CALCULADORA ROI V85 -->
+    <section class="section-roi reveal-section">
+        <div class="header-elite">
+            <h2>Calcula tu <span>Potencial.</span></h2>
+            <p style="color: var(--text-light); margin-top: 20px;">Descubre cuánto dinero y tiempo recuperas con CajaYa.</p>
+        </div>
+        
+        <div class="roi-card reveal">
+            <div class="roi-inputs">
+                <div class="roi-control">
+                    <label>Venta Mensual Aproximada <span id="valSales">$10.000.000</span></label>
+                    <input type="range" class="roi-slider" id="inputSales" min="1000000" max="50000000" step="500000" value="10000000">
+                </div>
+                <div class="roi-control">
+                    <label>Gestión Manual Diaria <span id="valTime">4 Horas</span></label>
+                    <input type="range" class="roi-slider" id="inputTime" min="1" max="12" step="1" value="4">
+                </div>
+                <div style="margin-top:20px;">
+                    <p style="font-size: 0.9rem; color: var(--text-light); line-height: 1.4;">
+                        <i class="fa-solid fa-circle-info" style="color:var(--primary);"></i> 
+                        Basado en un ahorro estimado del 3% por reducción de fugas/errores y 80% de eficiencia en gestión de inventarios.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="roi-results">
+                <div class="res-item">
+                    <span class="res-lab">Ahorro Mensual Estimado</span>
+                    <span class="res-val" id="resMonthly">$300.000</span>
+                </div>
+                <div class="res-item">
+                    <span class="res-lab">Tiempo Recuperado</span>
+                    <span class="res-val" id="resTime">96 Horas</span>
+                </div>
+                <div class="res-total">
+                    <span class="res-lab">Ganancia Potencial Anual</span>
+                    <span class="res-val" id="resAnnual" style="color:#FFD700;">$3.600.000</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="section-planes reveal-section" id="planes">
         <div class="header-elite" style="text-align: center;">
             <h2>Planes a tu <span>Medida.</span></h2>
@@ -777,6 +853,28 @@ $pEmpresa  = number_format($plans['empresa']['price']  ?? 35000, 0, ',', '.');
             const fill = document.getElementById('loadFill');
             if(fill) setTimeout(() => fill.style.width = '100%', 100);
         });
+
+        function updateROI() {
+            const sales = parseInt(document.getElementById('inputSales').value);
+            const time = parseInt(document.getElementById('inputTime').value);
+            
+            // UI Labels
+            document.getElementById('valSales').innerText = '$' + sales.toLocaleString('es-CL');
+            document.getElementById('valTime').innerText = time + (time === 1 ? ' Hora' : ' Horas');
+            
+            // Cálculos
+            const monthlySavings = sales * 0.03; // 3% ahorro fugas/errores
+            const hoursRecovered = (time * 0.8) * 30; // 80% eficiencia * 30 días
+            const annualGain = monthlySavings * 12;
+            
+            // Results UI
+            document.getElementById('resMonthly').innerText = '$' + Math.round(monthlySavings).toLocaleString('es-CL');
+            document.getElementById('resTime').innerText = Math.round(hoursRecovered) + ' Horas';
+            document.getElementById('resAnnual').innerText = '$' + Math.round(annualGain).toLocaleString('es-CL');
+        }
+
+        document.getElementById('inputSales').addEventListener('input', updateROI);
+        document.getElementById('inputTime').addEventListener('input', updateROI);
 
         window.addEventListener('load', () => {
             setTimeout(() => {
