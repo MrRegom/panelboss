@@ -24,6 +24,16 @@ try {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="css/admin-custom.css">
+    <style>
+        .pointer-copy {
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .pointer-copy:hover {
+            opacity: 0.7;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body class="layout-fixed sidebar-expand-lg">
     <div class="app-wrapper">
@@ -210,7 +220,11 @@ try {
                         return `<img src="${src}" class="img-catalog-silk" style="cursor: pointer;" onclick="openViewModal('${barcode}', '${name}')" onerror="this.src='https://placehold.co/100x100?text=S/I'">`;
                     }
                 },
-                { data: 'barcode', className: 'fw-bold text-primary small' },
+                { 
+                    data: 'barcode', 
+                    className: 'fw-bold text-primary small pointer-copy',
+                    render: d => `<span title="Clic para copiar">${d}</span>`
+                },
                 { data: 'name', className: 'fw-semibold text-dark' },
                 { data: 'brand', className: 'small text-muted' },
                 { 
@@ -266,6 +280,25 @@ try {
                         Swal.fire('Error', res.message, 'error');
                     }
                 }
+            });
+        });
+
+        // Lógica de Copiado al Portapapeles (Modernísima)
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true
+        });
+
+        $('#catalogTable').on('click', '.pointer-copy', function() {
+            const barcode = $(this).text().trim();
+            navigator.clipboard.writeText(barcode).then(() => {
+                Toast.fire({
+                    icon: 'success',
+                    title: `Copiado: ${barcode}`
+                });
             });
         });
     });
