@@ -1,54 +1,64 @@
 <?php
 namespace App\Services;
 
-use App\Config\Database;
-use PDO;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+use App\Config\SecurityConfig;
+use Exception;
 
+/**
+ * Servicio de Autenticación mediante JWT
+ */
 class AuthService {
-    private PDO $db;
-
-    public function __construct(PDO $db) {
-        $this->db = $db;
+    
+    /**
+     * Genera un Token de acceso basado en la licencia
+     */
+    public static function generateToken($licenseId, $licenseKey) {
+        $issuedAt = time();
+        $expire = $issuedAt + SecurityConfig::TOKEN_EXPIRY;
+        
+        $payload = [
+            'iss' => 'api.cajaya.cl',
+            'aud' => 'cajaya_pos_app',
+            'iat' => $issuedAt,
+            'nbf' => $issuedAt,
+            'exp' => $expire,
+            'data' => [
+                'license_id' => $licenseId,
+                'license_key' => $licenseKey
+            ]
+        ];
+        
+        return [
+            'access_token' => JWT::encode($payload, SecurityConfig::JWT_SECRET, SecurityConfig::JWT_ALGO),
+            'expires_in' => SecurityConfig::TOKEN_EXPIRY,
+            'token_type' => 'Bearer'
+        ];
+    }
+    
+    /**
+     * Valida un Token JWT
+     */
+    public static function validateToken($token) {
+        try {
+            $decoded = JWT::decode($token, new Key(SecurityConfig::JWT_SECRET, SecurityConfig::JWT_ALGO));
+            return (array) $decoded->data;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
-    public function login(string $email, string $password): bool {
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ? AND status = 'active'");
-        $stmt->execute([$email]);
-        $user = $stmt->fetch();
-
-        if ($user && password_verify($password, $user['password'])) {
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
+    /**
+     * Extrae el Bearer Token del Header de Authorization
+     */
+    public static function getBearerToken() {
+        $headers = getallheaders();
+        if (isset($headers['Authorization'])) {
+            if (preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches)) {
+                return $matches[1];
             }
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_name'] = $user['full_name'];
-            $_SESSION['user_role'] = $user['role'];
-            
-            // Actualizar último login
-            $update = $this->db->prepare("UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE id = ?");
-            $update->execute([$user['id']]);
-            
-            return true;
         }
-        return false;
-    }
-
-    public static function check() {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: login.php');
-            exit;
-        }
-    }
-
-    public static function logout() {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        session_destroy();
-        header('Location: login.php');
-        exit;
+        return null;
     }
 }

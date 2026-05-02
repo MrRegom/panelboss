@@ -10,21 +10,29 @@ while ($baseDir !== dirname($baseDir) && !file_exists($baseDir . '/vendor/autolo
 define('PROJECT_ROOT', $baseDir);
 
 require_once PROJECT_ROOT . '/vendor/autoload.php';
-require_once PROJECT_ROOT . '/src/Config/Database.php';
+require_once PROJECT_ROOT . '/vendor/autoload.php';
 
 use App\Config\Database;
+use App\Services\AuthService;
 
-// DEBUG TEMPORAL
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// --- SEGURIDAD v4.0 (Híbrida) ---
+$token = AuthService::getBearerToken();
+$licenseKey = null;
 
-// Priorizamos el header X-Client-Id sobre el parámetro (GET/POST) por seguridad
-$barcode    = $_REQUEST['barcode'] ?? null;
-$licenseKey = $_SERVER['HTTP_X_CLIENT_ID'] ?? $_REQUEST['license_key'] ?? null;
+if ($token) {
+    $tokenData = AuthService::validateToken($token);
+    if ($tokenData) {
+        $licenseKey = $tokenData['license_key'];
+    }
+} else {
+    $licenseKey = $_SERVER['HTTP_X_CLIENT_ID'] ?? $_REQUEST['license_key'] ?? null;
+}
+
+$barcode = $_REQUEST['barcode'] ?? null;
 
 if (!$barcode || !$licenseKey) {
-    header("HTTP/1.1 400 Bad Request");
-    echo "Falta Barcode o X-Client-Id";
+    header("HTTP/1.1 401 Unauthorized");
+    echo "Acceso denegado: Se requiere Token o Licencia";
     exit;
 }
 

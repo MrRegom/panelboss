@@ -121,12 +121,49 @@ AuthService::check();
                                 <a href="#sandbox" class="btn btn-sm btn-light px-4 py-2 rounded-3 fw-bold active">Entorno Sandbox</a>
                                 <a href="#catalog" class="btn btn-sm btn-light px-4 py-2 rounded-3 fw-bold">Catálogo Maestro</a>
                                 <a href="#images" class="btn btn-sm btn-light px-4 py-2 rounded-3 fw-bold">Servidor de Imágenes</a>
-                                <a href="#auth" class="btn btn-sm btn-light px-4 py-2 rounded-3 fw-bold">Autenticación</a>
+                                <a href="#auth" class="btn btn-sm btn-light px-4 py-2 rounded-3 fw-bold">Autenticación v4.0</a>
                             </div>
                         </div>
 
                         <!-- Contenido Principal (Ahora ocupa todo el ancho) -->
                         <div class="col-12">
+                            <!-- Auth Section (NUEVA) -->
+                            <section id="auth" class="mb-5">
+                                <div class="card api-card shadow-sm border-0 bg-white overflow-hidden">
+                                    <div class="card-header bg-dark text-white p-4">
+                                        <div class="d-flex align-items-center">
+                                            <div class="bg-primary p-3 rounded-3 me-3">
+                                                <i class="fa-solid fa-shield-halved fa-2x"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="mb-0 fw-bold">Autenticación v4.0 (JWT)</h4>
+                                                <span class="badge bg-warning text-dark">RECOMENDADO</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body p-5">
+                                        <h5>1. Obtención de Token</h5>
+                                        <p>Para mayor seguridad, no envíe su licencia en cada petición. Solicite un Token de acceso que expirará en 1 hora.</p>
+                                        
+                                        <div class="bg-dark p-3 rounded-4 mb-4">
+                                            <code class="text-warning small">
+                                                curl -X POST "https://api.cajaya.cl/auth/login.php" \<br>
+                                                -H "X-Client-Id: DEVELOPER-TEST"
+                                            </code>
+                                        </div>
+
+                                        <h5>2. Uso del Token</h5>
+                                        <p>Envíe el token recibido en el header <code>Authorization</code> de sus siguientes peticiones.</p>
+                                        
+                                        <div class="bg-dark p-3 rounded-4 mb-0">
+                                            <code class="text-warning small">
+                                                curl -X POST "https://api.cajaya.cl/catalog/list.php" \<br>
+                                                -H "Authorization: Bearer {TU_TOKEN_AQUÍ}"
+                                            </code>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                             <!-- Sandbox Section -->
                             <section id="sandbox" class="mb-5">
                                 <div class="card api-card shadow-sm border-0 bg-white">

@@ -13,6 +13,7 @@ define('PROJECT_ROOT', $baseDir);
 require_once PROJECT_ROOT . '/vendor/autoload.php';
 
 use App\Config\Database;
+use App\Services\AuthService;
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *'); // Permitir consumo desde la App
@@ -20,11 +21,26 @@ header('Access-Control-Allow-Origin: *'); // Permitir consumo desde la App
 try {
     $db = Database::getConnection();
     
-    // 1. Validar Licencia (Prioriza Header X-Client-Id para seguridad)
-    $licenseKey = $_SERVER['HTTP_X_CLIENT_ID'] ?? $_REQUEST['license_key'] ?? null;
+    // --- SEGURIDAD v4.0 (Híbrida) ---
+    $token = AuthService::getBearerToken();
+    $licenseKey = null;
+
+    if ($token) {
+        // Validación vía JWT
+        $tokenData = AuthService::validateToken($token);
+        if (!$tokenData) {
+            http_response_code(401);
+            throw new Exception("Token JWT inválido o expirado");
+        }
+        $licenseKey = $tokenData['license_key'];
+    } else {
+        // Fallback: Validación vía X-Client-Id (v3.0)
+        $licenseKey = $_SERVER['HTTP_X_CLIENT_ID'] ?? $_REQUEST['license_key'] ?? null;
+    }
     
     if (!$licenseKey) {
-        throw new Exception("Falta autenticación (X-Client-Id Header o license_key)");
+        http_response_code(401);
+        throw new Exception("Falta autenticación (Authorization Header o X-Client-Id)");
     }
 
     $stmtLic = $db->prepare("SELECT id FROM licenses WHERE license_key = :key AND status = 'active' LIMIT 1");
@@ -35,6 +51,7 @@ try {
         http_response_code(403);
         throw new Exception("Licencia inválida o inactiva");
     }
+    // --- FIN SEGURIDAD ---
 
     // 2. Obtener Catálogo
     $sql = "SELECT p.barcode, p.name, p.brand, p.image_path, c.name as category_name 

@@ -15,12 +15,29 @@ require_once PROJECT_ROOT . '/vendor/autoload.php';
 
 use App\Config\Database;
 use App\Repositories\MasterProductRepository;
+use App\Services\AuthService;
 
-$barcode    = $_REQUEST['barcode'] ?? null;
-$licenseKey = $_SERVER['HTTP_X_CLIENT_ID'] ?? $_REQUEST['license_key'] ?? null;
+// --- SEGURIDAD v4.0 (Híbrida) ---
+$token = AuthService::getBearerToken();
+$licenseKey = null;
+
+if ($token) {
+    $tokenData = AuthService::validateToken($token);
+    if (!$tokenData) {
+        http_response_code(401);
+        echo json_encode(['status' => 'error', 'message' => 'Token JWT inválido o expirado']);
+        exit;
+    }
+    $licenseKey = $tokenData['license_key'];
+} else {
+    $licenseKey = $_SERVER['HTTP_X_CLIENT_ID'] ?? $_REQUEST['license_key'] ?? null;
+}
+
+$barcode = $_REQUEST['barcode'] ?? null;
 
 if (!$barcode || !$licenseKey) {
-    echo json_encode(['status' => 'error', 'message' => 'Faltan parámetros obligatorios (barcode o X-Client-Id header)']);
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'Faltan parámetros (barcode y Authorization Header o X-Client-Id)']);
     exit;
 }
 
@@ -37,6 +54,7 @@ try {
         echo json_encode(['status' => 'error', 'message' => 'Licencia inválida o inactiva']);
         exit;
     }
+    // --- FIN SEGURIDAD ---
 
     // 2. Buscar Producto
     $repo = new MasterProductRepository();
