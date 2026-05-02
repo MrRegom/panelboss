@@ -28,13 +28,19 @@ class AuthService {
         $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['password'])) {
+            // 3. Login exitoso: Guardar en sesión
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_name'] = $user['name'];
+            $_SESSION['user_name'] = $user['full_name'];
             $_SESSION['user_rut'] = $user['rut'];
-            $_SESSION['user_role'] = $user['role_id'];
+            $_SESSION['user_role'] = $user['role'];
+
+            // 4. Registrar último acceso en la DB
+            $updateStmt = $this->db->prepare("UPDATE users SET last_login = NOW() WHERE id = ?");
+            $updateStmt->execute([$user['id']]);
+
             return true;
         }
         return false;

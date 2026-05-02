@@ -21,10 +21,10 @@ $userInitial = strtoupper(substr($userName, 0, 1));
         
         <ul class="navbar-nav ms-auto align-items-center">
             <li class="nav-item dropdown">
-                <div class="user-profile-nav dropdown-toggle" data-bs-toggle="dropdown">
-                    <span class="user-profile-name d-none d-sm-inline"><?= htmlspecialchars($userName) ?></span>
-                    <div class="user-avatar-circle">
-                        <?= $userInitial ?>
+                <div class="user-profile-nav dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" style="cursor: pointer;">
+                    <span class="user-profile-name d-none d-sm-inline me-2"><?= htmlspecialchars($userName) ?></span>
+                    <div class="user-avatar-circle d-flex align-items-center justify-content-center">
+                        <span style="line-height: 1;"><?= $userInitial ?></span>
                     </div>
                 </div>
                 <div class="dropdown-menu dropdown-menu-end border-0 shadow-lg mt-3 rounded-3">
