@@ -146,17 +146,24 @@ body {
 }
 
 .user-avatar-circle {
-    width: 32px;
-    height: 32px;
+    width: 35px;
+    height: 35px;
     background: var(--silk-purple);
     color: white;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     font-weight: 800;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     box-shadow: 0 0 10px rgba(124, 58, 237, 0.4);
+    overflow: hidden;
+    line-height: 0; /* Mata cualquier espacio de línea extra */
+}
+
+.user-avatar-circle span {
+    display: block;
+    transform: translateY(0px); /* Ajuste fino si fuera necesario */
 }
 
 .x-small {
