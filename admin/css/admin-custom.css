@@ -122,3 +122,43 @@ body {
     border-radius: 6px;
     border: 1px solid #e2e8f0;
 }
+
+/* User Profile Header Fix (Modernísimo) */
+.user-profile-nav {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+.user-profile-nav:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.user-profile-name {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-right: 12px;
+    white-space: nowrap; /* Evita que el nombre se corte en 2 líneas */
+}
+
+.user-avatar-circle {
+    width: 32px;
+    height: 32px;
+    background: var(--silk-purple);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.8rem;
+    box-shadow: 0 0 10px rgba(124, 58, 237, 0.4);
+}
+
+.x-small {
+    font-size: 0.7rem;
+}
