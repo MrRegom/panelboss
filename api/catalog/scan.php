@@ -16,8 +16,8 @@ require_once PROJECT_ROOT . '/vendor/autoload.php';
 use App\Config\Database;
 use App\Repositories\MasterProductRepository;
 
-$barcode    = $_GET['barcode'] ?? null;
-$licenseKey = $_SERVER['HTTP_X_CLIENT_ID'] ?? $_GET['license_key'] ?? null;
+$barcode    = $_REQUEST['barcode'] ?? null;
+$licenseKey = $_SERVER['HTTP_X_CLIENT_ID'] ?? $_REQUEST['license_key'] ?? null;
 
 if (!$barcode || !$licenseKey) {
     echo json_encode(['status' => 'error', 'message' => 'Faltan parámetros obligatorios (barcode o X-Client-Id header)']);

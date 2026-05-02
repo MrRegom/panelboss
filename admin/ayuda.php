@@ -162,7 +162,7 @@ AuthService::check();
                                     <div class="card-body p-5">
                                         <div class="d-flex align-items-start justify-content-between mb-4">
                                             <div>
-                                                <span class="method-badge bg-success text-white mb-2 d-inline-block">GET</span>
+                                                <span class="method-badge bg-primary text-white mb-2 d-inline-block">POST</span>
                                                 <h5 class="fw-bold">Obtener Catálogo Maestro</h5>
                                                 <p class="text-muted small">Retorna el listado completo de productos (+7,000 items) en formato JSON.</p>
                                             </div>
@@ -177,7 +177,7 @@ AuthService::check();
 
                                         <div class="bg-dark p-3 rounded-4 mb-3">
                                             <code class="text-warning small">
-                                                curl -X GET "https://api.cajaya.cl/catalog/list.php" \<br>
+                                                curl -X POST "https://api.cajaya.cl/catalog/list.php" \<br>
                                                 -H "X-Client-Id: DEVELOPER-TEST"
                                             </code>
                                         </div>
@@ -190,7 +190,7 @@ AuthService::check();
                                     <div class="card-body p-5">
                                         <div class="d-flex align-items-start justify-content-between mb-4">
                                             <div>
-                                                <span class="method-badge bg-success text-white mb-2 d-inline-block">GET</span>
+                                                <span class="method-badge bg-primary text-white mb-2 d-inline-block">POST</span>
                                                 <h5 class="fw-bold">Servidor de Imágenes</h5>
                                                 <p class="text-muted small">Endpoint optimizado para servir imágenes de productos vía Barcode.</p>
                                             </div>
@@ -205,7 +205,7 @@ AuthService::check();
                                         
                                         <div class="bg-dark p-3 rounded-4 mb-3">
                                             <code class="text-warning small">
-                                                curl -X GET "https://api.cajaya.cl/catalog/image.php?barcode=8434165469037" \<br>
+                                                curl -X POST "https://api.cajaya.cl/catalog/image.php?barcode=8434165469037" \<br>
                                                 -H "X-Client-Id: DEVELOPER-TEST"
                                             </code>
                                         </div>

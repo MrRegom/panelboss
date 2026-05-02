@@ -53,21 +53,22 @@
         <section>
             <h2>3. Sincronización de Catálogo</h2>
             <p>Obtiene la lista completa de productos. <strong>Seguridad:</strong> Se requiere enviar la licencia en los headers.</p>
-            <div class="endpoint">GET https://api.cajaya.cl/catalog/list.php</div>
+            <div class="endpoint">POST https://api.cajaya.cl/catalog/list.php</div>
             
             <h4>Ejemplo de petición (cURL):</h4>
-            <pre><code>curl -X GET "https://api.cajaya.cl/catalog/list.php" \
+            <pre><code>curl -X POST "https://api.cajaya.cl/catalog/list.php" \
      -H "X-Client-Id: DEVELOPER-TEST"</code></pre>
         </section>
 
         <section>
             <h2>4. Consulta de Producto (Escaneo)</h2>
             <p>Busca un producto específico por código de barras.</p>
-            <div class="endpoint">GET https://api.cajaya.cl/catalog/scan.php?barcode={codigo}</div>
+            <div class="endpoint">POST https://api.cajaya.cl/catalog/scan.php</div>
             
             <h4>Ejemplo de petición (cURL):</h4>
-            <pre><code>curl -X GET "https://api.cajaya.cl/catalog/scan.php?barcode=7802237001217" \
-     -H "X-Client-Id: DEVELOPER-TEST"</code></pre>
+            <pre><code>curl -X POST "https://api.cajaya.cl/catalog/scan.php" \
+     -H "X-Client-Id: DEVELOPER-TEST" \
+     -d "barcode=7802237001217"</code></pre>
         </section>
         
         <p style="margin-top: 30px;"><strong>Estructura de Respuesta:</strong></p>
