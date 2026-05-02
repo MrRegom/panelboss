@@ -35,85 +35,87 @@ try {
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
         <main class="app-main">
-            <div class="app-content-header py-4">
-                <div class="container-fluid px-4">
-                    <div class="row align-items-center">
-                        <div class="col-sm-6">
-                            <h3 class="fw-bold mb-0">CajaYa Intelligence Hub</h3>
-                            <p class="text-muted small mb-0">Monitor de operaciones globales y telemetría de licencias.</p>
-                        </div>
-                        <div class="col-sm-6 text-end">
-                            <div class="btn-group shadow-sm rounded-3 overflow-hidden">
-                                <button class="btn btn-silk px-4" data-bs-toggle="modal" data-bs-target="#modalGenerateLicense">
-                                    <i class="fa-solid fa-bolt me-2"></i> Nueva Licencia
-                                </button>
-                            </div>
-                        </div>
+            <div class="app-content-header py-4 animate-in">
+                <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3 class="fw-extrabold mb-0 gradient-text" style="font-size: 1.8rem;">CajaYa Intelligence Hub</h3>
+                        <p class="text-muted small">Ecosistema Global • Telemetría en Tiempo Real</p>
                     </div>
+                    <button class="btn btn-primary shadow-lg px-4 py-2 rounded-pill fw-bold border-0" data-bs-toggle="modal" data-bs-target="#modalGenerateLicense" style="background: var(--silk-purple);">
+                        <i class="fa-solid fa-bolt-lightning me-2"></i> NUEVA LICENCIA
+                    </button>
                 </div>
             </div>
 
-            <div class="app-content px-4">
+            <div class="app-content px-4 pb-5">
                 <div class="container-fluid">
-                    <!-- Metrics Bento Grid -->
+                    <!-- Bento Grid Metrics -->
                     <div class="row g-4 mb-4">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card card-silk border-0 shadow-sm p-4 h-100">
-                                <p class="text-muted small fw-bold text-uppercase mb-2">Licencias Totales</p>
-                                <div class="d-flex align-items-end justify-content-between">
-                                    <h2 class="fw-bold mb-0"><?= number_format($total_licenses) ?></h2>
-                                    <div class="text-success small fw-bold"><i class="fa-solid fa-caret-up me-1"></i> 12%</div>
-                                </div>
+                        <div class="col-lg-3 col-md-6 animate-in delay-1">
+                            <div class="glass-card p-4 h-100">
+                                <div class="glow-icon"><i class="fa-solid fa-id-card"></i></div>
+                                <p class="text-muted small fw-bold text-uppercase mb-1">Licencias Totales</p>
+                                <div class="metric-value"><?= number_format($total_licenses) ?></div>
+                                <div class="text-success small fw-bold mt-2"><i class="fa-solid fa-arrow-trend-up me-1"></i> +12% este mes</div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card card-silk border-0 shadow-sm p-4 h-100">
-                                <p class="text-muted small fw-bold text-uppercase mb-2">Activas / Online</p>
-                                <div class="d-flex align-items-end justify-content-between">
-                                    <h2 class="fw-bold mb-0 text-success"><?= number_format($active_licenses) ?></h2>
-                                    <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-2 py-1" style="font-size: 0.6rem;">LIVE</span>
-                                </div>
+                        <div class="col-lg-3 col-md-6 animate-in delay-2">
+                            <div class="glass-card p-4 h-100 border-success border-opacity-25">
+                                <div class="glow-icon" style="background: rgba(40, 167, 69, 0.1); color: #28a745;"><i class="fa-solid fa-satellite-dish"></i></div>
+                                <p class="text-muted small fw-bold text-uppercase mb-1">Activas / Online</p>
+                                <div class="metric-value text-success"><?= number_format($active_licenses) ?></div>
+                                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-2 py-1 mt-2" style="font-size: 0.6rem;">LIVE STATUS</span>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card card-silk border-0 shadow-sm p-4 h-100">
-                                <p class="text-muted small fw-bold text-uppercase mb-2">Empresas Partner</p>
-                                <h2 class="fw-bold mb-0"><?= number_format($total_companies) ?></h2>
+                        <div class="col-lg-3 col-md-6 animate-in delay-3">
+                            <div class="glass-card p-4 h-100">
+                                <div class="glow-icon" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;"><i class="fa-solid fa-building"></i></div>
+                                <p class="text-muted small fw-bold text-uppercase mb-1">Empresas Partner</p>
+                                <div class="metric-value"><?= number_format($total_companies) ?></div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card bg-indigo text-white border-0 shadow-sm p-4 h-100">
-                                <p class="text-white-50 small fw-bold text-uppercase mb-2">Prospectos Cloud</p>
-                                <h2 class="fw-bold mb-0"><?= number_format($total_leads) ?></h2>
+                        <div class="col-lg-3 col-md-6 animate-in delay-4">
+                            <div class="glass-card p-4 h-100" style="background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%); border: none;">
+                                <div class="glow-icon" style="background: rgba(255,255,255,0.2); color: white;"><i class="fa-solid fa-users-viewfinder"></i></div>
+                                <p class="text-white-50 small fw-bold text-uppercase mb-1">Prospectos Cloud</p>
+                                <div class="metric-value text-white"><?= number_format($total_leads) ?></div>
                             </div>
                         </div>
                     </div>
 
                     <div class="row g-4">
-                        <div class="col-lg-8">
-                            <div class="card card-silk border-0 shadow-sm p-4">
+                        <!-- Recent Activity Table -->
+                        <div class="col-lg-8 animate-in delay-3">
+                            <div class="glass-card p-4 h-100">
                                 <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <h6 class="fw-bold mb-0">Actividad Reciente (Leads)</h6>
-                                    <a href="leads.php" class="btn btn-link text-primary p-0 small fw-bold text-decoration-none">Ver todos</a>
+                                    <h6 class="fw-bold mb-0">Monitor de Leads Recientes</h6>
+                                    <a href="leads.php" class="btn btn-light btn-sm rounded-pill px-3 fw-bold">Ver todos</a>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table align-middle mb-0">
                                         <thead>
-                                            <tr class="text-muted small fw-bold text-uppercase" style="font-size: 0.65rem;">
-                                                <th>NOMBRE / EMAIL</th>
-                                                <th>STATUS</th>
-                                                <th class="text-end">REGISTRO</th>
+                                            <tr class="text-muted small fw-bold text-uppercase" style="font-size: 0.65rem; border-bottom: 2px solid #f4f6f9;">
+                                                <th class="py-3">IDENTIDAD</th>
+                                                <th class="py-3 text-center">ESTADO</th>
+                                                <th class="py-3 text-end">MARCA DE TIEMPO</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($recent_leads as $lead): ?>
                                             <tr>
-                                                <td>
-                                                    <div class="fw-bold text-dark small"><?= htmlspecialchars($lead['full_name']) ?></div>
-                                                    <div class="x-small text-muted"><?= htmlspecialchars($lead['email']) ?></div>
+                                                <td class="py-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold me-3" style="width:36px; height:36px; font-size: 0.8rem;">
+                                                            <?= strtoupper(substr($lead['full_name'], 0, 1)) ?>
+                                                        </div>
+                                                        <div>
+                                                            <div class="fw-bold text-dark small"><?= htmlspecialchars($lead['full_name']) ?></div>
+                                                            <div class="x-small text-muted"><?= htmlspecialchars($lead['email']) ?></div>
+                                                        </div>
+                                                    </div>
                                                 </td>
-                                                <td><span class="badge bg-primary bg-opacity-10 text-primary px-2 py-1 rounded small" style="font-size: 0.6rem;">NUEVO</span></td>
-                                                <td class="text-end small text-muted"><?= date('d/m H:i', strtotime($lead['created_at'])) ?></td>
+                                                <td class="text-center"><span class="badge bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-pill small" style="font-size: 0.6rem;">NUEVO REGISTRO</span></td>
+                                                <td class="text-end small text-muted fw-medium"><?= date('d M, H:i', strtotime($lead['created_at'])) ?></td>
                                             </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -121,24 +123,26 @@ try {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4">
-                            <div class="card bg-navy text-white border-0 shadow-sm p-4 h-100 position-relative overflow-hidden" style="background-color: #001f3f !important;">
-                                <i class="fa-solid fa-microchip position-absolute opacity-10" style="font-size: 10rem; bottom: -20px; right: -20px;"></i>
-                                <h6 class="fw-bold mb-4">Infraestructura US-WEST</h6>
-                                <div class="mb-4">
-                                    <div class="small fw-bold mb-1 text-white-50 text-uppercase" style="font-size: 0.6rem;">Latencia Promedio</div>
-                                    <div class="h3 fw-bold mb-0">24.5ms</div>
-                                </div>
-                                <div class="mb-4">
-                                    <div class="small fw-bold mb-1 text-white-50 text-uppercase" style="font-size: 0.6rem;">Sincronización</div>
-                                    <div class="h3 fw-bold mb-0">99.98%</div>
-                                </div>
-                                <div class="mt-auto">
-                                    <div class="d-flex align-items-center">
-                                        <div class="spinner-grow spinner-grow-sm text-success me-2" role="status"></div>
-                                        <span class="small fw-bold text-success">SISTEMA OPERATIVO</span>
+
+                        <!-- Infrastructure Card -->
+                        <div class="col-lg-4 animate-in delay-4">
+                            <div class="infra-card p-5 h-100">
+                                <div class="position-relative z-index-2">
+                                    <h6 class="fw-bold mb-4 opacity-75">NODO CENTRAL US-WEST</h6>
+                                    <div class="mb-5">
+                                        <div class="small fw-bold mb-1 text-white-50 text-uppercase" style="font-size: 0.65rem;">Latencia de Red</div>
+                                        <div class="h1 fw-extrabold mb-0">24.5<span class="fs-4 fw-normal opacity-50 ms-1">ms</span></div>
+                                    </div>
+                                    <div class="mb-5">
+                                        <div class="small fw-bold mb-1 text-white-50 text-uppercase" style="font-size: 0.65rem;">Sincronización Cloud</div>
+                                        <div class="h1 fw-extrabold mb-0">99.98<span class="fs-4 fw-normal opacity-50 ms-1">%</span></div>
+                                    </div>
+                                    <div class="mt-auto d-flex align-items-center">
+                                        <div class="pulse-green me-3"></div>
+                                        <span class="small fw-bold text-success">NÚCLEO OPERATIVO ACTIVO</span>
                                     </div>
                                 </div>
+                                <i class="fa-solid fa-microchip position-absolute opacity-10" style="font-size: 14rem; bottom: -40px; right: -40px; color: white;"></i>
                             </div>
                         </div>
                     </div>

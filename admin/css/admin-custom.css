@@ -166,6 +166,100 @@ body {
     transform: translateY(0px); /* Ajuste fino si fuera necesario */
 }
 
-.x-small {
-    font-size: 0.7rem;
+.pulse-green {
+    width: 12px;
+    height: 12px;
+    background: #28a745;
+    border-radius: 50%;
+    box-shadow: 0 0 0 rgba(40, 167, 69, 0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+}
+
+/* DASHBOARD NEXT-GEN STYLES (Estilo React/Futurista) */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    border-color: var(--silk-purple);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1;
+}
+
+.glow-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(124, 58, 237, 0.1);
+    color: var(--silk-purple);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in {
+    animation: fadeInUp 0.8s ease backwards;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+/* Tarjeta de Infraestructura Ultra-Moderna */
+.infra-card {
+    background: linear-gradient(145deg, #001f3f, #001429);
+    border-radius: 24px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.infra-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+    animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
