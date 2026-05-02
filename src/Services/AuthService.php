@@ -61,4 +61,18 @@ class AuthService {
         }
         return null;
     }
+
+    /**
+     * Verifica si hay una sesión activa en el panel (Simple Check)
+     */
+    public static function check() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: login.php");
+            exit;
+        }
+    }
 }
