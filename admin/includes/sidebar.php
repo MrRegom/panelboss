@@ -1,17 +1,17 @@
 <!-- CajaYa Premium Night Sidebar (V111) -->
 <aside class="app-sidebar shadow-lg">
     <div class="sidebar-brand">
-        <a href="./index.php" class="brand-link border-0 d-flex align-items-center justify-content-start w-100 py-3 ps-2">
+        <a href="./index.php" class="brand-link border-0 d-flex align-items-center justify-content-start w-100 py-3 ps-1">
             <!-- Logo original CajaYa (Color) con filtro para fondo oscuro -->
             <img src="img/logo.png?v=114" alt="CajaYa" style="height: 38px; width: auto;">
         </a>
     </div>
 
     <div class="sidebar-wrapper">
-        <nav class="mt-4 px-2">
-            <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false" style="padding-left: 0;">
+        <nav class="mt-4">
+            <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false" style="padding-left: 0; margin-left: -5px;">
                 
-                <li class="nav-header ps-2">INTELIGENCIA</li>
+                <li class="nav-header ps-1">INTELIGENCIA</li>
                 <li class="nav-item">
                     <a href="./index.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : '' ?>">
                         <i class="nav-icon fa-solid fa-chart-line"></i>
@@ -19,7 +19,7 @@
                     </a>
                 </li>
 
-                <li class="nav-header ps-2">GESTIÓN CORE</li>
+                <li class="nav-header ps-1">GESTIÓN CORE</li>
                 <li class="nav-item">
                     <a href="./leads.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'leads.php' ? 'active' : '' ?>">
                         <i class="nav-icon fa-solid fa-users-viewfinder"></i>
@@ -45,7 +45,7 @@
                     </a>
                 </li>
 
-                <li class="nav-header ps-2">SISTEMA & SEGURIDAD</li>
+                <li class="nav-header ps-1">SISTEMA & SEGURIDAD</li>
                 <li class="nav-item">
                     <a href="./users.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'users.php' ? 'active' : '' ?>">
                         <i class="nav-icon fa-solid fa-user-shield"></i>
