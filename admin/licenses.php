@@ -62,6 +62,7 @@ $companies = $db->query("SELECT id, name FROM companies ORDER BY name")->fetchAl
                     </div>
                 </div>
             </div>
+            <?php include __DIR__ . '/includes/footer.php'; ?>
         </main>
     </div>
 
@@ -120,9 +121,12 @@ $companies = $db->query("SELECT id, name FROM companies ORDER BY name")->fetchAl
                 { 
                     data: null, 
                     className: 'text-end',
-                    render: () => `
-                        <button class="btn btn-link text-primary p-1"><i class="fa-solid fa-edit"></i></button>
-                        <button class="btn btn-link text-danger p-1"><i class="fa-solid fa-trash"></i></button>`
+                    render: (d, t, row) => {
+                        let rowData = JSON.stringify(row).replace(/"/g, '&quot;');
+                        return `
+                        <button class="btn btn-link text-primary p-1" onclick='openEditLicense(${rowData})'><i class="fa-solid fa-edit"></i></button>
+                        <button class="btn btn-link text-danger p-1" onclick="deleteLicense(${row.id}, '${row.license_key}')"><i class="fa-solid fa-trash"></i></button>`
+                    }
                 }
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
@@ -160,7 +164,96 @@ $companies = $db->query("SELECT id, name FROM companies ORDER BY name")->fetchAl
                 }, 2500);
             }, 'json');
         });
+
+        // Form Edit Submit
+        $('#formEditLicense').on('submit', function(e) {
+            e.preventDefault();
+            $.post('api/update_license.php', $(this).serialize(), function(res) {
+                if(res.success) {
+                    Swal.fire('Actualizado', 'Licencia modificada.', 'success');
+                    $('#modalEditLicense').modal('hide');
+                    table.ajax.reload(null, false);
+                } else {
+                    Swal.fire('Error', res.message, 'error');
+                }
+            }, 'json');
+        });
     });
+
+    function openEditLicense(data) {
+        $('#edit_lic_id').val(data.id);
+        $('#edit_lic_key').val(data.license_key);
+        $('#edit_lic_plan').val(data.plan);
+        $('#edit_lic_status').val(data.status);
+        $('#edit_lic_expires').val(data.expires_at ? data.expires_at.split(' ')[0] : '');
+        $('#modalEditLicense').modal('show');
+    }
+
+    function deleteLicense(id, key) {
+        Swal.fire({
+            title: '¿Eliminar licencia?',
+            text: `Vas a eliminar la llave ${key}.`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.post('api/delete_license.php', { id: id }, function(res) {
+                    if(res.success) {
+                        Swal.fire('Eliminado', 'La licencia ha sido removida.', 'success');
+                        table.ajax.reload(null, false);
+                    } else {
+                        Swal.fire('Error', res.message, 'error');
+                    }
+                }, 'json');
+            }
+        });
+    }
     </script>
+
+    <!-- Modal Editar Licencia -->
+    <div class="modal fade" id="modalEditLicense" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">Editar Licencia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="formEditLicense">
+                    <input type="hidden" name="id" id="edit_lic_id">
+                    <div class="modal-body p-4 text-start">
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">LLAVE</label>
+                            <input type="text" class="form-control bg-light" id="edit_lic_key" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">PLAN</label>
+                            <select class="form-select" name="plan" id="edit_lic_plan" required>
+                                <option value="BASIC">BASIC</option>
+                                <option value="PRO">PRO</option>
+                                <option value="ENTERPRISE">ENTERPRISE</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">ESTADO</label>
+                            <select class="form-select" name="status" id="edit_lic_status" required>
+                                <option value="active">ACTIVE</option>
+                                <option value="pending">PENDING</option>
+                                <option value="suspended">SUSPENDED</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small fw-bold">EXPIRACIÓN</label>
+                            <input type="date" class="form-control" name="expires_at" id="edit_lic_expires">
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">GUARDAR CAMBIOS</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

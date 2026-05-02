@@ -21,14 +21,7 @@ $db = Database::getConnection();
 </head>
 <body class="layout-fixed sidebar-expand-lg">
     <div class="app-wrapper">
-        <nav class="app-header navbar navbar-expand">
-            <div class="container-fluid px-4">
-                <ul class="navbar-nav">
-                    <li class="nav-item"> <a class="nav-link text-white" data-lte-toggle="sidebar" href="#" role="button"> <i class="fa-solid fa-bars-staggered"></i> </a> </li>
-                </ul>
-            </div>
-        </nav>
-
+        <?php include __DIR__ . '/includes/header.php'; ?>
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
         <main class="app-main">
@@ -40,7 +33,7 @@ $db = Database::getConnection();
                             <p class="text-muted small mb-0">Gestión de partners y clientes corporativos.</p>
                         </div>
                         <div class="col-sm-6 text-end">
-                            <button class="btn btn-silk shadow-sm px-4" data-bs-toggle="modal" data-bs-target="#modalAddCompany">
+                            <button class="btn btn-silk shadow-sm px-4" onclick="openCompanyModal()">
                                 <i class="fa-solid fa-plus me-2"></i> Nueva Empresa
                             </button>
                         </div>
@@ -57,7 +50,7 @@ $db = Database::getConnection();
                                     <tr>
                                         <th>EMPRESA</th>
                                         <th>RUT / ID</th>
-                                        <th>UBICACIÓN</th>
+                                        <th>TELÉFONO</th>
                                         <th>ESTADO</th>
                                         <th class="text-end">ACCIONES</th>
                                     </tr>
@@ -67,25 +60,42 @@ $db = Database::getConnection();
                     </div>
                 </div>
             </div>
+            <?php include __DIR__ . '/includes/footer.php'; ?>
         </main>
     </div>
 
-    <!-- Modal Nueva Empresa -->
-    <div class="modal fade" id="modalAddCompany" tabindex="-1">
+    <!-- Modal Empresa -->
+    <div class="modal fade" id="modalCompany" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow">
                 <div class="modal-header">
-                    <h5 class="modal-title fw-bold">Registrar Nueva Empresa</h5>
+                    <h5 class="modal-title fw-bold" id="companyModalTitle">Registrar Empresa</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body p-4 text-center">
-                    <i class="fa-solid fa-person-digging fa-3x text-muted mb-3"></i>
-                    <h5 class="fw-bold text-dark mb-1">Módulo en Desarrollo</h5>
-                    <p class="text-muted small">El registro automático de empresas estará disponible en la próxima actualización.</p>
-                    <div class="mt-4">
-                        <button class="btn btn-primary px-4" data-bs-dismiss="modal">Entendido</button>
+                <form id="formCompany">
+                    <input type="hidden" name="id" id="comp_id">
+                    <div class="modal-body p-4 text-start">
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">NOMBRE DE LA EMPRESA</label>
+                            <input type="text" class="form-control" name="name" id="comp_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">RUT / ID FISCAL</label>
+                            <input type="text" class="form-control" name="rut" id="comp_rut">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted">TELÉFONO</label>
+                            <input type="text" class="form-control" name="phone" id="comp_phone">
+                        </div>
+                        <div class="mb-0">
+                            <label class="form-label small fw-bold text-muted">EMAIL</label>
+                            <input type="email" class="form-control" name="email" id="comp_email">
+                        </div>
                     </div>
-                </div>
+                    <div class="modal-footer border-0">
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">GUARDAR EMPRESA</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -95,10 +105,51 @@ $db = Database::getConnection();
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+    let table;
+
+    function openCompanyModal(data = null) {
+        $('#formCompany')[0].reset();
+        if(data) {
+            $('#companyModalTitle').text('Editar Empresa');
+            $('#comp_id').val(data.id);
+            $('#comp_name').val(data.name);
+            $('#comp_rut').val(data.rut);
+            $('#comp_phone').val(data.phone);
+            $('#comp_email').val(data.email);
+        } else {
+            $('#companyModalTitle').text('Registrar Empresa');
+            $('#comp_id').val('');
+        }
+        $('#modalCompany').modal('show');
+    }
+
+    function deleteCompany(id, name) {
+        Swal.fire({
+            title: '¿Eliminar empresa?',
+            text: `Vas a eliminar "${name}".`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.post('api/delete_company.php', { id: id }, function(res) {
+                    if(res.success) {
+                        Swal.fire('Eliminado', 'Empresa removida.', 'success');
+                        table.ajax.reload(null, false);
+                    } else {
+                        Swal.fire('Error', res.message, 'error');
+                    }
+                }, 'json');
+            }
+        });
+    }
+
     $(document).ready(function() {
-        $('#companiesTable').DataTable({
+        table = $('#companiesTable').DataTable({
             ajax: 'api/get_companies.php',
             columns: [
                 { 
@@ -110,7 +161,7 @@ $db = Database::getConnection();
                         </div>` 
                 },
                 { data: 'rut', render: d => `<span class="text-muted small">${d || '-'}</span>` },
-                { data: 'address', render: d => `<span class="small">${d || 'No definida'}</span>` },
+                { data: 'phone', render: d => `<span class="small">${d || '-'}</span>` },
                 { 
                     data: 'status', 
                     render: d => `<span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3">ACTIVA</span>` 
@@ -118,13 +169,29 @@ $db = Database::getConnection();
                 { 
                     data: null, 
                     className: 'text-end',
-                    render: (d, t, r) => `
-                        <button class="btn btn-link text-primary p-2"><i class="fa-solid fa-eye"></i></button>
-                        <button class="btn btn-link text-danger p-2"><i class="fa-solid fa-trash"></i></button>`
+                    render: (d, t, row) => {
+                        let rowData = JSON.stringify(row).replace(/"/g, '&quot;');
+                        return `
+                        <button class="btn btn-link text-primary p-2" onclick='openCompanyModal(${rowData})'><i class="fa-solid fa-edit"></i></button>
+                        <button class="btn btn-link text-danger p-2" onclick="deleteCompany(${row.id}, '${row.name}')"><i class="fa-solid fa-trash"></i></button>`
+                    }
                 }
             ],
             language: { url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json' },
             dom: '<"p-4 d-flex justify-content-between align-items-center"lf>rt<"p-4 d-flex justify-content-between align-items-center"ip>'
+        });
+
+        $('#formCompany').on('submit', function(e) {
+            e.preventDefault();
+            $.post('api/save_company.php', $(this).serialize(), function(res) {
+                if(res.success) {
+                    Swal.fire('Éxito', res.message, 'success');
+                    $('#modalCompany').modal('hide');
+                    table.ajax.reload(null, false);
+                } else {
+                    Swal.fire('Error', res.message, 'error');
+                }
+            }, 'json');
         });
     });
     </script>

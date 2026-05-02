@@ -15,8 +15,10 @@ AuthService::check();
 
 $db = Database::getConnection();
 
-$action = $_POST['action'] ?? 'update_expiry';
 $id = $_POST['id'] ?? null;
+$plan = $_POST['plan'] ?? null;
+$status = $_POST['status'] ?? null;
+$expires_at = !empty($_POST['expires_at']) ? $_POST['expires_at'] : null;
 
 if (!$id) {
     header('Content-Type: application/json');
@@ -25,22 +27,24 @@ if (!$id) {
 }
 
 try {
-    if ($action === 'toggle_status') {
-        $status = $_POST['status'] ?? 'active';
-        $stmt = $db->prepare("UPDATE licenses SET status = :status WHERE id = :id");
-        $stmt->execute(['status' => $status, 'id' => $id]);
-    } elseif ($action === 'update_full') {
-        $company_id = $_POST['company_id'] ?? null;
-        $plan = $_POST['plan'] ?? 'BASIC';
-        $expiry = !empty($_POST['expires_at']) ? $_POST['expires_at'] : null;
-        
-        $stmt = $db->prepare("UPDATE licenses SET company_id = :company_id, plan = :plan, expires_at = :expiry WHERE id = :id");
-        $stmt->execute(['company_id' => $company_id, 'plan' => $plan, 'expiry' => $expiry, 'id' => $id]);
-    } else {
-        $expiry = $_POST['expires_at'] ?? null;
-        $stmt = $db->prepare("UPDATE licenses SET expires_at = :expiry WHERE id = :id");
-        $stmt->execute(['expiry' => $expiry, 'id' => $id]);
+    $sql = "UPDATE licenses SET id = id"; // Dummy start
+    $params = ['id' => $id];
+
+    if ($plan) {
+        $sql .= ", plan = :plan";
+        $params['plan'] = $plan;
     }
+    if ($status) {
+        $sql .= ", status = :status";
+        $params['status'] = $status;
+    }
+    $sql .= ", expires_at = :expires_at";
+    $params['expires_at'] = $expires_at;
+
+    $sql .= " WHERE id = :id";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute($params);
     
     header('Content-Type: application/json');
     echo json_encode(['success' => true]);

@@ -63,6 +63,7 @@
     </div>
 
     <div class="p-4 mt-auto border-top border-white border-opacity-5 text-center">
-        <div class="x-small fw-bold text-white opacity-25">CAJAYA ENTERPRISE CLOUD</div>
+        <div class="x-small fw-bold text-white-50 opacity-50 mb-1">CajaYa Enterprise</div>
+        <div class="x-small text-muted" style="font-size: 0.6rem;">BUILD BY <span class="text-white opacity-75">RELTZER CODERS</span></div>
     </div>
 </aside>
