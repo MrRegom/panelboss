@@ -58,6 +58,12 @@
                         <p>Configuración Global</p>
                     </a>
                 </li>
+                <li class="nav-item mt-2">
+                    <a href="./ayuda.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) == 'ayuda.php' ? 'active' : '' ?>" style="background: rgba(106, 55, 183, 0.1); border: 1px solid rgba(106, 55, 183, 0.2);">
+                        <i class="nav-icon fa-solid fa-laptop-code text-primary"></i>
+                        <p class="fw-bold">Documentación API</p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
