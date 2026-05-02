@@ -170,14 +170,17 @@ AuthService::check();
 
                                         <div class="code-block mb-4">
                                             <button class="copy-btn"><i class="fa-regular fa-copy me-1"></i> Copiar</button>
-                                            <h4>Sincronización de Catálogo</h4>
-                <p>Endpoint: <code>https://api.cajaya.cl/catalog/list.php</code></p>
-                <div class="bg-dark p-3 rounded mb-3">
-                    <code class="text-warning">
-                        curl -X GET "https://api.cajaya.cl/catalog/list.php" \<br>
-                        -H "X-Client-Id: TU_LICENCIA_KEY"
-                    </code>
-                </div>
+                                            <code>
+                                                <span class="url-base">https://api.cajaya.cl/catalog/</span>list.php
+                                            </code>
+                                        </div>
+
+                                        <div class="bg-dark p-3 rounded-4 mb-3">
+                                            <code class="text-warning small">
+                                                curl -X GET "https://api.cajaya.cl/catalog/list.php" \<br>
+                                                -H "X-Client-Id: DEVELOPER-TEST"
+                                            </code>
+                                        </div>
                                     </div>
                                 </div>
                             </section>
@@ -196,7 +199,14 @@ AuthService::check();
                                         <div class="code-block mb-4">
                                             <button class="copy-btn"><i class="fa-regular fa-copy me-1"></i> Copiar</button>
                                             <code>
-                                                <span class="url-base">https://api.cajaya.cl/catalog/</span>image.php?<span class="url-param">barcode</span>={EAN13}&<span class="url-param">license_key</span>=DEVELOPER-TEST
+                                                <span class="url-base">https://api.cajaya.cl/catalog/</span>image.php?<span class="url-param">barcode</span>={EAN13}
+                                            </code>
+                                        </div>
+                                        
+                                        <div class="bg-dark p-3 rounded-4 mb-3">
+                                            <code class="text-warning small">
+                                                curl -X GET "https://api.cajaya.cl/catalog/image.php?barcode=8434165469037" \<br>
+                                                -H "X-Client-Id: DEVELOPER-TEST"
                                             </code>
                                         </div>
 
