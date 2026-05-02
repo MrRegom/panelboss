@@ -18,11 +18,13 @@ use App\Config\Database;
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// Priorizamos el header X-Client-Id sobre el parámetro GET por seguridad
 $barcode    = $_GET['barcode'] ?? null;
-$licenseKey = $_GET['license_key'] ?? null;
+$licenseKey = $_SERVER['HTTP_X_CLIENT_ID'] ?? $_GET['license_key'] ?? null;
 
 if (!$barcode || !$licenseKey) {
     header("HTTP/1.1 400 Bad Request");
+    echo "Falta Barcode o X-Client-Id";
     exit;
 }
 

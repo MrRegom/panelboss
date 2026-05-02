@@ -64,9 +64,22 @@ AuthService::check(); // Asegura que solo tú puedas ver la doc
         <section>
             <h2>3. Sincronización de Productos</h2>
             <p><span class="method">GET</span> <span class="endpoint">/list.php</span></p>
+            
             <table class="params-table">
-                <thead><tr><th>Parámetro</th><th>Tipo</th><th>Descripción</th></tr></thead>
-                <tbody><tr><td><code>license_key</code></td><td>String</td><td>Clave de licencia activa (Obligatorio).</td></tr></tbody>
+                <thead>
+                    <tr>
+                        <th>Header</th>
+                        <th>Tipo</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>X-Client-Id</code></td>
+                        <td>String</td>
+                        <td>Clave de licencia activa (Obligatorio).</td>
+                    </tr>
+                </tbody>
             </table>
             <p><strong>Respuesta de ejemplo:</strong></p>
             <pre>

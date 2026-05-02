@@ -20,11 +20,11 @@ header('Access-Control-Allow-Origin: *'); // Permitir consumo desde la App
 try {
     $db = Database::getConnection();
     
-    // 1. Validar Licencia
-    $licenseKey = $_REQUEST['license_key'] ?? null;
+    // 1. Validar Licencia (Prioriza Header X-Client-Id para seguridad)
+    $licenseKey = $_SERVER['HTTP_X_CLIENT_ID'] ?? $_REQUEST['license_key'] ?? null;
     
     if (!$licenseKey) {
-        throw new Exception("Falta el parámetro license_key");
+        throw new Exception("Falta autenticación (X-Client-Id Header o license_key)");
     }
 
     $stmtLic = $db->prepare("SELECT id FROM licenses WHERE license_key = :key AND status = 'active' LIMIT 1");
@@ -53,7 +53,9 @@ try {
 
     foreach ($products as &$p) {
         if ($p['image_path']) {
-            $p['image_url'] = "$baseUrl?barcode={$p['barcode']}&license_key=$licenseKey";
+            // SEGURIDAD: Ya no incluimos license_key en la URL. 
+            // La App debe enviar el header X-Client-Id para obtener la imagen.
+            $p['image_url'] = "$baseUrl?barcode={$p['barcode']}";
         } else {
             $p['image_url'] = null;
         }

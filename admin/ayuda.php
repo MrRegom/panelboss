@@ -170,14 +170,14 @@ AuthService::check();
 
                                         <div class="code-block mb-4">
                                             <button class="copy-btn"><i class="fa-regular fa-copy me-1"></i> Copiar</button>
-                                            <code>
-                                                <span class="url-base">https://api.cajaya.cl/catalog/</span>list.php?<span class="url-param">license_key</span>=DEVELOPER-TEST
-                                            </code>
-                                        </div>
-
-                                        <div class="bg-dark p-3 rounded-4">
-                                            <code class="text-warning small">curl -X GET "https://api.cajaya.cl/catalog/list.php?license_key=DEVELOPER-TEST"</code>
-                                        </div>
+                                            <h4>Sincronización de Catálogo</h4>
+                <p>Endpoint: <code>https://api.cajaya.cl/catalog/list.php</code></p>
+                <div class="bg-dark p-3 rounded mb-3">
+                    <code class="text-warning">
+                        curl -X GET "https://api.cajaya.cl/catalog/list.php" \<br>
+                        -H "X-Client-Id: TU_LICENCIA_KEY"
+                    </code>
+                </div>
                                     </div>
                                 </div>
                             </section>
