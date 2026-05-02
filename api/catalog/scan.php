@@ -47,11 +47,12 @@ try {
         exit;
     }
 
-    // 3. Formatear Respuesta
-    // Generamos una URL segura para la imagen que pase por nuestro validador
+    // Generamos una URL segura para la imagen de forma dinámica
     $imageUrl = null;
     if ($product['image_path']) {
-        $imageUrl = "https://" . $_SERVER['HTTP_HOST'] . "/api/catalog/image.php?barcode=" . $barcode . "&license_key=" . $licenseKey;
+        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+        $scriptPath = str_replace('scan.php', 'image.php', $_SERVER['SCRIPT_NAME']);
+        $imageUrl = "$protocol://" . $_SERVER['HTTP_HOST'] . "$scriptPath?barcode=" . $barcode . "&license_key=" . $licenseKey;
     }
 
     echo json_encode([

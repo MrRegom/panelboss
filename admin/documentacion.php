@@ -30,7 +30,7 @@ AuthService::check();
                 <p>Retorna el catálogo completo en formato JSON.</p>
                 <div class="mb-3">
                     <span class="badge bg-success me-2">GET</span>
-                    <code>https://panel.cajaya.cl/api/catalog/list.php</code>
+                    <code>https://api.cajaya.cl/catalog/list.php</code>
                 </div>
                 
                 <h5 class="mt-4">Parámetros requeridos:</h5>
@@ -46,7 +46,7 @@ AuthService::check();
       "barcode": "780123456789",
       "name": "Producto Ejemplo",
       "category_name": "Aseo",
-      "image_url": "https://panel.cajaya.cl/api/catalog/image.php?barcode=780..."
+      "image_url": "https://api.cajaya.cl/catalog/image.php?barcode=780..."
     }
   ]
 }</pre>
@@ -57,7 +57,7 @@ AuthService::check();
                 <p>Devuelve el archivo binario de la imagen directamente.</p>
                 <div class="mb-3">
                     <span class="badge bg-success me-2">GET</span>
-                    <code>https://panel.cajaya.cl/api/catalog/image.php</code>
+                    <code>https://api.cajaya.cl/catalog/image.php</code>
                 </div>
                 <ul>
                     <li><code>barcode</code>: Código de barras del producto.</li>

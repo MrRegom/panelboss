@@ -22,9 +22,9 @@ $db = Database::getConnection();
 $service = new LicenseService($db);
 $data = json_decode(file_get_contents('php://input'), true);
 
-if (!isset($_SERVER['HTTP_X_API_KEY']) || $_SERVER['HTTP_X_API_KEY'] !== $apiKey) {
+if (!isset($_SERVER['HTTP_X_CLIENT_ID']) || $_SERVER['HTTP_X_CLIENT_ID'] !== $apiKey) {
     http_response_code(401);
-    exit(json_encode(['error' => 'Invalid X-API-Key']));
+    exit(json_encode(['status' => 'error', 'message' => 'Unauthorized: X-Client-Id invalid']));
 }
 
 $licenseKey = $data['license_key'] ?? '';

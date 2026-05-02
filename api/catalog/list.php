@@ -47,7 +47,9 @@ try {
     // 3. Formatear URLs de imágenes
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
     $host = $_SERVER['HTTP_HOST'];
-    $baseUrl = "$protocol://$host/api/catalog/image.php";
+    // Generación dinámica de URL base para soportar subdominios (api.cajaya.cl)
+    $scriptPath = str_replace('list.php', 'image.php', $_SERVER['SCRIPT_NAME']);
+    $baseUrl = "$protocol://$host$scriptPath";
 
     foreach ($products as &$p) {
         if ($p['image_path']) {

@@ -47,11 +47,17 @@ AuthService::check(); // Asegura que solo tú puedas ver la doc
             <span class="badge">Estatus: Activa</span>
             <h2>1. Introducción</h2>
             <p>Esta API permite a la aplicación móvil de CajaYa sincronizar el catálogo global de productos de forma segura.</p>
-            <p><strong>Servidor Base:</strong> <code>https://panel.cajaya.cl/api/catalog/</code></p>
+            <p><strong>Servidor Base:</strong> <code>https://api.cajaya.cl/catalog/</code></p>
         </section>
 
         <section>
-            <h2>2. Credenciales de Desarrollo</h2>
+            <h2>2. Autenticación</h2>
+            <p>Para endpoints de sistema (Activación, Heartbeat), se requiere el envío del siguiente header:</p>
+            <pre>X-Client-Id: {TU_API_KEY}</pre>
+        </section>
+
+        <section>
+            <h2>3. Credenciales de Desarrollo</h2>
             <pre>LICENSE_KEY: DEVELOPER-TEST</pre>
         </section>
 
@@ -72,7 +78,7 @@ AuthService::check(); // Asegura que solo tú puedas ver la doc
       "barcode": "7802237001217",
       "name": "7 Especias Suk 70Gr",
       "category": "Despensa",
-      "image_url": "https://panel.cajaya.cl/api/catalog/image.php?barcode=7802237001217&license_key=DEVELOPER-TEST"
+      "image_url": "https://api.cajaya.cl/catalog/image.php?barcode=7802237001217&license_key=DEVELOPER-TEST"
     }
   ]
 }</pre>

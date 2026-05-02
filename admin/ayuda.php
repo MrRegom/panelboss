@@ -171,13 +171,12 @@ AuthService::check();
                                         <div class="code-block mb-4">
                                             <button class="copy-btn"><i class="fa-regular fa-copy me-1"></i> Copiar</button>
                                             <code>
-                                                <span class="url-base">https://panel.cajaya.cl/api/catalog/</span>list.php?<span class="url-param">license_key</span>=DEVELOPER-TEST
+                                                <span class="url-base">https://api.cajaya.cl/catalog/</span>list.php?<span class="url-param">license_key</span>=DEVELOPER-TEST
                                             </code>
                                         </div>
 
-                                        <h6 class="fw-bold small text-muted mb-3">EJEMPLO CURL</h6>
                                         <div class="bg-dark p-3 rounded-4">
-                                            <code class="text-warning small">curl -X GET "https://panel.cajaya.cl/api/catalog/list.php?license_key=DEVELOPER-TEST"</code>
+                                            <code class="text-warning small">curl -X GET "https://api.cajaya.cl/catalog/list.php?license_key=DEVELOPER-TEST"</code>
                                         </div>
                                     </div>
                                 </div>
@@ -197,7 +196,7 @@ AuthService::check();
                                         <div class="code-block mb-4">
                                             <button class="copy-btn"><i class="fa-regular fa-copy me-1"></i> Copiar</button>
                                             <code>
-                                                <span class="url-base">https://panel.cajaya.cl/api/catalog/</span>image.php?<span class="url-param">barcode</span>={EAN13}&<span class="url-param">license_key</span>=DEVELOPER-TEST
+                                                <span class="url-base">https://api.cajaya.cl/catalog/</span>image.php?<span class="url-param">barcode</span>={EAN13}&<span class="url-param">license_key</span>=DEVELOPER-TEST
                                             </code>
                                         </div>
 
@@ -212,8 +211,47 @@ AuthService::check();
                                         </div>
                                     </div>
                                 </div>
-                            </section>
-                        </div>
+                             </section>
+
+                             <!-- Auth Section -->
+                             <section id="auth" class="mb-5">
+                                 <h3 class="fw-bold mb-4">Seguridad y Autenticación</h3>
+                                 <div class="card api-card shadow-sm border-0">
+                                     <div class="card-body p-5">
+                                         <p class="text-muted">Para los endpoints de sistema (Activación y Heartbeat), se debe incluir el identificador de cliente en los headers de la petición.</p>
+                                         
+                                         <div class="table-responsive">
+                                             <table class="table table-bordered align-middle">
+                                                 <thead class="bg-light">
+                                                     <tr>
+                                                         <th>Header</th>
+                                                         <th>Valor</th>
+                                                         <th>Descripción</th>
+                                                     </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                     <tr>
+                                                         <td><code class="text-primary">X-Client-Id</code></td>
+                                                         <td><code>{TU_API_KEY}</code></td>
+                                                         <td>Identificador único proporcionado por el administrador.</td>
+                                                     </tr>
+                                                 </tbody>
+                                             </table>
+                                         </div>
+
+                                         <div class="alert bg-warning bg-opacity-10 border-0 rounded-4 p-4 mt-3">
+                                             <div class="d-flex gap-3">
+                                                 <i class="fa-solid fa-triangle-exclamation text-warning fs-4"></i>
+                                                 <div class="small text-muted">
+                                                     <strong class="text-warning d-block mb-1">Nota importante:</strong>
+                                                     Anteriormente este campo se llamaba <code>X-API-KEY</code>. A partir de la v2.4, se ha renombrado a <code>X-Client-Id</code> para mayor claridad semántica.
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </section>
+                         </div>
                     </div>
                 </div>
             </div>
