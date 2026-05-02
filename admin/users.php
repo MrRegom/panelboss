@@ -19,26 +19,7 @@ $userName = $_SESSION['user_name'] ?? 'Administrador';
 </head>
 <body class="layout-fixed sidebar-expand-lg">
     <div class="app-wrapper">
-        <nav class="app-header navbar navbar-expand">
-            <div class="container-fluid px-4">
-                <ul class="navbar-nav">
-                    <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i class="fa-solid fa-bars-staggered"></i> </a> </li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown user-menu"> 
-                        <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown"> 
-                            <span class="d-none d-md-inline fw-semibold me-2"><?= $userName ?></span>
-                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
-                                <i class="fa-solid fa-user-tie text-white small"></i>
-                            </div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2">
-                            <li><a href="logout.php" class="dropdown-item py-2 text-danger fw-medium"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <?php include __DIR__ . '/includes/header.php'; ?>
 
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
