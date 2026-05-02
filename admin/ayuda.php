@@ -98,8 +98,8 @@ AuthService::check();
         <?php include __DIR__ . '/includes/sidebar.php'; ?>
 
         <main class="app-main">
-            <div class="app-content-header py-5">
-                <div class="container-fluid px-5">
+            <div class="app-content-header py-4">
+                <div class="container-fluid px-2 px-md-4">
                     <div class="row align-items-center">
                         <div class="col-md-8">
                             <h1 class="fw-bold mb-2" style="letter-spacing: -1px;">Developer Hub</h1>
@@ -113,21 +113,20 @@ AuthService::check();
             </div>
 
             <div class="app-content">
-                <div class="container-fluid px-5 pb-5">
-                    <div class="row g-5">
-                        <!-- Navegación Lateral Interna -->
-                        <div class="col-md-3 d-none d-md-block">
-                            <div class="section-nav">
-                                <h6 class="fw-bold small text-muted mb-3 px-3">CONTENIDO</h6>
-                                <a href="#sandbox" class="nav-doc-link active">Entorno Sandbox</a>
-                                <a href="#catalog" class="nav-doc-link">Catálogo Maestro</a>
-                                <a href="#images" class="nav-doc-link">Servidor de Imágenes</a>
-                                <a href="#auth" class="nav-doc-link">Autenticación</a>
+                <div class="container-fluid px-2 px-md-4 pb-5">
+                    <div class="row">
+                        <!-- Navegación Superior (Nuevo Estilo) -->
+                        <div class="col-12 mb-4">
+                            <div class="d-flex gap-2 p-2 bg-white rounded-4 shadow-sm border overflow-auto">
+                                <a href="#sandbox" class="btn btn-sm btn-light px-4 py-2 rounded-3 fw-bold active">Entorno Sandbox</a>
+                                <a href="#catalog" class="btn btn-sm btn-light px-4 py-2 rounded-3 fw-bold">Catálogo Maestro</a>
+                                <a href="#images" class="btn btn-sm btn-light px-4 py-2 rounded-3 fw-bold">Servidor de Imágenes</a>
+                                <a href="#auth" class="btn btn-sm btn-light px-4 py-2 rounded-3 fw-bold">Autenticación</a>
                             </div>
                         </div>
 
-                        <!-- Contenido Principal -->
-                        <div class="col-md-9">
+                        <!-- Contenido Principal (Ahora ocupa todo el ancho) -->
+                        <div class="col-12">
                             <!-- Sandbox Section -->
                             <section id="sandbox" class="mb-5">
                                 <div class="card api-card shadow-sm border-0 bg-white">

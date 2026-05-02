@@ -1,7 +1,7 @@
 <!-- CajaYa Premium Night Sidebar (V111) -->
 <aside class="app-sidebar shadow-lg">
     <div class="sidebar-brand">
-        <a href="./index.php" class="brand-link border-0 d-flex align-items-center justify-content-center w-100 py-3">
+        <a href="./index.php" class="brand-link border-0 d-flex align-items-center justify-content-start w-100 py-3 px-4">
             <!-- Logo original CajaYa (Color) con filtro para fondo oscuro -->
             <img src="img/logo.png?v=114" alt="CajaYa" style="height: 38px; width: auto;">
         </a>
