@@ -10,8 +10,9 @@ if (isset($_SESSION['user_id'])) {
 
 $error = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Nota: AuthService necesita la conexión a la DB
     $auth = new AuthService(\App\Config\Database::getConnection());
-    if ($auth->login($_POST['email'], $_POST['password'])) {
+    if ($auth->login($_POST['rut'], $_POST['password'])) {
         header('Location: index.php');
         exit;
     } else {
@@ -139,21 +140,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         <?php endif; ?>
 
-        <form action="" method="post">
+        <form action="" method="post" id="loginForm">
             <div class="mb-3">
-                <label class="form-label">Correo Electrónico</label>
-                <input type="email" name="email" class="form-control" placeholder="ejemplo@cajaya.cl" required>
+                <label class="form-label">RUT de Usuario</label>
+                <input type="text" name="rut" id="rutInput" class="form-control" placeholder="12.345.678-9" required maxlength="12">
             </div>
             <div class="mb-4">
                 <label class="form-label">Contraseña</label>
                 <input type="password" name="password" class="form-control" placeholder="••••••••" required>
             </div>
-            <button type="submit" class="btn btn-login">Ingresar al Sistema</button>
+            <button type="submit" id="btnIngresar" class="btn btn-login">Ingresar al Sistema</button>
         </form>
 
         <div class="footer-text">
             &copy; 2026 CAJAYA ENTERPRISE &bull; V4.0
         </div>
     </div>
+
+    <script>
+        // Validador de RUT Chileno (Algoritmo Modulus 11)
+        const validateRut = (rut) => {
+            if (!/^[0-9]+[-|‐][0-9kK]{1}$/.test(rut)) return false;
+            let tmp = rut.split('-');
+            let dv = tmp[1].toUpperCase();
+            let res = 0;
+            let m = 2;
+            for (let i = tmp[0].length - 1; i >= 0; i--) {
+                res = res + (tmp[0].charAt(i) * m);
+                if (m === 7) m = 2; else m++;
+            }
+            let dvr = 11 - (res % 11);
+            if (dvr === 11) dvr = '0';
+            if (dvr === 10) dvr = 'K';
+            return dvr.toString() === dv;
+        };
+
+        const formatRut = (rut) => {
+            let valor = rut.replace(/\./g, '').replace('-', '');
+            if (valor.length <= 1) return valor;
+            let cuerpo = valor.slice(0, -1);
+            let dv = valor.slice(-1).toUpperCase();
+            return cuerpo + '-' + dv;
+        };
+
+        document.getElementById('rutInput').addEventListener('input', function(e) {
+            let valor = e.target.value.replace(/[^0-9kK\-]/g, '');
+            e.target.value = formatRut(valor);
+            
+            const btn = document.getElementById('btnIngresar');
+            if (validateRut(e.target.value)) {
+                e.target.style.borderColor = '#6a37b7';
+                btn.disabled = false;
+            } else {
+                e.target.style.borderColor = '#ff4757';
+                // Solo deshabilitamos si tiene algo escrito y es largo
+                if (e.target.value.length > 7) btn.disabled = true;
+            }
+        });
+    </script>
 </body>
 </html>

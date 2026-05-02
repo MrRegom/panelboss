@@ -14,20 +14,17 @@ class UserRepository
     }
 
     public function findAll() {
-        $sql = "SELECT id, full_name, email, role, status, last_login FROM users ORDER BY created_at DESC";
+        $sql = "SELECT id, rut, full_name, email, role, status, last_login FROM users ORDER BY created_at DESC";
         return $this->db->query($sql)->fetchAll();
     }
 
     /**
-     * Busca un usuario por su correo electrónico.
-     * 
-     * @param string $email
-     * @return array|null
+     * Busca un usuario por su RUT.
      */
-    public function findByEmail(string $email): ?array
+    public function findByRut(string $rut): ?array
     {
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
-        $stmt->execute([':email' => $email]);
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE rut = :rut LIMIT 1");
+        $stmt->execute([':rut' => $rut]);
         
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         return $user ?: null;

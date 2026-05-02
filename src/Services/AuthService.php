@@ -17,11 +17,14 @@ class AuthService {
     }
 
     /**
-     * Procesa el inicio de sesión tradicional para el Panel
+     * Procesa el inicio de sesión tradicional para el Panel usando RUT
      */
-    public function login($email, $password) {
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email AND status = 'active' LIMIT 1");
-        $stmt->execute(['email' => $email]);
+    public function login($rut, $password) {
+        // Limpiamos el RUT antes de consultar
+        $rut = $this->cleanRut($rut);
+        
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE rut = :rut AND status = 'active' LIMIT 1");
+        $stmt->execute(['rut' => $rut]);
         $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['password'])) {
@@ -30,10 +33,43 @@ class AuthService {
             }
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['name'];
+            $_SESSION['user_rut'] = $user['rut'];
             $_SESSION['user_role'] = $user['role_id'];
             return true;
         }
         return false;
+    }
+
+    /**
+     * Limpia un RUT (quita puntos, guiones y espacios)
+     */
+    public static function cleanRut($rut) {
+        return str_replace(['.', '-', ' '], '', strtoupper($rut));
+    }
+
+    /**
+     * Valida si un RUT es válido (Dígito verificador)
+     */
+    public static function validateRut($rut) {
+        $rut = self::cleanRut($rut);
+        if (strlen($rut) < 2) return false;
+        
+        $dv = substr($rut, -1);
+        $numero = substr($rut, 0, strlen($rut) - 1);
+        
+        $i = 2;
+        $suma = 0;
+        foreach (array_reverse(str_split($numero)) as $v) {
+            if ($i == 8) $i = 2;
+            $suma += $v * $i;
+            $i++;
+        }
+        
+        $dvr = 11 - ($suma % 11);
+        if ($dvr == 11) $dvr = 0;
+        if ($dvr == 10) $dvr = 'K';
+        
+        return strtoupper($dvr) == strtoupper($dv);
     }
     
     /**

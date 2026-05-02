@@ -5,6 +5,7 @@ use App\Config\Database;
 header('Content-Type: application/json');
 
 $id = $_POST['id'] ?? null;
+$rut = str_replace(['.', '-', ' '], '', strtoupper($_POST['rut'] ?? ''));
 $email = $_POST['email'] ?? '';
 $full_name = $_POST['full_name'] ?? '';
 $password = $_POST['password'] ?? '';
@@ -17,18 +18,18 @@ try {
         // ACTUALIZACIÓN
         if (!empty($password)) {
             $hashed = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $db->prepare("UPDATE users SET email = ?, full_name = ?, password = ?, role = ? WHERE id = ?");
-            $stmt->execute([$email, $full_name, $hashed, $role, $id]);
+            $stmt = $db->prepare("UPDATE users SET rut = ?, email = ?, full_name = ?, password = ?, role = ? WHERE id = ?");
+            $stmt->execute([$rut, $email, $full_name, $hashed, $role, $id]);
         } else {
-            $stmt = $db->prepare("UPDATE users SET email = ?, full_name = ?, role = ? WHERE id = ?");
-            $stmt->execute([$email, $full_name, $role, $id]);
+            $stmt = $db->prepare("UPDATE users SET rut = ?, email = ?, full_name = ?, role = ? WHERE id = ?");
+            $stmt->execute([$rut, $email, $full_name, $role, $id]);
         }
         $msg = "Usuario actualizado correctamente";
     } else {
         // CREACIÓN
         $hashed = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $db->prepare("INSERT INTO users (email, full_name, password, role, status) VALUES (?, ?, ?, ?, 'active')");
-        $stmt->execute([$email, $full_name, $hashed, $role]);
+        $stmt = $db->prepare("INSERT INTO users (rut, email, full_name, password, role, status) VALUES (?, ?, ?, ?, ?, 'active')");
+        $stmt->execute([$rut, $email, $full_name, $hashed, $role]);
         $msg = "Usuario creado correctamente";
     }
 

@@ -66,6 +66,7 @@ $userName = $_SESSION['user_name'] ?? 'Administrador';
                             <thead>
                                 <tr>
                                     <th class="ps-4">Nombre</th>
+                                    <th>RUT</th>
                                     <th>Email</th>
                                     <th>Rol</th>
                                     <th>Estado</th>
@@ -96,8 +97,12 @@ $userName = $_SESSION['user_name'] ?? 'Administrador';
                             <input type="text" class="form-control" name="full_name" id="full_name" required placeholder="Ej: Juan Pérez">
                         </div>
                         <div class="mb-4">
-                            <label class="small fw-bold text-muted mb-2">EMAIL / USUARIO</label>
-                            <input type="email" class="form-control" name="email" id="email" required placeholder="email@ejemplo.com">
+                            <label class="small fw-bold text-muted mb-2">RUT</label>
+                            <input type="text" class="form-control" name="rut" id="rut" required placeholder="12.345.678-9" maxlength="12">
+                        </div>
+                        <div class="mb-4">
+                            <label class="small fw-bold text-muted mb-2">EMAIL / USUARIO (Opcional)</label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="email@ejemplo.com">
                         </div>
                         <div class="mb-4">
                             <label class="small fw-bold text-muted mb-2">CONTRASEÑA</label>
@@ -132,7 +137,8 @@ $userName = $_SESSION['user_name'] ?? 'Administrador';
             ajax: 'api/get_users.php',
             columns: [
                 { data: 'full_name', className: 'ps-4', render: (d) => '<span class="fw-bold text-dark">'+d+'</span>' },
-                { data: 'email', render: (d) => '<span class="text-muted">'+d+'</span>' },
+                { data: 'rut', render: (d) => '<span class="badge bg-secondary bg-opacity-10 text-secondary border-0">'+(d || 'S/R')+'</span>' },
+                { data: 'email', render: (d) => '<span class="text-muted small">'+(d || '-')+'</span>' },
                 { data: 'role', render: function(d){ return '<span class="badge bg-primary bg-opacity-10 text-primary border-0">'+d.toUpperCase()+'</span>'; } },
                 { data: 'status', render: function(d){
                     const color = d === 'active' ? 'success' : 'danger';
@@ -160,6 +166,7 @@ $userName = $_SESSION['user_name'] ?? 'Administrador';
             const data = table.row($(this).parents('tr')).data();
             $('#user_id').val(data.id);
             $('#full_name').val(data.full_name);
+            $('#rut').val(data.rut);
             $('#email').val(data.email);
             $('#role').val(data.role);
             $('#password').val('');
@@ -177,13 +184,56 @@ $userName = $_SESSION['user_name'] ?? 'Administrador';
 
         $('#formUser').on('submit', function(e) {
             e.preventDefault();
+            // Validar RUT antes de enviar
+            const rutVal = $('#rut').val();
+            if(!validateRut(rutVal)) {
+                Swal.fire('RUT Inválido', 'Por favor ingresa un RUT chileno válido.', 'error');
+                return;
+            }
             $.post('api/save_user.php', $(this).serialize(), function(res) {
                 if(res.success) {
                     $('#modalUser').modal('hide');
                     table.ajax.reload();
                     Swal.fire({ icon: 'success', title: '¡Listo!', text: res.message, toast: true, position: 'top-end', showConfirmButton: false, timer: 1500 });
+                } else {
+                    Swal.fire('Error', res.message, 'error');
                 }
             }, 'json');
+        });
+
+        // Validador de RUT Chileno (Algoritmo Modulus 11)
+        const validateRut = (rut) => {
+            if (!/^[0-9]+[-|‐][0-9kK]{1}$/.test(rut)) return false;
+            let tmp = rut.split('-');
+            let dv = tmp[1].toUpperCase();
+            let res = 0;
+            let m = 2;
+            for (let i = tmp[0].length - 1; i >= 0; i--) {
+                res = res + (tmp[0].charAt(i) * m);
+                if (m === 7) m = 2; else m++;
+            }
+            let dvr = 11 - (res % 11);
+            if (dvr === 11) dvr = '0';
+            if (dvr === 10) dvr = 'K';
+            return dvr.toString() === dv;
+        };
+
+        const formatRut = (rut) => {
+            let valor = rut.replace(/\./g, '').replace('-', '');
+            if (valor.length <= 1) return valor;
+            let cuerpo = valor.slice(0, -1);
+            let dv = valor.slice(-1).toUpperCase();
+            return cuerpo + '-' + dv;
+        };
+
+        $('#rut').on('input', function(e) {
+            let valor = e.target.value.replace(/[^0-9kK\-]/g, '');
+            e.target.value = formatRut(valor);
+            if (validateRut(e.target.value)) {
+                $(this).removeClass('is-invalid').addClass('is-valid');
+            } else {
+                if(e.target.value.length > 7) $(this).removeClass('is-valid').addClass('is-invalid');
+            }
         });
     });
     </script>
