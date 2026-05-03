@@ -136,24 +136,46 @@ AuthService::check();
                                                 <i class="fa-solid fa-shield-halved fa-2x"></i>
                                             </div>
                                             <div>
-                                                <h4 class="mb-0 fw-bold">Autenticación v4.0 (JWT)</h4>
-                                                <span class="badge bg-warning text-dark">RECOMENDADO</span>
+                                                <h4 class="mb-0 fw-bold">Autenticación v4.0 y Activación</h4>
+                                                <span class="badge bg-warning text-dark">ACTUALIZADO</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-body p-5">
-                                        <h5>1. Obtención de Token</h5>
-                                        <p>Para mayor seguridad, no envíe su licencia en cada petición. Solicite un Token de acceso que expirará en 1 hora.</p>
+                                        <h5>1. Activación de Licencia y Máquina (Una sola vez)</h5>
+                                        <p>Para activar una nueva máquina y vincularla a una licencia adquirida, envíe los datos por <code>POST</code>. Utilice su llave maestra de API en el header <code>X-Client-Id</code>.</p>
+                                        
+                                        <div class="bg-dark p-3 rounded-4 mb-4">
+                                            <code class="text-warning small">
+                                                curl -X POST "https://api.cajaya.cl/activate.php" \<br>
+                                                -H "Content-Type: application/json" \<br>
+                                                -H "X-Client-Id: {TU_API_SHARED_KEY}" \<br>
+                                                -d '{<br>
+                                                &nbsp;&nbsp;"license_key": "CJYA-DEMO-XXXXX",<br>
+                                                &nbsp;&nbsp;"machine_id": "TEST-MACHINE-001",<br>
+                                                &nbsp;&nbsp;"hostname": "localhost",<br>
+                                                &nbsp;&nbsp;"version": "1.0.0",<br>
+                                                &nbsp;&nbsp;"business_name": "Mi Negocio Test",<br>
+                                                &nbsp;&nbsp;"rut": "12345678-9",<br>
+                                                &nbsp;&nbsp;"email": "test@example.com",<br>
+                                                &nbsp;&nbsp;"address": "Calle Falsa 123",<br>
+                                                &nbsp;&nbsp;"phone": "+56912345678"<br>
+                                                }'
+                                            </code>
+                                        </div>
+
+                                        <h5>2. Obtención de Token (Login diario)</h5>
+                                        <p>Una vez que la máquina está activada, solicite un Token JWT (Bearer) que expirará en 1 hora. Use su licencia como `X-Client-Id`.</p>
                                         
                                         <div class="bg-dark p-3 rounded-4 mb-4">
                                             <code class="text-warning small">
                                                 curl -X POST "https://api.cajaya.cl/auth/login.php" \<br>
-                                                -H "X-Client-Id: DEVELOPER-TEST"
+                                                -H "X-Client-Id: CJYA-DEMO-XXXXX"
                                             </code>
                                         </div>
 
-                                        <h5>2. Uso del Token</h5>
-                                        <p>Envíe el token recibido en el header <code>Authorization</code> de sus siguientes peticiones.</p>
+                                        <h5>3. Uso del Token en la API (Catálogo, etc.)</h5>
+                                        <p>Envíe el token recibido en el header <code>Authorization</code> de sus siguientes peticiones seguras.</p>
                                         
                                         <div class="bg-dark p-3 rounded-4 mb-0">
                                             <code class="text-warning small">
