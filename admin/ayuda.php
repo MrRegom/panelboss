@@ -165,13 +165,21 @@ AuthService::check();
                                         </div>
 
                                         <h5>2. Obtención de Token (Login diario)</h5>
-                                        <p>Una vez que la máquina está activada, solicite un Token JWT (Bearer) que expirará en 1 hora. Use su licencia como `X-Client-Id`.</p>
+                                        <p>Una vez que la máquina está activada, solicite un Token JWT (Bearer) que expirará en 1 hora. 
+                                        <strong>No requiere enviar ningún Body o JSON.</strong> Sólo envíe una petición POST vacía, incluyendo su Licencia en el Header <code>X-Client-Id</code>.</p>
                                         
                                         <div class="bg-dark p-3 rounded-4 mb-4">
                                             <code class="text-warning small">
                                                 curl -X POST "https://api.cajaya.cl/auth/login.php" \<br>
                                                 -H "X-Client-Id: CJYA-DEMO-XXXXX"
                                             </code>
+                                        </div>
+
+                                        <div class="alert bg-success bg-opacity-10 border-0 rounded-4 p-3 mb-4">
+                                            <div class="small text-success">
+                                                <i class="fa-solid fa-check-circle me-1"></i>
+                                                <strong>Respuesta esperada:</strong> Recibirá un JSON con la propiedad <code>data.token</code>. Ese es el Token JWT que debe utilizar en los siguientes pasos.
+                                            </div>
                                         </div>
 
                                         <h5>3. Uso del Token en la API (Catálogo, etc.)</h5>
