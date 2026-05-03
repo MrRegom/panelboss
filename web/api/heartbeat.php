@@ -17,7 +17,7 @@ if (file_exists($envPath)) {
     }
 }
 
-$apiKey = $_ENV['API_SHARED_KEY'] ?? 'CJYA_SECURE_API_88b2c45f107d6e8';
+$apiKey = $_ENV['API_SHARED_KEY'] ?? 'CJYA_SECURE_API_88b2c45f107d6e';
 $service = new LicenseService(Database::getConnection());
 $data = json_decode(file_get_contents('php://input'), true);
 
