@@ -38,12 +38,19 @@ class Database {
             $driver = $_ENV['DB_DRIVER']   ?? 'pgsql';
 
             try {
+                // Establecemos la zona horaria de PHP para Chile
+                date_default_timezone_set('America/Santiago');
+
                 $dsn = "$driver:host=$host;port=$port;dbname=$db";
                 self::$conn = new PDO($dsn, $user, $pass, [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                     PDO::ATTR_TIMEOUT => 5 // Timeout de 5 segundos
                 ]);
+
+                // Forzamos a la base de datos a usar la zona horaria de Chile en esta sesión
+                self::$conn->exec("SET TIME ZONE 'America/Santiago'");
+
             } catch(PDOException $e) {
                 error_log("DB CONNECTION ERROR: " . $e->getMessage());
                 // No matamos el proceso con exit, lanzamos la excepcion para que la App decida
