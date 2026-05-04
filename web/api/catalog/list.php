@@ -79,11 +79,20 @@ try {
         unset($p['image_path']); // Ocultar ruta interna
     }
 
-    echo json_encode([
+    $response = [
         'success' => true,
         'count' => count($products),
+        'master_catalog_enabled' => true,
+        'MasterCatalogEnabled' => true,
+        'is_master_catalog_active' => true,
         'data' => $products
-    ]);
+    ];
+
+    // Redundancia extrema para C#
+    $response['result'] = $response;
+    $response['Result'] = $response;
+
+    echo json_encode($response);
 
 } catch (\Exception $e) {
     echo json_encode([
