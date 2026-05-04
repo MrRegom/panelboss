@@ -60,7 +60,8 @@ class LicenseService {
         $license['machine_id'] = $machineId; // Update for token
         $token = $this->generateToken($license);
 
-        return [
+        $features = ["dte", "multi_terminal", "reports", "master_catalog", "catalog"];
+        $response = [
             'success' => true,
             'activation_token' => $token,
             'license_key' => $license['license_key'],
@@ -68,7 +69,7 @@ class LicenseService {
             'status' => 'active',
             'activated_at' => date('c'),
             'expires_at' => $license['expires_at'] ? date('c', strtotime($license['expires_at'])) : null,
-            'features' => ["dte", "multi_terminal", "reports", "master_catalog", "catalog"],
+            'features' => $features,
             'master_catalog_enabled' => true,
             'catalog_enabled' => true,
             'is_master_catalog_active' => true,
@@ -76,9 +77,16 @@ class LicenseService {
             'CatalogEnabled' => true,
             'IsMasterCatalogActive' => true,
             'heartbeat_interval_hours' => 24,
-            'message' => 'Licencia activada correctamente.',
-            'code' => 200
+            'message' => 'Licencia activada correctamente.'
         ];
+
+        // Redundancia para C# (objetos data y result)
+        $response['data'] = $response;
+        $response['result'] = $response;
+        $response['Result'] = $response;
+        $response['code'] = 200;
+
+        return $response;
     }
 
     public function heartbeat($key, $machineId, $version, $stats) {
@@ -110,7 +118,8 @@ class LicenseService {
             }
         }
 
-        return [
+        $features = ["dte", "multi_terminal", "reports", "master_catalog", "catalog"];
+        $response = [
             'status' => $status,
             'license_key' => $license['license_key'],
             'expires_at' => $license['expires_at'] ? date('c', strtotime($license['expires_at'])) : null,
@@ -118,15 +127,22 @@ class LicenseService {
             'message' => $message,
             'force_update' => false,
             'latest_version' => $version,
-            'features' => ["dte", "multi_terminal", "reports", "master_catalog", "catalog"],
+            'features' => $features,
             'master_catalog_enabled' => true,
             'catalog_enabled' => true,
             'is_master_catalog_active' => true,
             'MasterCatalogEnabled' => true,
             'CatalogEnabled' => true,
-            'IsMasterCatalogActive' => true,
-            'code' => 200
+            'IsMasterCatalogActive' => true
         ];
+
+        // Redundancia para C#
+        $response['data'] = $response;
+        $response['result'] = $response;
+        $response['Result'] = $response;
+        $response['code'] = 200;
+
+        return $response;
     }
 
     public function deactivate($key, $machineId) {
