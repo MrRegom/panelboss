@@ -72,6 +72,9 @@ class LicenseService {
             'master_catalog_enabled' => true,
             'catalog_enabled' => true,
             'is_master_catalog_active' => true,
+            'MasterCatalogEnabled' => true,
+            'CatalogEnabled' => true,
+            'IsMasterCatalogActive' => true,
             'heartbeat_interval_hours' => 24,
             'message' => 'Licencia activada correctamente.',
             'code' => 200
@@ -119,6 +122,9 @@ class LicenseService {
             'master_catalog_enabled' => true,
             'catalog_enabled' => true,
             'is_master_catalog_active' => true,
+            'MasterCatalogEnabled' => true,
+            'CatalogEnabled' => true,
+            'IsMasterCatalogActive' => true,
             'code' => 200
         ];
     }
