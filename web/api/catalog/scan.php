@@ -25,7 +25,7 @@ if ($token) {
     $tokenData = AuthService::validateToken($token);
     if (!$tokenData) {
         http_response_code(401);
-        echo json_encode(['status' => 'error', 'message' => 'Token JWT inválido o expirado']);
+        echo json_encode(['success' => false, 'message' => 'Token JWT inválido o expirado']);
         exit;
     }
     $licenseKey = $tokenData['license_key'];
@@ -37,7 +37,7 @@ $barcode = $_REQUEST['barcode'] ?? null;
 
 if (!$barcode || !$licenseKey) {
     http_response_code(400);
-    echo json_encode(['status' => 'error', 'message' => 'Faltan parámetros (barcode y Authorization Header o X-Client-Id)']);
+    echo json_encode(['success' => false, 'message' => 'Faltan parámetros (barcode y Authorization Header o X-Client-Id)']);
     exit;
 }
 
@@ -51,7 +51,7 @@ try {
 
     if (!$license || $license['status'] !== 'active') {
         http_response_code(403);
-        echo json_encode(['status' => 'error', 'message' => 'Licencia inválida o inactiva']);
+        echo json_encode(['success' => false, 'message' => 'Licencia inválida o inactiva']);
         exit;
     }
     // --- FIN SEGURIDAD ---
@@ -61,7 +61,7 @@ try {
     $product = $repo->getByBarcode($barcode);
 
     if (!$product) {
-        echo json_encode(['status' => 'not_found', 'message' => 'Producto no encontrado en el catálogo maestro']);
+        echo json_encode(['success' => false, 'message' => 'Producto no encontrado en el catálogo maestro']);
         exit;
     }
 
@@ -74,7 +74,7 @@ try {
     }
 
     echo json_encode([
-        'status' => 'success',
+        'success' => true,
         'data' => [
             'barcode' => $product['barcode'],
             'name'    => $product['name'],
@@ -86,5 +86,5 @@ try {
 
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['status' => 'error', 'message' => 'Error interno del servidor']);
+    echo json_encode(['success' => false, 'message' => 'Error interno del servidor']);
 }
