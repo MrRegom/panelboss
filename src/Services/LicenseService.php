@@ -69,6 +69,9 @@ class LicenseService {
             'activated_at' => date('c'),
             'expires_at' => $license['expires_at'] ? date('c', strtotime($license['expires_at'])) : null,
             'features' => ["dte", "multi_terminal", "reports", "master_catalog", "catalog"],
+            'master_catalog_enabled' => true,
+            'catalog_enabled' => true,
+            'is_master_catalog_active' => true,
             'heartbeat_interval_hours' => 24,
             'message' => 'Licencia activada correctamente.',
             'code' => 200
@@ -113,6 +116,9 @@ class LicenseService {
             'force_update' => false,
             'latest_version' => $version,
             'features' => ["dte", "multi_terminal", "reports", "master_catalog", "catalog"],
+            'master_catalog_enabled' => true,
+            'catalog_enabled' => true,
+            'is_master_catalog_active' => true,
             'code' => 200
         ];
     }
