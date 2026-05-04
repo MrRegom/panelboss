@@ -49,7 +49,13 @@ class Database {
                 ]);
 
                 // Forzamos a la base de datos a usar la zona horaria de Chile en esta sesión
-                self::$conn->exec("SET TIME ZONE 'America/Santiago'");
+                try {
+                    self::$conn->exec("SET TIME ZONE 'America/Santiago'");
+                } catch (\Exception $tzError) {
+                    // Si falla el comando de zona horaria, no matamos la app (Error 500)
+                    // Simplemente registramos el error y seguimos
+                    error_log("DB TIMEZONE WARNING: " . $tzError->getMessage());
+                }
 
             } catch(PDOException $e) {
                 error_log("DB CONNECTION ERROR: " . $e->getMessage());
