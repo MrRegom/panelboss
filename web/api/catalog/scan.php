@@ -58,7 +58,7 @@ try {
 
     // 2. Buscar Producto
     $repo = new MasterProductRepository();
-    $product = $repo->findByBarcode($barcode);
+    $product = $repo->getByBarcode($barcode);
 
     if (!$product) {
         echo json_encode(['status' => 'not_found', 'message' => 'Producto no encontrado en el catálogo maestro']);
