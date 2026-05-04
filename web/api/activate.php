@@ -1,5 +1,12 @@
 <?php
-require_once __DIR__ . '/../../vendor/autoload.php';
+// Descubrimiento robusto de la raíz del proyecto
+$baseDir = __DIR__;
+while ($baseDir !== dirname($baseDir) && !file_exists($baseDir . '/vendor/autoload.php')) {
+    $baseDir = dirname($baseDir);
+}
+define('PROJECT_ROOT', $baseDir);
+
+require_once PROJECT_ROOT . '/vendor/autoload.php';
 use App\Services\LicenseService;
 use App\Config\Database;
 header('Content-Type: application/json');
