@@ -49,7 +49,17 @@ class LicenseRepository {
             WHERE id = :id
         ");
         
-        return $stmt->execute(array_merge(['id' => $id, 'machine_id' => $machineId], $businessData));
+        $params = [
+            'id' => $id,
+            'machine_id' => $machineId,
+            'business_name' => $businessData['business_name'] ?? '',
+            'rut' => $businessData['rut'] ?? '',
+            'email' => $businessData['email'] ?? '',
+            'address' => $businessData['address'] ?? '',
+            'phone' => $businessData['phone'] ?? ''
+        ];
+        
+        return $stmt->execute($params);
     }
 
     public function updateHeartbeat($id, $version) {
