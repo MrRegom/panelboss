@@ -13,14 +13,23 @@ class Database {
      */
     public static function getConnection() {
         if (self::$conn === null) {
-            // Ruta al archivo .env en la raíz del proyecto
-            $envPath = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . '.env';
+            // Búsqueda robusta del archivo .env (subiendo niveles hasta encontrarlo)
+            $envPath = null;
+            $searchDir = __DIR__;
+            while ($searchDir !== dirname($searchDir)) {
+                if (file_exists($searchDir . DIRECTORY_SEPARATOR . '.env')) {
+                    $envPath = $searchDir . DIRECTORY_SEPARATOR . '.env';
+                    break;
+                }
+                $searchDir = dirname($searchDir);
+            }
             
             // Cargar variables de entorno manualmente si el archivo existe
-            if (file_exists($envPath)) {
+            if ($envPath) {
                 $lines = file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
                 foreach ($lines as $line) {
-                    if (strpos(trim($line), '#') === 0) continue;
+                    $line = trim($line);
+                    if (empty($line) || strpos($line, '#') === 0) continue;
                     $parts = explode('=', $line, 2);
                     if (count($parts) === 2) {
                         $_ENV[trim($parts[0])] = trim($parts[1], " \"'");
