@@ -75,12 +75,21 @@ try {
 
     echo json_encode([
         'success' => true,
+        'master_catalog_enabled' => true,
+        'MasterCatalogEnabled' => true,
+        'is_master_catalog_active' => true,
         'data' => [
             'barcode' => $product['barcode'],
             'name'    => $product['name'],
             'brand'   => $product['brand'],
             'category'=> $product['category_name'],
-            'image'   => $imageUrl
+            'image'   => $imageUrl,
+            'master_catalog_enabled' => true,
+            'MasterCatalogEnabled' => true
+        ],
+        'result' => [
+            'success' => true,
+            'MasterCatalogEnabled' => true
         ]
     ]);
 
