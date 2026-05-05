@@ -73,7 +73,7 @@ try {
     if ($product['image_path']) {
         $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
         $scriptPath = str_replace('scan.php', 'image.php', $_SERVER['SCRIPT_NAME']);
-        $imageUrl = "$protocol://" . $_SERVER['HTTP_HOST'] . "$scriptPath?barcode=" . $barcode;
+        $imageUrl = "$protocol://" . $_SERVER['HTTP_HOST'] . "$scriptPath?barcode=" . $barcode . "&license_key=" . $licenseKey;
     }
 
     $response = [
