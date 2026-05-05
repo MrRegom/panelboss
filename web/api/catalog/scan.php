@@ -76,11 +76,13 @@ try {
         $imageUrl = "$protocol://" . $_SERVER['HTTP_HOST'] . "$scriptPath?barcode=" . $barcode;
     }
 
-    echo json_encode([
+    $response = [
         'success' => true,
         'master_catalog_enabled' => true,
         'MasterCatalogEnabled' => true,
         'is_master_catalog_active' => true,
+        'IsMasterCatalogActive' => true,
+        'IsMasterCatalogEnabled' => true,
         'data' => [
             'barcode' => $product['barcode'],
             'name'    => $product['name'],
@@ -88,13 +90,22 @@ try {
             'category'=> $product['category_name'],
             'image'   => $imageUrl,
             'master_catalog_enabled' => true,
-            'MasterCatalogEnabled' => true
+            'MasterCatalogEnabled' => true,
+            'IsMasterCatalogEnabled' => true,
+            'IsMasterCatalogActive' => true
         ],
         'result' => [
             'success' => true,
-            'MasterCatalogEnabled' => true
+            'MasterCatalogEnabled' => true,
+            'IsMasterCatalogEnabled' => true,
+            'IsMasterCatalogActive' => true
         ]
-    ]);
+    ];
+    
+    // Objeto Result (Redundancia C#)
+    $response['Result'] = $response['result'];
+    
+    echo json_encode($response);
 
 } catch (Exception $e) {
     http_response_code(500);

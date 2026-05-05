@@ -76,12 +76,16 @@ class LicenseService {
             'MasterCatalogEnabled' => true,
             'CatalogEnabled' => true,
             'IsMasterCatalogActive' => true,
+            'IsMasterCatalogEnabled' => true,
+            'isMasterCatalogEnabled' => true,
             'Catalog' => [
                 'Enabled' => true,
-                'MasterEnabled' => true
+                'MasterEnabled' => true,
+                'Active' => true
             ],
             'MasterCatalog' => [
-                'Enabled' => true
+                'Enabled' => true,
+                'Active' => true
             ],
             'heartbeat_interval_hours' => 24,
             'message' => 'Licencia activada correctamente.'
@@ -142,14 +146,17 @@ class LicenseService {
             'MasterCatalogEnabled' => true,
             'CatalogEnabled' => true,
             'IsMasterCatalogActive' => true,
-            // Objeto Catalog (Estructura C#)
+            'IsMasterCatalogEnabled' => true,
+            'isMasterCatalogEnabled' => true,
             'Catalog' => [
                 'Enabled' => true,
-                'MasterEnabled' => true
+                'MasterEnabled' => true,
+                'Active' => true
             ],
             'MasterCatalog' => [
-                'Enabled' => true
-            ]
+                'Enabled' => true,
+                'Active' => true
+            ],
         ];
 
         // Redundancia para C#
