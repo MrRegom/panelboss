@@ -28,9 +28,13 @@ $apiKey = $_ENV['API_SHARED_KEY'] ?? 'CJYA_SECURE_API_88b2c45f107d6e';
 $service = new LicenseService(Database::getConnection());
 $data = json_decode(file_get_contents('php://input'), true);
 
-if (!isset($_SERVER['HTTP_X_CLIENT_ID']) || $_SERVER['HTTP_X_CLIENT_ID'] !== $apiKey) {
+// --- SEGURIDAD v4.0 (Híbrida) ---
+// Permitimos que el flujo continúe al Service, donde se validará la licencia y el Machine ID.
+$clientKey = $_SERVER['HTTP_X_CLIENT_ID'] ?? $data['license_key'] ?? '';
+
+if (empty($clientKey)) {
     http_response_code(401);
-    exit(json_encode(['status' => 'error', 'message' => 'Unauthorized: X-Client-Id invalid']));
+    exit(json_encode(['status' => 'error', 'message' => 'Falta autenticación (X-Client-Id o license_key)']));
 }
 
 $result = $service->heartbeat(
