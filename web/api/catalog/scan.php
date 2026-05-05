@@ -17,6 +17,9 @@ use App\Config\Database;
 use App\Repositories\MasterProductRepository;
 use App\Services\AuthService;
 
+// Leer el cuerpo de la petición (JSON)
+$input = json_decode(file_get_contents('php://input'), true);
+
 // --- SEGURIDAD v4.0 (Híbrida) ---
 $token = AuthService::getBearerToken();
 $licenseKey = null;
@@ -30,10 +33,10 @@ if ($token) {
     }
     $licenseKey = $tokenData['license_key'];
 } else {
-    $licenseKey = $_SERVER['HTTP_X_CLIENT_ID'] ?? $_REQUEST['license_key'] ?? null;
+    $licenseKey = $_SERVER['HTTP_X_CLIENT_ID'] ?? $input['license_key'] ?? $_REQUEST['license_key'] ?? null;
 }
 
-$barcode = $_REQUEST['barcode'] ?? null;
+$barcode = $input['barcode'] ?? $_REQUEST['barcode'] ?? null;
 
 if (!$barcode || !$licenseKey) {
     http_response_code(400);
